@@ -380,7 +380,7 @@ export default function AboutMe({ scrollDirection = 'down' }) {
                 {[
                   { label: 'Experience', value: '3+ Years' },
                   { label: 'Projects', value: '5+' },
-                  { label: 'Dean\'s List', value: 'Multiple' }
+                  { label: 'Dean\'s List', value: 'Multiple Semester' }
                 ].map((stat, index) => (
                   <div key={index} style={{
                     display: 'flex',
