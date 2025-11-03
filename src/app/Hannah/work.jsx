@@ -65,7 +65,9 @@ export default function Work({ scrollDirection = 'down' }) {
       responsibilities: [
         "Participated in organizing academic activities, including a university-level Quiz Bee competition",
         "Assisted in coordinating office communications and supporting event logistics to ensure smooth execution of academic programs"
-      ]
+      ],
+      icon: "M12 2L2 7L12 12L22 7L12 2Z M2 17L12 22L22 17 M2 12L12 17L22 12",
+      pattern: "grid"
     },
     {
       id: 2,
@@ -76,7 +78,9 @@ export default function Work({ scrollDirection = 'down' }) {
       responsibilities: [
         "Assists in organizing and facilitating cloud-focused learning sessions and professional development activities for IT students",
         "Supports the execution of cloud technology workshops and skill development programs for IT students"
-      ]
+      ],
+      icon: "M12 20L12 4 M4 12L20 12 M12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20Z",
+      pattern: "waves"
     }
   ]
 
@@ -95,154 +99,40 @@ export default function Work({ scrollDirection = 'down' }) {
           }
         }
         
-        @keyframes shapeRotate {
-          0% { transform: rotate(0deg) scale(1); }
-          50% { transform: rotate(180deg) scale(1.1); }
-          100% { transform: rotate(360deg) scale(1); }
+        @keyframes dash {
+          to {
+            stroke-dashoffset: 0;
+          }
         }
         
-        @keyframes shapeFloat {
-          0%, 100% { 
-            transform: translateY(0px) rotate(45deg) scale(1);
-            opacity: 0.02;
-          }
-          50% { 
-            transform: translateY(-20px) rotate(90deg) scale(1.05);
-            opacity: 0.04;
-          }
+        @keyframes pulse {
+          0%, 100% { opacity: 0.03; }
+          50% { opacity: 0.08; }
         }
         
         .experience-card {
           animation: slideInUp 0.6s ease-out;
         }
         
-        .stat-item:hover {
+        .experience-card:hover {
           transform: translateY(-8px);
         }
         
-        .stat-item:hover .stat-number {
-          color: #000000;
-          transform: scale(1.1);
+        .stat-item:hover {
+          transform: translateY(-5px);
         }
         
-        .stat-item:hover .stat-label {
-          color: #000000;
-          font-weight: 700;
+        .responsibility-item:hover {
+          transform: translateX(8px);
         }
         
-        .experience-card:hover .card-duration {
-          transform: scale(1.05);
-          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        .experience-card:hover .card-organization {
-          color: #000000;
-        }
-        
-        .experience-card:hover .card-role {
-          color: #000000;
-        }
-        
-        .experience-card:hover .card-location {
-          opacity: 1;
-        }
-        
-        .experience-card:hover .card-corner {
-          opacity: 1;
-          border-top-color: #000000;
-          border-right-color: #000000;
-        }
-        
-        .responsibility-item:hover .responsibility-icon {
-          transform: rotate(15deg) scale(1.1);
-          background: #000000;
-        }
-        
-        .responsibility-item:hover .responsibility-icon-dot {
-          transform: scale(1.3);
-        }
-        
-        .responsibility-item:hover .responsibility-text {
-          color: #000000;
-          font-weight: 600;
-        }
-        
-        .badge:hover {
-          background: #000000;
-          color: #ffffff;
-          transform: translateY(-2px);
+        .icon-svg:hover {
+          transform: rotate(10deg) scale(1.1);
         }
 
-        /* Responsive styles */
         @media (max-width: 1024px) {
-          .card-grid {
+          .cards-container {
             grid-template-columns: 1fr !important;
-          }
-          
-          .experience-card {
-            max-width: 100% !important;
-          }
-        }
-        
-        @media (max-width: 768px) {
-          .container {
-            padding: 60px 20px !important;
-          }
-          
-          .title {
-            font-size: 2.5rem !important;
-          }
-          
-          .card-header {
-            padding: 30px 25px !important;
-          }
-          
-          .card-body {
-            padding: 30px 25px !important;
-          }
-          
-          .stats-section {
-            grid-template-columns: repeat(2, 1fr) !important;
-            gap: 20px !important;
-            padding: 30px 25px !important;
-          }
-        }
-        
-        @media (max-width: 480px) {
-          .container {
-            padding: 40px 15px !important;
-          }
-          
-          .title {
-            font-size: 2rem !important;
-          }
-          
-          .subtitle {
-            font-size: 1rem !important;
-            padding: 0 10px;
-          }
-          
-          .card-header {
-            padding: 25px 20px !important;
-          }
-          
-          .card-body {
-            padding: 25px 20px !important;
-          }
-          
-          .responsibility-item {
-            padding: 15px !important;
-            flex-direction: column;
-            gap: 10px;
-          }
-          
-          .stats-section {
-            grid-template-columns: 1fr !important;
-            text-align: center;
-          }
-          
-          .stat-number {
-            font-size: 2.5rem !important;
           }
         }
       `;
@@ -260,12 +150,39 @@ export default function Work({ scrollDirection = 'down' }) {
     return null
   }
 
+  const IconSVG = ({ path, size = 24 }) => (
+    <svg 
+      width={size} 
+      height={size} 
+      viewBox="0 0 24 24" 
+      fill="none" 
+      stroke="currentColor" 
+      strokeWidth="2"
+      className="icon-svg"
+      style={{
+        transition: 'all 0.3s ease',
+      }}
+    >
+      <path 
+        d={path} 
+        strokeLinecap="round" 
+        strokeLinejoin="round"
+        strokeDasharray={100}
+        strokeDashoffset={100}
+        style={{
+          animation: 'dash 1s ease-out forwards',
+          animationDelay: '0.5s'
+        }}
+      />
+    </svg>
+  )
+
   return (
     <div style={{
       minHeight: '100vh',
       background: theme.bgPrimary,
-      padding: getResponsiveValue('100px 40px', '80px 30px', '60px 20px'),
-      fontFamily: "'Poppins', sans-serif",
+      padding: getResponsiveValue('80px 40px', '60px 30px', '40px 20px'),
+      fontFamily: "'Inter', sans-serif",
       position: 'relative',
       overflow: 'hidden',
       opacity: isVisible ? 1 : 0,
@@ -273,6 +190,7 @@ export default function Work({ scrollDirection = 'down' }) {
       transition: 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
     }} id="work">
       
+      {/* Background Graphics */}
       <div style={{
         position: 'absolute',
         top: 0,
@@ -282,54 +200,64 @@ export default function Work({ scrollDirection = 'down' }) {
         overflow: 'hidden',
         pointerEvents: 'none',
       }}>
-        <div style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          background: `
-            linear-gradient(90deg, ${theme.borderColor} 1px, transparent 1px),
-            linear-gradient(${theme.borderColor} 1px, transparent 1px)
-          `,
-          backgroundSize: '80px 80px',
-          opacity: 0.1,
-          transform: 'rotate(45deg)',
-          transformOrigin: 'center',
-        }}></div>
+        {/* Abstract Line Art */}
+        <svg width="100%" height="100%" style={{ position: 'absolute', opacity: 0.02 }}>
+          <defs>
+            <pattern id="diagonalLines" width="40" height="40" patternUnits="userSpaceOnUse">
+              <path d="M-10,10 L30,50 M30,10 L50,30" stroke={theme.accentColor} strokeWidth="1" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#diagonalLines)" />
+        </svg>
+
+        {/* Corner Graphics */}
         <div style={{
           position: 'absolute',
           top: '10%',
-          right: '5%',
-          width: getResponsiveValue(400, 300, 200),
-          height: getResponsiveValue(400, 300, 200),
-          border: `1px solid ${theme.borderColor}`,
-          borderRadius: '50%',
+          left: '5%',
+          width: getResponsiveValue(150, 100, 60),
+          height: getResponsiveValue(150, 100, 60),
+          border: `2px solid ${theme.accentColor}`,
+          borderRight: 'none',
+          borderBottom: 'none',
           opacity: 0.03,
-          animation: 'shapeRotate 20s linear infinite',
-          display: isMobile ? 'none' : 'block',
         }}></div>
+
         <div style={{
           position: 'absolute',
-          bottom: '15%',
-          left: '8%',
-          width: getResponsiveValue(150, 120, 80),
-          height: getResponsiveValue(150, 120, 80),
-          border: `1px solid ${theme.borderColor}`,
-          opacity: 0.02,
-          transform: 'rotate(45deg)',
-          animation: 'shapeFloat 15s ease-in-out infinite',
-          display: isMobile ? 'none' : 'block',
+          bottom: '10%',
+          right: '5%',
+          width: getResponsiveValue(150, 100, 60),
+          height: getResponsiveValue(150, 100, 60),
+          border: `2px solid ${theme.accentColor}`,
+          borderLeft: 'none',
+          borderTop: 'none',
+          opacity: 0.03,
+        }}></div>
+
+        {/* Pulsing Dots Pattern */}
+        <div style={{
+          position: 'absolute',
+          top: '30%',
+          right: '15%',
+          width: getResponsiveValue(100, 80, 50),
+          height: getResponsiveValue(100, 80, 50),
+          background: `radial-gradient(circle, ${theme.accentColor} 1px, transparent 1px)`,
+          backgroundSize: '15px 15px',
+          opacity: 0.03,
+          animation: 'pulse 4s ease-in-out infinite',
         }}></div>
       </div>
       
       <div style={{
-        maxWidth: '1400px',
+        maxWidth: '1200px',
         margin: '0 auto',
         width: '100%',
         position: 'relative',
         zIndex: 2,
       }}>
+        
+        {/* Header Section */}
         <div style={{
           textAlign: 'center',
           marginBottom: getResponsiveValue(80, 60, 40),
@@ -338,46 +266,81 @@ export default function Work({ scrollDirection = 'down' }) {
           transition: 'all 0.8s ease 0.2s',
         }}>
           <div style={{
-            display: 'inline-block',
-            padding: getResponsiveValue('12px 28px', '11px 24px', '10px 20px'),
-            border: `2px solid ${theme.accentColor}`,
-            borderRadius: '30px',
-            fontSize: getResponsiveValue('0.9rem', '0.85rem', '0.8rem'),
-            fontWeight: '700',
-            color: theme.accentColor,
-            background: 'transparent',
-            marginBottom: getResponsiveValue(32, 28, 24),
-            letterSpacing: '0.05em',
-            textTransform: 'uppercase',
-            transition: 'all 0.3s ease',
-          }} className="badge">Professional Experience</div>
-          <h1 style={{
-            fontSize: getResponsiveValue('4.5rem', '3.5rem', '2.5rem'),
-            fontWeight: '900',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: getResponsiveValue(12, 10, 8),
             marginBottom: getResponsiveValue(24, 20, 16),
+          }}>
+            <div style={{
+              width: getResponsiveValue(3, 2, 1),
+              height: getResponsiveValue(20, 16, 12),
+              background: theme.accentColor,
+            }}></div>
+            <div style={{
+              fontSize: getResponsiveValue('0.9rem', '0.85rem', '0.8rem'),
+              fontWeight: '700',
+              color: theme.accentColor,
+              letterSpacing: '0.1em',
+              textTransform: 'uppercase',
+            }}>
+              Professional Journey
+            </div>
+            <div style={{
+              width: getResponsiveValue(3, 2, 1),
+              height: getResponsiveValue(20, 16, 12),
+              background: theme.accentColor,
+            }}></div>
+          </div>
+          
+          <h1 style={{
+            fontSize: getResponsiveValue('3.5rem', '2.8rem', '2.2rem'),
+            fontWeight: '800',
+            marginBottom: getResponsiveValue(16, 14, 12),
             color: theme.textPrimary,
-            letterSpacing: '-0.03em',
+            letterSpacing: '-0.02em',
             lineHeight: 1.1,
-          }} className="title">Work & Contributions</h1>
-          <p style={{
-            fontSize: getResponsiveValue('1.3rem', '1.2rem', '1.1rem'),
-            color: theme.textMuted,
-            fontWeight: '500',
-            maxWidth: '600px',
-            margin: '0 auto',
-            lineHeight: 1.6,
-          }} className="subtitle">
-            My journey through organizational roles and professional development experiences
-          </p>
+          }}>
+            Work Experience
+          </h1>
+          
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: getResponsiveValue(20, 16, 12),
+            marginBottom: getResponsiveValue(24, 20, 16),
+          }}>
+            <div style={{
+              width: getResponsiveValue(60, 40, 30),
+              height: '1px',
+              background: theme.accentColor,
+              opacity: 0.2,
+            }}></div>
+            <p style={{
+              fontSize: getResponsiveValue('1.1rem', '1rem', '0.9rem'),
+              color: theme.textMuted,
+              fontWeight: '400',
+              margin: 0,
+              maxWidth: '500px',
+            }}>
+              My professional growth through organizational roles and contributions
+            </p>
+            <div style={{
+              width: getResponsiveValue(60, 40, 30),
+              height: '1px',
+              background: theme.accentColor,
+              opacity: 0.2,
+            }}></div>
+          </div>
         </div>
 
-        {/* Experience Cards Grid */}
+        {/* Experience Cards */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: getResponsiveValue('repeat(auto-fit, minmax(500px, 1fr))', '1fr', '1fr'),
+          gridTemplateColumns: getResponsiveValue('repeat(2, 1fr)', '1fr', '1fr'),
           gap: getResponsiveValue(40, 30, 20),
-          marginTop: getResponsiveValue(60, 50, 40),
-        }} className="card-grid">
+          marginBottom: getResponsiveValue(80, 60, 40),
+        }} className="cards-container">
           {experiences.map((experience, index) => (
             <div
               key={experience.id}
@@ -385,98 +348,119 @@ export default function Work({ scrollDirection = 'down' }) {
                 background: theme.bgPrimary,
                 border: `1px solid ${theme.borderColor}`,
                 borderRadius: '20px',
-                padding: '0',
+                padding: 0,
                 overflow: 'hidden',
-                transition: 'all 0.5s ease',
+                transition: 'all 0.4s ease',
                 position: 'relative',
                 boxShadow: `0 8px 32px ${theme.shadowLight}`,
                 opacity: isVisible ? 1 : 0,
-                transform: isVisible ? 'translateY(0)' : 'translateY(50px)',
-                transform: hoveredCard === index ? 'translateY(-15px) scale(1.02)' : 'translateY(0) scale(1)',
-                boxShadow: hoveredCard === index ? `0 35px 80px ${theme.shadowMedium}` : `0 8px 32px ${theme.shadowLight}`,
-                borderColor: hoveredCard === index ? theme.borderAccent : theme.borderColor,
-                maxWidth: '100%',
-                transitionDelay: `${0.4 + index * 0.2}s`
+                transform: isVisible ? 'translateY(0)' : 'translateY(40px)',
+                transitionDelay: `${0.3 + index * 0.2}s`,
               }}
               className="experience-card"
               onMouseEnter={() => setHoveredCard(index)}
               onMouseLeave={() => setHoveredCard(null)}
             >
+              {/* Card Pattern Background */}
               <div style={{
                 position: 'absolute',
                 top: 0,
                 left: 0,
                 right: 0,
-                height: '4px',
-                background: theme.accentColor,
+                bottom: 0,
+                background: experience.pattern === 'grid' 
+                  ? `linear-gradient(45deg, transparent 49%, ${theme.borderColor} 49%, ${theme.borderColor} 51%, transparent 51%)`
+                  : `linear-gradient(0deg, transparent 49%, ${theme.borderColor} 49%, ${theme.borderColor} 51%, transparent 51%)`,
+                backgroundSize: '20px 20px',
+                opacity: 0.03,
+                pointerEvents: 'none',
               }}></div>
-              <div style={{
-                position: 'absolute',
-                top: 0,
-                right: 0,
-                width: '60px',
-                height: '60px',
-                borderTop: `2px solid ${theme.borderColor}`,
-                borderRight: `2px solid ${theme.borderColor}`,
-                borderTopRightRadius: '20px',
-                opacity: 0.5,
-                transition: 'all 0.3s ease',
-              }} className="card-corner"></div>
-              
+
               {/* Card Header */}
               <div style={{
-                background: theme.bgSecondary,
-                padding: getResponsiveValue('40px', '35px', '30px'),
+                padding: getResponsiveValue('30px 25px 20px', '25px 20px 15px', '20px 15px 12px'),
                 borderBottom: `1px solid ${theme.borderColor}`,
                 position: 'relative',
-                overflow: 'hidden',
+                background: 'rgba(255, 255, 255, 0.8)',
               }}>
                 <div style={{
-                  position: 'absolute',
-                  top: getResponsiveValue('20px', '18px', '16px'),
-                  right: getResponsiveValue('20px', '18px', '16px'),
-                  background: theme.accentColor,
-                  color: '#ffffff',
-                  padding: getResponsiveValue('8px 16px', '7px 14px', '6px 12px'),
-                  borderRadius: '20px',
-                  fontSize: getResponsiveValue('0.85rem', '0.8rem', '0.75rem'),
-                  fontWeight: '700',
-                  letterSpacing: '0.05em',
-                  transition: 'all 0.3s ease',
-                }} className="card-duration">{experience.duration}</div>
-                <h3 style={{
-                  fontSize: getResponsiveValue('1.6rem', '1.5rem', '1.4rem'),
-                  fontWeight: '800',
-                  color: hoveredCard === index ? theme.textPrimary : theme.textPrimary,
-                  marginBottom: '8px',
-                  lineHeight: 1.3,
-                  transition: 'all 0.3s ease',
-                  paddingRight: '100px',
-                }} className="card-organization">{experience.organization}</h3>
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'flex-start',
+                  marginBottom: getResponsiveValue(16, 14, 12),
+                }}>
+                  <div style={{ flex: 1 }}>
+                    <h3 style={{
+                      fontSize: getResponsiveValue('1.4rem', '1.3rem', '1.2rem'),
+                      fontWeight: '700',
+                      color: theme.textPrimary,
+                      marginBottom: getResponsiveValue(8, 6, 4),
+                      lineHeight: 1.3,
+                    }}>
+                      {experience.organization}
+                    </h3>
+                    <div style={{
+                      fontSize: getResponsiveValue('1.1rem', '1rem', '0.9rem'),
+                      fontWeight: '600',
+                      color: theme.textSecondary,
+                      marginBottom: getResponsiveValue(8, 6, 4),
+                    }}>
+                      {experience.role}
+                    </div>
+                  </div>
+                  <div style={{
+                    width: getResponsiveValue(48, 40, 32),
+                    height: getResponsiveValue(48, 40, 32),
+                    background: theme.bgSecondary,
+                    border: `1px solid ${theme.borderColor}`,
+                    borderRadius: '12px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: theme.accentColor,
+                    flexShrink: 0,
+                  }}>
+                    <IconSVG path={experience.icon} size={getResponsiveValue(20, 18, 16)} />
+                  </div>
+                </div>
+                
                 <div style={{
-                  fontSize: getResponsiveValue('1.2rem', '1.1rem', '1rem'),
-                  fontWeight: '600',
-                  color: hoveredCard === index ? theme.textPrimary : theme.accentLight,
-                  marginBottom: '12px',
-                  transition: 'all 0.3s ease',
-                }} className="card-role">{experience.role}</div>
-                <div style={{
-                  fontSize: getResponsiveValue('1rem', '0.95rem', '0.9rem'),
-                  fontWeight: '500',
-                  color: theme.textMuted,
-                  opacity: hoveredCard === index ? 1 : 0.8,
-                  transition: 'all 0.3s ease',
-                }} className="card-location">{experience.location}</div>
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  flexWrap: 'wrap',
+                  gap: getResponsiveValue(12, 10, 8),
+                }}>
+                  <div style={{
+                    fontSize: getResponsiveValue('0.9rem', '0.85rem', '0.8rem'),
+                    color: theme.textMuted,
+                    fontWeight: '400',
+                  }}>
+                    {experience.location}
+                  </div>
+                  <div style={{
+                    fontSize: getResponsiveValue('0.85rem', '0.8rem', '0.75rem'),
+                    fontWeight: '600',
+                    color: theme.accentColor,
+                    background: theme.bgSecondary,
+                    padding: getResponsiveValue('6px 12px', '5px 10px', '4px 8px'),
+                    borderRadius: '6px',
+                    border: `1px solid ${theme.borderColor}`,
+                  }}>
+                    {experience.duration}
+                  </div>
+                </div>
               </div>
 
-              {/* Card Body */}
+              {/* Responsibilities */}
               <div style={{
-                padding: getResponsiveValue('40px', '35px', '30px'),
+                padding: getResponsiveValue('25px', '20px', '15px'),
+                background: 'rgba(255, 255, 255, 0.9)',
               }}>
                 <div style={{
                   display: 'flex',
                   flexDirection: 'column',
-                  gap: getResponsiveValue(20, 18, 16),
+                  gap: getResponsiveValue(16, 14, 12),
                 }}>
                   {experience.responsibilities.map((responsibility, idx) => (
                     <div
@@ -484,56 +468,48 @@ export default function Work({ scrollDirection = 'down' }) {
                       style={{
                         display: 'flex',
                         alignItems: 'flex-start',
-                        gap: getResponsiveValue(16, 14, 12),
-                        padding: getResponsiveValue('20px', '18px', '16px'),
+                        gap: getResponsiveValue(12, 10, 8),
+                        padding: getResponsiveValue('16px', '14px', '12px'),
                         background: theme.bgSecondary,
-                        borderRadius: '12px',
+                        borderRadius: '10px',
                         border: `1px solid ${theme.borderColor}`,
-                        transition: 'all 0.4s ease',
+                        transition: 'all 0.3s ease',
                         cursor: 'pointer',
-                        position: 'relative',
-                        overflow: 'hidden',
-                        transform: hoveredResponsibility === `${experience.id}-${idx}` ? 'translateX(12px) scale(1.02)' : 'translateX(0) scale(1)',
-                        background: hoveredResponsibility === `${experience.id}-${idx}` ? theme.bgPrimary : theme.bgSecondary,
-                        borderColor: hoveredResponsibility === `${experience.id}-${idx}` ? theme.borderAccent : theme.borderColor,
-                        boxShadow: hoveredResponsibility === `${experience.id}-${idx}` ? `0 8px 30px ${theme.shadowLight}` : 'none',
-                        flexDirection: isMobile ? 'column' : 'row',
                       }}
                       className="responsibility-item"
                       onMouseEnter={() => setHoveredResponsibility(`${experience.id}-${idx}`)}
                       onMouseLeave={() => setHoveredResponsibility(null)}
                     >
                       <div style={{
-                        width: getResponsiveValue(24, 22, 20),
-                        height: getResponsiveValue(24, 22, 20),
-                        background: hoveredResponsibility === `${experience.id}-${idx}` ? theme.accentColor : theme.accentColor,
-                        borderRadius: '6px',
                         display: 'flex',
                         alignItems: 'center',
-                        justifyContent: 'center',
-                        flexShrink: 0,
-                        marginTop: '2px',
-                        position: 'relative',
-                        transition: 'all 0.3s ease',
-                        transform: hoveredResponsibility === `${experience.id}-${idx}` ? 'rotate(15deg) scale(1.1)' : 'rotate(0) scale(1)',
-                      }} className="responsibility-icon">
+                        gap: getResponsiveValue(8, 6, 4),
+                        minWidth: getResponsiveValue(20, 18, 16),
+                      }}>
                         <div style={{
-                          width: '6px',
-                          height: '6px',
-                          background: '#ffffff',
+                          width: getResponsiveValue(6, 5, 4),
+                          height: getResponsiveValue(6, 5, 4),
+                          background: theme.accentColor,
                           borderRadius: '50%',
-                          transition: 'all 0.3s ease',
-                          transform: hoveredResponsibility === `${experience.id}-${idx}` ? 'scale(1.3)' : 'scale(1)',
-                        }} className="responsibility-icon-dot"></div>
+                        }}></div>
+                        <div style={{
+                          width: getResponsiveValue(2, 1, 1),
+                          height: getResponsiveValue(12, 10, 8),
+                          background: theme.accentColor,
+                          opacity: 0.5,
+                          borderRadius: '1px',
+                        }}></div>
                       </div>
-                      <p style={{
-                        fontSize: getResponsiveValue('1.05rem', '1rem', '0.95rem'),
-                        color: hoveredResponsibility === `${experience.id}-${idx}` ? theme.textPrimary : theme.textSecondary,
-                        lineHeight: 1.6,
-                        fontWeight: hoveredResponsibility === `${experience.id}-${idx}` ? '600' : '500',
+                      <div style={{
+                        fontSize: getResponsiveValue('0.95rem', '0.9rem', '0.85rem'),
+                        color: theme.textSecondary,
+                        lineHeight: 1.5,
+                        fontWeight: '400',
                         margin: 0,
-                        transition: 'all 0.3s ease',
-                      }} className="responsibility-text">{responsibility}</p>
+                        flex: 1,
+                      }}>
+                        {responsibility}
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -542,58 +518,119 @@ export default function Work({ scrollDirection = 'down' }) {
           ))}
         </div>
 
-        {/* Stats Section */}
+        {/* Stats Section with Graphics */}
         <div style={{
-          display: 'grid',
-          gridTemplateColumns: getResponsiveValue('repeat(auto-fit, minmax(200px, 1fr))', 'repeat(2, 1fr)', '1fr'),
-          gap: getResponsiveValue(30, 25, 20),
-          marginTop: getResponsiveValue(80, 60, 40),
-          padding: getResponsiveValue('40px', '35px', '30px'),
           background: theme.bgSecondary,
           borderRadius: '20px',
           border: `1px solid ${theme.borderColor}`,
+          padding: getResponsiveValue('50px 40px', '40px 30px', '30px 20px'),
+          position: 'relative',
+          overflow: 'hidden',
           opacity: isVisible ? 1 : 0,
           transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
-          transition: 'all 0.8s ease 1s',
-        }} className="stats-section">
-          {[
-            { number: '2', label: 'Organizations' },
-            { number: '4+', label: 'Roles Held' },
-            { number: '100%', label: 'Commitment' },
-            { number: '∞', label: 'Learning Potential' }
-          ].map((stat, index) => (
-            <div
-              key={index}
-              style={{
-                textAlign: 'center',
-                padding: getResponsiveValue('20px', '18px', '16px'),
-                transition: 'all 0.4s ease',
-                cursor: 'pointer',
-                transform: hoveredStat === index ? 'translateY(-8px)' : 'translateY(0)',
-              }}
-              className="stat-item"
-              onMouseEnter={() => setHoveredStat(index)}
-              onMouseLeave={() => setHoveredStat(null)}
-            >
-              <div style={{
-                fontSize: getResponsiveValue('3rem', '2.5rem', '2rem'),
-                fontWeight: '800',
-                color: hoveredStat === index ? theme.textPrimary : theme.accentColor,
-                marginBottom: '8px',
-                lineHeight: 1,
-                transition: 'all 0.3s ease',
-                transform: hoveredStat === index ? 'scale(1.1)' : 'scale(1)',
-              }} className="stat-number">{stat.number}</div>
-              <div style={{
-                fontSize: getResponsiveValue('1rem', '0.95rem', '0.9rem'),
-                fontWeight: hoveredStat === index ? '700' : '600',
-                color: hoveredStat === index ? theme.textPrimary : theme.textMuted,
-                textTransform: 'uppercase',
-                letterSpacing: '0.05em',
-                transition: 'all 0.3s ease',
-              }} className="stat-label">{stat.label}</div>
-            </div>
-          ))}
+          transition: 'all 0.8s ease 0.8s',
+        }}>
+          {/* Background Graphics */}
+          <div style={{
+            position: 'absolute',
+            top: 0,
+            right: 0,
+            width: '200px',
+            height: '100%',
+            background: `linear-gradient(135deg, ${theme.accentColor} 0%, transparent 70%)`,
+            opacity: 0.02,
+          }}></div>
+
+          <svg width="100" height="100" style={{ 
+            position: 'absolute', 
+            bottom: '20px', 
+            left: '30px', 
+            opacity: 0.03,
+            transform: 'rotate(45deg)'
+          }}>
+            <rect x="10" y="10" width="80" height="80" stroke={theme.accentColor} strokeWidth="2" fill="none" />
+          </svg>
+
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: getResponsiveValue('repeat(4, 1fr)', 'repeat(2, 1fr)', '1fr'),
+            gap: getResponsiveValue(30, 25, 20),
+            position: 'relative',
+            zIndex: 2,
+          }}>
+            {[
+              { number: '2', label: 'Organizations' },
+              { number: '4+', label: 'Roles Held' },
+              { number: '100%', label: 'Commitment' },
+              { number: '∞', label: 'Learning' }
+            ].map((stat, index) => (
+              <div
+                key={index}
+                style={{
+                  textAlign: 'center',
+                  padding: getResponsiveValue('25px 20px', '22px 18px', '20px 15px'),
+                  background: theme.bgPrimary,
+                  borderRadius: '15px',
+                  border: `1px solid ${theme.borderColor}`,
+                  transition: 'all 0.3s ease',
+                  cursor: 'pointer',
+                  position: 'relative',
+                  overflow: 'hidden',
+                }}
+                className="stat-item"
+                onMouseEnter={() => setHoveredStat(index)}
+                onMouseLeave={() => setHoveredStat(null)}
+              >
+                {/* Stat Background Pattern */}
+                <div style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  background: `linear-gradient(45deg, transparent 49%, ${theme.borderColor} 49%, ${theme.borderColor} 51%, transparent 51%)`,
+                  backgroundSize: '15px 15px',
+                  opacity: 0.03,
+                }}></div>
+
+                <div style={{
+                  fontSize: getResponsiveValue('2.5rem', '2.2rem', '1.8rem'),
+                  fontWeight: '800',
+                  color: hoveredStat === index ? theme.textPrimary : theme.accentColor,
+                  marginBottom: getResponsiveValue(8, 6, 4),
+                  lineHeight: 1,
+                  transition: 'all 0.3s ease',
+                  position: 'relative',
+                  zIndex: 2,
+                }}>
+                  {stat.number}
+                </div>
+                <div style={{
+                  fontSize: getResponsiveValue('0.9rem', '0.85rem', '0.8rem'),
+                  fontWeight: '600',
+                  color: hoveredStat === index ? theme.textPrimary : theme.textMuted,
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.05em',
+                  transition: 'all 0.3s ease',
+                  position: 'relative',
+                  zIndex: 2,
+                }}>
+                  {stat.label}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Bottom Decorative Element */}
+        <div style={{
+          textAlign: 'center',
+          marginTop: getResponsiveValue(60, 50, 40),
+          opacity: 0.1,
+        }}>
+          <svg width="80" height="8" viewBox="0 0 80 8" style={{ margin: '0 auto' }}>
+            <line x1="0" y1="4" x2="80" y2="4" stroke={theme.accentColor} strokeWidth="1" strokeDasharray="5,5" />
+          </svg>
         </div>
       </div>
     </div>

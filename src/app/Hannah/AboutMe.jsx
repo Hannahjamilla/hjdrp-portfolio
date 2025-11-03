@@ -85,13 +85,30 @@ export default function AboutMe({ scrollDirection = 'down' }) {
           box-shadow: 25px 25px 0px 0px rgba(0,0,0,1);
         }
         
-        .timeline-item {
-          transition: all 0.3s ease;
+        @media (prefers-color-scheme: dark) {
+          .profile-card:hover {
+            box-shadow: 25px 25px 0px 0px rgba(255,255,255,1);
+          }
         }
-        
-        .timeline-item:hover {
-          background: #f8f9fa;
-          transform: translateX(5px);
+
+        .philosophy-item:hover {
+          background: #000000;
+          color: #ffffff;
+          transform: translateY(-2px);
+        }
+
+        .philosophy-item:hover .philosophy-title {
+          color: #ffffff;
+        }
+
+        .philosophy-item:hover .philosophy-description {
+          color: #f0f0f0;
+        }
+
+        /* Fixed Hexagon Grid Styles */
+        .hexagon-grid {
+          display: grid !important;
+          position: relative;
         }
 
         /* Responsive styles */
@@ -112,9 +129,15 @@ export default function AboutMe({ scrollDirection = 'down' }) {
           .title {
             font-size: 3.5rem !important;
           }
-          
-          .title-background {
-            font-size: 6rem !important;
+
+          .hexagon-grid {
+            grid-template-columns: repeat(3, 1fr) !important;
+            gap: 15px !important;
+          }
+
+          .philosophy-grid {
+            grid-template-columns: 1fr !important;
+            gap: 20px !important;
           }
         }
         
@@ -127,18 +150,14 @@ export default function AboutMe({ scrollDirection = 'down' }) {
             font-size: 2.5rem !important;
           }
           
-          .title-background {
-            font-size: 4rem !important;
-          }
-          
           .subtitle {
             font-size: 1.1rem !important;
             padding: 0 20px;
           }
           
           .hexagon-grid {
-            grid-template-columns: repeat(2, 1fr) !important;
-            gap: 10px !important;
+            grid-template-columns: repeat(3, 1fr) !important;
+            gap: 12px !important;
           }
           
           .hexagon {
@@ -153,6 +172,11 @@ export default function AboutMe({ scrollDirection = 'down' }) {
             padding: 10px 16px !important;
             font-size: 0.8rem !important;
           }
+
+          .philosophy-grid {
+            grid-template-columns: 1fr !important;
+            gap: 15px !important;
+          }
         }
         
         @media (max-width: 480px) {
@@ -164,24 +188,25 @@ export default function AboutMe({ scrollDirection = 'down' }) {
             font-size: 2rem !important;
           }
           
-          .title-background {
-            font-size: 3rem !important;
-          }
-          
           .profile-card {
             padding: 30px 20px !important;
           }
           
           .hexagon-grid {
-            grid-template-columns: repeat(2, 1fr) !important;
+            grid-template-columns: repeat(3, 1fr) !important;
+            gap: 10px !important;
           }
           
           .hexagon {
-            height: 90px !important;
+            height: 85px !important;
           }
           
           .hexagon-number {
-            font-size: 1.4rem !important;
+            font-size: 1.3rem !important;
+          }
+          
+          .hexagon-label {
+            font-size: 0.55rem !important;
           }
           
           .skill-cluster {
@@ -192,6 +217,20 @@ export default function AboutMe({ scrollDirection = 'down' }) {
             flex-direction: column;
             gap: 10px !important;
             text-align: center;
+          }
+
+          .philosophy-grid {
+            gap: 12px !important;
+          }
+        }
+
+        @media (max-width: 380px) {
+          .hexagon-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+          
+          .hexagon {
+            height: 80px !important;
           }
         }
       `;
@@ -219,6 +258,34 @@ export default function AboutMe({ scrollDirection = 'down' }) {
       </div>
     )
   }
+
+  const philosophy = [
+    {
+      title: 'Continuous Learning',
+      description: 'Always eager to learn new programming languages and adapt to emerging technologies to stay at the forefront of web development.'
+    },
+    {
+      title: 'User-Centered Design',
+      description: 'Believe in creating practical digital solutions that prioritize user experience, accessibility, and community connection.'
+    },
+    {
+      title: 'Problem Solving',
+      description: 'Passionate about building applications that solve real-world problems and improve efficiency in everyday tasks.'
+    },
+    {
+      title: 'Approachable & Collaborative',
+      description: 'Friendly and easy to work with, I value teamwork and believe that the best solutions come from collaborative efforts and open communication.'
+    }
+  ]
+
+  const hexagons = [
+    { number: '3+', label: 'Years' },
+    { number: '5+', label: 'Projects' },
+    { number: '100%', label: 'Passion' },
+    { number: '∞', label: 'Ideas' },
+    { number: '10+', label: 'Skills' },
+    { number: '3', label: 'Certifications' }
+  ]
 
   return (
     <div style={{
@@ -296,18 +363,6 @@ export default function AboutMe({ scrollDirection = 'down' }) {
             display: 'inline-block',
             position: 'relative',
           }}>
-            <div style={{
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)',
-              fontSize: getResponsiveValue('8rem', '6rem', '4rem'),
-              fontWeight: '900',
-              color: theme.bgTertiary,
-              zIndex: 1,
-              opacity: 0.7,
-              letterSpacing: '-0.03em',
-            }} className="title-background">ABOUT</div>
             <h1 style={{
               fontSize: getResponsiveValue('5rem', '3.5rem', '2.5rem'),
               fontWeight: '900',
@@ -368,7 +423,7 @@ export default function AboutMe({ scrollDirection = 'down' }) {
                 color: theme.textSecondary,
                 marginBottom: '25px',
               }}>
-                Passionate about building user-centered web applications that don’t just look good but also solve real problems and make tasks easier.
+                Passionate about building user-centered web applications that don't just look good but also solve real problems and make tasks easier.
               </p>
               
               <div style={{
@@ -406,25 +461,21 @@ export default function AboutMe({ scrollDirection = 'down' }) {
               </div>
             </div>
 
+            {/* Fixed Hexagon Grid */}
             <div style={{
               display: 'grid',
-              gridTemplateColumns: getResponsiveValue('repeat(3, 1fr)', 'repeat(3, 1fr)', 'repeat(2, 1fr)'),
-              gap: getResponsiveValue(15, 12, 10),
+              gridTemplateColumns: 'repeat(3, 1fr)',
+              gap: getResponsiveValue(12, 10, 8),
               marginTop: '40px',
+              justifyItems: 'center',
             }} className="hexagon-grid">
-              {[
-              { number: '3+', label: 'Years' },
-              { number: '5+', label: 'Projects' },
-              { number: '100%', label: 'Passion' },
-              { number: '∞', label: 'Ideas' },
-              { number: '10+', label: 'Skills' },
-              { number: '3', label: 'Certifications' }
-              ].map((hex, index) => (
+              {hexagons.map((hex, index) => (
                 <div
                   key={index}
                   style={{
                     width: '100%',
-                    height: getResponsiveValue(120, 110, 100),
+                    maxWidth: getResponsiveValue(120, 100, 90),
+                    height: getResponsiveValue(120, 100, 85),
                     background: activeHex === index ? theme.accent : theme.bgSecondary,
                     border: `1px solid ${theme.borderColor}`,
                     display: 'flex',
@@ -441,22 +492,25 @@ export default function AboutMe({ scrollDirection = 'down' }) {
                   onMouseLeave={() => setActiveHex(null)}
                 >
                   <div style={{
-                    fontSize: getResponsiveValue('1.8rem', '1.6rem', '1.4rem'),
+                    fontSize: getResponsiveValue('1.6rem', '1.4rem', '1.3rem'),
                     fontWeight: '800',
                     color: activeHex === index ? theme.bgPrimary : theme.textPrimary,
                     transition: 'all 0.3s ease',
+                    lineHeight: 1,
                   }} className="hexagon-number">
                     {hex.number}
                   </div>
                   <div style={{
-                    fontSize: getResponsiveValue('0.7rem', '0.65rem', '0.6rem'),
+                    fontSize: getResponsiveValue('0.65rem', '0.6rem', '0.55rem'),
                     fontWeight: '600',
                     color: activeHex === index ? theme.bgPrimary : theme.textMuted,
                     textTransform: 'uppercase',
                     letterSpacing: '0.1em',
                     textAlign: 'center',
-                    marginTop: '5px',
+                    marginTop: '4px',
                     transition: 'all 0.3s ease',
+                    lineHeight: 1.2,
+                    padding: '0 4px',
                   }} className="hexagon-label">
                     {hex.label}
                   </div>
@@ -540,7 +594,7 @@ export default function AboutMe({ scrollDirection = 'down' }) {
               </div>
             </div>
 
-            {/* Achievements Timeline */}
+            {/* Development Philosophy */}
             <div style={{
               background: theme.bgPrimary,
               border: `1px solid ${theme.borderColor}`,
@@ -567,79 +621,56 @@ export default function AboutMe({ scrollDirection = 'down' }) {
                   fontWeight: 'bold',
                   borderRadius: '0px',
                   flexShrink: 0,
-                }}>★</div>
+                }}>✦</div>
                 <h3 style={{
                   fontSize: getResponsiveValue('1.5rem', '1.4rem', '1.3rem'),
                   fontWeight: '800',
                   color: theme.textPrimary,
                   textTransform: 'uppercase',
                   letterSpacing: '0.1em',
-                }}>Journey & Achievements</h3>
+                }}>Development Philosophy</h3>
               </div>
+              
+              {/* Philosophy Grid */}
               <div style={{
-                position: 'relative',
-                paddingLeft: isMobile ? '20px' : '30px',
-              }} className="achievement-timeline">
-                <div style={{
-                  position: 'absolute',
-                  left: isMobile ? '10px' : '15px',
-                  top: '0',
-                  bottom: '0',
-                  width: '2px',
-                  background: theme.accent,
-                }}></div>
-                {[
-                  {
-                    year: '2024',
-                    title: 'iNUvation 2024 Finalist',
-                    description: '4th Runner Up at NU Bulacan campus for innovative project solution'
-                  },
-                  {
-                    year: '2025',
-                    title: 'PSITE Research Conference',
-                    description: 'Presented "BaryoConnect: A Smart Community App for Local Governance"'
-                  }
-                ].map((item, index) => (
+                display: 'grid',
+                gridTemplateColumns: getResponsiveValue('repeat(2, 1fr)', '1fr', '1fr'),
+                gap: getResponsiveValue(20, 15, 12),
+              }} className="philosophy-grid">
+                {philosophy.map((item, index) => (
                   <div
                     key={index}
                     style={{
-                      position: 'relative',
-                      marginBottom: '40px',
-                      padding: getResponsiveValue('25px', '22px', '20px'),
                       background: theme.bgSecondary,
-                      borderLeft: `3px solid ${theme.accent}`,
+                      border: `1px solid ${theme.borderColor}`,
+                      padding: getResponsiveValue('25px 20px', '22px 18px', '20px 15px'),
+                      transition: 'all 0.3s ease',
+                      cursor: 'pointer',
+                      position: 'relative',
                     }}
-                    className="timeline-item"
+                    className="philosophy-item"
                   >
-                    <div style={{
-                      position: 'absolute',
-                      left: isMobile ? '-28px' : '-38px',
-                      top: '30px',
-                      width: '20px',
-                      height: '20px',
-                      background: theme.bgPrimary,
-                      border: `3px solid ${theme.accent}`,
-                      borderRadius: '50%',
-                    }}></div>
-                    <div style={{
-                      fontSize: getResponsiveValue('0.8rem', '0.75rem', '0.7rem'),
-                      fontWeight: '700',
-                      color: theme.accent,
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.1em',
-                      marginBottom: '8px',
-                    }}>{item.year}</div>
-                    <div style={{
-                      fontSize: getResponsiveValue('1.1rem', '1.05rem', '1rem'),
+                    <h4 style={{
+                      fontSize: getResponsiveValue('1.1rem', '1rem', '0.9rem'),
                       fontWeight: '700',
                       color: theme.textPrimary,
-                      marginBottom: '5px',
-                    }}>{item.title}</div>
-                    <div style={{
+                      marginBottom: '12px',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.05em',
+                      transition: 'all 0.3s ease',
+                    }} className="philosophy-title">
+                      {item.title}
+                    </h4>
+                    
+                    <p style={{
                       fontSize: getResponsiveValue('0.9rem', '0.85rem', '0.8rem'),
                       color: theme.textMuted,
-                      lineHeight: 1.5,
-                    }}>{item.description}</div>
+                      lineHeight: 1.6,
+                      margin: 0,
+                      transition: 'all 0.3s ease',
+                    }} className="philosophy-description">
+                      {item.description}
+                    </p>
                   </div>
                 ))}
               </div>
