@@ -413,11 +413,12 @@ export default function AboutMe({ scrollDirection = 'down' }) {
               marginTop: '40px',
             }} className="hexagon-grid">
               {[
-                { number: '3+', label: 'Years' },
-                { number: '5+', label: 'Projects' },
-                { number: '100%', label: 'Passion' },
-                { number: '∞', label: 'Ideas' },
-                { number: '10+', label: 'Skills' }
+              { number: '3+', label: 'Years' },
+              { number: '5+', label: 'Projects' },
+              { number: '100%', label: 'Passion' },
+              { number: '∞', label: 'Ideas' },
+              { number: '10+', label: 'Skills' },
+              { number: '3', label: 'Certifications' }
               ].map((hex, index) => (
                 <div
                   key={index}
