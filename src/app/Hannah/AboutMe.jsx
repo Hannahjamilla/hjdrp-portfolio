@@ -368,8 +368,7 @@ export default function AboutMe({ scrollDirection = 'down' }) {
                 color: theme.textSecondary,
                 marginBottom: '25px',
               }}>
-                IT professional specializing in modern web technologies, 
-                creating innovative solutions with React, Laravel, and cloud technologies.
+                Passionate about building user-centered web applications that don’t just look good but also solve real problems and make tasks easier.
               </p>
               
               <div style={{
@@ -381,8 +380,7 @@ export default function AboutMe({ scrollDirection = 'down' }) {
                 {[
                   { label: 'Experience', value: '3+ Years' },
                   { label: 'Projects', value: '5+' },
-                  { label: 'Dean\'s List', value: 'Multiple' },
-                  { label: 'Awards', value: '2' }
+                  { label: 'Dean\'s List', value: 'Multiple' }
                 ].map((stat, index) => (
                   <div key={index} style={{
                     display: 'flex',
@@ -418,7 +416,6 @@ export default function AboutMe({ scrollDirection = 'down' }) {
                 { number: '3+', label: 'Years' },
                 { number: '5+', label: 'Projects' },
                 { number: '100%', label: 'Passion' },
-                { number: '2', label: 'Awards' },
                 { number: '∞', label: 'Ideas' },
                 { number: '10+', label: 'Skills' }
               ].map((hex, index) => (
@@ -508,7 +505,7 @@ export default function AboutMe({ scrollDirection = 'down' }) {
                   color: theme.textPrimary,
                   textTransform: 'uppercase',
                   letterSpacing: '0.1em',
-                }}>Technical Arsenal</h3>
+                }}>Technical stack</h3>
               </div>
               <div style={{
                 display: 'flex',

@@ -133,6 +133,47 @@ export default function Introduction({ scrollDirection = 'down' }) {
     }
   }
 
+  // Fixed CV download function with correct path
+  const handleDownloadCV = () => {
+    // Create a link element
+    const link = document.createElement('a')
+    
+    // Use the correct path to your PDF file
+    link.href = '/cv/Hannah_Peralta-resume.pdf'
+    
+    // Set the download attribute with the desired filename
+    link.download = 'Hannah_Peralta-Resume.pdf'
+    
+    // Set target to _blank to open in new tab as fallback
+    link.target = '_blank'
+    
+    // Append to the document
+    document.body.appendChild(link)
+    
+    // Trigger the download
+    link.click()
+    
+    // Clean up
+    document.body.removeChild(link)
+  }
+
+  // Alternative download function that works better in some browsers
+  const handleDownloadCVAlternative = () => {
+    try {
+      // Method 1: Direct download
+      const link = document.createElement('a')
+      link.href = '/cv/Hannah_Peralta-resume.pdf'
+      link.download = 'Hannah_Peralta-Resume.pdf'
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+    } catch (error) {
+      // Method 2: Fallback - open in new tab
+      console.log('Download failed, opening in new tab:', error)
+      window.open('/cv/Hannah_Peralta-resume.pdf', '_blank')
+    }
+  }
+
   const generateParticles = useCallback(() => {
     const particles = [];
     for (let i = 0; i < 15; i++) {
@@ -247,6 +288,15 @@ export default function Introduction({ scrollDirection = 'down' }) {
         /* Mobile Menu Animation */
         .mobile-nav-links {
           transition: all 0.3s ease-in-out;
+        }
+        
+        /* Sticky Nav Animation */
+        .sticky-nav.visible {
+          top: 0 !important;
+        }
+        
+        .sticky-nav.hidden {
+          top: -100px !important;
         }
         
         /* Responsive Design */
@@ -1000,7 +1050,8 @@ export default function Introduction({ scrollDirection = 'down' }) {
             >
               View My Work
             </button>
-            <button style={{
+            <button 
+              style={{
                 padding: `${getResponsiveValue(18, 16, 14)}px ${getResponsiveValue(36, 32, 28)}px`,
                 fontSize: getResponsiveValue('0.95rem', '0.9rem', '0.85rem'),
                 fontWeight: '600',
@@ -1014,7 +1065,10 @@ export default function Introduction({ scrollDirection = 'down' }) {
                 overflow: 'hidden',
                 width: isMobile ? '100%' : 'auto',
                 minWidth: isMobile ? 'auto' : '140px',
-              }} className="secondary-btn">
+              }} 
+              className="secondary-btn"
+              onClick={handleDownloadCV}
+            >
               Download CV
             </button>
           </div>
