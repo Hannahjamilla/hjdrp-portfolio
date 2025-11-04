@@ -40,13 +40,18 @@ export default function Projects({ scrollDirection = 'down' }) {
   }
 
   const theme = {
-    bgPrimary: 'var(--bg-primary, #ffffff)',
-    bgSecondary: 'var(--bg-secondary, #fafafa)',
-    textPrimary: 'var(--text-primary, #000000)',
-    textMuted: 'var(--text-muted, #666666)',
-    accentColor: 'var(--accent-color, #000000)',
-    borderLight: 'var(--border-light, rgba(0, 0, 0, 0.1))',
-    borderDark: 'var(--border-dark, rgba(255, 255, 255, 0.1))',
+    bgPrimary: '#ffffff',
+    bgSecondary: '#f8f9fa',
+    bgTertiary: '#f1f3f5',
+    textPrimary: '#000000',
+    textSecondary: '#2d3748',
+    textMuted: '#4a5568',
+    accentColor: '#000000',
+    borderLight: 'rgba(0, 0, 0, 0.1)',
+    borderMedium: 'rgba(0, 0, 0, 0.15)',
+    success: '#10b981',
+    warning: '#f59e0b',
+    info: '#3b82f6'
   }
 
   const projects = [
@@ -75,41 +80,41 @@ export default function Projects({ scrollDirection = 'down' }) {
       year: "2024"
     },
     {
-    id: 3,
-    title: "Academic Projects",
-    description: "Collection of academic research projects and software development initiatives.",
-    fullDescription: "A showcase of innovative university projects in business automation and learning technology",
-    images: ["/images/2.png", "/images/3.png", "/images/4.png", "/images/5.png", "/images/7.png", "/images/8.png", "/images/POS.png", "/images/POS2.png", "/images/tutorial.png", "/images/tutorial2.png", "/images/paper.png"],
-    role: "Full Stack Developer",
-    badge: "Projects",
-    tech: ["PHP", "CSS", "JavaScript", "MySQL", "Bootstrap"],
-    year: "2023-2024"
-  }
+      id: 3,
+      title: "Academic Projects",
+      description: "Collection of academic research projects and software development initiatives.",
+      fullDescription: "A showcase of innovative university projects in business automation and learning technology",
+      images: ["/images/2.png", "/images/3.png", "/images/4.png", "/images/5.png", "/images/7.png", "/images/8.png", "/images/POS.png", "/images/POS2.png", "/images/tutorial.png", "/images/tutorial2.png", "/images/paper.png"],
+      role: "Full Stack Developer",
+      badge: "Projects",
+      tech: ["PHP", "CSS", "JavaScript", "MySQL", "Bootstrap"],
+      year: "2023-2024"
+    }
   ]
 
- const academicProjects = [
-  {
-    title: "Baliug Drug Store POS",
-    description: "Point of Sale system with comprehensive inventory management, sales analytics, and reporting capabilities.",
-    images: ["/images/2.png", "/images/3.png", "/images/4.png", "/images/5.png", "/images/POS.png", "/images/POS2.png"],
-    role: "Full Stack Developer",
-    description: "Point of Sale system with comprehensive inventory management, sales analytics, and reporting capabilities."
-  },
-  {
-    title: "Tutorial Center Platform",
-    description: "Interactive learning management system with course organization and student progress monitoring.",
-    images: ["/images/7.png", "/images/8.png", "/images/tutorial.png", "/images/tutorial2.png"],
-    role: "Full Stack Developer",
-    description: "Interactive learning management system with course organization and student progress monitoring."
-  },
-  {
-    title: "Event & Venue Rental Ecosystem",
-    description: "DEVELOPMENT OF AN INNOVATIVE EVENT AND VENUE RENTAL ECOSYSTEM THROUGH UNIFICATION OF BILLING, PAYMENT PROCESSING, AND INVENTORY SYSTEMS",
-    images: ["/images/paper.png"],
-    role: "Co-Developer / Research Contributor",
-    description: "Contributed to the development and research of a unified event and venue management system integrating billing, payment processing, and inventory tracking modules to simplify operations and improve user transaction flow. The research was officially published as part of the university's academic publication program."
-  }
-]
+  const academicProjects = [
+    {
+      title: "Baliug Drug Store POS",
+      description: "Point of Sale system with comprehensive inventory management, sales analytics, and reporting capabilities.",
+      images: ["/images/2.png", "/images/3.png", "/images/4.png", "/images/5.png", "/images/POS.png", "/images/POS2.png"],
+      role: "Full Stack Developer",
+      description: "Point of Sale system with comprehensive inventory management, sales analytics, and reporting capabilities."
+    },
+    {
+      title: "Tutorial Center Platform",
+      description: "Interactive learning management system with course organization and student progress monitoring.",
+      images: ["/images/7.png", "/images/8.png", "/images/tutorial.png", "/images/tutorial2.png"],
+      role: "Full Stack Developer",
+      description: "Interactive learning management system with course organization and student progress monitoring."
+    },
+    {
+      title: "Event & Venue Rental Ecosystem",
+      description: "DEVELOPMENT OF AN INNOVATIVE EVENT AND VENUE RENTAL ECOSYSTEM THROUGH UNIFICATION OF BILLING, PAYMENT PROCESSING, AND INVENTORY SYSTEMS",
+      images: ["/images/paper.png"],
+      role: "Co-Developer / Research Contributor",
+      description: "Contributed to the development and research of a unified event and venue management system integrating billing, payment processing, and inventory tracking modules to simplify operations and improve user transaction flow. The research was officially published as part of the university's academic publication program."
+    }
+  ]
 
   // Get current academic project based on active image
   const getCurrentAcademicProject = () => {
@@ -142,49 +147,28 @@ export default function Projects({ scrollDirection = 'down' }) {
       style.textContent = `
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
         
-        :root {
-          --bg-primary: #ffffff;
-          --bg-secondary: #fafafa;
-          --text-primary: #000000;
-          --text-muted: #666666;
-          --accent-color: #000000;
-          --border-light: rgba(0, 0, 0, 0.1);
-          --border-dark: rgba(255, 255, 255, 0.1);
-        }
-        
-        @media (prefers-color-scheme: dark) {
-          :root {
-            --bg-primary: #0a0a0a;
-            --bg-secondary: #1a1a1a;
-            --text-primary: #ffffff;
-            --text-muted: #a0a0a0;
-            --accent-color: #ffffff;
-            --border-light: rgba(255, 255, 255, 0.15);
-          }
-        }
-        
         .project-card:hover {
           transform: translateY(-8px);
-          border-color: var(--accent-color);
+          border-color: #000000;
           box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.25);
         }
         
         .tech-pill:hover {
-          background: var(--accent-color) !important;
-          color: var(--bg-primary) !important;
+          background: #000000 !important;
+          color: #ffffff !important;
           transform: scale(1.05);
         }
         
         .nav-button:hover {
-          background: var(--accent-color) !important;
-          border-color: var(--accent-color) !important;
-          color: var(--bg-primary) !important;
-          transform: scale(1.1);
+          background: #000000 !important;
+          border-color: #000000 !important;
+          color: #ffffff !important;
+          transform: scale(1.05);
         }
         
         .slider-dot:hover {
-          background: var(--accent-color) !important;
-          transform: scale(1.4);
+          background: #000000 !important;
+          transform: scale(1.2);
         }
 
         .project-badge {
@@ -209,30 +193,39 @@ export default function Projects({ scrollDirection = 'down' }) {
 
         @keyframes float {
           0%, 100% { transform: translateY(0px) rotate(0deg); }
-          33% { transform: translateY(-20px) rotate(120deg); }
-          66% { transform: translateY(10px) rotate(240deg); }
+          33% { transform: translateY(-15px) rotate(120deg); }
+          66% { transform: translateY(8px) rotate(240deg); }
         }
         
         .floating-shape {
-          animation: float 20s ease-in-out infinite;
+          animation: float 25s ease-in-out infinite;
         }
 
-        @keyframes pulse-glow {
-          0%, 100% { opacity: 0.1; transform: scale(1); }
-          50% { opacity: 0.15; transform: scale(1.1); }
+        @keyframes pulse {
+          0%, 100% { opacity: 0.08; transform: scale(1); }
+          50% { opacity: 0.12; transform: scale(1.05); }
         }
         
-        .pulse-glow {
-          animation: pulse-glow 4s ease-in-out infinite;
+        .pulse {
+          animation: pulse 6s ease-in-out infinite;
         }
 
         @keyframes slideInFromLeft {
-          0% { transform: translateX(-100px); opacity: 0; }
+          0% { transform: translateX(-80px); opacity: 0; }
           100% { transform: translateX(0); opacity: 1; }
         }
         
         .project-card {
           animation: slideInFromLeft 0.6s ease-out;
+        }
+
+        @keyframes bounce {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-10px); }
+        }
+        
+        .bounce {
+          animation: bounce 3s ease-in-out infinite;
         }
 
         /* Responsive styles */
@@ -298,6 +291,30 @@ export default function Projects({ scrollDirection = 'down' }) {
             font-size: 1.8rem !important;
           }
         }
+
+        /* Dark mode support */
+        @media (prefers-color-scheme: dark) {
+          .force-light {
+            background-color: #ffffff !important;
+            color: #000000 !important;
+          }
+          
+          .force-light-border {
+            border-color: rgba(0, 0, 0, 0.15) !important;
+          }
+          
+          .force-light-text {
+            color: #000000 !important;
+          }
+          
+          .force-light-bg {
+            background-color: #f8f9fa !important;
+          }
+          
+          .force-light-bg-secondary {
+            background-color: #f1f3f5 !important;
+          }
+        }
       `;
       document.head.appendChild(style);
 
@@ -328,57 +345,103 @@ export default function Projects({ scrollDirection = 'down' }) {
       transition: 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
       position: 'relative',
       overflow: 'hidden',
-      color: theme.textPrimary,
-    }} id="projects">
+    }} id="projects" className="force-light">
       
-      {/* Background Shapes */}
+      {/* Enhanced Background Graphics */}
       <div style={{
         position: 'absolute',
-        top: '8%',
-        left: '3%',
-        width: getResponsiveValue(180, 120, 80),
-        height: getResponsiveValue(180, 120, 80),
-        border: `4px solid ${theme.accentColor}`,
-        opacity: 0.04,
-        borderRadius: '40% 60% 70% 30% / 40% 50% 60% 50%',
-      }} className="floating-shape pulse-glow"></div>
-      
-      <div style={{
-        position: 'absolute',
-        bottom: '12%',
-        right: '5%',
-        width: getResponsiveValue(200, 150, 100),
-        height: getResponsiveValue(200, 150, 100),
+        top: '10%',
+        left: '5%',
+        width: getResponsiveValue(120, 80, 50),
+        height: getResponsiveValue(120, 80, 50),
         border: `3px solid ${theme.accentColor}`,
-        opacity: 0.03,
-        borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%',
-        transform: 'rotate(65deg)',
+        opacity: 0.06,
+        borderRadius: '30% 70% 70% 30% / 30% 30% 70% 70%',
       }} className="floating-shape"></div>
       
       <div style={{
         position: 'absolute',
-        top: '35%',
-        right: '12%',
-        width: getResponsiveValue(100, 80, 60),
-        height: getResponsiveValue(100, 80, 60),
+        bottom: '15%',
+        right: '8%',
+        width: getResponsiveValue(150, 100, 70),
+        height: getResponsiveValue(150, 100, 70),
+        border: `2px solid ${theme.accentColor}`,
+        opacity: 0.05,
+        borderRadius: '70% 30% 30% 70% / 70% 70% 30% 30%',
+        transform: 'rotate(45deg)',
+      }} className="floating-shape"></div>
+      
+      <div style={{
+        position: 'absolute',
+        top: '40%',
+        right: '15%',
+        width: getResponsiveValue(80, 60, 40),
+        height: getResponsiveValue(80, 60, 40),
         background: theme.accentColor,
         opacity: 0.04,
         borderRadius: '50%',
-        filter: 'blur(10px)',
-      }} className="pulse-glow"></div>
+      }} className="pulse"></div>
 
-      {/* Subtle Pattern Background */}
+      {/* Code Brackets Graphics */}
+      <div style={{
+        position: 'absolute',
+        top: '20%',
+        left: '8%',
+        fontSize: getResponsiveValue('2rem', '1.5rem', '1rem'),
+        color: theme.accentColor,
+        opacity: 0.03,
+        fontWeight: 'bold',
+        fontFamily: 'monospace',
+      }}>{'</>'}</div>
+
+      <div style={{
+        position: 'absolute',
+        bottom: '25%',
+        right: '12%',
+        fontSize: getResponsiveValue('2rem', '1.5rem', '1rem'),
+        color: theme.accentColor,
+        opacity: 0.03,
+        fontWeight: 'bold',
+        fontFamily: 'monospace',
+        transform: 'rotate(180deg)',
+      }}>{'</>'}</div>
+
+      {/* Connection Lines */}
+      <div style={{
+        position: 'absolute',
+        top: '30%',
+        left: '15%',
+        width: '2px',
+        height: '100px',
+        background: theme.accentColor,
+        opacity: 0.04,
+        transform: 'rotate(45deg)',
+      }}></div>
+
+      <div style={{
+        position: 'absolute',
+        bottom: '20%',
+        right: '18%',
+        width: '2px',
+        height: '80px',
+        background: theme.accentColor,
+        opacity: 0.04,
+        transform: 'rotate(-30deg)',
+      }}></div>
+
+      {/* Binary Code Pattern */}
       <div style={{
         position: 'absolute',
         top: 0,
         left: 0,
         right: 0,
         bottom: 0,
-        background: `
-          radial-gradient(circle at 20% 80%, ${theme.accentColor}08 0%, transparent 50%),
-          radial-gradient(circle at 80% 20%, ${theme.accentColor}06 0%, transparent 50%)
+        backgroundImage: `
+          radial-gradient(circle at 25% 25%, ${theme.accentColor}08 0%, transparent 50%),
+          radial-gradient(circle at 75% 75%, ${theme.accentColor}06 0%, transparent 50%)
         `,
-        opacity: 0.03,
+        backgroundSize: '400px 400px, 300px 300px',
+        opacity: 0.4,
       }}></div>
 
       <div style={{
@@ -387,7 +450,7 @@ export default function Projects({ scrollDirection = 'down' }) {
         position: 'relative',
         zIndex: 2,
       }}>
-        {/* Header */}
+        {/* Enhanced Header */}
         <div style={{
           textAlign: 'center',
           marginBottom: getResponsiveValue(120, 90, 60),
@@ -400,17 +463,28 @@ export default function Projects({ scrollDirection = 'down' }) {
             display: 'inline-block',
             position: 'relative',
           }}>
+            {/* Decorative elements */}
             <div style={{
               position: 'absolute',
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)',
-              width: getResponsiveValue(400, 300, 200),
-              height: getResponsiveValue(120, 90, 60),
-              background: `${theme.accentColor}08`,
+              top: '-20px',
+              left: '-30px',
+              width: '60px',
+              height: '60px',
+              border: `2px solid ${theme.accentColor}`,
+              opacity: 0.1,
               borderRadius: '50%',
-              filter: 'blur(40px)',
             }}></div>
+            <div style={{
+              position: 'absolute',
+              bottom: '-15px',
+              right: '-25px',
+              width: '40px',
+              height: '40px',
+              border: `2px solid ${theme.accentColor}`,
+              opacity: 0.1,
+              borderRadius: '50%',
+            }}></div>
+            
             <h1 style={{
               fontSize: getResponsiveValue('4.5rem', '3.5rem', '2.8rem'),
               fontWeight: '900',
@@ -419,9 +493,25 @@ export default function Projects({ scrollDirection = 'down' }) {
               letterSpacing: '-0.03em',
               position: 'relative',
               zIndex: 2,
-            }}>Project <span style={{
-              color: theme.accentColor,
-            }}>Portfolio</span></h1>
+              textShadow: '0 2px 4px rgba(0,0,0,0.05)',
+            }} className="force-light-text">
+              Project <span style={{
+                color: theme.accentColor,
+                position: 'relative',
+              }}>
+                Portfolio
+                <span style={{
+                  position: 'absolute',
+                  bottom: '5px',
+                  left: '0',
+                  width: '100%',
+                  height: '8px',
+                  backgroundColor: theme.accentColor,
+                  opacity: 0.15,
+                  borderRadius: '4px',
+                }}></span>
+              </span>
+            </h1>
           </div>
           <p style={{
             fontSize: getResponsiveValue('1.4rem', '1.2rem', '1.1rem'),
@@ -432,9 +522,20 @@ export default function Projects({ scrollDirection = 'down' }) {
             lineHeight: 1.6,
             position: 'relative',
             zIndex: 2,
-          }}>
+            opacity: 0.9,
+          }} className="force-light-text">
             Crafting digital solutions with innovation and precision
           </p>
+          
+          {/* Header decoration line */}
+          <div style={{
+            width: '100px',
+            height: '4px',
+            background: theme.accentColor,
+            margin: '30px auto 0',
+            opacity: 0.2,
+            borderRadius: '2px',
+          }}></div>
         </div>
 
         <div style={{
@@ -444,7 +545,7 @@ export default function Projects({ scrollDirection = 'down' }) {
           alignItems: 'start',
         }} className="main-grid">
           
-          {/* Project Cards Navigation */}
+          {/* Enhanced Project Cards Navigation */}
           <div style={{
             display: 'flex',
             flexDirection: 'column',
@@ -457,36 +558,35 @@ export default function Projects({ scrollDirection = 'down' }) {
                 key={project.id}
                 style={{
                   padding: getResponsiveValue('35px 30px', '28px 25px', '22px 20px'),
-                  background: theme.bgSecondary,
-                  border: `3px solid ${activeProject === index ? theme.accentColor : theme.borderLight}`,
-                  borderRadius: '25px',
+                  background: theme.bgPrimary,
+                  border: `2px solid ${activeProject === index ? theme.accentColor : theme.borderLight}`,
+                  borderRadius: '20px',
                   cursor: 'pointer',
-                  transition: 'all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                  transition: 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
                   position: 'relative',
                   overflow: 'hidden',
                   boxShadow: activeProject === index 
-                    ? '0 20px 40px -10px rgba(0, 0, 0, 0.15)' 
-                    : '0 8px 25px -5px rgba(0, 0, 0, 0.08)',
+                    ? '0 15px 30px -8px rgba(0, 0, 0, 0.15)' 
+                    : '0 5px 20px -5px rgba(0, 0, 0, 0.08)',
                   animationDelay: `${index * 0.1}s`,
-                  animationFillMode: 'both',
                 }}
-                className="project-card"
+                className="project-card force-light force-light-border"
                 onClick={() => {
                   setActiveProject(index)
                   setActiveImage(0)
                 }}
               >
-                {/* Background Pattern */}
-                <div style={{
-                  position: 'absolute',
-                  top: 0,
-                  right: 0,
-                  width: '80px',
-                  height: '80px',
-                  background: theme.accentColor,
-                  opacity: activeProject === index ? 0.08 : 0.04,
-                  transition: 'all 0.4s ease',
-                }}></div>
+                {/* Active indicator */}
+                {activeProject === index && (
+                  <div style={{
+                    position: 'absolute',
+                    top: '0',
+                    left: '0',
+                    width: '6px',
+                    height: '100%',
+                    background: theme.accentColor,
+                  }}></div>
+                )}
                 
                 {/* Project Number */}
                 <div style={{
@@ -496,11 +596,12 @@ export default function Projects({ scrollDirection = 'down' }) {
                   fontSize: getResponsiveValue('0.9rem', '0.8rem', '0.7rem'),
                   fontWeight: '800',
                   color: activeProject === index ? theme.accentColor : theme.textMuted,
-                  opacity: activeProject === index ? 1 : 0.5,
-                  background: activeProject === index ? `${theme.accentColor}15` : `${theme.textMuted}10`,
+                  opacity: activeProject === index ? 1 : 0.6,
+                  background: activeProject === index ? `${theme.accentColor}12` : `${theme.textMuted}08`,
                   padding: '6px 12px',
-                  borderRadius: '12px',
+                  borderRadius: '10px',
                   transition: 'all 0.3s ease',
+                  border: `1px solid ${activeProject === index ? `${theme.accentColor}20` : `${theme.textMuted}10`}`
                 }}>
                   0{index + 1}
                 </div>
@@ -520,20 +621,21 @@ export default function Projects({ scrollDirection = 'down' }) {
                     flex: 1,
                     lineHeight: 1.2,
                     letterSpacing: '-0.01em',
-                  }}>{project.title}</h3>
+                  }} className="force-light-text">{project.title}</h3>
                   <div style={{
                     background: activeProject === index ? theme.accentColor : theme.textMuted,
                     color: theme.bgPrimary,
                     padding: getResponsiveValue('8px 18px', '7px 16px', '6px 14px'),
-                    borderRadius: '16px',
+                    borderRadius: '12px',
                     fontSize: getResponsiveValue('0.85rem', '0.8rem', '0.75rem'),
                     fontWeight: '800',
                     letterSpacing: '0.5px',
                     whiteSpace: 'nowrap',
                     marginLeft: '15px',
-                    boxShadow: activeProject === index ? '0 4px 15px rgba(0, 0, 0, 0.2)' : 'none',
+                    boxShadow: activeProject === index ? '0 4px 12px rgba(0, 0, 0, 0.2)' : 'none',
                     transform: activeProject === index ? 'scale(1.05)' : 'scale(1)',
                     transition: 'all 0.3s ease',
+                    border: `1px solid ${activeProject === index ? theme.accentColor : theme.textMuted}`
                   }} className="project-badge">
                     {project.badge}
                   </div>
@@ -545,7 +647,8 @@ export default function Projects({ scrollDirection = 'down' }) {
                   lineHeight: 1.6,
                   marginBottom: getResponsiveValue(20, 18, 16),
                   marginLeft: getResponsiveValue('50px', '45px', '40px'),
-                }}>{project.description}</p>
+                  opacity: 0.9,
+                }} className="force-light-text">{project.description}</p>
                 
                 <div style={{
                   fontSize: getResponsiveValue('1rem', '0.9rem', '0.8rem'),
@@ -553,11 +656,12 @@ export default function Projects({ scrollDirection = 'down' }) {
                   fontWeight: '700',
                   opacity: activeProject === index ? 1 : 0.7,
                   marginLeft: getResponsiveValue('50px', '45px', '40px'),
-                  background: `${theme.accentColor}10`,
+                  background: `${theme.accentColor}08`,
                   padding: '8px 16px',
-                  borderRadius: '12px',
+                  borderRadius: '10px',
                   display: 'inline-block',
                   transition: 'all 0.3s ease',
+                  border: `1px solid ${theme.accentColor}15`
                 }}>{project.year}</div>
               </div>
             ))}
@@ -566,59 +670,59 @@ export default function Projects({ scrollDirection = 'down' }) {
           {/* Project Showcase */}
           <div style={{
             background: theme.bgPrimary,
-            borderRadius: '30px',
+            borderRadius: '24px',
             padding: getResponsiveValue('50px', '40px', '35px'),
-            border: `3px solid ${theme.borderLight}`,
+            border: `2px solid ${theme.borderLight}`,
             position: 'relative',
             overflow: 'hidden',
             order: isTablet ? 1 : 2,
-            boxShadow: '0 20px 60px -10px rgba(0, 0, 0, 0.1)',
-          }} className="project-showcase">
+            boxShadow: '0 15px 40px -10px rgba(0, 0, 0, 0.12)',
+          }} className="project-showcase force-light force-light-border">
             
-            {/* Corner Accents */}
+            {/* Corner Graphics */}
             <div style={{
               position: 'absolute',
               top: '0',
               left: '0',
-              width: '60px',
-              height: '60px',
-              borderTop: `4px solid ${theme.accentColor}`,
-              borderLeft: `4px solid ${theme.accentColor}`,
-              borderTopLeftRadius: '28px',
-              opacity: 0.3,
+              width: '50px',
+              height: '50px',
+              borderTop: `3px solid ${theme.accentColor}`,
+              borderLeft: `3px solid ${theme.accentColor}`,
+              borderTopLeftRadius: '22px',
+              opacity: 0.2,
             }}></div>
             <div style={{
               position: 'absolute',
               top: '0',
               right: '0',
-              width: '60px',
-              height: '60px',
-              borderTop: `4px solid ${theme.accentColor}`,
-              borderRight: `4px solid ${theme.accentColor}`,
-              borderTopRightRadius: '28px',
-              opacity: 0.3,
+              width: '50px',
+              height: '50px',
+              borderTop: `3px solid ${theme.accentColor}`,
+              borderRight: `3px solid ${theme.accentColor}`,
+              borderTopRightRadius: '22px',
+              opacity: 0.2,
             }}></div>
             <div style={{
               position: 'absolute',
               bottom: '0',
               left: '0',
-              width: '60px',
-              height: '60px',
-              borderBottom: `4px solid ${theme.accentColor}`,
-              borderLeft: `4px solid ${theme.accentColor}`,
-              borderBottomLeftRadius: '28px',
-              opacity: 0.3,
+              width: '50px',
+              height: '50px',
+              borderBottom: `3px solid ${theme.accentColor}`,
+              borderLeft: `3px solid ${theme.accentColor}`,
+              borderBottomLeftRadius: '22px',
+              opacity: 0.2,
             }}></div>
             <div style={{
               position: 'absolute',
               bottom: '0',
               right: '0',
-              width: '60px',
-              height: '60px',
-              borderBottom: `4px solid ${theme.accentColor}`,
-              borderRight: `4px solid ${theme.accentColor}`,
-              borderBottomRightRadius: '28px',
-              opacity: 0.3,
+              width: '50px',
+              height: '50px',
+              borderBottom: `3px solid ${theme.accentColor}`,
+              borderRight: `3px solid ${theme.accentColor}`,
+              borderBottomRightRadius: '22px',
+              opacity: 0.2,
             }}></div>
 
             {/* Image Slider */}
@@ -626,12 +730,12 @@ export default function Projects({ scrollDirection = 'down' }) {
               position: 'relative',
               width: '100%',
               height: getResponsiveValue(400, 320, 260),
-              borderRadius: '20px',
+              borderRadius: '18px',
               overflow: 'hidden',
               background: theme.bgSecondary,
               border: `2px solid ${theme.borderLight}`,
               marginBottom: getResponsiveValue(40, 35, 30),
-            }} className="image-container">
+            }} className="image-container force-light-bg force-light-border">
               <img 
                 src={currentProject.images[activeImage]} 
                 alt={currentProject.title}
@@ -650,23 +754,23 @@ export default function Projects({ scrollDirection = 'down' }) {
                   position: 'absolute',
                   top: '50%',
                   transform: 'translateY(-50%)',
-                  width: getResponsiveValue(60, 50, 45),
-                  height: getResponsiveValue(60, 50, 45),
+                  width: getResponsiveValue(50, 45, 40),
+                  height: getResponsiveValue(50, 45, 40),
                   background: theme.bgPrimary,
-                  border: `3px solid ${theme.borderLight}`,
+                  border: `2px solid ${theme.borderMedium}`,
                   borderRadius: '50%',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   cursor: 'pointer',
-                  fontSize: getResponsiveValue('1.5rem', '1.3rem', '1.1rem'),
+                  fontSize: getResponsiveValue('1.3rem', '1.2rem', '1rem'),
                   fontWeight: 'bold',
-                  color: theme.textPrimary,
                   transition: 'all 0.3s ease',
-                  left: '25px',
-                  boxShadow: '0 8px 25px rgba(0, 0, 0, 0.15)',
+                  left: '20px',
+                  boxShadow: '0 5px 15px rgba(0, 0, 0, 0.1)',
+                  color: theme.textPrimary,
                 }}
-                className="nav-button"
+                className="nav-button force-light force-light-border"
                 onClick={prevImage}
               >
                 ‹
@@ -676,23 +780,23 @@ export default function Projects({ scrollDirection = 'down' }) {
                   position: 'absolute',
                   top: '50%',
                   transform: 'translateY(-50%)',
-                  width: getResponsiveValue(60, 50, 45),
-                  height: getResponsiveValue(60, 50, 45),
+                  width: getResponsiveValue(50, 45, 40),
+                  height: getResponsiveValue(50, 45, 40),
                   background: theme.bgPrimary,
-                  border: `3px solid ${theme.borderLight}`,
+                  border: `2px solid ${theme.borderMedium}`,
                   borderRadius: '50%',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   cursor: 'pointer',
-                  fontSize: getResponsiveValue('1.5rem', '1.3rem', '1.1rem'),
+                  fontSize: getResponsiveValue('1.3rem', '1.2rem', '1rem'),
                   fontWeight: 'bold',
-                  color: theme.textPrimary,
                   transition: 'all 0.3s ease',
-                  right: '25px',
-                  boxShadow: '0 8px 25px rgba(0, 0, 0, 0.15)',
+                  right: '20px',
+                  boxShadow: '0 5px 15px rgba(0, 0, 0, 0.1)',
+                  color: theme.textPrimary,
                 }}
-                className="nav-button"
+                className="nav-button force-light force-light-border"
                 onClick={nextImage}
               >
                 ›
@@ -701,24 +805,23 @@ export default function Projects({ scrollDirection = 'down' }) {
               {/* Dots Indicator */}
               <div style={{
                 position: 'absolute',
-                bottom: '25px',
+                bottom: '20px',
                 left: '50%',
                 transform: 'translateX(-50%)',
                 display: 'flex',
-                gap: '12px',
+                gap: '10px',
                 background: theme.bgPrimary,
-                padding: getResponsiveValue('12px 25px', '10px 20px', '8px 16px'),
-                borderRadius: '30px',
-                backdropFilter: 'blur(15px)',
-                boxShadow: '0 8px 25px rgba(0, 0, 0, 0.1)',
-                border: `1px solid ${theme.borderLight}`,
-              }}>
+                padding: getResponsiveValue('10px 20px', '8px 16px', '6px 12px'),
+                borderRadius: '25px',
+                boxShadow: '0 5px 15px rgba(0, 0, 0, 0.1)',
+                border: `1px solid ${theme.borderLight}`
+              }} className="force-light force-light-border">
                 {currentProject.images.map((_, index) => (
                   <div
                     key={index}
                     style={{
-                      width: '12px',
-                      height: '12px',
+                      width: '10px',
+                      height: '10px',
                       borderRadius: '50%',
                       background: index === activeImage ? theme.accentColor : theme.borderLight,
                       cursor: 'pointer',
@@ -752,28 +855,32 @@ export default function Projects({ scrollDirection = 'down' }) {
                     margin: '0 0 8px 0',
                     letterSpacing: '-0.02em',
                     lineHeight: 1.1,
-                  }}>{currentProject.title}</h2>
-                  <p style={{
-                    fontSize: getResponsiveValue('1.3rem', '1.2rem', '1.1rem'),
-                    color: theme.textMuted,
-                    margin: '0 0 15px 0',
-                    fontWeight: '500',
-                  }}>{currentProject.subtitle}</p>
+                  }} className="force-light-text">{currentProject.title}</h2>
+                  {currentProject.subtitle && (
+                    <p style={{
+                      fontSize: getResponsiveValue('1.3rem', '1.2rem', '1.1rem'),
+                      color: theme.textMuted,
+                      margin: '0 0 15px 0',
+                      fontWeight: '500',
+                      opacity: 0.9,
+                    }} className="force-light-text">{currentProject.subtitle}</p>
+                  )}
                 </div>
                 <div style={{
                   display: 'flex',
-                  gap: '15px',
+                  gap: '12px',
                   alignItems: 'center',
                 }}>
                   <div style={{
                     background: theme.accentColor,
                     color: theme.bgPrimary,
-                    padding: getResponsiveValue('8px 20px', '7px 18px', '6px 16px'),
-                    borderRadius: '18px',
+                    padding: getResponsiveValue('8px 18px', '7px 16px', '6px 14px'),
+                    borderRadius: '14px',
                     fontSize: getResponsiveValue('0.9rem', '0.85rem', '0.8rem'),
                     fontWeight: '800',
                     letterSpacing: '0.5px',
-                    boxShadow: '0 4px 15px rgba(0, 0, 0, 0.15)',
+                    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
+                    border: `1px solid ${theme.accentColor}`
                   }}>
                     {currentProject.badge}
                   </div>
@@ -781,11 +888,11 @@ export default function Projects({ scrollDirection = 'down' }) {
                     fontSize: getResponsiveValue('1rem', '0.9rem', '0.8rem'),
                     color: theme.textMuted,
                     fontWeight: '700',
-                    background: `${theme.textMuted}10`,
-                    padding: '8px 16px',
-                    borderRadius: '14px',
-                    border: `1px solid ${theme.borderLight}`,
-                  }}>
+                    background: `${theme.textMuted}08`,
+                    padding: '8px 14px',
+                    borderRadius: '12px',
+                    border: `1px solid ${theme.textMuted}15`
+                  }} className="force-light-text">
                     {currentProject.year}
                   </div>
                 </div>
@@ -797,18 +904,19 @@ export default function Projects({ scrollDirection = 'down' }) {
                 fontWeight: '700',
                 marginBottom: '20px',
                 background: `${theme.accentColor}08`,
-                padding: '12px 20px',
-                borderRadius: '14px',
+                padding: '10px 18px',
+                borderRadius: '12px',
                 display: 'inline-block',
-                border: `1px solid ${theme.borderLight}`,
-              }}>Role: {currentProject.role}</div>
+                border: `1px solid ${theme.accentColor}12`
+              }} className="force-light-text">Role: {currentProject.role}</div>
 
               <p style={{
                 fontSize: getResponsiveValue('1.2rem', '1.1rem', '1rem'),
                 color: theme.textPrimary,
                 lineHeight: '1.7',
                 marginBottom: getResponsiveValue(35, 30, 25),
-              }}>
+                opacity: 0.9,
+              }} className="force-light-text">
                 {currentProject.fullDescription}
               </p>
 
@@ -816,25 +924,25 @@ export default function Projects({ scrollDirection = 'down' }) {
               <div style={{
                 display: 'grid',
                 gridTemplateColumns: getResponsiveValue('repeat(3, 1fr)', 'repeat(2, 1fr)', 'repeat(2, 1fr)'),
-                gap: getResponsiveValue(12, 10, 8),
+                gap: getResponsiveValue(10, 8, 6),
                 marginBottom: getResponsiveValue(35, 30, 25),
               }} className="tech-grid">
                 {currentProject.tech.map((tech, index) => (
                   <div
                     key={index}
                     style={{
-                      padding: getResponsiveValue('12px 20px', '10px 18px', '8px 16px'),
+                      padding: getResponsiveValue('10px 18px', '8px 14px', '6px 12px'),
                       background: theme.bgSecondary,
-                      border: `2px solid ${theme.borderLight}`,
-                      borderRadius: '25px',
+                      border: `1px solid ${theme.borderLight}`,
+                      borderRadius: '20px',
                       fontSize: getResponsiveValue('0.9rem', '0.85rem', '0.8rem'),
                       fontWeight: '600',
                       color: theme.textPrimary,
                       textAlign: 'center',
                       transition: 'all 0.3s ease',
-                      boxShadow: '0 4px 12px rgba(0, 0, 0, 0.05)',
+                      boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)',
                     }}
-                    className="tech-pill"
+                    className="tech-pill force-light-bg-secondary force-light-border force-light-text"
                   >
                     {tech}
                   </div>
@@ -844,30 +952,46 @@ export default function Projects({ scrollDirection = 'down' }) {
 
             {/* Academic Projects Details */}
             {isAcademicProject && (
-              <div>
+              <div style={{
+                padding: '25px',
+                background: theme.bgSecondary,
+                borderRadius: '18px',
+                border: `1px solid ${theme.borderLight}`,
+                boxShadow: '0 5px 20px rgba(0, 0, 0, 0.05)',
+              }} className="force-light-bg-secondary force-light-border">
                 <h4 style={{ 
                   fontSize: getResponsiveValue('1.3rem', '1.2rem', '1.1rem'),
                   fontWeight: '800', 
-                  marginBottom: '20px',
+                  marginBottom: '18px',
                   color: theme.textPrimary,
                   letterSpacing: '-0.01em',
-                }}>
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '10px',
+                }} className="force-light-text">
+                  <span style={{
+                    display: 'inline-block',
+                    width: '6px',
+                    height: '6px',
+                    borderRadius: '50%',
+                    background: theme.accentColor,
+                  }}></span>
                   Current Project: {currentAcademicProject.title}
                 </h4>
                 
                 <div style={{
-                  padding: getResponsiveValue('25px', '22px', '20px'),
-                  background: theme.bgSecondary,
-                  border: `2px solid ${theme.borderLight}`,
-                  borderRadius: '20px',
-                  boxShadow: '0 8px 25px rgba(0, 0, 0, 0.08)',
-                }}>
+                  padding: getResponsiveValue('20px', '18px', '16px'),
+                  background: theme.bgPrimary,
+                  border: `1px solid ${theme.borderLight}`,
+                  borderRadius: '14px',
+                  boxShadow: '0 2px 10px rgba(0, 0, 0, 0.03)',
+                }} className="force-light force-light-border">
                   <div style={{
                     fontSize: getResponsiveValue('1rem', '0.95rem', '0.9rem'),
                     fontWeight: '700',
                     color: theme.textMuted,
-                    marginBottom: '12px',
-                  }}>
+                    marginBottom: '10px',
+                  }} className="force-light-text">
                     Role: {currentAcademicProject.role}
                   </div>
                   <p style={{
@@ -875,7 +999,8 @@ export default function Projects({ scrollDirection = 'down' }) {
                     color: theme.textPrimary,
                     lineHeight: '1.6',
                     margin: 0,
-                  }}>
+                    opacity: 0.9,
+                  }} className="force-light-text">
                     {currentAcademicProject.description}
                   </p>
                 </div>
