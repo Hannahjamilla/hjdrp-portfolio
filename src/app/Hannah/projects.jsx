@@ -40,12 +40,13 @@ export default function Projects({ scrollDirection = 'down' }) {
   }
 
   const theme = {
-    bgPrimary: '#ffffff',
-    bgSecondary: '#fafafa',
-    textPrimary: '#000000',
-    textMuted: '#666666',
-    accentColor: '#000000',
-    borderLight: 'rgba(0, 0, 0, 0.05)',
+    bgPrimary: 'var(--bg-primary, #ffffff)',
+    bgSecondary: 'var(--bg-secondary, #fafafa)',
+    textPrimary: 'var(--text-primary, #000000)',
+    textMuted: 'var(--text-muted, #666666)',
+    accentColor: 'var(--accent-color, #000000)',
+    borderLight: 'var(--border-light, rgba(0, 0, 0, 0.1))',
+    borderDark: 'var(--border-dark, rgba(255, 255, 255, 0.1))',
   }
 
   const projects = [
@@ -141,27 +142,48 @@ export default function Projects({ scrollDirection = 'down' }) {
       style.textContent = `
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
         
+        :root {
+          --bg-primary: #ffffff;
+          --bg-secondary: #fafafa;
+          --text-primary: #000000;
+          --text-muted: #666666;
+          --accent-color: #000000;
+          --border-light: rgba(0, 0, 0, 0.1);
+          --border-dark: rgba(255, 255, 255, 0.1);
+        }
+        
+        @media (prefers-color-scheme: dark) {
+          :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #1a1a1a;
+            --text-primary: #ffffff;
+            --text-muted: #a0a0a0;
+            --accent-color: #ffffff;
+            --border-light: rgba(255, 255, 255, 0.15);
+          }
+        }
+        
         .project-card:hover {
-          transform: translateY(-12px) scale(1.02) rotate(0.5deg);
-          border-color: #000000;
-          box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+          transform: translateY(-8px);
+          border-color: var(--accent-color);
+          box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.25);
         }
         
         .tech-pill:hover {
-          background: #000000 !important;
-          color: #ffffff !important;
-          transform: scale(1.08);
+          background: var(--accent-color) !important;
+          color: var(--bg-primary) !important;
+          transform: scale(1.05);
         }
         
         .nav-button:hover {
-          background: #000000 !important;
-          border-color: #000000 !important;
-          color: #ffffff !important;
+          background: var(--accent-color) !important;
+          border-color: var(--accent-color) !important;
+          color: var(--bg-primary) !important;
           transform: scale(1.1);
         }
         
         .slider-dot:hover {
-          background: #000000 !important;
+          background: var(--accent-color) !important;
           transform: scale(1.4);
         }
 
@@ -306,9 +328,10 @@ export default function Projects({ scrollDirection = 'down' }) {
       transition: 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
       position: 'relative',
       overflow: 'hidden',
+      color: theme.textPrimary,
     }} id="projects">
       
-      {/* Enhanced Background Shapes */}
+      {/* Background Shapes */}
       <div style={{
         position: 'absolute',
         top: '8%',
@@ -344,7 +367,7 @@ export default function Projects({ scrollDirection = 'down' }) {
         filter: 'blur(10px)',
       }} className="pulse-glow"></div>
 
-      {/* Enhanced Binary Code Background */}
+      {/* Subtle Pattern Background */}
       <div style={{
         position: 'absolute',
         top: 0,
@@ -352,14 +375,10 @@ export default function Projects({ scrollDirection = 'down' }) {
         right: 0,
         bottom: 0,
         background: `
-          radial-gradient(circle at 20% 80%, ${theme.accentColor}15 0%, transparent 50%),
-          radial-gradient(circle at 80% 20%, ${theme.accentColor}10 0%, transparent 50%),
-          linear-gradient(90deg, transparent 49%, ${theme.accentColor}02 49%, ${theme.accentColor}02 51%, transparent 51%),
-          linear-gradient(transparent 49%, ${theme.accentColor}02 49%, ${theme.accentColor}02 51%, transparent 51%)
+          radial-gradient(circle at 20% 80%, ${theme.accentColor}08 0%, transparent 50%),
+          radial-gradient(circle at 80% 20%, ${theme.accentColor}06 0%, transparent 50%)
         `,
-        backgroundSize: '80px 80px, 80px 80px, 60px 60px, 60px 60px',
         opacity: 0.03,
-        transform: 'rotate(12deg)',
       }}></div>
 
       <div style={{
@@ -368,7 +387,7 @@ export default function Projects({ scrollDirection = 'down' }) {
         position: 'relative',
         zIndex: 2,
       }}>
-        {/* Enhanced Header */}
+        {/* Header */}
         <div style={{
           textAlign: 'center',
           marginBottom: getResponsiveValue(120, 90, 60),
@@ -388,7 +407,7 @@ export default function Projects({ scrollDirection = 'down' }) {
               transform: 'translate(-50%, -50%)',
               width: getResponsiveValue(400, 300, 200),
               height: getResponsiveValue(120, 90, 60),
-              background: `linear-gradient(45deg, ${theme.accentColor}05, ${theme.accentColor}15)`,
+              background: `${theme.accentColor}08`,
               borderRadius: '50%',
               filter: 'blur(40px)',
             }}></div>
@@ -400,15 +419,8 @@ export default function Projects({ scrollDirection = 'down' }) {
               letterSpacing: '-0.03em',
               position: 'relative',
               zIndex: 2,
-              background: `linear-gradient(135deg, ${theme.textPrimary} 0%, ${theme.textMuted} 100%)`,
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
             }}>Project <span style={{
-              background: `linear-gradient(135deg, ${theme.accentColor} 0%, #444 100%)`,
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
+              color: theme.accentColor,
             }}>Portfolio</span></h1>
           </div>
           <p style={{
@@ -420,7 +432,6 @@ export default function Projects({ scrollDirection = 'down' }) {
             lineHeight: 1.6,
             position: 'relative',
             zIndex: 2,
-            opacity: 0.8,
           }}>
             Crafting digital solutions with innovation and precision
           </p>
@@ -433,7 +444,7 @@ export default function Projects({ scrollDirection = 'down' }) {
           alignItems: 'start',
         }} className="main-grid">
           
-          {/* Enhanced Project Cards Navigation */}
+          {/* Project Cards Navigation */}
           <div style={{
             display: 'flex',
             flexDirection: 'column',
@@ -446,7 +457,7 @@ export default function Projects({ scrollDirection = 'down' }) {
                 key={project.id}
                 style={{
                   padding: getResponsiveValue('35px 30px', '28px 25px', '22px 20px'),
-                  background: `linear-gradient(135deg, ${theme.bgPrimary} 0%, ${theme.bgSecondary} 100%)`,
+                  background: theme.bgSecondary,
                   border: `3px solid ${activeProject === index ? theme.accentColor : theme.borderLight}`,
                   borderRadius: '25px',
                   cursor: 'pointer',
@@ -465,15 +476,15 @@ export default function Projects({ scrollDirection = 'down' }) {
                   setActiveImage(0)
                 }}
               >
-                {/* Enhanced Background Pattern */}
+                {/* Background Pattern */}
                 <div style={{
                   position: 'absolute',
                   top: 0,
                   right: 0,
                   width: '80px',
                   height: '80px',
-                  background: `linear-gradient(135deg, ${theme.accentColor} 0%, transparent 70%)`,
-                  opacity: activeProject === index ? 0.12 : 0.06,
+                  background: theme.accentColor,
+                  opacity: activeProject === index ? 0.08 : 0.04,
                   transition: 'all 0.4s ease',
                 }}></div>
                 
@@ -511,9 +522,7 @@ export default function Projects({ scrollDirection = 'down' }) {
                     letterSpacing: '-0.01em',
                   }}>{project.title}</h3>
                   <div style={{
-                    background: activeProject === index 
-                      ? `linear-gradient(135deg, ${theme.accentColor} 0%, #333 100%)` 
-                      : theme.accentColor,
+                    background: activeProject === index ? theme.accentColor : theme.textMuted,
                     color: theme.bgPrimary,
                     padding: getResponsiveValue('8px 18px', '7px 16px', '6px 14px'),
                     borderRadius: '16px',
@@ -536,7 +545,6 @@ export default function Projects({ scrollDirection = 'down' }) {
                   lineHeight: 1.6,
                   marginBottom: getResponsiveValue(20, 18, 16),
                   marginLeft: getResponsiveValue('50px', '45px', '40px'),
-                  opacity: 0.9,
                 }}>{project.description}</p>
                 
                 <div style={{
@@ -644,7 +652,7 @@ export default function Projects({ scrollDirection = 'down' }) {
                   transform: 'translateY(-50%)',
                   width: getResponsiveValue(60, 50, 45),
                   height: getResponsiveValue(60, 50, 45),
-                  background: 'rgba(255, 255, 255, 0.95)',
+                  background: theme.bgPrimary,
                   border: `3px solid ${theme.borderLight}`,
                   borderRadius: '50%',
                   display: 'flex',
@@ -653,6 +661,7 @@ export default function Projects({ scrollDirection = 'down' }) {
                   cursor: 'pointer',
                   fontSize: getResponsiveValue('1.5rem', '1.3rem', '1.1rem'),
                   fontWeight: 'bold',
+                  color: theme.textPrimary,
                   transition: 'all 0.3s ease',
                   left: '25px',
                   boxShadow: '0 8px 25px rgba(0, 0, 0, 0.15)',
@@ -669,7 +678,7 @@ export default function Projects({ scrollDirection = 'down' }) {
                   transform: 'translateY(-50%)',
                   width: getResponsiveValue(60, 50, 45),
                   height: getResponsiveValue(60, 50, 45),
-                  background: 'rgba(255, 255, 255, 0.95)',
+                  background: theme.bgPrimary,
                   border: `3px solid ${theme.borderLight}`,
                   borderRadius: '50%',
                   display: 'flex',
@@ -678,6 +687,7 @@ export default function Projects({ scrollDirection = 'down' }) {
                   cursor: 'pointer',
                   fontSize: getResponsiveValue('1.5rem', '1.3rem', '1.1rem'),
                   fontWeight: 'bold',
+                  color: theme.textPrimary,
                   transition: 'all 0.3s ease',
                   right: '25px',
                   boxShadow: '0 8px 25px rgba(0, 0, 0, 0.15)',
@@ -696,11 +706,12 @@ export default function Projects({ scrollDirection = 'down' }) {
                 transform: 'translateX(-50%)',
                 display: 'flex',
                 gap: '12px',
-                background: 'rgba(255, 255, 255, 0.95)',
+                background: theme.bgPrimary,
                 padding: getResponsiveValue('12px 25px', '10px 20px', '8px 16px'),
                 borderRadius: '30px',
                 backdropFilter: 'blur(15px)',
                 boxShadow: '0 8px 25px rgba(0, 0, 0, 0.1)',
+                border: `1px solid ${theme.borderLight}`,
               }}>
                 {currentProject.images.map((_, index) => (
                   <div
@@ -747,7 +758,6 @@ export default function Projects({ scrollDirection = 'down' }) {
                     color: theme.textMuted,
                     margin: '0 0 15px 0',
                     fontWeight: '500',
-                    opacity: 0.8,
                   }}>{currentProject.subtitle}</p>
                 </div>
                 <div style={{
@@ -756,7 +766,7 @@ export default function Projects({ scrollDirection = 'down' }) {
                   alignItems: 'center',
                 }}>
                   <div style={{
-                    background: `linear-gradient(135deg, ${theme.accentColor} 0%, #333 100%)`,
+                    background: theme.accentColor,
                     color: theme.bgPrimary,
                     padding: getResponsiveValue('8px 20px', '7px 18px', '6px 16px'),
                     borderRadius: '18px',
@@ -774,6 +784,7 @@ export default function Projects({ scrollDirection = 'down' }) {
                     background: `${theme.textMuted}10`,
                     padding: '8px 16px',
                     borderRadius: '14px',
+                    border: `1px solid ${theme.borderLight}`,
                   }}>
                     {currentProject.year}
                   </div>
@@ -789,6 +800,7 @@ export default function Projects({ scrollDirection = 'down' }) {
                 padding: '12px 20px',
                 borderRadius: '14px',
                 display: 'inline-block',
+                border: `1px solid ${theme.borderLight}`,
               }}>Role: {currentProject.role}</div>
 
               <p style={{
@@ -796,7 +808,6 @@ export default function Projects({ scrollDirection = 'down' }) {
                 color: theme.textPrimary,
                 lineHeight: '1.7',
                 marginBottom: getResponsiveValue(35, 30, 25),
-                opacity: 0.9,
               }}>
                 {currentProject.fullDescription}
               </p>
@@ -813,7 +824,7 @@ export default function Projects({ scrollDirection = 'down' }) {
                     key={index}
                     style={{
                       padding: getResponsiveValue('12px 20px', '10px 18px', '8px 16px'),
-                      background: `linear-gradient(135deg, ${theme.bgSecondary} 0%, ${theme.bgPrimary} 100%)`,
+                      background: theme.bgSecondary,
                       border: `2px solid ${theme.borderLight}`,
                       borderRadius: '25px',
                       fontSize: getResponsiveValue('0.9rem', '0.85rem', '0.8rem'),
@@ -846,7 +857,7 @@ export default function Projects({ scrollDirection = 'down' }) {
                 
                 <div style={{
                   padding: getResponsiveValue('25px', '22px', '20px'),
-                  background: `linear-gradient(135deg, ${theme.bgSecondary} 0%, ${theme.bgPrimary} 100%)`,
+                  background: theme.bgSecondary,
                   border: `2px solid ${theme.borderLight}`,
                   borderRadius: '20px',
                   boxShadow: '0 8px 25px rgba(0, 0, 0, 0.08)',
@@ -864,7 +875,6 @@ export default function Projects({ scrollDirection = 'down' }) {
                     color: theme.textPrimary,
                     lineHeight: '1.6',
                     margin: 0,
-                    opacity: 0.9,
                   }}>
                     {currentAcademicProject.description}
                   </p>
