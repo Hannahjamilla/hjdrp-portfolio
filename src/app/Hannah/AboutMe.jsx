@@ -397,28 +397,67 @@ export default function AboutMe({ scrollDirection = 'down' }) {
             position: 'relative',
           }}>
             <h1 style={{
-              fontSize: getResponsiveValue('5rem', '3.5rem', '2.5rem'),
+              fontSize: getResponsiveValue('5.5rem', '4rem', '2.8rem'),
               fontWeight: '900',
               color: theme.textPrimary,
               margin: 0,
-              lineHeight: 1,
-              letterSpacing: '-0.03em',
+              lineHeight: 0.9,
+              letterSpacing: '-0.04em',
               position: 'relative',
               zIndex: 2,
+              textTransform: 'uppercase',
             }} className="title">
-              ABOUT <span style={{color: theme.accent}}>ME</span>
+              <span style={{
+                background: 'linear-gradient(135deg, #000000 0%, #333333 50%, #000000 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                position: 'relative',
+              }}>
+                ABOUT
+              </span>{' '}
+              <span style={{
+                color: theme.accent,
+                position: 'relative',
+                display: 'inline-block',
+              }}>
+                ME
+                <span style={{
+                  position: 'absolute',
+                  bottom: '-12px',
+                  left: '0',
+                  width: '100%',
+                  height: '6px',
+                  background: 'linear-gradient(90deg, transparent, #000000, transparent)',
+                  borderRadius: '3px',
+                }}></span>
+              </span>
             </h1>
           </div>
           <p style={{
-            fontSize: getResponsiveValue('1.3rem', '1.2rem', '1.1rem'),
+            fontSize: getResponsiveValue('1.4rem', '1.3rem', '1.15rem'),
             color: theme.textMuted,
             fontWeight: '400',
-            marginTop: getResponsiveValue(20, 18, 16),
-            maxWidth: '500px',
-            margin: `${getResponsiveValue(20, 18, 16)}px auto 0`,
-            lineHeight: 1.6,
+            marginTop: getResponsiveValue(25, 22, 20),
+            maxWidth: '600px',
+            margin: `${getResponsiveValue(25, 22, 20)}px auto 0`,
+            lineHeight: 1.7,
+            position: 'relative',
           }} className="subtitle">
-            Building digital experiences that blend creativity with technical excellence
+            <span style={{
+              background: 'linear-gradient(135deg, #666666 0%, #888888 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+            }}>
+              Building digital experiences that blend
+            </span>{' '}
+            <span style={{ 
+              color: theme.textSecondary, 
+              fontWeight: '600',
+            }}>
+              creativity with technical excellence
+            </span>
           </p>
         </div>
 
@@ -434,29 +473,80 @@ export default function AboutMe({ scrollDirection = 'down' }) {
             position: 'relative',
           }} className="profile-section">
             <div style={{
-              background: theme.bgPrimary,
-              border: `2px solid ${theme.accent}`,
-              borderRadius: '0px',
-              padding: getResponsiveValue('40px 30px', '35px 25px', '30px 20px'),
+              background: `linear-gradient(135deg, ${theme.bgPrimary} 0%, ${theme.bgSecondary} 100%)`,
+              border: `3px solid ${theme.accent}`,
+              borderRadius: '20px',
+              padding: getResponsiveValue('45px 35px', '40px 30px', '35px 25px'),
               position: 'relative',
-              boxShadow: '20px 20px 0px 0px rgba(0,0,0,1)',
+              boxShadow: '25px 25px 0px 0px rgba(0,0,0,1)',
               transform: 'rotate(-2deg)',
+              overflow: 'hidden',
             }} className="profile-card">
+
+              {/* Decorative corner elements */}
+              <div style={{
+                position: 'absolute',
+                top: '15px',
+                right: '15px',
+                width: '30px',
+                height: '30px',
+                border: `2px solid ${theme.accent}`,
+                borderRadius: '50%',
+                opacity: 0.3,
+              }}></div>
+              <div style={{
+                position: 'absolute',
+                bottom: '15px',
+                left: '15px',
+                width: '20px',
+                height: '20px',
+                background: theme.accent,
+                borderRadius: '3px',
+                opacity: 0.2,
+                transform: 'rotate(45deg)',
+              }}></div>
+
               <h3 style={{
-                fontSize: getResponsiveValue('1.8rem', '1.6rem', '1.4rem'),
-                fontWeight: '800',
+                fontSize: getResponsiveValue('2rem', '1.8rem', '1.6rem'),
+                fontWeight: '900',
                 color: theme.textPrimary,
-                marginBottom: '15px',
+                marginBottom: '20px',
                 textTransform: 'uppercase',
                 letterSpacing: '0.1em',
-              }}>Web Developer</h3>
-              <p style={{
-                fontSize: getResponsiveValue('1rem', '0.95rem', '0.9rem'),
-                lineHeight: '1.7',
-                color: theme.textSecondary,
-                marginBottom: '25px',
+                textAlign: 'center',
+                position: 'relative',
               }}>
-                Passionate about building user-centered web applications that don't just look good but also solve real problems and make tasks easier.
+                <span style={{
+                  background: 'linear-gradient(135deg, #000000 0%, #333333 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                }}>
+                  Web Developer
+                </span>
+              </h3>
+              <p style={{
+                fontSize: getResponsiveValue('1.1rem', '1rem', '0.95rem'),
+                lineHeight: '1.8',
+                color: theme.textSecondary,
+                marginBottom: '30px',
+                textAlign: 'center',
+                position: 'relative',
+              }}>
+                <span style={{
+                  background: 'linear-gradient(135deg, #333333 0%, #555555 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                }}>
+                  Passionate about building user-centered web applications that don't just look good but also
+                </span>{' '}
+                <span style={{ 
+                  color: theme.textPrimary, 
+                  fontWeight: '600',
+                }}>
+                  solve real problems and make tasks easier.
+                </span>
               </p>
               
               <div style={{
@@ -516,7 +606,7 @@ export default function AboutMe({ scrollDirection = 'down' }) {
                     alignItems: 'center',
                     justifyContent: 'center',
                     position: 'relative',
-                    cursor: 'pointer',
+                    cursor: 'default',
                     transition: 'all 0.3s ease',
                     clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)',
                   }}
@@ -604,7 +694,7 @@ export default function AboutMe({ scrollDirection = 'down' }) {
                   'React & Next.js', 'Laravel Framework', 'MySQL / Cloud SQL', 
                   'Node.js & Express', 'JavaScript', 'TypeScript',
                   'React Native', 'Git & GitHub', 'RESTful APIs', 'HTML & CSS',
-                  'PHP', 'Tailwind CSS', 'Firebase'
+                  'PHP', 'Tailwind CSS', 'Firebase', 'Mongo DB'
                 ].map((skill, index) => (
                   <div
                     key={index}
@@ -678,7 +768,7 @@ export default function AboutMe({ scrollDirection = 'down' }) {
                       border: `1px solid ${theme.borderColor}`,
                       padding: getResponsiveValue('25px 20px', '22px 18px', '20px 15px'),
                       transition: 'all 0.3s ease',
-                      cursor: 'pointer',
+                      cursor: 'default',
                       position: 'relative',
                     }}
                     className="philosophy-item"

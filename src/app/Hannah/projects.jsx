@@ -161,21 +161,41 @@ export default function Projects({ scrollDirection = 'down' }) {
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
         
         .project-card {
-          transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+          transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
           cursor: pointer;
+          position: relative;
+        }
+        
+        .project-card::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: linear-gradient(135deg, rgba(0,0,0,0.02) 0%, transparent 50%, rgba(0,0,0,0.02) 100%);
+          opacity: 0;
+          transition: opacity 0.3s ease;
+          border-radius: 24px;
+          z-index: 1;
+          pointer-events: none;
+        }
+        
+        .project-card:hover::before {
+          opacity: 1;
         }
         
         .project-card:hover {
-          transform: translateY(-12px) scale(1.02);
-          box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.3);
+          transform: translateY(-15px) scale(1.03) rotate(1deg);
+          box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.35);
         }
         
         .project-card:active {
-          transform: translateY(-8px) scale(1.01);
+          transform: translateY(-10px) scale(1.02) rotate(0.5deg);
         }
         
         .project-card:hover .card-image {
-          transform: scale(1.1);
+          transform: scale(1.15);
         }
         
         .tech-pill:hover {
@@ -371,7 +391,7 @@ export default function Projects({ scrollDirection = 'down' }) {
         position: 'relative',
         zIndex: 2,
       }}>
-        {/* Header */}
+        {/* Enhanced Header */}
         <div style={{
           textAlign: 'center',
           marginBottom: getResponsiveValue(80, 60, 40),
@@ -379,41 +399,78 @@ export default function Projects({ scrollDirection = 'down' }) {
           transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
           transition: 'all 0.8s ease 0.2s',
         }}>
+
+          
           <h1 style={{
-            fontSize: getResponsiveValue('4.5rem', '3.5rem', '2.8rem'),
+            fontSize: getResponsiveValue('5rem', '4rem', '3.2rem'),
             fontWeight: '900',
-            marginBottom: getResponsiveValue(20, 18, 16),
+            marginBottom: getResponsiveValue(25, 22, 20),
             color: theme.textPrimary,
-            letterSpacing: '-0.03em',
+            letterSpacing: '-0.04em',
             textShadow: '0 2px 4px rgba(0,0,0,0.05)',
+            lineHeight: 0.9,
+            textTransform: 'uppercase',
           }} className="force-light-text">
-            Project <span style={{
+            <span style={{
+              background: 'linear-gradient(135deg, #000000 0%, #333333 50%, #000000 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+            }}>
+              Project
+            </span>{' '}
+            <span style={{
               color: theme.accentColor,
               position: 'relative',
+              display: 'inline-block',
             }}>
               Portfolio
               <span style={{
                 position: 'absolute',
-                bottom: '5px',
+                bottom: '-8px',
                 left: '0',
                 width: '100%',
-                height: '8px',
+                height: '6px',
                 backgroundColor: theme.accentColor,
-                opacity: 0.15,
-                borderRadius: '4px',
+                opacity: 0.2,
+                borderRadius: '3px',
+              }}></span>
+              <span style={{
+                position: 'absolute',
+                bottom: '-12px',
+                left: '10%',
+                width: '80%',
+                height: '3px',
+                backgroundColor: theme.accentColor,
+                opacity: 0.4,
+                borderRadius: '2px',
               }}></span>
             </span>
           </h1>
           <p style={{
-            fontSize: getResponsiveValue('1.4rem', '1.2rem', '1.1rem'),
+            fontSize: getResponsiveValue('1.5rem', '1.3rem', '1.15rem'),
             color: theme.textMuted,
             fontWeight: '400',
-            maxWidth: '600px',
+            maxWidth: '700px',
             margin: '0 auto',
-            lineHeight: 1.6,
+            lineHeight: 1.7,
             opacity: 0.9,
+            position: 'relative',
           }} className="force-light-text">
-            Crafting digital solutions with innovation and precision
+            <span style={{
+              background: 'linear-gradient(135deg, #666666 0%, #888888 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+            }}>
+              Crafting digital solutions with
+            </span>{' '}
+            <span style={{ 
+              color: theme.textSecondary, 
+              fontWeight: '600',
+            }}>
+              innovation and precision
+            </span>
           </p>
         </div>
 

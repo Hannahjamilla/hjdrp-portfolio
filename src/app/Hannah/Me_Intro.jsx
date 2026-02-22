@@ -10,9 +10,9 @@ export default function Introduction({ scrollDirection = 'down' }) {
   const [activeSection, setActiveSection] = useState('home')
   const [isScrolled, setIsScrolled] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
-  const [showStickyNav, setShowStickyNav] = useState(false)
   const [elementVisible, setElementVisible] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [windowSize, setWindowSize] = useState({
     width: typeof window !== 'undefined' ? window.innerWidth : 1200,
     height: typeof window !== 'undefined' ? window.innerHeight : 800
@@ -34,7 +34,7 @@ export default function Introduction({ scrollDirection = 'down' }) {
     github: "https://github.com/Hannahjamilla"
   }
 
-  // Handle window resize
+  // Handle window resize and mouse movement
   useEffect(() => {
     const handleResize = () => {
       setWindowSize({
@@ -43,8 +43,16 @@ export default function Introduction({ scrollDirection = 'down' }) {
       })
     }
 
+    const handleMouseMove = (e) => {
+      setMousePosition({ x: e.clientX, y: e.clientY })
+    }
+
     window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
+    window.addEventListener('mousemove', handleMouseMove)
+    return () => {
+      window.removeEventListener('resize', handleResize)
+      window.removeEventListener('mousemove', handleMouseMove)
+    }
   }, [])
 
   // Get responsive values
@@ -64,7 +72,6 @@ export default function Introduction({ scrollDirection = 'down' }) {
     const handleScroll = () => {
       const scrollTop = window.scrollY
       setIsScrolled(scrollTop > 50)
-      setShowStickyNav(scrollTop > 400)
 
       const sections = ['home', 'about', 'work', 'projects', 'contact']
       const current = sections.find(section => {
@@ -135,55 +142,26 @@ export default function Introduction({ scrollDirection = 'down' }) {
 
   // Fixed CV download function with correct path
   const handleDownloadCV = () => {
-    // Create a link element
     const link = document.createElement('a')
-    
-    // Use the correct path to your PDF file
     link.href = '/cv/Hannah_Peralta-resume.pdf'
-    
-    // Set the download attribute with the desired filename
     link.download = 'Hannah_Peralta-Resume.pdf'
-    
-    // Set target to _blank to open in new tab as fallback
     link.target = '_blank'
-    
-    // Append to the document
     document.body.appendChild(link)
-    
-    // Trigger the download
     link.click()
-    
-    // Clean up
     document.body.removeChild(link)
-  }
-
-  // Alternative download function that works better in some browsers
-  const handleDownloadCVAlternative = () => {
-    try {
-      // Method 1: Direct download
-      const link = document.createElement('a')
-      link.href = '/cv/Hannah_Peralta-resume.pdf'
-      link.download = 'Hannah_Peralta-Resume.pdf'
-      document.body.appendChild(link)
-      link.click()
-      document.body.removeChild(link)
-    } catch (error) {
-      // Method 2: Fallback - open in new tab
-      console.log('Download failed, opening in new tab:', error)
-      window.open('/cv/Hannah_Peralta-resume.pdf', '_blank')
-    }
   }
 
   const generateParticles = useCallback(() => {
     const particles = [];
-    for (let i = 0; i < 15; i++) {
+    for (let i = 0; i < 20; i++) {
       particles.push({
         id: i,
-        size: Math.random() * 6 + 2,
+        size: Math.random() * 4 + 2,
         left: Math.random() * 100,
         top: Math.random() * 100,
         animationDelay: Math.random() * 20,
-        opacity: Math.random() * 0.1 + 0.02,
+        opacity: Math.random() * 0.08 + 0.02,
+        speed: Math.random() * 0.5 + 0.2,
       });
     }
     return particles;
@@ -197,9 +175,83 @@ export default function Introduction({ scrollDirection = 'down' }) {
       style.textContent = `
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
         
+        @keyframes gridShift {
+          0%, 100% { 
+            transform: translateX(0) translateY(0); 
+            opacity: 0.6; 
+          }
+          25% { 
+            transform: translateX(10px) translateY(-5px); 
+            opacity: 0.4; 
+          }
+          50% { 
+            transform: translateX(-5px) translateY(10px); 
+            opacity: 0.7; 
+          }
+          75% { 
+            transform: translateX(5px) translateY(-10px); 
+            opacity: 0.5; 
+          }
+        }
+
+        @keyframes morphFloat {
+          0%, 100% { 
+            transform: translateY(0px) rotate(0deg) scale(1); 
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; 
+          }
+          25% { 
+            transform: translateY(-20px) rotate(90deg) scale(1.05); 
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; 
+          }
+          50% { 
+            transform: translateY(10px) rotate(180deg) scale(0.95); 
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; 
+          }
+          75% { 
+            transform: translateY(-10px) rotate(270deg) scale(1.02); 
+            border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%; 
+          }
+        }
+
+        @keyframes scrollIndicator {
+          0% {
+            transform: translateY(-8px);
+            opacity: 0;
+          }
+          50% {
+            opacity: 1;
+          }
+          100% {
+            transform: translateY(30px);
+            opacity: 0;
+          }
+        }
+
         @keyframes blink {
           0%, 50% { opacity: 1; }
           51%, 100% { opacity: 0; }
+        }
+
+        @keyframes slideDown {
+          from {
+            opacity: 0;
+            transform: translateY(-20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
         }
 
         @keyframes float {
@@ -208,81 +260,246 @@ export default function Introduction({ scrollDirection = 'down' }) {
         }
 
         @keyframes particleFloat {
-          0%, 100% { transform: translateY(0px) rotate(0deg); }
-          33% { transform: translateY(-30px) rotate(120deg); }
-          66% { transform: translateY(15px) rotate(240deg); }
+          0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+          25% { transform: translateY(-15px) translateX(10px) rotate(90deg); }
+          50% { transform: translateY(-30px) translateX(-5px) rotate(180deg); }
+          75% { transform: translateY(-10px) translateX(-15px) rotate(270deg); }
+        }
+
+        @keyframes morphShape {
+          0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+          25% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+          50% { border-radius: 50% 40% 60% 30% / 40% 70% 60% 30%; }
+          75% { border-radius: 40% 70% 30% 60% / 70% 40% 50% 60%; }
+        }
+
+        @keyframes gradientShift {
+          0%, 100% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+        }
+
+        @keyframes slideInFromLeft {
+          from { transform: translateX(-100px); opacity: 0; }
+          to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slideInFromRight {
+          from { transform: translateX(100px); opacity: 0; }
+          to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes scaleIn {
+          from { transform: scale(0.8); opacity: 0; }
+          to { transform: scale(1); opacity: 1; }
         }
         
         .nav-link:hover {
           color: #000000;
+          transform: translateY(-2px);
         }
         
         .nav-link::after {
           content: '';
           position: absolute;
-          bottom: 0;
-          left: 0;
+          bottom: -2px;
+          left: 50%;
           width: 0;
           height: 2px;
-          background: #000000;
-          transition: width 0.3s ease;
+          background: linear-gradient(90deg, #000000, #333333);
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          transform: translateX(-50%);
+          border-radius: 1px;
         }
         
         .nav-link:hover::after {
+          width: 80%;
+        }
+        
+        .primary-btn {
+          position: relative;
+          overflow: hidden;
+          background: linear-gradient(135deg, #000000, #333333);
+          transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .primary-btn::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
           width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+          transition: left 0.6s ease;
+        }
+
+        .primary-btn:hover::before {
+          left: 100%;
         }
         
         .primary-btn:hover {
+          background: linear-gradient(135deg, #333333, #000000);
+          transform: translateY(-4px) scale(1.02);
+          box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+        }
+        
+        .secondary-btn {
+          position: relative;
+          overflow: hidden;
           background: transparent;
-          color: #000000;
-          border: 2px solid #000000;
-          transform: translateY(-3px);
-          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+          transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .secondary-btn::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 0;
+          height: 100%;
+          background: #000000;
+          transition: width 0.3s ease;
+          z-index: -1;
+        }
+
+        .secondary-btn:hover::before {
+          width: 100%;
         }
         
         .secondary-btn:hover {
+          color: #ffffff;
           border-color: #000000;
-          background: rgba(0, 0, 0, 0.02);
-          transform: translateY(-3px);
+          transform: translateY(-4px) scale(1.02);
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .avatar-container {
+          position: relative;
+          transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .avatar-container::before {
+          content: '';
+          position: absolute;
+          top: -20px;
+          left: -20px;
+          right: -20px;
+          bottom: -20px;
+          background: conic-gradient(from 0deg, #000000, #333333, #000000, #333333, #000000);
+          border-radius: inherit;
+          z-index: -2;
+          opacity: 0;
+          transition: opacity 0.5s ease;
+          filter: blur(15px);
+        }
+
+        .avatar-container:hover::before {
+          opacity: 0.1;
+        }
+
+        .avatar-container:hover .avatar-glow {
+          opacity: 1;
         }
         
         .avatar-container:hover {
-          transform: translateY(-15px) rotate(2deg);
-          border-color: #000000;
-          box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+          transform: translateY(-30px) rotate(-5deg) scale(1.1);
+          box-shadow: 
+            0 60px 120px rgba(0, 0, 0, 0.3),
+            inset 0 1px 0 rgba(255,255,255,0.2);
         }
         
         .avatar-container:hover .avatar-image {
-          transform: scale(1.15) translateY(-5%);
+          transform: translateY(-5%) scale(1.2);
+          filter: contrast(1.05) brightness(1.02) saturate(1.1);
+        }
+        
+        .social-link {
+          position: relative;
+          overflow: hidden;
+          transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .social-link::before {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 0;
+          height: 0;
+          background: radial-gradient(circle, #000000 0%, #333333 100%);
+          border-radius: 50%;
+          transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+          transform: translate(-50%, -50%);
+          z-index: -1;
+        }
+
+        .social-link::after {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 0;
+          height: 0;
+          background: conic-gradient(from 0deg, transparent, rgba(255,255,255,0.1), transparent);
+          border-radius: 50%;
+          transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+          transform: translate(-50%, -50%);
+          z-index: 1;
+        }
+
+        .social-link:hover::before {
+          width: 150%;
+          height: 150%;
+        }
+
+        .social-link:hover::after {
+          width: 200%;
+          height: 200%;
         }
         
         .social-link:hover {
-          border-color: #000000;
-          background-color: #000000;
-          transform: translateY(-3px) scale(1.1);
-          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-        
-        .social-link:hover svg {
           color: #ffffff;
+          border-color: #000000;
+          transform: translateY(-10px) scale(1.25) rotate(15deg);
+          box-shadow: 
+            0 25px 50px rgba(0, 0, 0, 0.3),
+            inset 0 1px 0 rgba(255,255,255,0.1);
         }
         
         .logo-image:hover {
-          transform: scale(1.1) rotate(2deg);
+          transform: scale(1.1) rotate(5deg);
         }
         
-        .floating-circle {
-          animation: float 8s ease-in-out infinite;
-        }
-        
-        .floating-rect {
-          animation: float 6s ease-in-out infinite 1s;
+        .floating-shape {
+          animation: morphFloat 25s ease-in-out infinite;
         }
         
         .particle {
           position: absolute;
-          background: rgba(0, 0, 0, 0.03);
-          animation: particleFloat 20s infinite linear;
+          background: linear-gradient(45deg, rgba(0, 0, 0, 0.03), rgba(0, 0, 0, 0.01));
+          animation: particleFloat 25s infinite linear;
+          border-radius: 50%;
+        }
+
+        .gradient-text {
+          background: linear-gradient(135deg, #000000, #333333, #000000);
+          background-size: 200% 200%;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          animation: gradientShift 3s ease-in-out infinite;
+        }
+
+        .slide-in-left {
+          animation: slideInFromLeft 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .slide-in-right {
+          animation: slideInFromRight 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .scale-in {
+          animation: scaleIn 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         
         /* Mobile Menu Animation */
@@ -317,22 +534,26 @@ export default function Introduction({ scrollDirection = 'down' }) {
           }
         }
         
-        /* Responsive Design */
+        /* Enhanced responsive styles */
         @media (max-width: 1024px) {
           .layout-grid {
             grid-template-columns: 1fr !important;
-            gap: 40px !important;
+            gap: 60px !important;
             text-align: center;
           }
           
           .sidebar {
             order: 2;
-            max-width: 400px;
+            max-width: 500px;
             margin: 0 auto;
           }
           
           .main-content {
             order: 1;
+          }
+
+          .floating-shape {
+            opacity: 0.5 !important;
           }
         }
         
@@ -346,12 +567,39 @@ export default function Introduction({ scrollDirection = 'down' }) {
           }
           
           .title {
-            font-size: clamp(2rem, 8vw, 3rem) !important;
-            line-height: 1.2 !important;
+            font-size: clamp(2.2rem, 8vw, 3.2rem) !important;
+            line-height: 1.1 !important;
           }
           
           .greeting {
-            font-size: clamp(1rem, 4vw, 1.3rem) !important;
+            font-size: clamp(1.1rem, 4vw, 1.4rem) !important;
+          }
+          
+          .avatar-container {
+            width: 300px !important;
+            height: 300px !important;
+          }
+
+          .particle {
+            display: none !important;
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .container {
+            padding: 25px 20px !important;
+          }
+          
+          .buttons {
+            flex-direction: column;
+            gap: 20px;
+            width: 100%;
+          }
+          
+          .primary-btn, .secondary-btn {
+            width: 100% !important;
+            padding: 18px 28px !important;
+            font-size: 1rem !important;
           }
           
           .avatar-container {
@@ -359,81 +607,18 @@ export default function Introduction({ scrollDirection = 'down' }) {
             height: 280px !important;
           }
           
-          .buttons {
-            width: 100%;
-          }
-          
-          .buttons button {
-            width: 100%;
-          }
-        }
-        
-        @media (max-width: 480px) {
-          .container {
-            padding: 20px 15px !important;
-          }
-          
-          .buttons {
-            flex-direction: column;
-            gap: 15px;
-            width: 100%;
-          }
-          
-          .primary-btn, .secondary-btn {
-            width: 100% !important;
-            text-align: center;
-            padding: 16px 24px !important;
-          }
-          
-          .avatar-container {
-            width: 250px !important;
-            height: 250px !important;
-          }
-          
           .social-links {
-            gap: 12px;
+            gap: 15px;
             justify-content: center;
           }
           
           .social-link {
-            width: 44px !important;
-            height: 44px !important;
+            width: 50px !important;
+            height: 50px !important;
           }
-          
-          .description {
-            font-size: 0.95rem !important;
-          }
-        }
-        
-        @media (max-width: 360px) {
-          .avatar-container {
-            width: 220px !important;
-            height: 220px !important;
-          }
-          
-          .title {
-            font-size: clamp(1.8rem, 7vw, 2.5rem) !important;
-          }
-          
-          .social-link {
-            width: 40px !important;
-            height: 40px !important;
-          }
-        }
-        
-        /* Landscape mobile optimization */
-        @media (max-height: 600px) and (orientation: landscape) {
-          .container {
-            padding: 15px 20px !important;
-          }
-          
-          .layout-grid {
-            gap: 30px !important;
-          }
-          
-          .avatar-container {
-            width: 200px !important;
-            height: 200px !important;
+
+          .floating-shape {
+            display: none !important;
           }
         }
         
@@ -465,18 +650,20 @@ export default function Introduction({ scrollDirection = 'down' }) {
 
   return (
     <>
-      {/* Fixed Navigation Bar */}
+      {/* Fixed Navigation Bar with Enhanced Design */}
       <nav style={{
         position: 'fixed',
         top: 0,
         left: 0,
         right: 0,
         zIndex: 9999,
-        background: isScrolled ? 'rgba(255, 255, 255, 0.98)' : 'rgba(255, 255, 255, 0.95)',
-        backdropFilter: 'blur(20px)',
-        boxShadow: isScrolled ? '0 4px 20px rgba(0, 0, 0, 0.1)' : '0 2px 10px rgba(0, 0, 0, 0.05)',
-        transition: 'all 0.3s ease',
-        padding: getResponsiveValue('15px 60px', '12px 40px', '12px 20px'),
+        background: isScrolled ? 'rgba(255, 255, 255, 0.95)' : 'rgba(255, 255, 255, 0.90)',
+        backdropFilter: 'blur(25px)',
+        WebkitBackdropFilter: 'blur(25px)',
+        boxShadow: isScrolled ? '0 8px 32px rgba(0, 0, 0, 0.12)' : '0 4px 20px rgba(0, 0, 0, 0.08)',
+        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+        padding: getResponsiveValue('18px 60px', '15px 40px', '15px 20px'),
+        borderBottom: `1px solid ${isScrolled ? 'rgba(0, 0, 0, 0.1)' : 'rgba(0, 0, 0, 0.05)'}`,
       }}>
         <div style={{
           display: 'flex',
@@ -486,26 +673,48 @@ export default function Introduction({ scrollDirection = 'down' }) {
           margin: '0 auto',
           width: '100%',
         }}>
-          {/* Logo */}
-          <div style={{ display: 'flex', alignItems: 'center' }}>
+          {/* Enhanced Logo */}
+          <div style={{ 
+            display: 'flex', 
+            alignItems: 'center',
+            position: 'relative',
+          }}>
+            <div style={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              width: '120%',
+              height: '120%',
+              background: 'radial-gradient(circle, rgba(0,0,0,0.05) 0%, transparent 70%)',
+              borderRadius: '50%',
+              opacity: isScrolled ? 1 : 0,
+              transition: 'opacity 0.3s ease',
+            }}></div>
             <img 
               src="/images/HanMade.png" 
               alt="HanMade Logo" 
               style={{
-                height: getResponsiveValue(50, 45, 40),
+                height: getResponsiveValue(55, 50, 45),
                 width: 'auto',
                 objectFit: 'contain',
-                transition: 'transform 0.3s ease',
+                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                position: 'relative',
+                zIndex: 2,
               }}
               className="logo-image"
             />
           </div>
 
-          {/* Desktop Navigation */}
+          {/* Enhanced Desktop Navigation */}
           <div style={{
             display: isMobile ? 'none' : 'flex',
-            gap: getResponsiveValue(35, 25, 20),
+            gap: getResponsiveValue(40, 30, 25),
             alignItems: 'center',
+            background: 'rgba(0, 0, 0, 0.03)',
+            padding: '12px 24px',
+            borderRadius: '50px',
+            border: '1px solid rgba(0, 0, 0, 0.08)',
           }}>
             {['home', 'about', 'work', 'projects', 'contact'].map((section) => (
               <a 
@@ -515,11 +724,15 @@ export default function Introduction({ scrollDirection = 'down' }) {
                   color: activeSection === section ? theme.textPrimary : theme.textSecondary,
                   textDecoration: 'none',
                   fontSize: getResponsiveValue('0.95rem', '0.9rem', '0.85rem'),
-                  fontWeight: activeSection === section ? '600' : '500',
-                  padding: '8px 0',
+                  fontWeight: activeSection === section ? '700' : '600',
+                  padding: '10px 16px',
                   position: 'relative',
-                  transition: 'all 0.3s ease',
+                  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                   whiteSpace: 'nowrap',
+                  borderRadius: '25px',
+                  background: activeSection === section ? 'rgba(0, 0, 0, 0.08)' : 'transparent',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.5px',
                 }} 
                 className="nav-link"
                 onClick={(e) => {
@@ -532,45 +745,59 @@ export default function Introduction({ scrollDirection = 'down' }) {
             ))}
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Enhanced Mobile Menu Button */}
           <button 
             style={{
               display: isMobile ? 'flex' : 'none',
               flexDirection: 'column',
-              gap: '4px',
-              background: 'none',
-              border: 'none',
+              gap: '5px',
+              background: 'rgba(0, 0, 0, 0.05)',
+              border: '1px solid rgba(0, 0, 0, 0.1)',
+              borderRadius: '12px',
               cursor: 'pointer',
-              padding: '8px',
+              padding: '12px',
+              transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
             }}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
+            onMouseEnter={(e) => {
+              e.target.style.background = 'rgba(0, 0, 0, 0.08)'
+              e.target.style.transform = 'scale(1.05)'
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.background = 'rgba(0, 0, 0, 0.05)'
+              e.target.style.transform = 'scale(1)'
+            }}
           >
             <div style={{
-              width: '25px',
-              height: '2px',
+              width: '28px',
+              height: '3px',
               backgroundColor: theme.textPrimary,
-              transition: 'all 0.3s ease',
-              transform: isMobileMenuOpen ? 'rotate(45deg) translate(5px, 5px)' : 'none',
+              borderRadius: '2px',
+              transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+              transform: isMobileMenuOpen ? 'rotate(45deg) translate(6px, 6px)' : 'none',
             }}></div>
             <div style={{
-              width: '25px',
-              height: '2px',
+              width: '28px',
+              height: '3px',
               backgroundColor: theme.textPrimary,
-              transition: 'all 0.3s ease',
+              borderRadius: '2px',
+              transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
               opacity: isMobileMenuOpen ? 0 : 1,
+              transform: isMobileMenuOpen ? 'scale(0)' : 'scale(1)',
             }}></div>
             <div style={{
-              width: '25px',
-              height: '2px',
+              width: '28px',
+              height: '3px',
               backgroundColor: theme.textPrimary,
-              transition: 'all 0.3s ease',
-              transform: isMobileMenuOpen ? 'rotate(-45deg) translate(7px, -6px)' : 'none',
+              borderRadius: '2px',
+              transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+              transform: isMobileMenuOpen ? 'rotate(-45deg) translate(8px, -8px)' : 'none',
             }}></div>
           </button>
         </div>
 
-        {/* Mobile Menu Dropdown */}
+        {/* Enhanced Mobile Menu Dropdown */}
         {isMobileMenuOpen && isMobile && (
           <div style={{
             position: 'absolute',
@@ -578,32 +805,54 @@ export default function Introduction({ scrollDirection = 'down' }) {
             left: 0,
             right: 0,
             background: 'rgba(255, 255, 255, 0.98)',
-            backdropFilter: 'blur(20px)',
+            backdropFilter: 'blur(25px)',
+            WebkitBackdropFilter: 'blur(25px)',
             borderTop: `1px solid ${theme.borderColor}`,
-            padding: '20px',
+            padding: '25px 20px',
             display: 'flex',
             flexDirection: 'column',
-            gap: '15px',
-            boxShadow: '0 10px 30px rgba(0, 0, 0, 0.1)',
+            gap: '8px',
+            boxShadow: '0 15px 40px rgba(0, 0, 0, 0.15)',
+            borderBottomLeftRadius: '20px',
+            borderBottomRightRadius: '20px',
+            animation: 'slideDown 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
           }}>
-            {['home', 'about', 'work', 'projects', 'contact'].map((section) => (
+            {['home', 'about', 'work', 'projects', 'contact'].map((section, index) => (
               <a 
                 key={section}
                 href={`#${section}`} 
                 style={{
                   color: activeSection === section ? theme.textPrimary : theme.textSecondary,
                   textDecoration: 'none',
-                  fontSize: '1rem',
-                  fontWeight: activeSection === section ? '600' : '500',
-                  padding: '12px 0',
+                  fontSize: '1.1rem',
+                  fontWeight: activeSection === section ? '700' : '600',
+                  padding: '16px 20px',
                   textAlign: 'center',
-                  transition: 'all 0.3s ease',
-                  borderBottom: `1px solid ${theme.borderColor}`,
+                  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                  borderRadius: '12px',
+                  background: activeSection === section ? 'rgba(0, 0, 0, 0.08)' : 'transparent',
+                  textTransform: 'uppercase',
+                  letterSpacing: '1px',
+                  opacity: 0,
+                  transform: 'translateY(20px)',
+                  animation: `fadeInUp 0.3s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.1}s forwards`,
                 }} 
                 className="nav-link"
                 onClick={(e) => {
                   e.preventDefault()
                   scrollToSection(section)
+                }}
+                onMouseEnter={(e) => {
+                  if (activeSection !== section) {
+                    e.target.style.background = 'rgba(0, 0, 0, 0.05)'
+                    e.target.style.transform = 'translateX(5px)'
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (activeSection !== section) {
+                    e.target.style.background = 'transparent'
+                    e.target.style.transform = 'translateX(0)'
+                  }
                 }}
               >
                 {section.charAt(0).toUpperCase() + section.slice(1)}
@@ -613,13 +862,18 @@ export default function Introduction({ scrollDirection = 'down' }) {
         )}
       </nav>
 
-      {/* Main Content with padding for fixed nav */}
+      {/* Main Content with enhanced design */}
       <div style={{
         minHeight: '100vh',
         minHeight: '100dvh',
-        background: theme.bgPrimary,
+        background: `
+          linear-gradient(135deg, ${theme.bgPrimary} 0%, ${theme.bgSecondary} 30%, ${theme.bgPrimary} 70%, ${theme.bgSecondary} 100%),
+          radial-gradient(circle at 25% 25%, rgba(0,0,0,0.04) 0%, transparent 50%),
+          radial-gradient(circle at 75% 75%, rgba(0,0,0,0.03) 0%, transparent 50%),
+          conic-gradient(from 180deg at 50% 50%, transparent 0deg, rgba(0,0,0,0.01) 90deg, transparent 180deg, rgba(0,0,0,0.01) 270deg, transparent 360deg)
+        `,
         padding: getResponsiveValue('40px 60px', '30px 40px', '20px 20px'),
-        paddingTop: getResponsiveValue('120px', '110px', '100px'),
+        paddingTop: getResponsiveValue('140px', '130px', '120px'),
         display: 'flex',
         flexDirection: 'column',
         position: 'relative',
@@ -640,40 +894,75 @@ export default function Introduction({ scrollDirection = 'down' }) {
         pointerEvents: 'none',
         overflow: 'hidden',
       }}>
+        {/* Dynamic grid pattern */}
         <div style={{
           position: 'absolute',
           top: 0,
           left: 0,
           right: 0,
           bottom: 0,
-          backgroundImage: `radial-gradient(${theme.borderColor} 1px, transparent 1px)`,
-          backgroundSize: `${getResponsiveValue(40, 30, 25)}px ${getResponsiveValue(40, 30, 25)}px`,
-          opacity: 0.3,
+          backgroundImage: `
+            linear-gradient(rgba(0,0,0,0.02) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(0,0,0,0.02) 1px, transparent 1px)
+          `,
+          backgroundSize: `${getResponsiveValue(60, 50, 40)}px ${getResponsiveValue(60, 50, 40)}px`,
+          opacity: 0.5,
         }}></div>
+
+        {/* Enhanced morphing shapes */}
         <div style={{
           position: 'absolute',
-          top: '20%',
-          right: getResponsiveValue('15%', '10%', '5%'),
-          width: getResponsiveValue(200, 150, 100),
-          height: getResponsiveValue(200, 150, 100),
-          border: `1px solid ${theme.borderColor}`,
-          borderRadius: '50%',
-          opacity: isMobile ? 0.2 : 0.4,
-          background: theme.bgSecondary,
-        }} className="floating-circle"></div>
-        <div style={{
-          position: 'absolute',
-          bottom: '25%',
-          left: getResponsiveValue('12%', '8%', '5%'),
-          width: getResponsiveValue(120, 90, 60),
-          height: getResponsiveValue(120, 90, 60),
-          border: `1px solid ${theme.borderColor}`,
-          opacity: isMobile ? 0.2 : 0.3,
-          transform: 'rotate(25deg)',
-          background: theme.bgSecondary,
-        }} className="floating-rect"></div>
+          top: '12%',
+          right: getResponsiveValue('8%', '6%', '4%'),
+          width: getResponsiveValue(280, 200, 140),
+          height: getResponsiveValue(280, 200, 140),
+          background: `
+            linear-gradient(135deg, ${theme.borderColor}, transparent 70%),
+            radial-gradient(circle at 30% 70%, rgba(0,0,0,0.05) 0%, transparent 50%)
+          `,
+          opacity: isMobile ? 0.15 : 0.25,
+          borderRadius: '40% 60% 70% 30% / 40% 50% 60% 50%',
+        }} className="floating-shape"></div>
         
-        {/* Particles */}
+        <div style={{
+          position: 'absolute',
+          bottom: '18%',
+          left: getResponsiveValue('6%', '4%', '2%'),
+          width: getResponsiveValue(200, 140, 100),
+          height: getResponsiveValue(200, 140, 100),
+          background: `
+            linear-gradient(45deg, ${theme.borderColor}, transparent 60%),
+            conic-gradient(from 45deg, transparent, rgba(0,0,0,0.03), transparent)
+          `,
+          opacity: isMobile ? 0.12 : 0.2,
+          transform: 'rotate(45deg)',
+          borderRadius: '30% 70% 70% 30% / 30% 30% 70% 70%',
+        }} className="floating-shape"></div>
+
+        <div style={{
+          position: 'absolute',
+          top: '65%',
+          right: '18%',
+          width: getResponsiveValue(150, 100, 70),
+          height: getResponsiveValue(150, 100, 70),
+          background: `radial-gradient(circle, ${theme.borderColor} 0%, transparent 70%)`,
+          opacity: isMobile ? 0.08 : 0.15,
+          borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%',
+        }} className="floating-shape"></div>
+        
+        <div style={{
+          position: 'absolute',
+          top: '25%',
+          left: '15%',
+          width: getResponsiveValue(100, 80, 60),
+          height: getResponsiveValue(100, 80, 60),
+          border: `2px solid ${theme.borderColor}`,
+          opacity: isMobile ? 0.1 : 0.18,
+          borderRadius: '50%',
+          background: 'radial-gradient(circle, transparent 40%, rgba(0,0,0,0.02) 70%)',
+        }} className="floating-shape"></div>
+        
+        {/* Enhanced Particles */}
         <div style={{
           position: 'absolute',
           top: 0,
@@ -693,13 +982,27 @@ export default function Introduction({ scrollDirection = 'down' }) {
                 left: `${particle.left}%`,
                 top: `${particle.top}%`,
                 animationDelay: `${particle.animationDelay}s`,
+                animationDuration: `${20 + particle.speed * 10}s`,
                 opacity: particle.opacity,
-                borderRadius: '50%',
-                background: theme.borderColor,
               }}
             />
           ))}
         </div>
+
+        {/* Interactive cursor effect */}
+        {!isMobile && (
+          <div style={{
+            position: 'absolute',
+            width: '200px',
+            height: '200px',
+            background: `radial-gradient(circle, ${theme.borderColor} 0%, transparent 70%)`,
+            borderRadius: '50%',
+            opacity: 0.03,
+            pointerEvents: 'none',
+            transform: `translate(${mousePosition.x - 100}px, ${mousePosition.y - 100}px)`,
+            transition: 'transform 0.1s ease-out',
+          }} />
+        )}
       </div>
 
       {/* Main Layout */}
@@ -729,16 +1032,63 @@ export default function Introduction({ scrollDirection = 'down' }) {
           order: isTablet ? 2 : 1,
         }} className="sidebar">
           <div style={{
-            width: getResponsiveValue(320, 280, 250),
-            height: getResponsiveValue(320, 280, 250),
-            borderRadius: getResponsiveValue(25, 20, 15),
+            width: getResponsiveValue(360, 320, 290),
+            height: getResponsiveValue(360, 320, 290),
+            borderRadius: getResponsiveValue(35, 30, 25),
             overflow: 'hidden',
-            border: `2px solid ${theme.borderColor}`,
-            background: theme.bgSecondary,
+            border: `4px solid ${theme.borderColor}`,
+            background: `
+              linear-gradient(135deg, ${theme.bgSecondary} 0%, ${theme.bgPrimary} 50%, ${theme.bgSecondary} 100%),
+              radial-gradient(circle at 30% 70%, rgba(0,0,0,0.02) 0%, transparent 50%)
+            `,
             position: 'relative',
-            transition: 'all 0.4s ease',
-            boxShadow: `0 20px 40px ${theme.shadowColor}`,
+            transition: 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
+            boxShadow: `
+              0 30px 60px ${theme.shadowColor},
+              inset 0 1px 0 rgba(255,255,255,0.1)
+            `,
           }} className="avatar-container">
+            {/* Enhanced decorative border elements */}
+            <div style={{
+              position: 'absolute',
+              top: '-4px',
+              left: '-4px',
+              right: '-4px',
+              bottom: '-4px',
+              background: `
+                conic-gradient(from 0deg, transparent, rgba(0,0,0,0.1), transparent, rgba(0,0,0,0.05), transparent),
+                linear-gradient(45deg, transparent 30%, rgba(0,0,0,0.02) 50%, transparent 70%)
+              `,
+              borderRadius: getResponsiveValue(35, 30, 25),
+              zIndex: -1,
+              opacity: 0,
+              transition: 'opacity 0.4s ease',
+            }} className="avatar-glow"></div>
+            
+            {/* Corner decorations */}
+            <div style={{
+              position: 'absolute',
+              top: '10px',
+              right: '10px',
+              width: '40px',
+              height: '40px',
+              border: `2px solid ${theme.borderColor}`,
+              borderRadius: '50%',
+              opacity: 0.2,
+              background: 'radial-gradient(circle, rgba(0,0,0,0.05) 0%, transparent 70%)',
+            }}></div>
+            <div style={{
+              position: 'absolute',
+              bottom: '10px',
+              left: '10px',
+              width: '25px',
+              height: '25px',
+              background: `linear-gradient(45deg, ${theme.borderColor}, transparent)`,
+              borderRadius: '4px',
+              opacity: 0.15,
+              transform: 'rotate(45deg)',
+            }}></div>
+            
             <img 
               src="/images/Hannah.png" 
               alt="Hannah Peralta" 
@@ -746,12 +1096,26 @@ export default function Introduction({ scrollDirection = 'down' }) {
                 width: '100%',
                 height: '130%',
                 objectFit: 'cover',
-                transition: 'transform 0.5s ease',
+                transition: 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
                 transform: 'translateY(-5%)',
+                filter: 'contrast(1.02) brightness(1.01)',
               }}
               className="avatar-image"
             />
-           
+            
+            {/* Enhanced overlay gradient */}
+            <div style={{
+              position: 'absolute',
+              bottom: 0,
+              left: 0,
+              right: 0,
+              height: '40%',
+              background: `
+                linear-gradient(to top, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.02) 50%, transparent 100%),
+                radial-gradient(ellipse at bottom, rgba(0,0,0,0.05) 0%, transparent 70%)
+              `,
+              pointerEvents: 'none',
+            }}></div>
           </div>
           
           <div style={{
@@ -917,20 +1281,28 @@ export default function Introduction({ scrollDirection = 'down' }) {
                       `clamp(1.8rem, 8vw, 2.5rem)` : 
                       isTablet ? 
                       `clamp(2.2rem, 5vw, 3rem)` : 
-                      `clamp(2.5rem, 5vw, 4rem)`,
-            fontWeight: '800',
-            marginBottom: getResponsiveValue(20, 18, 16),
-            lineHeight: 1.1,
+                      `clamp(2.5rem, 5vw, 4.5rem)`,
+            fontWeight: '900',
+            marginBottom: getResponsiveValue(25, 22, 20),
+            lineHeight: 1.05,
             color: theme.textPrimary,
-            letterSpacing: '-0.02em',
+            letterSpacing: '-0.03em',
             opacity: elementVisible ? 1 : 0,
             transform: elementVisible ? 'translateY(0)' : (scrollDirection === 'down' ? 'translateY(30px)' : 'translateY(-30px)'),
             transition: 'all 0.8s ease 0.5s',
             wordWrap: 'break-word',
             overflowWrap: 'break-word',
+            position: 'relative',
           }} className="title">
-            Crafting Digital <span style={{color: theme.textPrimary, fontWeight: '800', position: 'relative'}}>Experiences</span><br />
-            That Inspire & Transform
+            <span style={{
+              background: 'linear-gradient(135deg, #000000 0%, #333333 50%, #000000 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+              position: 'relative',
+            }}>
+              Crafting Digital Experiences That Inspire & Transform
+            </span>
           </h1>
           
           {/* Dynamic Greeting with Enhanced Typing Effect */}
@@ -963,11 +1335,11 @@ export default function Introduction({ scrollDirection = 'down' }) {
           </div>
           
           <p style={{
-            fontSize: getResponsiveValue('1.125rem', '1.05rem', '1rem'),
+            fontSize: getResponsiveValue('1.2rem', '1.1rem', '1.05rem'),
             color: theme.textMuted,
-            marginBottom: getResponsiveValue(40, 35, 30),
-            lineHeight: 1.7,
-            maxWidth: '600px',
+            marginBottom: getResponsiveValue(45, 40, 35),
+            lineHeight: 1.8,
+            maxWidth: '650px',
             fontWeight: '400',
             opacity: elementVisible ? 1 : 0,
             transform: elementVisible ? 'translateY(0)' : (scrollDirection === 'down' ? 'translateY(20px)' : 'translateY(-20px)'),
@@ -975,43 +1347,84 @@ export default function Introduction({ scrollDirection = 'down' }) {
             marginLeft: isTablet ? 'auto' : '0',
             marginRight: isTablet ? 'auto' : '0',
             textAlign: isTablet ? 'center' : 'left',
+            position: 'relative',
           }} className="description">
-            I create modern, user-friendly digital solutions designed to help people, solve problems, and make everyday experiences easier and better.
+            <span style={{
+              background: 'linear-gradient(135deg, #666666 0%, #888888 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+            }}>
+              I create modern, user-friendly digital solutions designed to help people, solve problems, and make everyday experiences{' '}
+            </span>
+            <span style={{ 
+              color: theme.textSecondary, 
+              fontWeight: '600',
+              position: 'relative',
+            }}>
+              easier and better.
+            </span>
           </p>
 
-          {/* Enhanced Buttons */}
+          {/* Enhanced Buttons with scroll indicator */}
           <div style={{
             display: 'flex',
-            gap: getResponsiveValue(20, 15, 12),
+            gap: getResponsiveValue(25, 20, 15),
             alignItems: 'center',
             flexWrap: 'wrap',
             opacity: elementVisible ? 1 : 0,
             transform: elementVisible ? 'translateY(0)' : (scrollDirection === 'down' ? 'translateY(20px)' : 'translateY(-20px)'),
             transition: 'all 0.8s ease 0.8s',
             justifyContent: isTablet ? 'center' : 'flex-start',
+            marginBottom: getResponsiveValue(60, 50, 40),
           }} className="buttons">
             <button 
               style={{
-                padding: `${getResponsiveValue(18, 16, 14)}px ${getResponsiveValue(36, 32, 28)}px`,
-                fontSize: getResponsiveValue('0.95rem', '0.9rem', '0.85rem'),
-                fontWeight: '600',
-                background: theme.accentPrimary,
+                padding: `${getResponsiveValue(20, 18, 16)}px ${getResponsiveValue(40, 36, 32)}px`,
+                fontSize: getResponsiveValue('1rem', '0.95rem', '0.9rem'),
+                fontWeight: '700',
+                background: 'linear-gradient(135deg, #000000 0%, #333333 100%)',
                 color: '#ffffff',
                 border: 'none',
-                borderRadius: getResponsiveValue(12, 10, 8),
+                borderRadius: getResponsiveValue(16, 14, 12),
                 cursor: 'pointer',
-                transition: 'all 0.4s ease',
+                transition: 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
                 position: 'relative',
                 overflow: 'hidden',
-                boxShadow: `0 10px 30px ${theme.shadowColor}`,
+                boxShadow: '0 15px 35px rgba(0, 0, 0, 0.15)',
                 width: isMobile ? '100%' : 'auto',
-                minWidth: isMobile ? 'auto' : '140px',
+                minWidth: isMobile ? 'auto' : '180px',
+                textTransform: 'uppercase',
+                letterSpacing: '0.5px',
               }} 
               className="primary-btn"
               onClick={() => scrollToSection('projects')}
+              onMouseEnter={(e) => {
+                e.target.style.transform = 'translateY(-6px) scale(1.03)'
+                e.target.style.boxShadow = '0 25px 50px rgba(0, 0, 0, 0.25)'
+                e.target.style.background = 'linear-gradient(135deg, #333333 0%, #000000 100%)'
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.transform = 'translateY(0) scale(1)'
+                e.target.style.boxShadow = '0 15px 35px rgba(0, 0, 0, 0.15)'
+                e.target.style.background = 'linear-gradient(135deg, #000000 0%, #333333 100%)'
+              }}
             >
-              View My Projects
+              <span style={{ position: 'relative', zIndex: 2 }}>
+                View My Projects
+              </span>
+              <div style={{
+                position: 'absolute',
+                top: 0,
+                left: '-100%',
+                width: '100%',
+                height: '100%',
+                background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent)',
+                transition: 'left 0.6s ease',
+                zIndex: 1,
+              }}></div>
             </button>
+            
             <button 
               style={{
                 padding: `${getResponsiveValue(18, 16, 14)}px ${getResponsiveValue(36, 32, 28)}px`,
@@ -1019,19 +1432,48 @@ export default function Introduction({ scrollDirection = 'down' }) {
                 fontWeight: '600',
                 background: 'transparent',
                 color: theme.textPrimary,
-                border: `2px solid ${theme.borderColor}`,
-                borderRadius: getResponsiveValue(12, 10, 8),
+                border: `2px solid ${theme.textPrimary}`,
+                borderRadius: getResponsiveValue(16, 14, 12),
                 cursor: 'pointer',
-                transition: 'all 0.4s ease',
+                transition: 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
                 position: 'relative',
                 overflow: 'hidden',
                 width: isMobile ? '100%' : 'auto',
-                minWidth: isMobile ? 'auto' : '140px',
+                minWidth: isMobile ? 'auto' : '160px',
+                textTransform: 'uppercase',
+                letterSpacing: '0.5px',
               }} 
               className="secondary-btn"
-              onClick={handleDownloadCV}
+              onClick={() => scrollToSection('contact')}
+              onMouseEnter={(e) => {
+                e.target.style.transform = 'translateY(-4px) scale(1.02)'
+                e.target.style.background = '#000000'
+                e.target.style.color = '#ffffff'
+                e.target.style.borderColor = '#000000'
+                e.target.style.boxShadow = '0 20px 40px rgba(0, 0, 0, 0.15)'
+                // Ensure the text span is also white
+                const span = e.target.querySelector('span')
+                if (span) span.style.color = '#ffffff'
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.transform = 'translateY(0) scale(1)'
+                e.target.style.background = 'transparent'
+                e.target.style.color = theme.textPrimary
+                e.target.style.borderColor = theme.textPrimary
+                e.target.style.boxShadow = 'none'
+                // Reset the text span color
+                const span = e.target.querySelector('span')
+                if (span) span.style.color = theme.textPrimary
+              }}
             >
-              Download CV
+              <span style={{ 
+                position: 'relative', 
+                zIndex: 2,
+                color: 'inherit',
+                transition: 'color 0.4s ease'
+              }}>
+                Let's talk?
+              </span>
             </button>
           </div>
         </div>

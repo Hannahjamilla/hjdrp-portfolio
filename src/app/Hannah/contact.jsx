@@ -156,8 +156,9 @@ export default function Contact({ scrollDirection = 'down' }) {
           left: -100%;
           width: 100%;
           height: 100%;
-          background: linear-gradient(90deg, transparent, rgba(0,0,0,0.05), transparent);
-          transition: left 0.5s ease;
+          background: linear-gradient(90deg, transparent, rgba(0,0,0,0.03), transparent);
+          transition: left 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+          border-radius: 16px;
         }
         
         .contact-method:hover::before {
@@ -165,8 +166,9 @@ export default function Contact({ scrollDirection = 'down' }) {
         }
         
         .contact-method:hover {
-          transform: translateY(-3px);
-          box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+          transform: translateY(-6px) scale(1.02);
+          box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+          border-color: rgba(0, 0, 0, 0.15);
         }
         
         .social-link {
@@ -445,38 +447,76 @@ export default function Contact({ scrollDirection = 'down' }) {
               filter: 'blur(25px)',
             }}></div>
             <h1 style={{
-              fontSize: getResponsiveValue('4rem', '3rem', '2.5rem'),
+              fontSize: getResponsiveValue('4.5rem', '3.5rem', '2.8rem'),
               fontWeight: '900',
               color: theme.textPrimary,
               margin: 0,
-              lineHeight: 1,
-              letterSpacing: '-0.02em',
+              lineHeight: 0.9,
+              letterSpacing: '-0.04em',
               position: 'relative',
               zIndex: 2,
               textTransform: 'uppercase',
             }} className="contact-title">
-              GET IN <span style={{color: theme.accent, position: 'relative'}}>TOUCH
+              <span style={{
+                background: 'linear-gradient(135deg, #000000 0%, #333333 50%, #000000 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }}>
+                GET IN
+              </span>{' '}
+              <span style={{
+                color: theme.accent, 
+                position: 'relative',
+                display: 'inline-block',
+              }}>
+                TOUCH
                 <span style={{
                   position: 'absolute',
-                  bottom: '-4px',
+                  bottom: '-8px',
                   left: 0,
                   width: '100%',
+                  height: '6px',
+                  background: `linear-gradient(90deg, transparent, ${theme.accent}, transparent)`,
+                  borderRadius: '3px',
+                }}></span>
+                <span style={{
+                  position: 'absolute',
+                  bottom: '-12px',
+                  left: '10%',
+                  width: '80%',
                   height: '3px',
                   background: `linear-gradient(90deg, transparent, ${theme.accent}, transparent)`,
+                  borderRadius: '2px',
+                  opacity: 0.6,
                 }}></span>
               </span>
             </h1>
           </div>
           <p style={{
-            fontSize: getResponsiveValue('1.3rem', '1.2rem', '1.1rem'),
+            fontSize: getResponsiveValue('1.4rem', '1.3rem', '1.15rem'),
             color: theme.textMuted,
             fontWeight: '400',
-            marginTop: getResponsiveValue(20, 18, 16),
-            maxWidth: '500px',
-            margin: `${getResponsiveValue(20, 18, 16)}px auto 0`,
-            lineHeight: 1.6,
+            marginTop: getResponsiveValue(25, 22, 20),
+            maxWidth: '600px',
+            margin: `${getResponsiveValue(25, 22, 20)}px auto 0`,
+            lineHeight: 1.7,
+            position: 'relative',
           }} className="contact-subtitle">
-            Let's collaborate and bring your ideas to life
+            <span style={{
+              background: 'linear-gradient(135deg, #666666 0%, #888888 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+            }}>
+              Let's collaborate and bring
+            </span>{' '}
+            <span style={{ 
+              color: theme.textSecondary, 
+              fontWeight: '600',
+            }}>
+              your ideas to life
+            </span>
           </p>
         </div>
 
@@ -505,16 +545,18 @@ export default function Contact({ scrollDirection = 'down' }) {
                   display: 'flex',
                   alignItems: 'center',
                   gap: getResponsiveValue(20, 18, 16),
-                  padding: getResponsiveValue('25px', '22px', '20px'),
-                  background: theme.bgPrimary,
-                  borderRadius: '12px',
+                  padding: getResponsiveValue('30px', '25px', '22px'),
+                  background: `linear-gradient(135deg, ${theme.bgPrimary} 0%, ${theme.bgSecondary} 100%)`,
+                  borderRadius: '16px',
                   textDecoration: 'none',
                   color: theme.textPrimary,
                   border: `2px solid ${theme.borderColor}`,
-                  boxShadow: '0 4px 20px rgba(0,0,0,0.05)',
+                  boxShadow: '0 8px 25px rgba(0,0,0,0.08)',
                   opacity: isVisible ? 1 : 0,
                   transform: isVisible ? 'translateX(0)' : 'translateX(-20px)',
-                  transition: `all 0.6s ease ${index * 0.1}s`
+                  transition: `all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${index * 0.1}s`,
+                  position: 'relative',
+                  overflow: 'hidden',
                 }}
                 className="contact-method"
                 onMouseEnter={() => setActiveContact(index)}
@@ -647,23 +689,25 @@ export default function Contact({ scrollDirection = 'down' }) {
               boxShadow: '0 8px 32px rgba(0,0,0,0.08)',
               textAlign: 'center',
             }}>
+              {/* Profile Image */}
               <div style={{
-                width: getResponsiveValue(60, 50, 40),
-                height: getResponsiveValue(60, 50, 40),
-                background: `linear-gradient(135deg, ${theme.accent}, ${theme.accentSecondary})`,
-                color: theme.bgPrimary,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: getResponsiveValue('1.5rem', '1.3rem', '1.1rem'),
-                fontWeight: 'bold',
-                borderRadius: '12px',
+                width: getResponsiveValue(80, 70, 60),
+                height: getResponsiveValue(80, 70, 60),
+                borderRadius: '50%',
+                overflow: 'hidden',
                 margin: '0 auto 15px',
-                boxShadow: '0 4px 15px rgba(0,0,0,0.1)',
+                border: `2px solid ${theme.borderColor}`,
+                background: theme.bgSecondary,
               }}>
-                <svg width={getResponsiveValue(24, 20, 18)} height={getResponsiveValue(24, 20, 18)} viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z"/>
-                </svg>
+                <img 
+                  src="/images/hannah-two.jpg" 
+                  alt="Hannah Peralta" 
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                  }}
+                />
               </div>
               <h4 style={{
                 fontSize: getResponsiveValue('1.1rem', '1rem', '0.9rem'),
@@ -673,6 +717,13 @@ export default function Contact({ scrollDirection = 'down' }) {
               }}>
                 Open for Opportunities
               </h4>
+              <p style={{
+                fontSize: getResponsiveValue('0.9rem', '0.85rem', '0.8rem'),
+                color: theme.textMuted,
+                margin: 0,
+              }}>
+                Ready to collaborate on exciting projects
+              </p>
             </div>
           </div>
         </div>
