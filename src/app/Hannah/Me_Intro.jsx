@@ -299,6 +299,24 @@ export default function Introduction({ scrollDirection = 'down' }) {
           top: -100px !important;
         }
         
+        /* Desktop and Mobile Nav Sticky */
+        .desktop-nav, .mobile-nav {
+          position: sticky !important;
+          top: 0 !important;
+          z-index: 1000 !important;
+        }
+        
+        /* Ensure smooth sticky behavior */
+        .desktop-nav {
+          margin-bottom: 60px !important;
+        }
+        
+        @media (max-width: 768px) {
+          .mobile-nav {
+            margin-bottom: 40px !important;
+          }
+        }
+        
         /* Responsive Design */
         @media (max-width: 1024px) {
           .layout-grid {
@@ -309,6 +327,8 @@ export default function Introduction({ scrollDirection = 'down' }) {
           
           .sidebar {
             order: 2;
+            max-width: 400px;
+            margin: 0 auto;
           }
           
           .main-content {
@@ -327,6 +347,7 @@ export default function Introduction({ scrollDirection = 'down' }) {
           
           .title {
             font-size: clamp(2rem, 8vw, 3rem) !important;
+            line-height: 1.2 !important;
           }
           
           .greeting {
@@ -336,6 +357,14 @@ export default function Introduction({ scrollDirection = 'down' }) {
           .avatar-container {
             width: 280px !important;
             height: 280px !important;
+          }
+          
+          .buttons {
+            width: 100%;
+          }
+          
+          .buttons button {
+            width: 100%;
           }
         }
         
@@ -347,11 +376,13 @@ export default function Introduction({ scrollDirection = 'down' }) {
           .buttons {
             flex-direction: column;
             gap: 15px;
+            width: 100%;
           }
           
           .primary-btn, .secondary-btn {
-            width: 100%;
+            width: 100% !important;
             text-align: center;
+            padding: 16px 24px !important;
           }
           
           .avatar-container {
@@ -361,11 +392,16 @@ export default function Introduction({ scrollDirection = 'down' }) {
           
           .social-links {
             gap: 12px;
+            justify-content: center;
           }
           
           .social-link {
             width: 44px !important;
             height: 44px !important;
+          }
+          
+          .description {
+            font-size: 0.95rem !important;
           }
         }
         
@@ -377,6 +413,27 @@ export default function Introduction({ scrollDirection = 'down' }) {
           
           .title {
             font-size: clamp(1.8rem, 7vw, 2.5rem) !important;
+          }
+          
+          .social-link {
+            width: 40px !important;
+            height: 40px !important;
+          }
+        }
+        
+        /* Landscape mobile optimization */
+        @media (max-height: 600px) and (orientation: landscape) {
+          .container {
+            padding: 15px 20px !important;
+          }
+          
+          .layout-grid {
+            gap: 30px !important;
+          }
+          
+          .avatar-container {
+            width: 200px !important;
+            height: 200px !important;
           }
         }
         
@@ -407,33 +464,19 @@ export default function Introduction({ scrollDirection = 'down' }) {
   const isTablet = windowSize.width < 1024
 
   return (
-    <div style={{
-      minHeight: '100vh',
-      minHeight: '100dvh',
-      background: theme.bgPrimary,
-      padding: getResponsiveValue('40px 60px', '30px 40px', '20px 20px'),
-      display: 'flex',
-      flexDirection: 'column',
-      position: 'relative',
-      overflow: 'hidden',
-      fontFamily: "'Poppins', sans-serif",
-      opacity: isVisible ? 1 : 0,
-      transform: isVisible ? 'translateY(0)' : (scrollDirection === 'down' ? 'translateY(50px)' : 'translateY(-50px)'),
-      transition: 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-    }} id="home">
-      
-      {/* Sticky Navigation */}
-      <nav className={`sticky-nav ${showStickyNav ? 'visible' : 'hidden'}`} style={{
+    <>
+      {/* Fixed Navigation Bar */}
+      <nav style={{
         position: 'fixed',
-        top: '-100px',
+        top: 0,
         left: 0,
         right: 0,
-        zIndex: 1000,
-        transition: 'all 0.4s ease',
-        background: 'rgba(255, 255, 255, 0.95)',
+        zIndex: 9999,
+        background: isScrolled ? 'rgba(255, 255, 255, 0.98)' : 'rgba(255, 255, 255, 0.95)',
         backdropFilter: 'blur(20px)',
-        borderBottom: '1px solid rgba(0, 0, 0, 0.08)',
-        padding: '15px 0',
+        boxShadow: isScrolled ? '0 4px 20px rgba(0, 0, 0, 0.1)' : '0 2px 10px rgba(0, 0, 0, 0.05)',
+        transition: 'all 0.3s ease',
+        padding: getResponsiveValue('15px 60px', '12px 40px', '12px 20px'),
       }}>
         <div style={{
           display: 'flex',
@@ -442,8 +485,8 @@ export default function Introduction({ scrollDirection = 'down' }) {
           maxWidth: '1400px',
           margin: '0 auto',
           width: '100%',
-          padding: getResponsiveValue('0 60px', '0 40px', '0 20px'),
         }}>
+          {/* Logo */}
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <img 
               src="/images/HanMade.png" 
@@ -452,14 +495,17 @@ export default function Introduction({ scrollDirection = 'down' }) {
                 height: getResponsiveValue(50, 45, 40),
                 width: 'auto',
                 objectFit: 'contain',
+                transition: 'transform 0.3s ease',
               }}
               className="logo-image"
             />
           </div>
+
+          {/* Desktop Navigation */}
           <div style={{
             display: isMobile ? 'none' : 'flex',
             gap: getResponsiveValue(35, 25, 20),
-            flexWrap: 'wrap',
+            alignItems: 'center',
           }}>
             {['home', 'about', 'work', 'projects', 'contact'].map((section) => (
               <a 
@@ -485,68 +531,47 @@ export default function Introduction({ scrollDirection = 'down' }) {
               </a>
             ))}
           </div>
-        </div>
-      </nav>
 
-      {/* Mobile Navigation */}
-      <nav style={{
-        display: isMobile ? 'flex' : 'none',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        padding: '15px 0',
-        marginBottom: '40px',
-        width: '100%',
-        position: 'relative',
-        zIndex: 10,
-      }} className="mobile-nav">
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <img 
-            src="/images/HanMade.png" 
-            alt="HanMade Logo" 
+          {/* Mobile Menu Button */}
+          <button 
             style={{
-              height: 40,
-              width: 'auto',
-              objectFit: 'contain',
+              display: isMobile ? 'flex' : 'none',
+              flexDirection: 'column',
+              gap: '4px',
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              padding: '8px',
             }}
-            className="logo-image"
-          />
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            <div style={{
+              width: '25px',
+              height: '2px',
+              backgroundColor: theme.textPrimary,
+              transition: 'all 0.3s ease',
+              transform: isMobileMenuOpen ? 'rotate(45deg) translate(5px, 5px)' : 'none',
+            }}></div>
+            <div style={{
+              width: '25px',
+              height: '2px',
+              backgroundColor: theme.textPrimary,
+              transition: 'all 0.3s ease',
+              opacity: isMobileMenuOpen ? 0 : 1,
+            }}></div>
+            <div style={{
+              width: '25px',
+              height: '2px',
+              backgroundColor: theme.textPrimary,
+              transition: 'all 0.3s ease',
+              transform: isMobileMenuOpen ? 'rotate(-45deg) translate(7px, -6px)' : 'none',
+            }}></div>
+          </button>
         </div>
-        <button 
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '4px',
-            background: 'none',
-            border: 'none',
-            cursor: 'pointer',
-            padding: '8px',
-          }}
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          aria-label="Toggle menu"
-        >
-          <div style={{
-            width: '25px',
-            height: '2px',
-            backgroundColor: theme.textPrimary,
-            transition: 'all 0.3s ease',
-            transform: isMobileMenuOpen ? 'rotate(45deg) translate(5px, 5px)' : 'none',
-          }}></div>
-          <div style={{
-            width: '25px',
-            height: '2px',
-            backgroundColor: theme.textPrimary,
-            transition: 'all 0.3s ease',
-            opacity: isMobileMenuOpen ? 0 : 1,
-          }}></div>
-          <div style={{
-            width: '25px',
-            height: '2px',
-            backgroundColor: theme.textPrimary,
-            transition: 'all 0.3s ease',
-            transform: isMobileMenuOpen ? 'rotate(-45deg) translate(7px, -6px)' : 'none',
-          }}></div>
-        </button>
-        {isMobileMenuOpen && (
+
+        {/* Mobile Menu Dropdown */}
+        {isMobileMenuOpen && isMobile && (
           <div style={{
             position: 'absolute',
             top: '100%',
@@ -554,15 +579,13 @@ export default function Introduction({ scrollDirection = 'down' }) {
             right: 0,
             background: 'rgba(255, 255, 255, 0.98)',
             backdropFilter: 'blur(20px)',
-            border: `1px solid ${theme.borderColor}`,
-            borderRadius: '12px',
+            borderTop: `1px solid ${theme.borderColor}`,
             padding: '20px',
-            marginTop: '10px',
             display: 'flex',
             flexDirection: 'column',
             gap: '15px',
-            boxShadow: '0 20px 40px rgba(0, 0, 0, 0.1)',
-          }} className="mobile-nav-links">
+            boxShadow: '0 10px 30px rgba(0, 0, 0, 0.1)',
+          }}>
             {['home', 'about', 'work', 'projects', 'contact'].map((section) => (
               <a 
                 key={section}
@@ -590,6 +613,23 @@ export default function Introduction({ scrollDirection = 'down' }) {
         )}
       </nav>
 
+      {/* Main Content with padding for fixed nav */}
+      <div style={{
+        minHeight: '100vh',
+        minHeight: '100dvh',
+        background: theme.bgPrimary,
+        padding: getResponsiveValue('40px 60px', '30px 40px', '20px 20px'),
+        paddingTop: getResponsiveValue('120px', '110px', '100px'),
+        display: 'flex',
+        flexDirection: 'column',
+        position: 'relative',
+        overflow: 'hidden',
+        fontFamily: "'Poppins', sans-serif",
+        opacity: isVisible ? 1 : 0,
+        transform: isVisible ? 'translateY(0)' : (scrollDirection === 'down' ? 'translateY(50px)' : 'translateY(-50px)'),
+        transition: 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+      }} id="home">
+      
       {/* Enhanced Background Elements */}
       <div style={{
         position: 'absolute',
@@ -662,70 +702,6 @@ export default function Introduction({ scrollDirection = 'down' }) {
         </div>
       </div>
 
-      {/* Main Navigation */}
-      <nav style={{
-        display: isMobile ? 'none' : 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        marginBottom: getResponsiveValue(60, 50, 40),
-        maxWidth: '1400px',
-        margin: `0 auto ${getResponsiveValue(60, 50, 40)}px auto`,
-        width: '100%',
-        position: 'relative',
-        zIndex: 10,
-        transition: 'all 0.3s ease',
-        padding: isScrolled ? `${getResponsiveValue(15, 12, 10)}px ${getResponsiveValue(30, 25, 20)}px` : '20px 0',
-        background: isScrolled ? 'rgba(255, 255, 255, 0.95)' : 'transparent',
-        backdropFilter: isScrolled ? 'blur(20px)' : 'none',
-        borderRadius: isScrolled ? '15px' : '0',
-        boxShadow: isScrolled ? '0 8px 32px rgba(0, 0, 0, 0.1)' : 'none',
-        opacity: elementVisible ? 1 : 0,
-        transform: elementVisible ? 'translateY(0)' : (scrollDirection === 'down' ? 'translateY(-20px)' : 'translateY(20px)'),
-        transition: 'all 0.8s ease 0.1s',
-      }} className="desktop-nav">
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <img 
-            src="/images/HanMade.png" 
-            alt="HanMade Logo" 
-            style={{
-              height: getResponsiveValue(60, 50, 40),
-              width: 'auto',
-              objectFit: 'contain',
-            }}
-            className="logo-image"
-          />
-        </div>
-        <div style={{
-          display: 'flex',
-          gap: getResponsiveValue(35, 25, 20),
-          flexWrap: 'wrap',
-        }}>
-          {['home', 'about', 'work', 'projects', 'contact'].map((section) => (
-            <a 
-              key={section}
-              href={`#${section}`} 
-              style={{
-                color: activeSection === section ? theme.textPrimary : theme.textSecondary,
-                textDecoration: 'none',
-                fontSize: getResponsiveValue('0.95rem', '0.9rem', '0.85rem'),
-                fontWeight: activeSection === section ? '600' : '500',
-                padding: '8px 0',
-                position: 'relative',
-                transition: 'all 0.3s ease',
-                whiteSpace: 'nowrap',
-              }} 
-              className="nav-link"
-              onClick={(e) => {
-                e.preventDefault()
-                scrollToSection(section)
-              }}
-            >
-              {section.charAt(0).toUpperCase() + section.slice(1)}
-            </a>
-          ))}
-        </div>
-      </nav>
-
       {/* Main Layout */}
       <div style={{
         display: 'grid',
@@ -775,21 +751,7 @@ export default function Introduction({ scrollDirection = 'down' }) {
               }}
               className="avatar-image"
             />
-            <div style={{
-              position: 'absolute',
-              width: getResponsiveValue(60, 50, 40),
-              height: getResponsiveValue(60, 50, 40),
-              border: `2px solid ${theme.accentPrimary}`,
-              borderRadius: '50%',
-              top: getResponsiveValue(-15, -12, -10),
-              right: getResponsiveValue(-15, -12, -10),
-              background: theme.bgPrimary,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: getResponsiveValue('1.25rem', '1.1rem', '1rem'),
-              fontWeight: 'bold',
-            }}>HJ</div>
+           
           </div>
           
           <div style={{
@@ -979,7 +941,7 @@ export default function Introduction({ scrollDirection = 'down' }) {
             fontWeight: '500',
             marginBottom: getResponsiveValue(30, 25, 20),
             color: theme.textSecondary,
-            minHeight: getResponsiveValue(32, 28, 24),
+            minHeight: getResponsiveValue(40, 35, 30),
             display: 'flex',
             alignItems: 'center',
             justifyContent: isTablet ? 'center' : 'flex-start',
@@ -1046,9 +1008,9 @@ export default function Introduction({ scrollDirection = 'down' }) {
                 minWidth: isMobile ? 'auto' : '140px',
               }} 
               className="primary-btn"
-              onClick={() => scrollToSection('work')}
+              onClick={() => scrollToSection('projects')}
             >
-              View My Work
+              View My Projects
             </button>
             <button 
               style={{
@@ -1075,5 +1037,6 @@ export default function Introduction({ scrollDirection = 'down' }) {
         </div>
       </div>
     </div>
+    </>
   )
 }

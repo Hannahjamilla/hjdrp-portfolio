@@ -120,6 +120,8 @@ export default function AboutMe({ scrollDirection = 'down' }) {
           
           .profile-section {
             order: 1;
+            max-width: 600px;
+            margin: 0 auto;
           }
           
           .content-section {
@@ -133,6 +135,8 @@ export default function AboutMe({ scrollDirection = 'down' }) {
           .hexagon-grid {
             grid-template-columns: repeat(3, 1fr) !important;
             gap: 15px !important;
+            max-width: 400px;
+            margin: 40px auto 0;
           }
 
           .philosophy-grid {
@@ -177,6 +181,10 @@ export default function AboutMe({ scrollDirection = 'down' }) {
             grid-template-columns: 1fr !important;
             gap: 15px !important;
           }
+          
+          .profile-card {
+            padding: 30px 20px !important;
+          }
         }
         
         @media (max-width: 480px) {
@@ -189,7 +197,12 @@ export default function AboutMe({ scrollDirection = 'down' }) {
           }
           
           .profile-card {
-            padding: 30px 20px !important;
+            padding: 25px 18px !important;
+            transform: rotate(0deg) !important;
+          }
+          
+          .profile-card:hover {
+            transform: rotate(0deg) translateY(-5px) !important;
           }
           
           .hexagon-grid {
@@ -210,7 +223,7 @@ export default function AboutMe({ scrollDirection = 'down' }) {
           }
           
           .skill-cluster {
-            padding: 30px 20px !important;
+            padding: 25px 15px !important;
           }
           
           .cluster-header {
@@ -222,15 +235,35 @@ export default function AboutMe({ scrollDirection = 'down' }) {
           .philosophy-grid {
             gap: 12px !important;
           }
+          
+          .philosophy-item {
+            padding: 20px 15px !important;
+          }
         }
 
         @media (max-width: 380px) {
           .hexagon-grid {
             grid-template-columns: repeat(2, 1fr) !important;
+            gap: 12px !important;
           }
           
           .hexagon {
-            height: 80px !important;
+            height: 90px !important;
+          }
+          
+          .title {
+            font-size: 1.8rem !important;
+          }
+        }
+        
+        /* Landscape optimization */
+        @media (max-height: 600px) and (orientation: landscape) {
+          .container {
+            padding: 30px 20px !important;
+          }
+          
+          .hexagon-grid {
+            margin-top: 20px !important;
           }
         }
       `;

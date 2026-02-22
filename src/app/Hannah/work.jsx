@@ -133,6 +133,31 @@ export default function Work({ scrollDirection = 'down' }) {
         @media (max-width: 1024px) {
           .cards-container {
             grid-template-columns: 1fr !important;
+            max-width: 600px;
+            margin: 0 auto;
+          }
+        }
+        
+        @media (max-width: 768px) {
+          .experience-card {
+            padding: 0 !important;
+          }
+          
+          .responsibility-item {
+            padding: 14px !important;
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .stat-item {
+            padding: 20px 15px !important;
+          }
+        }
+        
+        /* Landscape optimization */
+        @media (max-height: 600px) and (orientation: landscape) {
+          .cards-container {
+            gap: 30px !important;
           }
         }
       `;

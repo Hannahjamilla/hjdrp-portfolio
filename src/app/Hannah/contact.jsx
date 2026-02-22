@@ -209,7 +209,9 @@ export default function Contact({ scrollDirection = 'down' }) {
           
           .contact-grid {
             grid-template-columns: 1fr !important;
-            gap: 25px !important;
+            gap: 30px !important;
+            max-width: 600px;
+            margin: 0 auto;
           }
         }
         
@@ -269,8 +271,8 @@ export default function Contact({ scrollDirection = 'down' }) {
           }
           
           .social-link {
-            width: 45px !important;
-            height: 45px !important;
+            width: 48px !important;
+            height: 48px !important;
           }
           
           .footer-text {
@@ -292,8 +294,19 @@ export default function Contact({ scrollDirection = 'down' }) {
           }
           
           .social-link {
-            width: 40px !important;
-            height: 40px !important;
+            width: 44px !important;
+            height: 44px !important;
+          }
+        }
+        
+        /* Landscape optimization */
+        @media (max-height: 600px) and (orientation: landscape) {
+          .contact-container {
+            padding: 30px 25px !important;
+          }
+          
+          .contact-grid {
+            gap: 25px !important;
           }
         }
       `;
