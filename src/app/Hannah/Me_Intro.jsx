@@ -13,6 +13,7 @@ export default function Introduction({ scrollDirection = 'down' }) {
   const [elementVisible, setElementVisible] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  const [showScrollTop, setShowScrollTop] = useState(false)
   const [windowSize, setWindowSize] = useState({
     width: typeof window !== 'undefined' ? window.innerWidth : 1200,
     height: typeof window !== 'undefined' ? window.innerHeight : 800
@@ -72,6 +73,7 @@ export default function Introduction({ scrollDirection = 'down' }) {
     const handleScroll = () => {
       const scrollTop = window.scrollY
       setIsScrolled(scrollTop > 50)
+      setShowScrollTop(scrollTop > 300)
 
       const sections = ['home', 'about', 'work', 'projects', 'contact']
       const current = sections.find(section => {
@@ -150,6 +152,14 @@ export default function Introduction({ scrollDirection = 'down' }) {
     document.body.appendChild(link)
     link.click()
     document.body.removeChild(link)
+  }
+
+  // Scroll to top function
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
   }
 
   const generateParticles = useCallback(() => {
@@ -627,6 +637,53 @@ export default function Introduction({ scrollDirection = 'down' }) {
             transition-duration: 0.01ms !important;
           }
         }
+
+        /* Scroll to top button */
+        .scroll-to-top {
+          position: fixed;
+          bottom: 30px;
+          right: 30px;
+          width: 45px;
+          height: 45px;
+          background: #6C131F;
+          color: #FFECEA;
+          border: none;
+          border-radius: 50%;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 1.2rem;
+          font-weight: bold;
+          box-shadow: 0 4px 12px rgba(108, 19, 31, 0.3);
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          z-index: 1000;
+          opacity: 0;
+          transform: translateY(20px);
+          pointer-events: none;
+        }
+
+        .scroll-to-top.visible {
+          opacity: 1;
+          transform: translateY(0);
+          pointer-events: all;
+        }
+
+        .scroll-to-top:hover {
+          background: #A14B58;
+          transform: translateY(-3px) scale(1.1);
+          box-shadow: 0 8px 20px rgba(108, 19, 31, 0.4);
+        }
+
+        @media (max-width: 768px) {
+          .scroll-to-top {
+            bottom: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            font-size: 1rem;
+          }
+        }
       `;
       document.head.appendChild(style);
 
@@ -1028,23 +1085,42 @@ export default function Introduction({ scrollDirection = 'down' }) {
           transition: 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s',
           order: isTablet ? 2 : 1,
         }} className="sidebar">
-          <div style={{
-            width: getResponsiveValue(360, 320, 290),
-            height: getResponsiveValue(360, 320, 290),
-            borderRadius: getResponsiveValue(35, 30, 25),
-            overflow: 'hidden',
-            border: `4px solid ${theme.borderColor}`,
-            background: `
-              linear-gradient(135deg, ${theme.bgSecondary} 0%, ${theme.bgPrimary} 50%, ${theme.bgSecondary} 100%),
-              radial-gradient(circle at 30% 70%, rgba(0,0,0,0.02) 0%, transparent 50%)
-            `,
-            position: 'relative',
-            transition: 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
-            boxShadow: `
-              0 30px 60px ${theme.shadowColor},
-              inset 0 1px 0 rgba(255,255,255,0.1)
-            `,
-          }} className="avatar-container">
+          <div 
+            style={{
+              width: getResponsiveValue(360, 320, 290),
+              height: getResponsiveValue(360, 320, 290),
+              borderRadius: getResponsiveValue(35, 30, 25),
+              overflow: 'hidden',
+              border: `4px solid ${theme.borderColor}`,
+              background: `
+                linear-gradient(135deg, ${theme.bgSecondary} 0%, ${theme.bgPrimary} 50%, ${theme.bgSecondary} 100%),
+                radial-gradient(circle at 30% 70%, rgba(0,0,0,0.02) 0%, transparent 50%)
+              `,
+              position: 'relative',
+              transition: 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
+              boxShadow: `
+                0 30px 60px ${theme.shadowColor},
+                inset 0 1px 0 rgba(255,255,255,0.1)
+              `,
+            }} 
+            className="avatar-container"
+            onMouseEnter={() => {
+              const mainImg = document.querySelector('.avatar-main')
+              const hoverImg = document.querySelector('.avatar-hover')
+              if (mainImg && hoverImg) {
+                mainImg.style.opacity = '0'
+                hoverImg.style.opacity = '1'
+              }
+            }}
+            onMouseLeave={() => {
+              const mainImg = document.querySelector('.avatar-main')
+              const hoverImg = document.querySelector('.avatar-hover')
+              if (mainImg && hoverImg) {
+                mainImg.style.opacity = '1'
+                hoverImg.style.opacity = '0'
+              }
+            }}
+          >
             {/* Enhanced decorative border elements */}
             <div style={{
               position: 'absolute',
@@ -1086,6 +1162,7 @@ export default function Introduction({ scrollDirection = 'down' }) {
               transform: 'rotate(45deg)',
             }}></div>
             
+            {/* Main Image */}
             <img 
               src="/images/Hannah.png" 
               alt="Hannah Peralta" 
@@ -1093,11 +1170,32 @@ export default function Introduction({ scrollDirection = 'down' }) {
                 width: '100%',
                 height: '130%',
                 objectFit: 'cover',
-                transition: 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
+                transition: 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
                 transform: 'translateY(-5%)',
                 filter: 'contrast(1.02) brightness(1.01)',
+                opacity: 1,
               }}
-              className="avatar-image"
+              className="avatar-image avatar-main"
+            />
+            
+            {/* Hover Image */}
+            <img 
+              src="/images/hannah-two.jpg" 
+              alt="Hannah Peralta" 
+              style={{
+                width: '100%',
+                height: '130%',
+                objectFit: 'cover',
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                transition: 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
+                transform: 'translateY(-5%)',
+                filter: 'contrast(1.02) brightness(1.01)',
+                opacity: 0,
+                pointerEvents: 'none',
+              }}
+              className="avatar-image avatar-hover"
             />
             
             {/* Enhanced overlay gradient */}
@@ -1470,6 +1568,15 @@ export default function Introduction({ scrollDirection = 'down' }) {
         </div>
       </div>
     </div>
+
+    {/* Scroll to Top Button */}
+    <button 
+      className={`scroll-to-top ${showScrollTop ? 'visible' : ''}`}
+      onClick={scrollToTop}
+      aria-label="Scroll to top"
+    >
+      ↑
+    </button>
     </>
   )
 }
