@@ -15,14 +15,14 @@ export default function AboutMe({ scrollDirection = 'down' }) {
   }, [])
 
   const theme = {
-    bgPrimary: '#ffffff',
-    bgSecondary: '#f8f9fa',
-    bgTertiary: '#f1f3f4',
-    textPrimary: '#000000',
-    textSecondary: '#1a1a1a',
-    textMuted: '#666666',
-    borderColor: 'rgba(0, 0, 0, 0.1)',
-    accent: '#000000',
+    bgPrimary: '#FFECEA',
+    bgSecondary: '#ffffff',
+    bgTertiary: '#f8f4f3',
+    textPrimary: '#6C131F',
+    textSecondary: '#A14B58',
+    textMuted: '#A14B58',
+    borderColor: 'rgba(108, 19, 31, 0.15)',
+    accent: '#6C131F',
   }
 
   const [windowSize, setWindowSize] = useState({
@@ -66,14 +66,14 @@ export default function AboutMe({ scrollDirection = 'down' }) {
         }
         
         .skill-tag:hover {
-          background: #000000;
-          color: #ffffff;
+          background: #6C131F;
+          color: #FFECEA;
           transform: translateY(-2px);
         }
         
         .hexagon:hover .hexagon-number,
         .hexagon:hover .hexagon-label {
-          color: #ffffff;
+          color: #FFECEA;
         }
         
         .profile-card {
@@ -82,23 +82,23 @@ export default function AboutMe({ scrollDirection = 'down' }) {
         
         .profile-card:hover {
           transform: rotate(-2deg) translateY(-5px);
-          box-shadow: 25px 25px 0px 0px rgba(0,0,0,1);
+          box-shadow: 25px 25px 0px 0px rgba(108,19,31,1);
         }
         
         @media (prefers-color-scheme: dark) {
           .profile-card:hover {
-            box-shadow: 25px 25px 0px 0px rgba(255,255,255,1);
+            box-shadow: 25px 25px 0px 0px rgba(255,236,234,1);
           }
         }
 
         .philosophy-item:hover {
-          background: #000000;
-          color: #ffffff;
+          background: #6C131F;
+          color: #FFECEA;
           transform: translateY(-2px);
         }
 
         .philosophy-item:hover .philosophy-title {
-          color: #ffffff;
+          color: #FFECEA;
         }
 
         .philosophy-item:hover .philosophy-description {
@@ -408,10 +408,7 @@ export default function AboutMe({ scrollDirection = 'down' }) {
               textTransform: 'uppercase',
             }} className="title">
               <span style={{
-                background: 'linear-gradient(135deg, #000000 0%, #333333 50%, #000000 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
+                color: '#6C131F',
                 position: 'relative',
               }}>
                 ABOUT
@@ -445,10 +442,7 @@ export default function AboutMe({ scrollDirection = 'down' }) {
             position: 'relative',
           }} className="subtitle">
             <span style={{
-              background: 'linear-gradient(135deg, #666666 0%, #888888 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
+              color: '#A14B58',
             }}>
               Building digital experiences that blend
             </span>{' '}
@@ -517,10 +511,7 @@ export default function AboutMe({ scrollDirection = 'down' }) {
                 position: 'relative',
               }}>
                 <span style={{
-                  background: 'linear-gradient(135deg, #000000 0%, #333333 100%)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
+                  color: '#6C131F',
                 }}>
                   Web Developer
                 </span>
@@ -534,10 +525,7 @@ export default function AboutMe({ scrollDirection = 'down' }) {
                 position: 'relative',
               }}>
                 <span style={{
-                  background: 'linear-gradient(135deg, #333333 0%, #555555 100%)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
+                  color: '#A14B58',
                 }}>
                   Passionate about building user-centered web applications that don't just look good but also
                 </span>{' '}

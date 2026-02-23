@@ -119,16 +119,17 @@ export default function Introduction({ scrollDirection = 'down' }) {
   }, [currentGreeting])
 
   const theme = {
-    bgPrimary: '#ffffff',
-    bgSecondary: '#f8f9fa',
-    textPrimary: '#000000',
-    textSecondary: '#2d3748',
-    textMuted: '#718096',
-    accentPrimary: '#000000',
-    accentSecondary: '#4a5568',
-    borderColor: 'rgba(0, 0, 0, 0.08)',
-    shadowColor: 'rgba(0, 0, 0, 0.06)',
-    shadowHover: 'rgba(0, 0, 0, 0.12)',
+    bgPrimary: '#FFECEA',
+    bgSecondary: '#ffffff',
+    bgTertiary: '#f8f4f3',
+    textPrimary: '#6C131F',
+    textSecondary: '#A14B58',
+    textMuted: '#A14B58',
+    accentPrimary: '#6C131F',
+    accentSecondary: '#A14B58',
+    borderColor: 'rgba(108, 19, 31, 0.15)',
+    shadowColor: 'rgba(108, 19, 31, 0.08)',
+    shadowHover: 'rgba(108, 19, 31, 0.15)',
   }
 
   const scrollToSection = (sectionId) => {
@@ -294,7 +295,7 @@ export default function Introduction({ scrollDirection = 'down' }) {
         }
         
         .nav-link:hover {
-          color: #000000;
+          color: #6C131F;
           transform: translateY(-2px);
         }
         
@@ -305,7 +306,7 @@ export default function Introduction({ scrollDirection = 'down' }) {
           left: 50%;
           width: 0;
           height: 2px;
-          background: linear-gradient(90deg, #000000, #333333);
+          background: #6C131F;
           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
           transform: translateX(-50%);
           border-radius: 1px;
@@ -318,7 +319,7 @@ export default function Introduction({ scrollDirection = 'down' }) {
         .primary-btn {
           position: relative;
           overflow: hidden;
-          background: linear-gradient(135deg, #000000, #333333);
+          background: #6C131F;
           transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
@@ -329,7 +330,7 @@ export default function Introduction({ scrollDirection = 'down' }) {
           left: -100%;
           width: 100%;
           height: 100%;
-          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+          background: linear-gradient(90deg, transparent, rgba(255,236,234,0.3), transparent);
           transition: left 0.6s ease;
         }
 
@@ -338,9 +339,9 @@ export default function Introduction({ scrollDirection = 'down' }) {
         }
         
         .primary-btn:hover {
-          background: linear-gradient(135deg, #333333, #000000);
+          background: #A14B58;
           transform: translateY(-4px) scale(1.02);
-          box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+          box-shadow: 0 25px 50px rgba(108, 19, 31, 0.25);
         }
         
         .secondary-btn {
@@ -357,7 +358,7 @@ export default function Introduction({ scrollDirection = 'down' }) {
           left: 0;
           width: 0;
           height: 100%;
-          background: #000000;
+          background: #6C131F;
           transition: width 0.3s ease;
           z-index: -1;
         }
@@ -367,10 +368,10 @@ export default function Introduction({ scrollDirection = 'down' }) {
         }
         
         .secondary-btn:hover {
-          color: #ffffff;
-          border-color: #000000;
+          color: #FFECEA;
+          border-color: #6C131F;
           transform: translateY(-4px) scale(1.02);
-          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 20px 40px rgba(108, 19, 31, 0.15);
         }
         
         .avatar-container {
@@ -385,7 +386,7 @@ export default function Introduction({ scrollDirection = 'down' }) {
           left: -20px;
           right: -20px;
           bottom: -20px;
-          background: conic-gradient(from 0deg, #000000, #333333, #000000, #333333, #000000);
+          background: #6C131F;
           border-radius: inherit;
           z-index: -2;
           opacity: 0;
@@ -404,8 +405,8 @@ export default function Introduction({ scrollDirection = 'down' }) {
         .avatar-container:hover {
           transform: translateY(-30px) rotate(-5deg) scale(1.1);
           box-shadow: 
-            0 60px 120px rgba(0, 0, 0, 0.3),
-            inset 0 1px 0 rgba(255,255,255,0.2);
+            0 60px 120px rgba(108, 19, 31, 0.3),
+            inset 0 1px 0 rgba(255,236,234,0.2);
         }
         
         .avatar-container:hover .avatar-image {
@@ -426,7 +427,7 @@ export default function Introduction({ scrollDirection = 'down' }) {
           left: 50%;
           width: 0;
           height: 0;
-          background: radial-gradient(circle, #000000 0%, #333333 100%);
+          background: #6C131F;
           border-radius: 50%;
           transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
           transform: translate(-50%, -50%);
@@ -440,7 +441,7 @@ export default function Introduction({ scrollDirection = 'down' }) {
           left: 50%;
           width: 0;
           height: 0;
-          background: conic-gradient(from 0deg, transparent, rgba(255,255,255,0.1), transparent);
+          background: rgba(255,236,234,0.2);
           border-radius: 50%;
           transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
           transform: translate(-50%, -50%);
@@ -458,12 +459,12 @@ export default function Introduction({ scrollDirection = 'down' }) {
         }
         
         .social-link:hover {
-          color: #ffffff;
-          border-color: #000000;
+          color: #FFECEA;
+          border-color: #6C131F;
           transform: translateY(-10px) scale(1.25) rotate(15deg);
           box-shadow: 
-            0 25px 50px rgba(0, 0, 0, 0.3),
-            inset 0 1px 0 rgba(255,255,255,0.1);
+            0 25px 50px rgba(108, 19, 31, 0.3),
+            inset 0 1px 0 rgba(255,236,234,0.1);
         }
         
         .logo-image:hover {
@@ -482,12 +483,8 @@ export default function Introduction({ scrollDirection = 'down' }) {
         }
 
         .gradient-text {
-          background: linear-gradient(135deg, #000000, #333333, #000000);
-          background-size: 200% 200%;
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-          animation: gradientShift 3s ease-in-out infinite;
+          background: #6C131F;
+          color: #6C131F;
         }
 
         .slide-in-left {
@@ -1295,10 +1292,7 @@ export default function Introduction({ scrollDirection = 'down' }) {
             position: 'relative',
           }} className="title">
             <span style={{
-              background: 'linear-gradient(135deg, #000000 0%, #333333 50%, #000000 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
+              color: '#6C131F',
               position: 'relative',
             }}>
               Crafting Digital Experiences That Inspire & Transform
@@ -1350,10 +1344,7 @@ export default function Introduction({ scrollDirection = 'down' }) {
             position: 'relative',
           }} className="description">
             <span style={{
-              background: 'linear-gradient(135deg, #666666 0%, #888888 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
+              color: '#A14B58',
             }}>
               I create modern, user-friendly digital solutions designed to help people, solve problems, and make everyday experiences{' '}
             </span>
@@ -1383,15 +1374,15 @@ export default function Introduction({ scrollDirection = 'down' }) {
                 padding: `${getResponsiveValue(20, 18, 16)}px ${getResponsiveValue(40, 36, 32)}px`,
                 fontSize: getResponsiveValue('1rem', '0.95rem', '0.9rem'),
                 fontWeight: '700',
-                background: 'linear-gradient(135deg, #000000 0%, #333333 100%)',
-                color: '#ffffff',
+                background: '#6C131F',
+                color: '#FFECEA',
                 border: 'none',
                 borderRadius: getResponsiveValue(16, 14, 12),
                 cursor: 'pointer',
                 transition: 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
                 position: 'relative',
                 overflow: 'hidden',
-                boxShadow: '0 15px 35px rgba(0, 0, 0, 0.15)',
+                boxShadow: '0 15px 35px rgba(108, 19, 31, 0.15)',
                 width: isMobile ? '100%' : 'auto',
                 minWidth: isMobile ? 'auto' : '180px',
                 textTransform: 'uppercase',
@@ -1401,13 +1392,13 @@ export default function Introduction({ scrollDirection = 'down' }) {
               onClick={() => scrollToSection('projects')}
               onMouseEnter={(e) => {
                 e.target.style.transform = 'translateY(-6px) scale(1.03)'
-                e.target.style.boxShadow = '0 25px 50px rgba(0, 0, 0, 0.25)'
-                e.target.style.background = 'linear-gradient(135deg, #333333 0%, #000000 100%)'
+                e.target.style.boxShadow = '0 25px 50px rgba(108, 19, 31, 0.25)'
+                e.target.style.background = '#A14B58'
               }}
               onMouseLeave={(e) => {
                 e.target.style.transform = 'translateY(0) scale(1)'
-                e.target.style.boxShadow = '0 15px 35px rgba(0, 0, 0, 0.15)'
-                e.target.style.background = 'linear-gradient(135deg, #000000 0%, #333333 100%)'
+                e.target.style.boxShadow = '0 15px 35px rgba(108, 19, 31, 0.15)'
+                e.target.style.background = '#6C131F'
               }}
             >
               <span style={{ position: 'relative', zIndex: 2 }}>
@@ -1447,13 +1438,13 @@ export default function Introduction({ scrollDirection = 'down' }) {
               onClick={() => scrollToSection('contact')}
               onMouseEnter={(e) => {
                 e.target.style.transform = 'translateY(-4px) scale(1.02)'
-                e.target.style.background = '#000000'
-                e.target.style.color = '#ffffff'
-                e.target.style.borderColor = '#000000'
-                e.target.style.boxShadow = '0 20px 40px rgba(0, 0, 0, 0.15)'
+                e.target.style.background = '#6C131F'
+                e.target.style.color = '#FFECEA'
+                e.target.style.borderColor = '#6C131F'
+                e.target.style.boxShadow = '0 20px 40px rgba(108, 19, 31, 0.15)'
                 // Ensure the text span is also white
                 const span = e.target.querySelector('span')
-                if (span) span.style.color = '#ffffff'
+                if (span) span.style.color = '#FFECEA'
               }}
               onMouseLeave={(e) => {
                 e.target.style.transform = 'translateY(0) scale(1)'

@@ -40,15 +40,15 @@ export default function Contact({ scrollDirection = 'down' }) {
   }
 
   const theme = {
-    bgPrimary: '#ffffff',
-    bgSecondary: '#f8f9fa',
-    bgTertiary: '#f1f3f4',
-    textPrimary: '#000000',
-    textSecondary: '#1a1a1a',
-    textMuted: '#666666',
-    borderColor: 'rgba(0, 0, 0, 0.1)',
-    accent: '#000000',
-    accentSecondary: '#333333',
+    bgPrimary: '#FFECEA',
+    bgSecondary: '#ffffff',
+    bgTertiary: '#f8f4f3',
+    textPrimary: '#6C131F',
+    textSecondary: '#A14B58',
+    textMuted: '#A14B58',
+    borderColor: 'rgba(108, 19, 31, 0.15)',
+    accent: '#6C131F',
+    accentSecondary: '#A14B58',
   }
 
   const contactMethods = [
@@ -458,10 +458,7 @@ export default function Contact({ scrollDirection = 'down' }) {
               textTransform: 'uppercase',
             }} className="contact-title">
               <span style={{
-                background: 'linear-gradient(135deg, #000000 0%, #333333 50%, #000000 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
+                color: '#6C131F',
               }}>
                 GET IN
               </span>{' '}
@@ -504,10 +501,7 @@ export default function Contact({ scrollDirection = 'down' }) {
             position: 'relative',
           }} className="contact-subtitle">
             <span style={{
-              background: 'linear-gradient(135deg, #666666 0%, #888888 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
+              color: '#A14B58',
             }}>
               Let's collaborate and bring
             </span>{' '}

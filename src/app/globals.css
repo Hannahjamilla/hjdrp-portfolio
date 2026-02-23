@@ -3,27 +3,27 @@
 
 /* CSS Variables for Modern Design System */
 :root {
-  --primary-color: #000000;
-  --secondary-color: #ffffff;
-  --accent-color: #6366f1;
-  --accent-secondary: #8b5cf6;
-  --text-primary: #1a1a1a;
-  --text-secondary: #4b5563;
-  --text-muted: #9ca3af;
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8fafc;
-  --bg-tertiary: #f1f5f9;
-  --border-light: rgba(0, 0, 0, 0.08);
-  --border-medium: rgba(0, 0, 0, 0.12);
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-  --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-  --gradient-tertiary: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-  --gradient-quaternary: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+  --primary-color: #6C131F;
+  --secondary-color: #FFECEA;
+  --accent-color: #A14B58;
+  --accent-secondary: #6C131F;
+  --text-primary: #6C131F;
+  --text-secondary: #A14B58;
+  --text-muted: #A14B58;
+  --bg-primary: #FFECEA;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #f8f4f3;
+  --border-light: rgba(108, 19, 31, 0.15);
+  --border-medium: rgba(108, 19, 31, 0.25);
+  --shadow-sm: 0 1px 2px 0 rgba(108, 19, 31, 0.08);
+  --shadow-md: 0 4px 6px -1px rgba(108, 19, 31, 0.12);
+  --shadow-lg: 0 10px 15px -3px rgba(108, 19, 31, 0.15);
+  --shadow-xl: 0 20px 25px -5px rgba(108, 19, 31, 0.18);
+  --shadow-2xl: 0 25px 50px -12px rgba(108, 19, 31, 0.25);
+  --gradient-primary: #6C131F;
+  --gradient-secondary: #A14B58;
+  --gradient-tertiary: #FFECEA;
+  --gradient-quaternary: #6C131F;
   --border-radius-sm: 8px;
   --border-radius-md: 12px;
   --border-radius-lg: 16px;
@@ -44,16 +44,16 @@
 /* Dark mode support */
 @media (prefers-color-scheme: dark) {
   :root {
-    --primary-color: #ffffff;
-    --secondary-color: #000000;
-    --text-primary: #f9fafb;
-    --text-secondary: #d1d5db;
-    --text-muted: #6b7280;
-    --bg-primary: #111827;
-    --bg-secondary: #1f2937;
-    --bg-tertiary: #374151;
-    --border-light: rgba(255, 255, 255, 0.1);
-    --border-medium: rgba(255, 255, 255, 0.2);
+    --primary-color: #FFECEA;
+    --secondary-color: #6C131F;
+    --text-primary: #FFECEA;
+    --text-secondary: #A14B58;
+    --text-muted: #A14B58;
+    --bg-primary: #6C131F;
+    --bg-secondary: #A14B58;
+    --bg-tertiary: #8B2635;
+    --border-light: rgba(255, 236, 234, 0.15);
+    --border-medium: rgba(255, 236, 234, 0.25);
   }
 }
 
@@ -124,12 +124,12 @@ html {
 
 /* Selection Styles */
 ::selection {
-  background: rgba(99, 102, 241, 0.2);
+  background: rgba(161, 75, 88, 0.3);
   color: var(--text-primary);
 }
 
 ::-moz-selection {
-  background: rgba(99, 102, 241, 0.2);
+  background: rgba(161, 75, 88, 0.3);
   color: var(--text-primary);
 }
 

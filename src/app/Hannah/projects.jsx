@@ -53,15 +53,15 @@ export default function Projects({ scrollDirection = 'down' }) {
   }
 
   const theme = {
-    bgPrimary: '#ffffff',
-    bgSecondary: '#f8f9fa',
-    bgTertiary: '#f1f3f5',
-    textPrimary: '#000000',
-    textSecondary: '#2d3748',
-    textMuted: '#4a5568',
-    accentColor: '#000000',
-    borderLight: 'rgba(0, 0, 0, 0.1)',
-    borderMedium: 'rgba(0, 0, 0, 0.15)',
+    bgPrimary: '#FFECEA',
+    bgSecondary: '#ffffff',
+    bgTertiary: '#f8f4f3',
+    textPrimary: '#6C131F',
+    textSecondary: '#A14B58',
+    textMuted: '#A14B58',
+    accentColor: '#6C131F',
+    borderLight: 'rgba(108, 19, 31, 0.15)',
+    borderMedium: 'rgba(108, 19, 31, 0.25)',
     success: '#10b981',
     warning: '#f59e0b',
     info: '#3b82f6'
@@ -199,8 +199,8 @@ export default function Projects({ scrollDirection = 'down' }) {
         }
         
         .tech-pill:hover {
-          background: #000000 !important;
-          color: #ffffff !important;
+          background: #6C131F !important;
+          color: #FFECEA !important;
           transform: scale(1.05);
         }
         
@@ -412,10 +412,7 @@ export default function Projects({ scrollDirection = 'down' }) {
             textTransform: 'uppercase',
           }} className="force-light-text">
             <span style={{
-              background: 'linear-gradient(135deg, #000000 0%, #333333 50%, #000000 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
+              color: '#6C131F',
             }}>
               Project
             </span>{' '}
@@ -458,10 +455,7 @@ export default function Projects({ scrollDirection = 'down' }) {
             position: 'relative',
           }} className="force-light-text">
             <span style={{
-              background: 'linear-gradient(135deg, #666666 0%, #888888 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
+              color: '#A14B58',
             }}>
               Crafting digital solutions with
             </span>{' '}

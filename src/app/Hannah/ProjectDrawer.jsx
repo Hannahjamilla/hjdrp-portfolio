@@ -277,7 +277,7 @@ export default function ProjectDrawer({
             width: isMobile ? '45px' : '50px',
             height: isMobile ? '45px' : '50px',
             borderRadius: '50%',
-            background: `linear-gradient(135deg, ${theme.accentColor} 0%, #333333 100%)`,
+            background: theme.accentColor,
             color: theme.bgPrimary,
             border: 'none',
             fontSize: isMobile ? '1.5rem' : '1.8rem',
@@ -287,17 +287,17 @@ export default function ProjectDrawer({
             justifyContent: 'center',
             zIndex: 10,
             transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-            boxShadow: '0 8px 20px rgba(0, 0, 0, 0.3)',
+            boxShadow: '0 8px 20px rgba(108, 19, 31, 0.3)',
           }}
           onMouseEnter={(e) => {
             e.target.style.transform = 'scale(1.1) rotate(90deg)'
-            e.target.style.background = 'linear-gradient(135deg, #333333 0%, #000000 100%)'
-            e.target.style.boxShadow = '0 12px 30px rgba(0, 0, 0, 0.4)'
+            e.target.style.background = theme.textSecondary
+            e.target.style.boxShadow = '0 12px 30px rgba(108, 19, 31, 0.4)'
           }}
           onMouseLeave={(e) => {
             e.target.style.transform = 'scale(1) rotate(0deg)'
-            e.target.style.background = `linear-gradient(135deg, ${theme.accentColor} 0%, #333333 100%)`
-            e.target.style.boxShadow = '0 8px 20px rgba(0, 0, 0, 0.3)'
+            e.target.style.background = theme.accentColor
+            e.target.style.boxShadow = '0 8px 20px rgba(108, 19, 31, 0.3)'
           }}
         >
           ×
@@ -342,14 +342,14 @@ export default function ProjectDrawer({
             }}>
               <div style={{
                 padding: isMobile ? '10px 18px' : '14px 28px',
-                background: `linear-gradient(135deg, ${theme.accentColor} 0%, #333333 100%)`,
+                background: theme.accentColor,
                 color: theme.bgPrimary,
                 borderRadius: isMobile ? '15px' : '20px',
                 fontSize: isMobile ? '0.8rem' : '0.9rem',
                 fontWeight: '800',
                 textTransform: 'uppercase',
                 letterSpacing: '0.8px',
-                boxShadow: '0 6px 20px rgba(0, 0, 0, 0.25)',
+                boxShadow: '0 6px 20px rgba(108, 19, 31, 0.25)',
                 position: 'relative',
                 overflow: 'hidden',
               }}>
@@ -359,7 +359,7 @@ export default function ProjectDrawer({
                   left: '-100%',
                   width: '100%',
                   height: '100%',
-                  background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent)',
+                  background: 'linear-gradient(90deg, transparent, rgba(255,236,234,0.2), transparent)',
                   animation: 'shimmer 2s infinite',
                 }}></div>
                 {selectedProject.badge}
@@ -399,7 +399,7 @@ export default function ProjectDrawer({
               lineHeight: 1.1,
               background: isMobile 
                 ? 'none' 
-                : 'linear-gradient(135deg, #000000 0%, #333333 50%, #666666 100%)',
+                : '#6C131F',
               WebkitBackgroundClip: isMobile ? 'unset' : 'text',
               WebkitTextFillColor: isMobile ? theme.textPrimary : 'transparent',
               backgroundClip: isMobile ? 'unset' : 'text',
@@ -490,7 +490,7 @@ export default function ProjectDrawer({
                 <span style={{
                   width: '6px',
                   height: '20px',
-                  background: `linear-gradient(135deg, ${theme.accentColor} 0%, #333333 100%)`,
+                  background: theme.accentColor,
                   borderRadius: '3px',
                 }}></span>
                 Project Gallery
@@ -804,14 +804,14 @@ export default function ProjectDrawer({
                   }}
                   className="tech-pill force-light-bg-secondary force-light-border force-light-text"
                   onMouseEnter={(e) => {
-                    e.target.style.background = `linear-gradient(135deg, ${theme.accentColor} 0%, #333333 100%)`
-                    e.target.style.color = '#ffffff'
+                    e.target.style.background = theme.accentColor
+                    e.target.style.color = '#FFECEA'
                     e.target.style.transform = 'translateY(-4px) scale(1.03)'
-                    e.target.style.boxShadow = '0 12px 30px rgba(0, 0, 0, 0.2)'
+                    e.target.style.boxShadow = '0 12px 30px rgba(108, 19, 31, 0.2)'
                     e.target.style.borderColor = theme.accentColor
                   }}
                   onMouseLeave={(e) => {
-                    e.target.style.background = `linear-gradient(135deg, ${theme.bgSecondary} 0%, ${theme.bgTertiary || theme.bgSecondary} 100%)`
+                    e.target.style.background = `${theme.bgSecondary}`
                     e.target.style.color = theme.textPrimary
                     e.target.style.transform = 'translateY(0) scale(1)'
                     e.target.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.08)'

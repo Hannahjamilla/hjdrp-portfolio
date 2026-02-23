@@ -65,11 +65,11 @@ export default function Work() {
   ]
 
   const theme = {
-    primary: '#000000',
-    secondary: '#6c757d',
-    light: '#f8f9fa',
-    border: 'rgba(0,0,0,0.08)',
-    accent: '#111111'
+    primary: '#6C131F',
+    secondary: '#A14B58',
+    light: '#FFECEA',
+    border: 'rgba(108, 19, 31, 0.15)',
+    accent: '#A14B58'
   }
 
   return (
@@ -112,10 +112,7 @@ export default function Work() {
           textTransform: 'uppercase',
         }}>
           <span style={{
-            background: 'linear-gradient(135deg, #000000 0%, #333333 50%, #000000 100%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
+            color: '#6C131F',
           }}>
             Work
           </span>{' '}
@@ -131,7 +128,7 @@ export default function Work() {
               left: '0',
               width: '100%',
               height: getResponsiveValue('6px', '4px', '3px'),
-              background: 'linear-gradient(90deg, transparent, #000000, transparent)',
+              background: `linear-gradient(90deg, transparent, ${theme.primary}, transparent)`,
               borderRadius: '3px',
             }}></span>
           </span>
@@ -235,7 +232,7 @@ export default function Work() {
               fontSize: getResponsiveValue('1.6rem', '1.4rem', '1.2rem'),
               fontWeight: '900',
               marginBottom: getResponsiveValue('8px', '6px', '5px'),
-              background: 'linear-gradient(135deg, #000000 0%, #333333 100%)',
+              background: `${theme.primary}`,
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
