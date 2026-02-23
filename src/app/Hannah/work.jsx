@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import GlobalNavigation from '../components/GlobalNavigation'
 import { useResponsive } from '../hooks/useResponsive'
 
 export default function Work() {
@@ -73,7 +74,9 @@ export default function Work() {
   }
 
   return (
-    <section
+    <div>
+      <GlobalNavigation />
+      <section
       id="work"
       style={{
         minHeight: '100vh',
@@ -335,5 +338,6 @@ export default function Work() {
       </div>
 
     </section>
+    </div>
   )
 }

@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import GlobalNavigation from '../components/GlobalNavigation'
 import ProjectDrawer from './ProjectDrawer'
 
 export default function Projects({ scrollDirection = 'down' }) {
@@ -159,13 +160,13 @@ export default function Projects({ scrollDirection = 'down' }) {
       const style = document.createElement('style');
       style.textContent = `
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
-        
+
         .project-card {
           transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
           cursor: pointer;
           position: relative;
         }
-        
+
         .project-card::before {
           content: '';
           position: absolute;
@@ -180,43 +181,43 @@ export default function Projects({ scrollDirection = 'down' }) {
           z-index: 1;
           pointer-events: none;
         }
-        
+
         .project-card:hover::before {
           opacity: 1;
         }
-        
+
         .project-card:hover {
           transform: translateY(-15px) scale(1.03) rotate(1deg);
           box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.35);
         }
-        
+
         .project-card:active {
           transform: translateY(-10px) scale(1.02) rotate(0.5deg);
         }
-        
+
         .project-card:hover .card-image {
           transform: scale(1.15);
         }
-        
+
         .tech-pill:hover {
           background: #6C131F !important;
           color: #FFECEA !important;
           transform: scale(1.05);
         }
-        
+
         .modal-overlay {
           animation: fadeIn 0.3s ease;
         }
-        
+
         @keyframes fadeIn {
           from { opacity: 0; }
           to { opacity: 1; }
         }
-        
+
         .modal-content {
           animation: slideUp 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
-        
+
         @keyframes slideUp {
           from { 
             opacity: 0;
@@ -227,11 +228,11 @@ export default function Projects({ scrollDirection = 'down' }) {
             transform: translateY(0);
           }
         }
-        
+
         .thumbnail-image {
           transition: all 0.3s ease;
         }
-        
+
         .thumbnail-image:hover {
           transform: scale(1.1);
         }
@@ -241,7 +242,7 @@ export default function Projects({ scrollDirection = 'down' }) {
           33% { transform: translateY(-15px) rotate(120deg); }
           66% { transform: translateY(8px) rotate(240deg); }
         }
-        
+
         .floating-shape {
           animation: float 25s ease-in-out infinite;
         }
@@ -252,7 +253,7 @@ export default function Projects({ scrollDirection = 'down' }) {
             grid-template-columns: repeat(2, 1fr) !important;
           }
         }
-        
+
         @media (max-width: 768px) {
           .project-grid {
             grid-template-columns: 1fr !important;
@@ -263,70 +264,70 @@ export default function Projects({ scrollDirection = 'down' }) {
             border-radius: 16px !important;
           }
         }
-        
+
         @media (max-width: 480px) {
           .modal-overlay {
             padding: 15px !important;
           }
         }
-        
+
         /* Prevent body scroll when modal is open */
         body.modal-open {
           overflow: hidden !important;
           position: fixed !important;
           width: 100% !important;
         }
-        
+
         /* Equal height cards */
         .project-card {
           display: flex !important;
           flex-direction: column !important;
           height: 100% !important;
         }
-        
+
         .card-content {
           display: flex !important;
           flex-direction: column !important;
           flex: 1 !important;
         }
-        
+
         .card-description {
           flex: 1 !important;
         }
-        
+
         /* Side drawer scrollbar */
         .side-drawer-scroll::-webkit-scrollbar {
           width: 8px;
         }
-        
+
         .side-drawer-scroll::-webkit-scrollbar-track {
           background: #f1f1f1;
         }
-        
+
         .side-drawer-scroll::-webkit-scrollbar-thumb {
           background: #888;
           border-radius: 4px;
         }
-        
+
         .side-drawer-scroll::-webkit-scrollbar-thumb:hover {
           background: #555;
         }
-        
+
         /* Thumbnail gallery scrollbar */
         .thumbnail-gallery-scroll::-webkit-scrollbar {
           height: 6px;
         }
-        
+
         .thumbnail-gallery-scroll::-webkit-scrollbar-track {
           background: #f1f1f1;
           border-radius: 3px;
         }
-        
+
         .thumbnail-gallery-scroll::-webkit-scrollbar-thumb {
           background: #000000;
           border-radius: 3px;
         }
-        
+
         .thumbnail-gallery-scroll::-webkit-scrollbar-thumb:hover {
           background: #333;
         }
@@ -349,331 +350,344 @@ export default function Projects({ scrollDirection = 'down' }) {
   const currentAcademicProject = getCurrentAcademicProject()
 
   return (
-    <div style={{
-      minHeight: '100vh',
-      background: theme.bgPrimary,
-      padding: getResponsiveValue('100px 60px', '80px 40px', '60px 25px'),
-      fontFamily: "'Inter', 'SF Pro Display', -apple-system, sans-serif",
-      opacity: isVisible ? 1 : 0,
-      transform: isVisible ? 'translateY(0)' : (scrollDirection === 'down' ? 'translateY(50px)' : 'translateY(-50px)'),
-      transition: 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-      position: 'relative',
-      overflow: 'hidden',
-    }} id="projects" className="force-light">
-      
-      {/* Background Graphics */}
+    <div>
+      <GlobalNavigation />
       <div style={{
-        position: 'absolute',
-        top: '10%',
-        left: '5%',
-        width: getResponsiveValue(120, 80, 50),
-        height: getResponsiveValue(120, 80, 50),
-        border: `3px solid ${theme.accentColor}`,
-        opacity: 0.06,
-        borderRadius: '30% 70% 70% 30% / 30% 30% 70% 70%',
-      }} className="floating-shape"></div>
-      
-      <div style={{
-        position: 'absolute',
-        bottom: '15%',
-        right: '8%',
-        width: getResponsiveValue(150, 100, 70),
-        height: getResponsiveValue(150, 100, 70),
-        border: `2px solid ${theme.accentColor}`,
-        opacity: 0.05,
-        borderRadius: '70% 30% 30% 70% / 70% 70% 30% 30%',
-        transform: 'rotate(45deg)',
-      }} className="floating-shape"></div>
-
-      <div style={{
-        maxWidth: '1600px',
-        margin: '0 auto',
+        minHeight: '100vh',
+        background: theme.bgPrimary,
+        padding: getResponsiveValue('100px 60px', '80px 40px', '60px 25px'),
+        fontFamily: "'Inter', 'SF Pro Display', -apple-system, sans-serif",
+        opacity: isVisible ? 1 : 0,
+        transform: isVisible ? 'translateY(0)' : (scrollDirection === 'down' ? 'translateY(50px)' : 'translateY(-50px)'),
+        transition: 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
         position: 'relative',
-        zIndex: 2,
-      }}>
-        {/* Enhanced Header */}
+        overflow: 'hidden',
+      }} id="projects" className="force-light">
+        
+        {/* Background Graphics */}
         <div style={{
-          textAlign: 'center',
-          marginBottom: getResponsiveValue(80, 60, 40),
-          opacity: isVisible ? 1 : 0,
-          transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
-          transition: 'all 0.8s ease 0.2s',
+          position: 'absolute',
+          top: '10%',
+          left: '5%',
+          width: getResponsiveValue(120, 80, 50),
+          height: getResponsiveValue(120, 80, 50),
+          border: `3px solid ${theme.accentColor}`,
+          opacity: 0.06,
+          borderRadius: '30% 70% 70% 30% / 30% 30% 70% 70%',
+        }} className="floating-shape"></div>
+        
+        <div style={{
+          position: 'absolute',
+          bottom: '15%',
+          right: '8%',
+          width: getResponsiveValue(150, 100, 70),
+          height: getResponsiveValue(150, 100, 70),
+          border: `2px solid ${theme.accentColor}`,
+          opacity: 0.05,
+          borderRadius: '70% 30% 30% 70% / 70% 70% 30% 30%',
+          transform: 'rotate(45deg)',
+        }} className="floating-shape"></div>
+
+        <div style={{
+          maxWidth: '1600px',
+          margin: '0 auto',
+          position: 'relative',
+          zIndex: 2,
         }}>
-
-          
-          <h1 style={{
-            fontSize: getResponsiveValue('5rem', '4rem', '3.2rem'),
-            fontWeight: '900',
-            marginBottom: getResponsiveValue(25, 22, 20),
-            color: theme.textPrimary,
-            letterSpacing: '-0.04em',
-            textShadow: '0 2px 4px rgba(0,0,0,0.05)',
-            lineHeight: 0.9,
-            textTransform: 'uppercase',
-          }} className="force-light-text">
-            <span style={{
-              color: '#6C131F',
-            }}>
-              Project
-            </span>{' '}
-            <span style={{
-              color: theme.accentColor,
-              position: 'relative',
-              display: 'inline-block',
-            }}>
-              Portfolio
+          {/* Enhanced Header */}
+          <div style={{
+            textAlign: 'center',
+            marginBottom: getResponsiveValue(80, 60, 40),
+            opacity: isVisible ? 1 : 0,
+            transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
+            transition: 'all 0.8s ease 0.2s',
+          }}>
+            <h1 style={{
+              fontSize: getResponsiveValue('5rem', '4rem', '3.2rem'),
+              fontWeight: '900',
+              marginBottom: getResponsiveValue(25, 22, 20),
+              color: theme.textPrimary,
+              letterSpacing: '-0.04em',
+              textShadow: '0 2px 4px rgba(0,0,0,0.05)',
+              lineHeight: 0.9,
+              textTransform: 'uppercase',
+            }} className="force-light-text">
               <span style={{
-                position: 'absolute',
-                bottom: '-8px',
-                left: '0',
-                width: '100%',
-                height: '6px',
-                backgroundColor: theme.accentColor,
-                opacity: 0.2,
-                borderRadius: '3px',
-              }}></span>
+                color: '#6C131F',
+              }}>
+                Project
+              </span>{' '}
               <span style={{
-                position: 'absolute',
-                bottom: '-12px',
-                left: '10%',
-                width: '80%',
-                height: '3px',
-                backgroundColor: theme.accentColor,
-                opacity: 0.4,
-                borderRadius: '2px',
-              }}></span>
-            </span>
-          </h1>
-          <p style={{
-            fontSize: getResponsiveValue('1.5rem', '1.3rem', '1.15rem'),
-            color: theme.textMuted,
-            fontWeight: '400',
-            maxWidth: '700px',
-            margin: '0 auto',
-            lineHeight: 1.7,
-            opacity: 0.9,
-            position: 'relative',
-          }} className="force-light-text">
-            <span style={{
-              color: '#A14B58',
-            }}>
-              Crafting digital solutions with
-            </span>{' '}
-            <span style={{ 
-              color: theme.textSecondary, 
-              fontWeight: '600',
-            }}>
-              innovation and precision
-            </span>
-          </p>
-        </div>
-
-        {/* Project Cards Grid */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: getResponsiveValue('repeat(3, 1fr)', 'repeat(2, 1fr)', '1fr'),
-          gap: getResponsiveValue(40, 30, 25),
-          marginBottom: getResponsiveValue(60, 50, 40),
-          alignItems: 'stretch',
-        }} className="project-grid">
-          {projects.map((project, index) => (
-            <div
-              key={project.id}
-              style={{
-                background: theme.bgPrimary,
-                border: `2px solid ${theme.borderLight}`,
-                borderRadius: '24px',
-                overflow: 'hidden',
+                color: theme.accentColor,
                 position: 'relative',
-                boxShadow: '0 10px 30px -5px rgba(0, 0, 0, 0.1)',
-                opacity: isVisible ? 1 : 0,
-                transform: isVisible ? 'translateY(0)' : 'translateY(40px)',
-                transitionDelay: `${0.3 + index * 0.1}s`,
-                display: 'flex',
-                flexDirection: 'column',
-                cursor: 'pointer',
-                userSelect: 'none',
-              }}
-              className="project-card force-light force-light-border"
-              onClick={(e) => {
-                e.preventDefault()
-                e.stopPropagation()
-                console.log('Card clicked:', project.title)
-                openProject(project)
-              }}
-              onMouseEnter={() => setHoveredCard(index)}
-              onMouseLeave={() => setHoveredCard(null)}
-            >
-              {/* Project Image */}
-              <div style={{
-                width: '100%',
-                height: getResponsiveValue(280, 240, 200),
-                overflow: 'hidden',
-                position: 'relative',
-                background: theme.bgSecondary,
-                flexShrink: 0,
-              }} className="force-light-bg-secondary">
-                <img 
-                  src={project.images[0]} 
-                  alt={project.title}
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover',
-                    transition: 'transform 0.5s ease',
-                  }}
-                  className="card-image"
-                />
-                {/* Overlay on hover */}
-                <div style={{
+                display: 'inline-block',
+              }}>
+                Portfolio
+                <span style={{
                   position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
-                  background: 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%)',
-                  opacity: hoveredCard === index ? 1 : 0,
-                  transition: 'opacity 0.3s ease',
+                  bottom: '-8px',
+                  left: '0',
+                  width: '100%',
+                  height: '6px',
+                  backgroundColor: theme.accentColor,
+                  opacity: 0.2,
+                  borderRadius: '3px',
+                }}></span>
+                <span style={{
+                  position: 'absolute',
+                  bottom: '-12px',
+                  left: '10%',
+                  width: '80%',
+                  height: '3px',
+                  backgroundColor: theme.accentColor,
+                  opacity: 0.4,
+                  borderRadius: '2px',
+                }}></span>
+              </span>
+            </h1>
+            <p style={{
+              fontSize: getResponsiveValue('1.5rem', '1.3rem', '1.15rem'),
+              color: theme.textMuted,
+              fontWeight: '400',
+              maxWidth: '700px',
+              margin: '0 auto',
+              lineHeight: 1.7,
+              opacity: 0.9,
+              position: 'relative',
+            }} className="force-light-text">
+              <span style={{
+                color: '#A14B58',
+              }}>
+                Crafting digital solutions with
+              </span>{' '}
+              <span style={{ 
+                color: theme.textSecondary, 
+                fontWeight: '600',
+              }}>
+                innovation and precision
+              </span>
+            </p>
+          </div>
+
+          {/* Project Cards Grid */}
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: getResponsiveValue('repeat(3, 1fr)', 'repeat(2, 1fr)', '1fr'),
+            gap: getResponsiveValue(40, 30, 25),
+            marginBottom: getResponsiveValue(60, 50, 40),
+            alignItems: 'stretch',
+          }} className="project-grid">
+            {projects.map((project, index) => (
+              <div
+                key={project.id}
+                style={{
+                  background: theme.bgPrimary,
+                  border: `2px solid ${theme.borderLight}`,
+                  borderRadius: '24px',
+                  overflow: 'hidden',
+                  position: 'relative',
+                  boxShadow: '0 10px 30px -5px rgba(0, 0, 0, 0.1)',
+                  opacity: isVisible ? 1 : 0,
+                  transform: isVisible ? 'translateY(0)' : 'translateY(40px)',
+                  transitionDelay: `${0.3 + index * 0.1}s`,
                   display: 'flex',
-                  alignItems: 'flex-end',
-                  padding: '20px',
-                }}>
+                  flexDirection: 'column',
+                  cursor: 'pointer',
+                  userSelect: 'none',
+                }}
+                className="project-card force-light force-light-border"
+                onClick={(e) => {
+                  e.preventDefault()
+                  e.stopPropagation()
+                  console.log('Card clicked:', project.title)
+                  openProject(project)
+                }}
+                onMouseEnter={() => setHoveredCard(index)}
+                onMouseLeave={() => setHoveredCard(null)}
+              >
+                {/* Project Image */}
+                <div style={{
+                  width: '100%',
+                  height: getResponsiveValue(280, 240, 200),
+                  overflow: 'hidden',
+                  position: 'relative',
+                  background: theme.bgSecondary,
+                  flexShrink: 0,
+                }} className="force-light-bg-secondary">
+                  <img 
+                    src={project.images[0]} 
+                    alt={project.title}
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      transition: 'transform 0.5s ease',
+                    }}
+                    className="card-image"
+                  />
+                  
+                  {/* Overlay on hover */}
                   <div style={{
-                    color: '#ffffff',
-                    fontSize: getResponsiveValue('1rem', '0.95rem', '0.9rem'),
-                    fontWeight: '600',
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    background: 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%)',
+                    opacity: hoveredCard === index ? 1 : 0,
+                    transition: 'opacity 0.3s ease',
+                    display: 'flex',
+                    alignItems: 'flex-end',
+                    padding: '20px',
                   }}>
-                    Click to view details →
+                    <div style={{
+                      color: '#ffffff',
+                      fontSize: getResponsiveValue('1rem', '0.95rem', '0.9rem'),
+                      fontWeight: '600',
+                    }}>
+                      Click to view details →
+                    </div>
+                  </div>
+
+                  {/* Badge */}
+                  <div style={{
+                    position: 'absolute',
+                    top: '15px',
+                    right: '15px',
+                    background: theme.accentColor,
+                    color: theme.bgPrimary,
+                    padding: getResponsiveValue('8px 16px', '7px 14px', '6px 12px'),
+                    borderRadius: '20px',
+                    fontSize: getResponsiveValue('0.85rem', '0.8rem', '0.75rem'),
+                    fontWeight: '800',
+                    letterSpacing: '0.5px',
+                    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
+                  }}>
+                    {project.badge}
                   </div>
                 </div>
-                {/* Badge */}
-                <div style={{
-                  position: 'absolute',
-                  top: '15px',
-                  right: '15px',
-                  background: theme.accentColor,
-                  color: theme.bgPrimary,
-                  padding: getResponsiveValue('8px 16px', '7px 14px', '6px 12px'),
-                  borderRadius: '20px',
-                  fontSize: getResponsiveValue('0.85rem', '0.8rem', '0.75rem'),
-                  fontWeight: '800',
-                  letterSpacing: '0.5px',
-                  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
-                }}>
-                  {project.badge}
-                </div>
-              </div>
 
-              {/* Project Info */}
-              <div style={{
-                padding: getResponsiveValue('25px', '22px', '20px'),
-                display: 'flex',
-                flexDirection: 'column',
-                flex: 1,
-              }} className="card-content">
-                <h3 style={{
-                  fontSize: getResponsiveValue('1.5rem', '1.3rem', '1.2rem'),
-                  fontWeight: '800',
-                  color: theme.textPrimary,
-                  marginBottom: '10px',
-                  lineHeight: 1.2,
-                }} className="force-light-text">{project.title}</h3>
-                
-                {project.subtitle && (
-                  <p style={{
-                    fontSize: getResponsiveValue('1rem', '0.95rem', '0.9rem'),
-                    color: theme.textMuted,
-                    marginBottom: '12px',
-                    fontWeight: '500',
-                  }} className="force-light-text">{project.subtitle}</p>
-                )}
-                
-                <p style={{
-                  fontSize: getResponsiveValue('0.95rem', '0.9rem', '0.85rem'),
-                  color: theme.textSecondary,
-                  lineHeight: 1.6,
-                  marginBottom: '15px',
-                  display: '-webkit-box',
-                  WebkitLineClamp: 3,
-                  WebkitBoxOrient: 'vertical',
-                  overflow: 'hidden',
-                  flex: 1,
-                }} className="force-light-text card-description">{project.description}</p>
-
-                {/* Tech Tags */}
+                {/* Project Info */}
                 <div style={{
+                  padding: getResponsiveValue('25px', '22px', '20px'),
                   display: 'flex',
-                  flexWrap: 'wrap',
-                  gap: '8px',
-                  marginBottom: '15px',
-                }}>
-                  {project.tech.slice(0, 3).map((tech, idx) => (
-                    <div
-                      key={idx}
-                      style={{
+                  flexDirection: 'column',
+                  flex: 1,
+                }} className="card-content">
+                  <h3 style={{
+                    fontSize: getResponsiveValue('1.5rem', '1.3rem', '1.2rem'),
+                    fontWeight: '800',
+                    color: theme.textPrimary,
+                    marginBottom: '10px',
+                    lineHeight: 1.2,
+                  }} className="force-light-text">
+                    {project.title}
+                  </h3>
+                  
+                  {project.subtitle && (
+                    <p style={{
+                      fontSize: getResponsiveValue('1rem', '0.95rem', '0.9rem'),
+                      color: theme.textMuted,
+                      marginBottom: '12px',
+                      fontWeight: '500',
+                    }} className="force-light-text">
+                      {project.subtitle}
+                    </p>
+                  )}
+
+                  <p style={{
+                    fontSize: getResponsiveValue('0.95rem', '0.9rem', '0.85rem'),
+                    color: theme.textSecondary,
+                    lineHeight: 1.6,
+                    marginBottom: '15px',
+                    display: '-webkit-box',
+                    WebkitLineClamp: 3,
+                    WebkitBoxOrient: 'vertical',
+                    overflow: 'hidden',
+                    flex: 1,
+                  }} className="force-light-text card-description">
+                    {project.description}
+                  </p>
+
+                  {/* Tech Tags */}
+                  <div style={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    gap: '8px',
+                    marginBottom: '15px',
+                  }}>
+                    {project.tech.slice(0, 3).map((tech, idx) => (
+                      <div
+                        key={idx}
+                        style={{
+                          padding: '6px 12px',
+                          background: theme.bgSecondary,
+                          border: `1px solid ${theme.borderLight}`,
+                          borderRadius: '12px',
+                          fontSize: getResponsiveValue('0.8rem', '0.75rem', '0.7rem'),
+                          fontWeight: '600',
+                          color: theme.textPrimary,
+                        }}
+                        className="force-light-bg-secondary force-light-border force-light-text"
+                      >
+                        {tech}
+                      </div>
+                    ))}
+                    {project.tech.length > 3 && (
+                      <div style={{
                         padding: '6px 12px',
-                        background: theme.bgSecondary,
-                        border: `1px solid ${theme.borderLight}`,
+                        background: `${theme.accentColor}10`,
+                        border: `1px solid ${theme.accentColor}30`,
                         borderRadius: '12px',
                         fontSize: getResponsiveValue('0.8rem', '0.75rem', '0.7rem'),
-                        fontWeight: '600',
-                        color: theme.textPrimary,
-                      }}
-                      className="force-light-bg-secondary force-light-border force-light-text"
-                    >
-                      {tech}
-                    </div>
-                  ))}
-                  {project.tech.length > 3 && (
-                    <div style={{
-                      padding: '6px 12px',
-                      background: `${theme.accentColor}10`,
-                      border: `1px solid ${theme.accentColor}30`,
-                      borderRadius: '12px',
-                      fontSize: getResponsiveValue('0.8rem', '0.75rem', '0.7rem'),
-                      fontWeight: '700',
-                      color: theme.accentColor,
-                    }}>
-                      +{project.tech.length - 3} more
-                    </div>
-                  )}
-                </div>
+                        fontWeight: '700',
+                        color: theme.accentColor,
+                      }}>
+                        +{project.tech.length - 3} more
+                      </div>
+                    )}
+                  </div>
 
-                {/* Footer */}
-                <div style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  paddingTop: '15px',
-                  borderTop: `1px solid ${theme.borderLight}`,
-                }} className="force-light-border">
+                  {/* Footer */}
                   <div style={{
-                    fontSize: getResponsiveValue('0.85rem', '0.8rem', '0.75rem'),
-                    color: theme.textMuted,
-                    fontWeight: '600',
-                  }} className="force-light-text">{project.year}</div>
-                  <div style={{
-                    fontSize: getResponsiveValue('0.85rem', '0.8rem', '0.75rem'),
-                    color: theme.accentColor,
-                    fontWeight: '700',
-                  }}>View Project →</div>
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    paddingTop: '15px',
+                    borderTop: `1px solid ${theme.borderLight}`,
+                  }} className="force-light-border">
+                    <div style={{
+                      fontSize: getResponsiveValue('0.85rem', '0.8rem', '0.75rem'),
+                      color: theme.textMuted,
+                      fontWeight: '600',
+                    }} className="force-light-text">
+                      {project.year}
+                    </div>
+                    <div style={{
+                      fontSize: getResponsiveValue('0.85rem', '0.8rem', '0.75rem'),
+                      color: theme.accentColor,
+                      fontWeight: '700',
+                    }}>
+                      View Project →
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
 
-      {/* Side Panel Drawer */}
-      <ProjectDrawer
-        selectedProject={selectedProject}
-        selectedImageIndex={selectedImageIndex}
-        onClose={closeProject}
-        onSelectImage={selectImage}
-        theme={theme}
-        getResponsiveValue={getResponsiveValue}
-        academicProjects={academicProjects}
-      />
+        {/* Side Panel Drawer */}
+        <ProjectDrawer
+          selectedProject={selectedProject}
+          selectedImageIndex={selectedImageIndex}
+          onClose={closeProject}
+          onSelectImage={selectImage}
+          theme={theme}
+          getResponsiveValue={getResponsiveValue}
+          academicProjects={academicProjects}
+        />
+      </div>
     </div>
   )
 }

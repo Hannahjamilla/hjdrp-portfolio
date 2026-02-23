@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState, useRef } from 'react'
+import GlobalNavigation from '../components/GlobalNavigation'
 
 export default function AboutMe({ scrollDirection = 'down' }) {
   const [mounted, setMounted] = useState(false)
@@ -60,9 +61,31 @@ export default function AboutMe({ scrollDirection = 'down' }) {
           33% { transform: translateY(-10px) rotate(120deg); }
           66% { transform: translateY(5px) rotate(240deg); }
         }
+
+        @keyframes bounce {
+          0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+          40% { transform: translateY(-10px); }
+          60% { transform: translateY(-5px); }
+        }
         
         .floating-shape {
           animation: float 15s ease-in-out infinite;
+        }
+
+        .hexagon-bounce {
+          animation: bounce 2s ease-in-out infinite;
+        }
+
+        .hexagon-bounce:nth-child(1) {
+          animation-delay: 0s;
+        }
+
+        .hexagon-bounce:nth-child(2) {
+          animation-delay: 0.3s;
+        }
+
+        .hexagon-bounce:nth-child(3) {
+          animation-delay: 0.6s;
         }
         
         .skill-tag:hover {
@@ -295,495 +318,499 @@ export default function AboutMe({ scrollDirection = 'down' }) {
   const philosophy = [
     {
       title: 'Continuous Learning',
-      description: 'Always eager to learn new programming languages and adapt to emerging technologies to stay at the forefront of web development.'
+      description: 'Always learning new technologies to stay current in web development.'
     },
     {
       title: 'User-Centered Design',
-      description: 'Believe in creating practical digital solutions that prioritize user experience, accessibility, and community connection.'
+      description: 'Creating solutions that prioritize user experience and accessibility.'
     },
     {
       title: 'Problem Solving',
-      description: 'Passionate about building applications that solve real-world problems and improve efficiency in everyday tasks.'
+      description: 'Building applications that solve real-world problems efficiently.'
     },
     {
-      title: 'Approachable & Collaborative',
-      description: 'Friendly and easy to work with, I value teamwork and believe that the best solutions come from collaborative efforts and open communication.'
+      title: 'Quality & Innovation',
+      description: 'Writing clean code while exploring creative solutions.'
     }
   ]
 
   const hexagons = [
-    { number: '3+', label: 'Years' },
     { number: '5+', label: 'Projects' },
-    { number: '100%', label: 'Passion' },
-    { number: '∞', label: 'Ideas' },
     { number: '10+', label: 'Skills' },
     { number: '3', label: 'Certifications' }
   ]
 
   return (
-    <div style={{
-      minHeight: '100vh',
-      background: theme.bgPrimary,
-      padding: getResponsiveValue('80px 40px', '60px 30px', '40px 20px'),
-      fontFamily: "'Poppins', sans-serif",
-      position: 'relative',
-      overflow: 'hidden',
-      opacity: isVisible ? 1 : 0,
-      transform: isVisible ? 'translateY(0)' : (scrollDirection === 'down' ? 'translateY(50px)' : 'translateY(-50px)'),
-      transition: 'all 0.8s ease',
-    }} id="about" ref={sectionRef}>
-      
+    <div>
+      <GlobalNavigation />
       <div style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        background: `
-          linear-gradient(45deg, transparent 49%, ${theme.borderColor} 49%, ${theme.borderColor} 51%, transparent 51%),
-          linear-gradient(-45deg, transparent 49%, ${theme.borderColor} 49%, ${theme.borderColor} 51%, transparent 51%)
-        `,
-        backgroundSize: getResponsiveValue('60px 60px', '50px 50px', '40px 40px'),
-        opacity: 0.03,
-      }}></div>
-      
-      {/* Floating shapes */}
-      <div style={{
-        position: 'absolute',
-        width: getResponsiveValue(100, 80, 60),
-        height: getResponsiveValue(100, 80, 60),
-        border: `2px solid ${theme.borderColor}`,
-        opacity: 0.1,
-        top: '10%',
-        left: '5%',
-        borderRadius: '50%'
-      }} className="floating-shape"></div>
-      
-      <div style={{
-        position: 'absolute',
-        width: getResponsiveValue(100, 80, 60),
-        height: getResponsiveValue(100, 80, 60),
-        border: `2px solid ${theme.borderColor}`,
-        opacity: 0.1,
-        top: '20%',
-        right: '8%',
-        borderRadius: '0px',
-        transform: 'rotate(45deg)'
-      }} className="floating-shape"></div>
-      
-      <div style={{
-        position: 'absolute',
-        width: getResponsiveValue(100, 80, 60),
-        height: getResponsiveValue(100, 80, 60),
-        border: `2px solid ${theme.borderColor}`,
-        opacity: 0.1,
-        bottom: '15%',
-        left: '8%',
-        borderRadius: '20px'
-      }} className="floating-shape"></div>
-      
-      <div style={{
-        maxWidth: '1400px',
-        margin: '0 auto',
+        minHeight: '100vh',
+        background: theme.bgPrimary,
+        padding: getResponsiveValue('80px 40px', '60px 30px', '40px 20px'),
+        fontFamily: "'Poppins', sans-serif",
         position: 'relative',
-        zIndex: 2,
-      }}>
+        overflow: 'hidden',
+        opacity: isVisible ? 1 : 0,
+        transform: isVisible ? 'translateY(0)' : (scrollDirection === 'down' ? 'translateY(50px)' : 'translateY(-50px)'),
+        transition: 'all 0.8s ease',
+      }} id="about" ref={sectionRef}>
+        
         <div style={{
-          textAlign: 'center',
-          marginBottom: getResponsiveValue(80, 60, 40),
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: `
+            linear-gradient(45deg, transparent 49%, ${theme.borderColor} 49%, ${theme.borderColor} 51%, transparent 51%),
+            linear-gradient(-45deg, transparent 49%, ${theme.borderColor} 49%, ${theme.borderColor} 51%, transparent 51%)
+          `,
+          backgroundSize: getResponsiveValue('60px 60px', '50px 50px', '40px 40px'),
+          opacity: 0.03,
+        }}></div>
+        
+        {/* Floating shapes */}
+        <div style={{
+          position: 'absolute',
+          width: getResponsiveValue(100, 80, 60),
+          height: getResponsiveValue(100, 80, 60),
+          border: `2px solid ${theme.borderColor}`,
+          opacity: 0.1,
+          top: '10%',
+          left: '5%',
+          borderRadius: '50%'
+        }} className="floating-shape"></div>
+        
+        <div style={{
+          position: 'absolute',
+          width: getResponsiveValue(100, 80, 60),
+          height: getResponsiveValue(100, 80, 60),
+          border: `2px solid ${theme.borderColor}`,
+          opacity: 0.1,
+          top: '20%',
+          right: '8%',
+          borderRadius: '0px',
+          transform: 'rotate(45deg)'
+        }} className="floating-shape"></div>
+        
+        <div style={{
+          position: 'absolute',
+          width: getResponsiveValue(100, 80, 60),
+          height: getResponsiveValue(100, 80, 60),
+          border: `2px solid ${theme.borderColor}`,
+          opacity: 0.1,
+          bottom: '15%',
+          left: '8%',
+          borderRadius: '20px'
+        }} className="floating-shape"></div>
+        
+        <div style={{
+          maxWidth: '1400px',
+          margin: '0 auto',
+          position: 'relative',
+          zIndex: 2,
         }}>
           <div style={{
-            display: 'inline-block',
-            position: 'relative',
+            textAlign: 'center',
+            marginBottom: getResponsiveValue(80, 60, 40),
           }}>
-            <h1 style={{
-              fontSize: getResponsiveValue('5.5rem', '4rem', '2.8rem'),
-              fontWeight: '900',
-              color: theme.textPrimary,
-              margin: 0,
-              lineHeight: 0.9,
-              letterSpacing: '-0.04em',
-              position: 'relative',
-              zIndex: 2,
-              textTransform: 'uppercase',
-            }} className="title">
-              <span style={{
-                color: '#6C131F',
-                position: 'relative',
-              }}>
-                ABOUT
-              </span>{' '}
-              <span style={{
-                color: theme.accent,
-                position: 'relative',
-                display: 'inline-block',
-              }}>
-                ME
-                <span style={{
-                  position: 'absolute',
-                  bottom: '-12px',
-                  left: '0',
-                  width: '100%',
-                  height: '6px',
-                  background: 'linear-gradient(90deg, transparent, #000000, transparent)',
-                  borderRadius: '3px',
-                }}></span>
-              </span>
-            </h1>
-          </div>
-          <p style={{
-            fontSize: getResponsiveValue('1.4rem', '1.3rem', '1.15rem'),
-            color: theme.textMuted,
-            fontWeight: '400',
-            marginTop: getResponsiveValue(25, 22, 20),
-            maxWidth: '600px',
-            margin: `${getResponsiveValue(25, 22, 20)}px auto 0`,
-            lineHeight: 1.7,
-            position: 'relative',
-          }} className="subtitle">
-            <span style={{
-              color: '#A14B58',
-            }}>
-              Building digital experiences that blend
-            </span>{' '}
-            <span style={{ 
-              color: theme.textSecondary, 
-              fontWeight: '600',
-            }}>
-              creativity with technical excellence
-            </span>
-          </p>
-        </div>
-
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: getResponsiveValue('1fr 2fr', '1fr', '1fr'),
-          gap: getResponsiveValue(60, 40, 30),
-          alignItems: 'start',
-        }} className="main-layout">
-          
-          {/* Left Profile Section */}
-          <div style={{
-            position: 'relative',
-          }} className="profile-section">
             <div style={{
-              background: `linear-gradient(135deg, ${theme.bgPrimary} 0%, ${theme.bgSecondary} 100%)`,
-              border: `3px solid ${theme.accent}`,
-              borderRadius: '20px',
-              padding: getResponsiveValue('45px 35px', '40px 30px', '35px 25px'),
+              display: 'inline-block',
               position: 'relative',
-              boxShadow: '25px 25px 0px 0px rgba(0,0,0,1)',
-              transform: 'rotate(-2deg)',
-              overflow: 'hidden',
-            }} className="profile-card">
-
-              {/* Decorative corner elements */}
-              <div style={{
-                position: 'absolute',
-                top: '15px',
-                right: '15px',
-                width: '30px',
-                height: '30px',
-                border: `2px solid ${theme.accent}`,
-                borderRadius: '50%',
-                opacity: 0.3,
-              }}></div>
-              <div style={{
-                position: 'absolute',
-                bottom: '15px',
-                left: '15px',
-                width: '20px',
-                height: '20px',
-                background: theme.accent,
-                borderRadius: '3px',
-                opacity: 0.2,
-                transform: 'rotate(45deg)',
-              }}></div>
-
-              <h3 style={{
-                fontSize: getResponsiveValue('2rem', '1.8rem', '1.6rem'),
+            }}>
+              <h1 style={{
+                fontSize: getResponsiveValue('5.5rem', '4rem', '2.8rem'),
                 fontWeight: '900',
                 color: theme.textPrimary,
-                marginBottom: '20px',
-                textTransform: 'uppercase',
-                letterSpacing: '0.1em',
-                textAlign: 'center',
+                margin: 0,
+                lineHeight: 0.9,
+                letterSpacing: '-0.04em',
                 position: 'relative',
-              }}>
+                zIndex: 2,
+                textTransform: 'uppercase',
+              }} className="title">
                 <span style={{
                   color: '#6C131F',
+                  position: 'relative',
                 }}>
-                  Web Developer
-                </span>
-              </h3>
-              <p style={{
-                fontSize: getResponsiveValue('1.1rem', '1rem', '0.95rem'),
-                lineHeight: '1.8',
-                color: theme.textSecondary,
-                marginBottom: '30px',
-                textAlign: 'center',
-                position: 'relative',
-              }}>
-                <span style={{
-                  color: '#A14B58',
-                }}>
-                  Passionate about building user-centered web applications that don't just look good but also
+                  ABOUT
                 </span>{' '}
-                <span style={{ 
-                  color: theme.textPrimary, 
-                  fontWeight: '600',
+                <span style={{
+                  color: theme.accent,
+                  position: 'relative',
+                  display: 'inline-block',
                 }}>
-                  solve real problems and make tasks easier.
-                </span>
-              </p>
-              
-              <div style={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '15px',
-                marginTop: '30px',
-              }}>
-                {[
-                  { label: 'Experience', value: '3+ Years' },
-                  { label: 'Projects', value: '5+' },
-                  { label: 'Dean\'s List', value: 'Multiple Semester' }
-                ].map((stat, index) => (
-                  <div key={index} style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    padding: '15px 0',
-                    borderBottom: `1px solid ${theme.borderColor}`,
-                  }}>
-                    <span style={{
-                      fontSize: getResponsiveValue('0.9rem', '0.85rem', '0.8rem'),
-                      fontWeight: '600',
-                      color: theme.textMuted,
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.05em',
-                    }}>{stat.label}</span>
-                    <span style={{
-                      fontSize: getResponsiveValue('1.4rem', '1.3rem', '1.2rem'),
-                      fontWeight: '800',
-                      color: theme.accent,
-                    }}>{stat.value}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Fixed Hexagon Grid */}
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(3, 1fr)',
-              gap: getResponsiveValue(12, 10, 8),
-              marginTop: '40px',
-              justifyItems: 'center',
-            }} className="hexagon-grid">
-              {hexagons.map((hex, index) => (
-                <div
-                  key={index}
-                  style={{
+                  ME
+                  <span style={{
+                    position: 'absolute',
+                    bottom: '-12px',
+                    left: '0',
                     width: '100%',
-                    maxWidth: getResponsiveValue(120, 100, 90),
-                    height: getResponsiveValue(120, 100, 85),
-                    background: activeHex === index ? theme.accent : theme.bgSecondary,
-                    border: `1px solid ${theme.borderColor}`,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    position: 'relative',
-                    cursor: 'default',
-                    transition: 'all 0.3s ease',
-                    clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)',
-                  }}
-                  className="hexagon"
-                  onMouseEnter={() => setActiveHex(index)}
-                  onMouseLeave={() => setActiveHex(null)}
-                >
-                  <div style={{
-                    fontSize: getResponsiveValue('1.6rem', '1.4rem', '1.3rem'),
-                    fontWeight: '800',
-                    color: activeHex === index ? theme.bgPrimary : theme.textPrimary,
-                    transition: 'all 0.3s ease',
-                    lineHeight: 1,
-                  }} className="hexagon-number">
-                    {hex.number}
-                  </div>
-                  <div style={{
-                    fontSize: getResponsiveValue('0.65rem', '0.6rem', '0.55rem'),
-                    fontWeight: '600',
-                    color: activeHex === index ? theme.bgPrimary : theme.textMuted,
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.1em',
-                    textAlign: 'center',
-                    marginTop: '4px',
-                    transition: 'all 0.3s ease',
-                    lineHeight: 1.2,
-                    padding: '0 4px',
-                  }} className="hexagon-label">
-                    {hex.label}
-                  </div>
-                </div>
-              ))}
+                    height: '6px',
+                    background: 'linear-gradient(90deg, transparent, #000000, transparent)',
+                    borderRadius: '3px',
+                  }}></span>
+                </span>
+              </h1>
             </div>
+            <p style={{
+              fontSize: getResponsiveValue('1.4rem', '1.3rem', '1.15rem'),
+              color: theme.textMuted,
+              fontWeight: '400',
+              marginTop: getResponsiveValue(25, 22, 20),
+              maxWidth: '600px',
+              margin: `${getResponsiveValue(25, 22, 20)}px auto 0`,
+              lineHeight: 1.7,
+              position: 'relative',
+            }} className="subtitle">
+              <span style={{
+                color: '#A14B58',
+              }}>
+                Creating digital solutions with
+              </span>{' '}
+              <span style={{ 
+                color: theme.textSecondary, 
+                fontWeight: '600',
+              }}>
+                creativity and purpose
+              </span>
+            </p>
           </div>
 
-          {/* Right Content Section */}
           <div style={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: getResponsiveValue(40, 35, 30),
-          }} className="content-section">
+            display: 'grid',
+            gridTemplateColumns: getResponsiveValue('1fr 2fr', '1fr', '1fr'),
+            gap: getResponsiveValue(60, 40, 30),
+            alignItems: 'start',
+          }} className="main-layout">
             
-            {/* Skills Cluster */}
+            {/* Left Profile Section */}
             <div style={{
-              background: theme.bgPrimary,
-              border: `1px solid ${theme.borderColor}`,
-              padding: getResponsiveValue('40px', '35px', '30px 20px'),
               position: 'relative',
-            }} className="skill-cluster">
+            }} className="profile-section">
               <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: getResponsiveValue(15, 12, 10),
-                marginBottom: '30px',
-                flexDirection: isMobile ? 'column' : 'row',
-                textAlign: isMobile ? 'center' : 'left',
-              }} className="cluster-header">
+                background: `linear-gradient(135deg, ${theme.bgPrimary} 0%, ${theme.bgSecondary} 100%)`,
+                border: `3px solid ${theme.accent}`,
+                borderRadius: '20px',
+                padding: getResponsiveValue('45px 35px', '40px 30px', '35px 25px'),
+                position: 'relative',
+                boxShadow: '25px 25px 0px 0px rgba(0,0,0,1)',
+                transform: 'rotate(-2deg)',
+                overflow: 'hidden',
+              }} className="profile-card">
+
+                {/* Decorative corner elements */}
                 <div style={{
-                  width: getResponsiveValue(50, 45, 40),
-                  height: getResponsiveValue(50, 45, 40),
+                  position: 'absolute',
+                  top: '15px',
+                  right: '15px',
+                  width: '30px',
+                  height: '30px',
+                  border: `2px solid ${theme.accent}`,
+                  borderRadius: '50%',
+                  opacity: 0.3,
+                }}></div>
+                <div style={{
+                  position: 'absolute',
+                  bottom: '15px',
+                  left: '15px',
+                  width: '20px',
+                  height: '20px',
                   background: theme.accent,
-                  color: theme.bgPrimary,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: getResponsiveValue('1.2rem', '1.1rem', '1rem'),
-                  fontWeight: 'bold',
-                  borderRadius: '0px',
-                  flexShrink: 0,
-                }}>{"</>"}</div>
+                  borderRadius: '3px',
+                  opacity: 0.2,
+                  transform: 'rotate(45deg)',
+                }}></div>
+
                 <h3 style={{
-                  fontSize: getResponsiveValue('1.5rem', '1.4rem', '1.3rem'),
-                  fontWeight: '800',
+                  fontSize: getResponsiveValue('2rem', '1.8rem', '1.6rem'),
+                  fontWeight: '900',
                   color: theme.textPrimary,
+                  marginBottom: '20px',
                   textTransform: 'uppercase',
                   letterSpacing: '0.1em',
-                }}>Technical stack</h3>
+                  textAlign: 'center',
+                  position: 'relative',
+                }}>
+                  <span style={{
+                    color: '#6C131F',
+                  }}>
+                    Web Developer
+                  </span>
+                </h3>
+                <p style={{
+                  fontSize: getResponsiveValue('1.1rem', '1rem', '0.95rem'),
+                  lineHeight: '1.8',
+                  color: theme.textSecondary,
+                  marginBottom: '30px',
+                  textAlign: 'center',
+                  position: 'relative',
+                }}>
+                  <span style={{
+                    color: '#A14B58',
+                  }}>
+                    Building web applications that look great and
+                  </span>{' '}
+                  <span style={{ 
+                    color: theme.textPrimary, 
+                    fontWeight: '600',
+                  }}>
+                    solve real problems for people.
+                  </span>
+                </p>
+                
+                <div style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '15px',
+                  marginTop: getResponsiveValue('40px', '35px', '30px'),
+                }}>
+                  {[
+                    { label: 'Experience', value: '3+ Years' },
+                    { label: 'Projects', value: '5+' },
+                    { label: 'Dean\'s List', value: 'Multiple Semester' }
+                  ].map((stat, index) => (
+                    <div key={index} style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                      padding: '15px 0',
+                      borderBottom: `1px solid ${theme.borderColor}`,
+                    }}>
+                      <span style={{
+                        fontSize: getResponsiveValue('0.9rem', '0.85rem', '0.8rem'),
+                        fontWeight: '600',
+                        color: theme.textMuted,
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.05em',
+                      }}>{stat.label}</span>
+                      <span style={{
+                        fontSize: getResponsiveValue('1.4rem', '1.3rem', '1.2rem'),
+                        fontWeight: '800',
+                        color: theme.accent,
+                      }}>{stat.value}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
+
+              {/* Fixed Hexagon Grid */}
               <div style={{
-                display: 'flex',
-                flexWrap: 'wrap',
+                display: 'grid',
+                gridTemplateColumns: 'repeat(3, 1fr)',
                 gap: getResponsiveValue(12, 10, 8),
-              }} className="skill-tags">
-                {[
-                  'React & Next.js', 'Laravel Framework', 'MySQL / Cloud SQL', 
-                  'Node.js & Express', 'JavaScript', 'TypeScript',
-                  'React Native', 'Git & GitHub', 'RESTful APIs', 'HTML & CSS',
-                  'PHP', 'Tailwind CSS', 'Firebase', 'Mongo DB'
-                ].map((skill, index) => (
+                marginTop: getResponsiveValue('80px', '70px', '60px'),
+                justifyItems: 'center',
+              }} className="hexagon-grid">
+                {hexagons.map((hex, index) => (
                   <div
                     key={index}
                     style={{
-                      padding: getResponsiveValue('12px 20px', '11px 18px', '10px 16px'),
-                      background: theme.bgSecondary,
+                      width: '100%',
+                      maxWidth: getResponsiveValue(120, 100, 90),
+                      height: getResponsiveValue(120, 100, 85),
+                      background: activeHex === index ? theme.accent : theme.bgSecondary,
                       border: `1px solid ${theme.borderColor}`,
-                      fontSize: getResponsiveValue('0.9rem', '0.85rem', '0.8rem'),
-                      fontWeight: '500',
-                      color: theme.textSecondary,
-                      transition: 'all 0.3s ease',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      justifyContent: 'center',
                       position: 'relative',
-                      overflow: 'hidden',
+                      cursor: 'default',
+                      transition: 'all 0.3s ease',
+                      clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)',
                     }}
-                    className="skill-tag"
+                    className="hexagon hexagon-bounce"
+                    onMouseEnter={() => setActiveHex(index)}
+                    onMouseLeave={() => setActiveHex(null)}
                   >
-                    {skill}
+                    <div style={{
+                      fontSize: getResponsiveValue('1.6rem', '1.4rem', '1.3rem'),
+                      fontWeight: '800',
+                      color: activeHex === index ? theme.bgPrimary : theme.textPrimary,
+                      transition: 'all 0.3s ease',
+                      lineHeight: 1,
+                    }} className="hexagon-number">
+                      {hex.number}
+                    </div>
+                    <div style={{
+                      fontSize: getResponsiveValue('0.65rem', '0.6rem', '0.55rem'),
+                      fontWeight: '600',
+                      color: activeHex === index ? theme.bgPrimary : theme.textMuted,
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.1em',
+                      textAlign: 'center',
+                      marginTop: '4px',
+                      transition: 'all 0.3s ease',
+                      lineHeight: 1.2,
+                      padding: '0 4px',
+                    }} className="hexagon-label">
+                      {hex.label}
+                    </div>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* Development Philosophy */}
+            {/* Right Content Section */}
             <div style={{
-              background: theme.bgPrimary,
-              border: `1px solid ${theme.borderColor}`,
-              padding: getResponsiveValue('40px', '35px', '30px 20px'),
-              position: 'relative',
-            }} className="skill-cluster">
+              display: 'flex',
+              flexDirection: 'column',
+              gap: getResponsiveValue(40, 35, 30),
+            }} className="content-section">
+              
+              {/* Skills Cluster */}
               <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: getResponsiveValue(15, 12, 10),
-                marginBottom: '30px',
-                flexDirection: isMobile ? 'column' : 'row',
-                textAlign: isMobile ? 'center' : 'left',
-              }} className="cluster-header">
+                background: theme.bgPrimary,
+                border: `1px solid ${theme.borderColor}`,
+                padding: getResponsiveValue('40px', '35px', '30px 20px'),
+                position: 'relative',
+              }} className="skill-cluster">
                 <div style={{
-                  width: getResponsiveValue(50, 45, 40),
-                  height: getResponsiveValue(50, 45, 40),
-                  background: theme.accent,
-                  color: theme.bgPrimary,
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: getResponsiveValue('1.2rem', '1.1rem', '1rem'),
-                  fontWeight: 'bold',
-                  borderRadius: '0px',
-                  flexShrink: 0,
-                }}>✦</div>
-                <h3 style={{
-                  fontSize: getResponsiveValue('1.5rem', '1.4rem', '1.3rem'),
-                  fontWeight: '800',
-                  color: theme.textPrimary,
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.1em',
-                }}>Development Philosophy</h3>
+                  gap: getResponsiveValue(15, 12, 10),
+                  marginBottom: '30px',
+                  flexDirection: isMobile ? 'column' : 'row',
+                  textAlign: isMobile ? 'center' : 'left',
+                }} className="cluster-header">
+                  <div style={{
+                    width: getResponsiveValue(50, 45, 40),
+                    height: getResponsiveValue(50, 45, 40),
+                    background: theme.accent,
+                    color: theme.bgPrimary,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: getResponsiveValue('1.2rem', '1.1rem', '1rem'),
+                    fontWeight: 'bold',
+                    borderRadius: '0px',
+                    flexShrink: 0,
+                  }}>{"</>"}</div>
+                  <h3 style={{
+                    fontSize: getResponsiveValue('1.5rem', '1.4rem', '1.3rem'),
+                    fontWeight: '800',
+                    color: theme.textPrimary,
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.1em',
+                    margin: 0,
+                  }}>Skills & Expertise</h3>
+                </div>
+                <div style={{
+                  display: 'grid',
+                  gridTemplateColumns: getResponsiveValue('repeat(3, 1fr)', 'repeat(2, 1fr)', '1fr'),
+                  gap: getResponsiveValue(12, 10, 8),
+                }} className="skill-tags">
+                  {[
+                    'Website Design', 'Coding / Programming', 'Data Storage / Database', 
+                    'Mobile Apps', 'Teamwork', 'Creative Ideas'
+                  ].map((skill, index) => (
+                    <div
+                      key={index}
+                      style={{
+                        padding: getResponsiveValue('12px 20px', '11px 18px', '10px 16px'),
+                        background: theme.bgSecondary,
+                        border: `1px solid ${theme.borderColor}`,
+                        fontSize: getResponsiveValue('0.9rem', '0.85rem', '0.8rem'),
+                        fontWeight: '500',
+                        color: theme.textSecondary,
+                        transition: 'all 0.3s ease',
+                        position: 'relative',
+                        overflow: 'hidden',
+                        textAlign: 'center',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        minHeight: getResponsiveValue('48px', '44px', '40px'),
+                      }}
+                      className="skill-tag"
+                    >
+                      {skill}
+                    </div>
+                  ))}
+                </div>
               </div>
-              
-              {/* Philosophy Grid */}
+
+              {/* Development Philosophy */}
               <div style={{
-                display: 'grid',
-                gridTemplateColumns: getResponsiveValue('repeat(2, 1fr)', '1fr', '1fr'),
-                gap: getResponsiveValue(20, 15, 12),
-              }} className="philosophy-grid">
-                {philosophy.map((item, index) => (
-                  <div
-                    key={index}
-                    style={{
-                      background: theme.bgSecondary,
-                      border: `1px solid ${theme.borderColor}`,
-                      padding: getResponsiveValue('25px 20px', '22px 18px', '20px 15px'),
-                      transition: 'all 0.3s ease',
-                      cursor: 'default',
-                      position: 'relative',
-                    }}
-                    className="philosophy-item"
-                  >
-                    <h4 style={{
-                      fontSize: getResponsiveValue('1.1rem', '1rem', '0.9rem'),
-                      fontWeight: '700',
-                      color: theme.textPrimary,
-                      marginBottom: '12px',
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.05em',
-                      transition: 'all 0.3s ease',
-                    }} className="philosophy-title">
-                      {item.title}
-                    </h4>
-                    
-                    <p style={{
-                      fontSize: getResponsiveValue('0.9rem', '0.85rem', '0.8rem'),
-                      color: theme.textMuted,
-                      lineHeight: 1.6,
-                      margin: 0,
-                      transition: 'all 0.3s ease',
-                    }} className="philosophy-description">
-                      {item.description}
-                    </p>
-                  </div>
-                ))}
+                background: theme.bgPrimary,
+                border: `1px solid ${theme.borderColor}`,
+                padding: getResponsiveValue('40px', '35px', '30px 20px'),
+                position: 'relative',
+              }} className="skill-cluster">
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: getResponsiveValue(15, 12, 10),
+                  marginBottom: '30px',
+                  flexDirection: isMobile ? 'column' : 'row',
+                  textAlign: isMobile ? 'center' : 'left',
+                }} className="cluster-header">
+                  <div style={{
+                    width: getResponsiveValue(50, 45, 40),
+                    height: getResponsiveValue(50, 45, 40),
+                    background: theme.accent,
+                    color: theme.bgPrimary,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: getResponsiveValue('1.2rem', '1.1rem', '1rem'),
+                    fontWeight: 'bold',
+                    borderRadius: '0px',
+                    flexShrink: 0,
+                  }}>✦</div>
+                  <h3 style={{
+                    fontSize: getResponsiveValue('1.5rem', '1.4rem', '1.3rem'),
+                    fontWeight: '800',
+                    color: theme.textPrimary,
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.1em',
+                  }}>Development Philosophy</h3>
+                </div>
+                
+                {/* Philosophy Grid */}
+                <div style={{
+                  display: 'grid',
+                  gridTemplateColumns: getResponsiveValue('repeat(2, 1fr)', '1fr', '1fr'),
+                  gap: getResponsiveValue(20, 15, 12),
+                }} className="philosophy-grid">
+                  {philosophy.map((item, index) => (
+                    <div
+                      key={index}
+                      style={{
+                        background: theme.bgSecondary,
+                        border: `1px solid ${theme.borderColor}`,
+                        padding: getResponsiveValue('25px 20px', '22px 18px', '20px 15px'),
+                        transition: 'all 0.3s ease',
+                        cursor: 'default',
+                        position: 'relative',
+                      }}
+                      className="philosophy-item"
+                    >
+                      <h4 style={{
+                        fontSize: getResponsiveValue('1.1rem', '1rem', '0.9rem'),
+                        fontWeight: '700',
+                        color: theme.textPrimary,
+                        marginBottom: '12px',
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.05em',
+                        transition: 'all 0.3s ease',
+                      }} className="philosophy-title">
+                        {item.title}
+                      </h4>
+                      
+                      <p style={{
+                        fontSize: getResponsiveValue('0.9rem', '0.85rem', '0.8rem'),
+                        color: theme.textMuted,
+                        lineHeight: 1.6,
+                        margin: 0,
+                        transition: 'all 0.3s ease',
+                      }} className="philosophy-description">
+                        {item.description}
+                      </p>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
