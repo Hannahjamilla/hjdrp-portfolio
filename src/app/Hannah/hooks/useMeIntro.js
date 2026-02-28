@@ -19,11 +19,10 @@ export const useMeIntro = () => {
   })
 
 const greetings = [
-  "Creating Simple Digital Experiences",
+  "Digital Made Simple",
   "Building Useful Web Projects",
   "Turning Ideas Into Websites",
   "Learning and Growing Through Code",
-  "Designing Clean and Simple Interfaces",
   "Developing Practical Solutions",
   "Making Ideas Work Online",
   "Exploring Modern Web Development",

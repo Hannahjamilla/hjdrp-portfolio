@@ -156,9 +156,9 @@ export default function AboutMe({ scrollDirection = 'down' }) {
           }
 
           .hexagon-grid {
-            grid-template-columns: repeat(3, 1fr) !important;
+            grid-template-columns: repeat(4, 1fr) !important;
             gap: 15px !important;
-            max-width: 400px;
+            max-width: 500px;
             margin: 40px auto 0;
           }
 
@@ -183,7 +183,7 @@ export default function AboutMe({ scrollDirection = 'down' }) {
           }
           
           .hexagon-grid {
-            grid-template-columns: repeat(3, 1fr) !important;
+            grid-template-columns: repeat(4, 1fr) !important;
             gap: 12px !important;
           }
           
@@ -229,7 +229,7 @@ export default function AboutMe({ scrollDirection = 'down' }) {
           }
           
           .hexagon-grid {
-            grid-template-columns: repeat(3, 1fr) !important;
+            grid-template-columns: repeat(4, 1fr) !important;
             gap: 10px !important;
           }
           
@@ -337,7 +337,8 @@ export default function AboutMe({ scrollDirection = 'down' }) {
   const hexagons = [
     { number: '5+', label: 'Projects' },
     { number: '10+', label: 'Skills' },
-    { number: '3', label: 'Certifications' }
+    { number: '3', label: 'Certifications' },
+    { number: '2+', label: 'Years' }
   ]
 
   return (
@@ -597,7 +598,7 @@ export default function AboutMe({ scrollDirection = 'down' }) {
               {/* Fixed Hexagon Grid */}
               <div style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(3, 1fr)',
+                gridTemplateColumns: 'repeat(4, 1fr)',
                 gap: getResponsiveValue(12, 10, 8),
                 marginTop: getResponsiveValue('80px', '70px', '60px'),
                 justifyItems: 'center',

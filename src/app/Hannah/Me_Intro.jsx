@@ -357,11 +357,11 @@ export default function Introduction() {
   if (!mounted) return null
 
   return (
-    <div ref={containerRef} style={{ position: 'relative' }}>
+    <div ref={containerRef} style={{ position: 'relative', width: '100%', overflow: 'visible' }}>
       <GlobalNavigation />
 
       {/* Main Container - Adjusted for navigation visibility */}
-      <div style={{
+      <div className="content-container" style={{
         minHeight: '100vh',
         minHeight: '100dvh',
         display: 'flex',
@@ -377,8 +377,10 @@ export default function Introduction() {
           linear-gradient(135deg, ${theme.bgPrimary} 0%, ${theme.bgSecondary} 50%, ${theme.bgPrimary} 100%)
         `,
         padding: getResponsiveValue('20px 120px', '16px 60px', '12px 24px'),
-        paddingTop: getResponsiveValue('100px', '90px', '80px'), // Increased top padding for navigation
-        paddingBottom: getResponsiveValue('40px', '32px', '24px'),
+        paddingTop: getResponsiveValue('120px', '100px', '90px'), // Increased top padding for navigation
+        paddingBottom: getResponsiveValue('60px', '50px', '40px'), // Increased bottom padding
+        width: '100%',
+        overflow: 'visible',
       }} id="home">
 
         {/* Responsive decorative elements */}
@@ -638,7 +640,8 @@ export default function Introduction() {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          gap: getResponsiveValue('20px', '16px', '12px'),
+          gap: getResponsiveValue('24px', '20px', '16px'),
+          padding: getResponsiveValue('0 20px', '0 16px', '0 12px'),
         }}>
           
           {/* Responsive badge - Properly positioned */}
@@ -765,18 +768,18 @@ export default function Introduction() {
               'repeat(2, 1fr)', 
               'repeat(2, 1fr)'
             ),
-            gap: getResponsiveValue('12px', '10px', '6px'),
+            gap: getResponsiveValue('16px', '14px', '12px'),
             width: '100%',
-            maxWidth: '700px',
-            marginTop: getResponsiveValue('12px', '10px', '8px'),
-            padding: '0 8px',
+            maxWidth: '800px',
+            marginTop: getResponsiveValue('24px', '20px', '16px'),
+            padding: getResponsiveValue('0 16px', '0 12px', '0 8px'),
           }}>
             {expertiseItems.map((item, index) => (
               <div
                 key={index}
                 className="tech-card hover-glow"
                 style={{
-                  padding: getResponsiveValue('16px 12px', '14px 10px', '4px 3px'),
+                  padding: getResponsiveValue('20px 16px', '18px 14px', '16px 12px'),
                   background: `linear-gradient(135deg, ${theme.accentPrimary}15, ${theme.bgSecondary}90)`,
                   border: `1px solid ${theme.accentPrimary}`,
                   borderRadius: getResponsiveValue('20px', '16px', '12px'),
@@ -785,8 +788,8 @@ export default function Introduction() {
                   textAlign: 'center',
                   backdropFilter: 'blur(12px)',
                   boxShadow: `0 6px 25px -6px ${theme.accentPrimary}35, inset 0 1px 0 ${theme.accentPrimary}20`,
-                  minHeight: getResponsiveValue('75px', '65px', '35px'),
-                  aspectRatio: getResponsiveValue('1.4', '1.3', '1.5'),
+                  minHeight: getResponsiveValue('100px', '90px', '80px'),
+                  aspectRatio: getResponsiveValue('1.4', '1.3', '1.2'),
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'center',
@@ -798,9 +801,9 @@ export default function Introduction() {
                 {/* Tech code identifier */}
                 <div style={{
                   position: 'absolute',
-                  top: getResponsiveValue('6px', '5px', '1px'),
-                  right: getResponsiveValue('8px', '6px', '2px'),
-                  fontSize: getResponsiveValue('8px', '7px', '6px'),
+                  top: getResponsiveValue('8px', '6px', '4px'),
+                  right: getResponsiveValue('10px', '8px', '6px'),
+                  fontSize: getResponsiveValue('10px', '9px', '8px'),
                   fontFamily: 'monospace',
                   color: theme.accentPrimary,
                   opacity: 0.6,
@@ -812,8 +815,8 @@ export default function Introduction() {
 
                 {/* Enhanced tech symbol with glow effect */}
                 <div style={{
-                  fontSize: getResponsiveValue('24px', '20px', '18px'),
-                  marginBottom: getResponsiveValue('10px', '8px', '2px'),
+                  fontSize: getResponsiveValue('28px', '24px', '20px'),
+                  marginBottom: getResponsiveValue('12px', '10px', '8px'),
                   filter: 'none',
                   transition: 'all 0.4s ease',
                   color: theme.accentPrimary,
@@ -826,18 +829,19 @@ export default function Introduction() {
 
                 {/* Enhanced title with better typography */}
                 <h3 style={{
-                  fontSize: getResponsiveValue('11px', '10px', '9px'),
+                  fontSize: getResponsiveValue('13px', '12px', '11px'),
                   fontWeight: '700',
                   color: theme.textPrimary,
                   marginBottom: 0,
                   textTransform: 'uppercase',
-                  letterSpacing: getResponsiveValue('1px', '0.8px', '0.6px'),
-                  lineHeight: 1.2,
+                  letterSpacing: getResponsiveValue('1.2px', '1px', '0.8px'),
+                  lineHeight: 1.3,
                   wordBreak: 'break-word',
                   hyphens: 'auto',
                   textAlign: 'center',
                   fontFamily: 'system-ui, -apple-system, sans-serif',
                   textShadow: `0 1px 2px ${theme.accentPrimary}20`,
+                  padding: getResponsiveValue('0 4px', '0 3px', '0 2px'),
                 }}>
                   {item.title}
                 </h3>
@@ -882,9 +886,10 @@ export default function Introduction() {
             gap: getResponsiveValue('24px', '20px', '16px'),
             alignItems: 'center',
             justifyContent: 'center',
-            marginTop: getResponsiveValue('16px', '12px', '10px'),
+            marginTop: getResponsiveValue('24px', '20px', '16px'),
             width: '100%',
-            maxWidth: '500px',
+            maxWidth: '600px',
+            padding: getResponsiveValue('0 20px', '0 16px', '0 12px'),
           }}>
             <button 
               className="hover-lift"
@@ -958,7 +963,7 @@ export default function Introduction() {
             border: `1px solid ${theme.textMuted}15`,
             backdropFilter: 'blur(8px)',
           }}>
-            STATUS: ONLINE • UPTIME: 99.9% • LAST_DEPLOY: {new Date().toISOString().split('T')[0]}
+            STATUS: ONLINE • UPTIME: 99.9% • LAST_DEPLOY: July 12, 2003
           </div>
         </div>
       </div>
