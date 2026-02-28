@@ -33,41 +33,118 @@ export default function Introduction() {
     accentSecondary: '#A14B58',
   }
 
-  // Expertise items with concise descriptions
+  // Learning-focused expertise areas
   const expertiseItems = [
     { 
-      title: 'DIGITAL ARCHITECTURE',
-      description: 'Scalable, performant systems'
+      title: 'ALWAYS CURIOUS, ALWAYS LEARNING',
+      symbol: '◆',
+      techCode: 'CURIOUS'
     },
     { 
-      title: 'IMMERSIVE INTERFACES',
-      description: 'Where interaction meets poetry'
+      title: 'GROWING THROUGH EVERY CHALLENGE',
+      symbol: '◇',
+      techCode: 'GROWING'
     },
     { 
-      title: 'CREATIVE DIRECTION',
-      description: 'Visions to reality'
+      title: 'OPEN TO LEARNING AND NEW IDEAS',
+      symbol: '◈',
+      techCode: 'OPEN'
     },
     { 
-      title: 'EXPERIENCE DESIGN',
-      description: 'Moments that resonate'
+      title: 'BUILDING USEFUL WEB PROJECTS',
+      symbol: '◉',
+      techCode: 'BUILDING'
     },
   ]
 
   const isMobile = windowSize.width < 768
   const isTablet = windowSize.width < 1024
+  const isSmallMobile = windowSize.width < 480
 
-  // Auto-rotate expertise
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % expertiseItems.length)
-    }, 3000)
-    return () => clearInterval(interval)
-  }, [])
+  // Remove auto-rotation - let user control interaction
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setActiveIndex((prev) => (prev + 1) % expertiseItems.length)
+  //   }, 3000)
+  //   return () => clearInterval(interval)
+  // }, [])
 
   useEffect(() => {
     if (mounted) {
       const style = document.createElement('style')
       style.textContent = createMeIntroStyles() + `
+        @keyframes techGlow {
+          0%, 100% { 
+            box-shadow: 0 0 20px ${theme.accentPrimary}20;
+            transform: scale(1);
+          }
+          50% { 
+            box-shadow: 0 0 40px ${theme.accentPrimary}40;
+            transform: scale(1.02);
+          }
+        }
+
+        @keyframes dataFlow {
+          0% { 
+            transform: translateX(-100%);
+            opacity: 0;
+          }
+          50% { 
+            opacity: 1;
+          }
+          100% { 
+            transform: translateX(100%);
+            opacity: 0;
+          }
+        }
+
+        @keyframes circuitPulse {
+          0%, 100% { 
+            stroke-dashoffset: 0;
+            opacity: 0.3;
+          }
+          50% { 
+            stroke-dashoffset: -20;
+            opacity: 1;
+          }
+        }
+
+        @keyframes matrixRain {
+          0% { 
+            transform: translateY(-100vh);
+            opacity: 0;
+          }
+          10% { 
+            opacity: 1;
+          }
+          90% { 
+            opacity: 1;
+          }
+          100% { 
+            transform: translateY(100vh);
+            opacity: 0;
+          }
+        }
+
+        @keyframes hologramFlicker {
+          0%, 100% { 
+            opacity: 1;
+            filter: hue-rotate(0deg);
+          }
+          25% { 
+            opacity: 0.8;
+            filter: hue-rotate(90deg);
+          }
+          50% { 
+            opacity: 0.9;
+            filter: hue-rotate(180deg);
+          }
+          75% { 
+            opacity: 0.7;
+            filter: hue-rotate(270deg);
+          }
+        }
+
         @keyframes blink {
   0%, 50% { opacity: 1; }
   51%, 100% { opacity: 0; }
@@ -191,6 +268,38 @@ export default function Introduction() {
           }
         `).join('')}
 
+        .tech-glow {
+          animation: techGlow 2s ease-in-out infinite;
+        }
+
+        .circuit-pulse {
+          animation: circuitPulse 2s ease-in-out infinite;
+        }
+
+        .hologram-flicker {
+          animation: hologramFlicker 1.5s ease-in-out infinite;
+        }
+
+        .tech-card {
+          position: relative;
+          overflow: hidden;
+        }
+
+        .tech-card::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, transparent, ${theme.accentPrimary}20, transparent);
+          transition: left 0.5s ease;
+        }
+
+        .tech-card:hover::before {
+          left: 100%;
+        }
+
         .soft-float {
           animation: softFloat 6s ease-in-out infinite;
         }
@@ -251,10 +360,10 @@ export default function Introduction() {
     <div ref={containerRef} style={{ position: 'relative' }}>
       <GlobalNavigation />
 
-      {/* Main Container - Compact height */}
+      {/* Main Container - Adjusted for navigation visibility */}
       <div style={{
-        height: '100vh',
-        height: '100dvh',
+        minHeight: '100vh',
+        minHeight: '100dvh',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
@@ -267,69 +376,179 @@ export default function Introduction() {
           conic-gradient(from 45deg at 60% 20%, ${theme.accentPrimary}10, transparent, ${theme.textSecondary}08),
           linear-gradient(135deg, ${theme.bgPrimary} 0%, ${theme.bgSecondary} 50%, ${theme.bgPrimary} 100%)
         `,
-        padding: getResponsiveValue('0 120px', '0 60px', '0 24px'),
+        padding: getResponsiveValue('20px 120px', '16px 60px', '12px 24px'),
+        paddingTop: getResponsiveValue('100px', '90px', '80px'), // Increased top padding for navigation
+        paddingBottom: getResponsiveValue('40px', '32px', '24px'),
       }} id="home">
 
-        {/* Advanced Decorative Elements */}
+        {/* Responsive decorative elements */}
         <div style={{
           position: 'absolute',
           inset: 0,
           overflow: 'hidden',
           pointerEvents: 'none',
         }}>
-          {/* Animated Geometric Shapes */}
+          {/* Enhanced technical circuit lines */}
+          <svg
+            style={{
+              position: 'absolute',
+              top: getResponsiveValue('20%', '15%', '10%'),
+              right: getResponsiveValue('10%', '8%', '5%'),
+              width: getResponsiveValue('200px', '150px', '100px'),
+              height: getResponsiveValue('200px', '150px', '100px'),
+              opacity: getResponsiveValue(0.4, 0.3, 0.25),
+            }}
+          >
+            <defs>
+              <linearGradient id="circuitGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor={theme.accentPrimary} stopOpacity="0.9" />
+                <stop offset="50%" stopColor={theme.textSecondary} stopOpacity="0.6" />
+                <stop offset="100%" stopColor={theme.accentPrimary} stopOpacity="0.3" />
+              </linearGradient>
+              <filter id="glow">
+                <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                <feMerge> 
+                  <feMergeNode in="coloredBlur"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+            </defs>
+            <path
+              d={getResponsiveValue(
+                "M20,20 L180,20 L180,60 L100,60 L100,140 L180,140 L180,180",
+                "M15,15 L135,15 L135,45 L75,45 L75,105 L135,105 L135,135",
+                "M10,10 L90,10 L90,30 L50,30 L50,70 L90,70 L90,90"
+              )}
+              fill="none"
+              stroke="url(#circuitGradient)"
+              strokeWidth={getResponsiveValue("2", "1.5", "1")}
+              strokeDasharray="8,4"
+              className="circuit-pulse"
+              filter="url(#glow)"
+            />
+            {/* Enhanced circuit nodes */}
+            <circle cx={getResponsiveValue("20", "15", "10")} cy={getResponsiveValue("20", "15", "10")} r={getResponsiveValue("4", "3", "2")} fill={theme.accentPrimary} className="tech-glow" />
+            <circle cx={getResponsiveValue("180", "135", "90")} cy={getResponsiveValue("60", "45", "30")} r={getResponsiveValue("4", "3", "2")} fill={theme.accentPrimary} className="tech-glow" />
+            <circle cx={getResponsiveValue("100", "75", "50")} cy={getResponsiveValue("140", "105", "70")} r={getResponsiveValue("4", "3", "2")} fill={theme.accentPrimary} className="tech-glow" />
+            
+            {/* Additional tech elements */}
+            <rect x={getResponsiveValue("90", "67", "45")} y={getResponsiveValue("50", "37", "25")} width={getResponsiveValue("20", "15", "10")} height={getResponsiveValue("20", "15", "10")} fill="none" stroke={theme.textSecondary} strokeWidth="1" opacity="0.6" />
+            <polygon points={getResponsiveValue("160,40 170,50 160,60 150,50", "120,30 127,37 120,45 112,37", "80,20 85,25 80,30 75,25")} fill={theme.accentPrimary} opacity="0.4" />
+          </svg>
+
+          {/* Code-like floating elements */}
+          {[...Array(getResponsiveValue(6, 4, 3))].map((_, i) => (
+            <div
+              key={`code-${i}`}
+              style={{
+                position: 'absolute',
+                top: `${15 + i * 20}%`,
+                left: `${5 + i * 15}%`,
+                fontSize: getResponsiveValue('10px', '9px', '8px'),
+                fontFamily: 'monospace',
+                color: `${theme.accentPrimary}${40 + i * 10}`,
+                opacity: 0.3,
+                transform: `rotate(${i * 15}deg)`,
+                letterSpacing: '1px',
+                pointerEvents: 'none',
+                animation: `floatParticle${i} ${8 + i * 2}s ease-in-out infinite`,
+              }}
+            >
+              {['{ }', '< />', '[ ]', '( )', '=> ', '::'][i] || '{}'}
+            </div>
+          ))}
+
+          {/* Matrix Rain Effect - Responsive */}
+          {[...Array(getResponsiveValue(8, 6, 4))].map((_, i) => (
+            <div
+              key={`matrix-${i}`}
+              className="matrix-rain"
+              style={{
+                position: 'absolute',
+                left: `${10 + i * (getResponsiveValue(12, 15, 20))}%`,
+                top: '-10vh',
+                width: getResponsiveValue('2px', '1.5px', '1px'),
+                height: getResponsiveValue('20vh', '15vh', '10vh'),
+                background: `linear-gradient(180deg, transparent, ${theme.accentPrimary}60, transparent)`,
+                animationDelay: `${i * 0.5}s`,
+                animationDuration: `${4 + i * 0.5}s`,
+              }}
+            />
+          ))}
+
+          {/* Holographic Grid - Responsive */}
+          <div
+            className="hologram-flicker"
+            style={{
+              position: 'absolute',
+              bottom: getResponsiveValue('10%', '8%', '5%'),
+              left: getResponsiveValue('20%', '15%', '10%'),
+              width: getResponsiveValue('300px', '200px', '150px'),
+              height: getResponsiveValue('200px', '150px', '100px'),
+              background: `
+                linear-gradient(90deg, transparent 49%, ${theme.accentPrimary}20 50%, transparent 51%),
+                linear-gradient(0deg, transparent 49%, ${theme.textSecondary}15 50%, transparent 51%)
+              `,
+              backgroundSize: getResponsiveValue('20px 20px', '15px 15px', '10px 10px'),
+              opacity: getResponsiveValue(0.4, 0.3, 0.2),
+              clipPath: 'polygon(0 0, 100% 20%, 80% 100%, 0% 80%)',
+            }}
+          />
+
+          {/* Animated Geometric Shapes - Responsive */}
+          {/* Responsive animated geometric shapes */}
           <div className="soft-float" style={{
             position: 'absolute',
-            top: '10%',
-            right: '8%',
-            width: '300px',
-            height: '300px',
+            top: getResponsiveValue('10%', '8%', '5%'),
+            right: getResponsiveValue('8%', '5%', '2%'),
+            width: getResponsiveValue('300px', '200px', '150px'),
+            height: getResponsiveValue('300px', '200px', '150px'),
             background: `conic-gradient(from 45deg, ${theme.accentPrimary}15, transparent, ${theme.textSecondary}10, transparent)`,
             borderRadius: '50%',
             animation: 'rotateShape 20s linear infinite',
-            filter: 'blur(40px)',
+            filter: getResponsiveValue('blur(40px)', 'blur(30px)', 'blur(20px)'),
           }} />
 
           <div style={{
             position: 'absolute',
-            top: '60%',
-            left: '5%',
-            width: '250px',
-            height: '250px',
+            top: getResponsiveValue('60%', '65%', '70%'),
+            left: getResponsiveValue('5%', '3%', '1%'),
+            width: getResponsiveValue('250px', '180px', '120px'),
+            height: getResponsiveValue('250px', '180px', '120px'),
             background: `linear-gradient(135deg, ${theme.bgPrimary}40, ${theme.accentSecondary}20)`,
             clipPath: 'polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%)',
             animation: 'floatRotate 15s ease-in-out infinite',
-            filter: 'blur(20px)',
+            filter: getResponsiveValue('blur(20px)', 'blur(15px)', 'blur(10px)'),
           }} />
 
-          {/* Morphing Blob */}
+          {/* Morphing Blob - Responsive */}
           <div style={{
             position: 'absolute',
-            top: '20%',
-            left: '15%',
-            width: '200px',
-            height: '200px',
+            top: getResponsiveValue('20%', '18%', '15%'),
+            left: getResponsiveValue('15%', '12%', '8%'),
+            width: getResponsiveValue('200px', '150px', '100px'),
+            height: getResponsiveValue('200px', '150px', '100px'),
             background: `radial-gradient(circle, ${theme.accentPrimary}12, transparent 70%)`,
             borderRadius: '63% 37% 54% 46% / 55% 48% 52% 45%',
             animation: 'morphBlob 8s ease-in-out infinite',
-            filter: 'blur(30px)',
+            filter: getResponsiveValue('blur(30px)', 'blur(20px)', 'blur(15px)'),
           }} />
 
-          {/* Floating Particles */}
-          {[...Array(6)].map((_, i) => (
+          {/* Responsive floating particles */}
+          {[...Array(getResponsiveValue(6, 4, 3))].map((_, i) => (
             <div key={i} style={{
               position: 'absolute',
               top: `${20 + i * 15}%`,
               left: `${10 + i * 12}%`,
-              width: `${8 + i * 2}px`,
-              height: `${8 + i * 2}px`,
+              width: getResponsiveValue(`${8 + i * 2}px`, `${6 + i * 1.5}px`, `${4 + i}px`),
+              height: getResponsiveValue(`${8 + i * 2}px`, `${6 + i * 1.5}px`, `${4 + i}px`),
               background: `${theme.accentPrimary}${30 + i * 10}`,
               borderRadius: '50%',
               animation: `floatParticle${i} ${6 + i}s ease-in-out infinite`,
             }} />
           ))}
 
-          {/* Dynamic Grid Pattern */}
+          {/* Responsive dynamic grid pattern */}
           <svg
             style={{
               position: 'absolute',
@@ -337,80 +556,80 @@ export default function Introduction() {
               left: 0,
               width: '100%',
               height: '100%',
-              opacity: 0.05,
+              opacity: getResponsiveValue(0.05, 0.04, 0.03),
             }}
           >
             <defs>
-              <pattern id="dynamicGrid" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
-                <path d="M 60 0 L 0 0 0 60" fill="none" stroke={theme.textPrimary} strokeWidth="0.5" />
-                <circle cx="30" cy="30" r="1" fill={theme.accentPrimary} opacity="0.3" />
+              <pattern 
+                id="dynamicGrid" 
+                x="0" 
+                y="0" 
+                width={getResponsiveValue("60", "45", "30")} 
+                height={getResponsiveValue("60", "45", "30")} 
+                patternUnits="userSpaceOnUse"
+              >
+                <path 
+                  d={getResponsiveValue("M 60 0 L 0 0 0 60", "M 45 0 L 0 0 0 45", "M 30 0 L 0 0 0 30")} 
+                  fill="none" 
+                  stroke={theme.textPrimary} 
+                  strokeWidth={getResponsiveValue("0.5", "0.4", "0.3")} 
+                />
+                <circle 
+                  cx={getResponsiveValue("30", "22.5", "15")} 
+                  cy={getResponsiveValue("30", "22.5", "15")} 
+                  r={getResponsiveValue("1", "0.8", "0.6")} 
+                  fill={theme.accentPrimary} 
+                  opacity="0.3" 
+                />
               </pattern>
             </defs>
             <rect width="100%" height="100%" fill="url(#dynamicGrid)" />
           </svg>
 
-          {/* Animated Lines */}
-          <div style={{
-            position: 'absolute',
-            top: '40%',
-            right: '20%',
-            width: '150px',
-            height: '2px',
-            background: `linear-gradient(90deg, transparent, ${theme.accentPrimary}60, transparent)`,
-            animation: 'slideLine 4s ease-in-out infinite',
-          }} />
+          {/* Responsive animated lines - removed moving lines */}
+          {/* Static decorative lines instead of animated ones */}
 
+          {/* Responsive glowing orbs */}
           <div style={{
             position: 'absolute',
-            bottom: '30%',
-            left: '25%',
-            width: '2px',
-            height: '100px',
-            background: `linear-gradient(180deg, transparent, ${theme.textSecondary}40, transparent)`,
-            animation: 'slideLineVertical 5s ease-in-out infinite reverse',
-          }} />
-
-          {/* Glowing Orbs */}
-          <div style={{
-            position: 'absolute',
-            top: '15%',
-            right: '30%',
-            width: '80px',
-            height: '80px',
+            top: getResponsiveValue('15%', '12%', '8%'),
+            right: getResponsiveValue('30%', '25%', '20%'),
+            width: getResponsiveValue('80px', '60px', '40px'),
+            height: getResponsiveValue('80px', '60px', '40px'),
             background: `radial-gradient(circle, ${theme.accentPrimary}20, transparent 70%)`,
             borderRadius: '50%',
             animation: 'pulseGlow 3s ease-in-out infinite',
-            filter: 'blur(15px)',
+            filter: getResponsiveValue('blur(15px)', 'blur(12px)', 'blur(8px)'),
           }} />
 
           <div style={{
             position: 'absolute',
-            bottom: '20%',
-            right: '15%',
-            width: '60px',
-            height: '60px',
+            bottom: getResponsiveValue('20%', '18%', '15%'),
+            right: getResponsiveValue('15%', '12%', '8%'),
+            width: getResponsiveValue('60px', '45px', '30px'),
+            height: getResponsiveValue('60px', '45px', '30px'),
             background: `radial-gradient(circle, ${theme.textSecondary}25, transparent 70%)`,
             borderRadius: '50%',
             animation: 'pulseGlow 4s ease-in-out infinite reverse',
-            filter: 'blur(20px)',
+            filter: getResponsiveValue('blur(20px)', 'blur(15px)', 'blur(10px)'),
           }} />
 
-          {/* Interactive Cursor Trail */}
+          {/* Responsive interactive cursor trail */}
           <div style={{
             position: 'absolute',
-            top: mousePosition.y - 100,
-            left: mousePosition.x - 100,
-            width: '200px',
-            height: '200px',
+            top: mousePosition.y - getResponsiveValue(100, 75, 50),
+            left: mousePosition.x - getResponsiveValue(100, 75, 50),
+            width: getResponsiveValue('200px', '150px', '100px'),
+            height: getResponsiveValue('200px', '150px', '100px'),
             background: `radial-gradient(circle, ${theme.accentPrimary}08, transparent 70%)`,
             borderRadius: '50%',
             transition: 'all 0.3s ease',
-            filter: 'blur(40px)',
+            filter: getResponsiveValue('blur(40px)', 'blur(30px)', 'blur(20px)'),
             pointerEvents: 'none',
           }} />
         </div>
 
-        {/* Content - Centered and compact */}
+        {/* Content - Optimized spacing for visibility */}
         <div style={{
           position: 'relative',
           zIndex: 10,
@@ -419,30 +638,38 @@ export default function Introduction() {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          gap: isMobile ? '32px' : '48px',
+          gap: getResponsiveValue('20px', '16px', '12px'),
         }}>
           
-          {/* Minimal badge */}
+          {/* Responsive badge - Properly positioned */}
           <div className="scale-in" style={{ 
             opacity: isVisible ? 1 : 0,
+            width: '100%',
+            display: 'flex',
+            justifyContent: 'center',
+            marginTop: getResponsiveValue('0px', '0px', '10px'), // Extra margin on mobile
           }}>
             <span style={{
-              fontSize: '14px',
-              letterSpacing: '4px',
+              fontSize: getResponsiveValue('14px', '13px', '12px'),
+              letterSpacing: getResponsiveValue('4px', '3px', '2px'),
               textTransform: 'uppercase',
               color: theme.textSecondary,
               display: 'inline-block',
-              padding: '6px 16px',
+              padding: getResponsiveValue('10px 24px', '8px 20px', '6px 16px'),
               border: `1px solid ${theme.textSecondary}30`,
               borderRadius: '30px',
-              minWidth: '320px',
+              minWidth: getResponsiveValue('320px', '280px', '240px'),
+              maxWidth: '90vw',
               textAlign: 'center',
+              wordBreak: 'break-word',
+              background: `${theme.bgSecondary}20`,
+              backdropFilter: 'blur(8px)',
             }}>
               {displayText}
               <span style={{
                 display: 'inline-block',
                 width: '2px',
-                height: '12px',
+                height: getResponsiveValue('14px', '12px', '10px'),
                 background: theme.textPrimary,
                 marginLeft: '4px',
                 animation: 'blink 1s infinite',
@@ -451,158 +678,286 @@ export default function Introduction() {
             </span>
           </div>
           
-          {/* Main Title - Bold and clean */}
+          {/* Enhanced tech title with terminal styling */}
           <div className="slide-up-fade" style={{ 
             opacity: isVisible ? 1 : 0,
             textAlign: 'center',
+            position: 'relative',
+            width: '100%',
           }}>
+            {/* Terminal-style header - Better positioned */}
+            <div style={{
+              fontSize: getResponsiveValue('12px', '11px', '10px'),
+              fontFamily: 'monospace',
+              color: theme.textMuted,
+              marginBottom: getResponsiveValue('12px', '10px', '8px'),
+              opacity: 0.6,
+              letterSpacing: '1px',
+            }}>
+              ~/portfolio/hannah-peralta$ npm run dev
+            </div>
+
             <h1 style={{
-              fontSize: isMobile ? 'clamp(2.5rem, 8vw, 3.5rem)' : 'clamp(4rem, 6vw, 5.5rem)',
+              fontSize: getResponsiveValue(
+                'clamp(3.5rem, 5.5vw, 5.5rem)', 
+                'clamp(2.8rem, 6vw, 4rem)', 
+                'clamp(2rem, 8vw, 3rem)'
+              ),
               fontWeight: '700',
               lineHeight: 1.1,
               color: theme.textPrimary,
               letterSpacing: '-0.03em',
               margin: 0,
+              position: 'relative',
+              wordBreak: 'break-word',
             }}>
-              <span style={{ display: 'block' }}>CRAFTING</span>
+              <span style={{ 
+                display: 'block',
+                position: 'relative',
+              }}>
+                CODING TOMORROW'S
+                {/* Enhanced tech accent line with gradient */}
+                <div style={{
+                  position: 'absolute',
+                  bottom: getResponsiveValue('-6px', '-4px', '-2px'),
+                  left: '50%',
+                  transform: 'translateX(-50%)',
+                  width: '60%',
+                  height: getResponsiveValue('4px', '3px', '2px'),
+                  background: `linear-gradient(90deg, transparent, ${theme.accentPrimary}, ${theme.textSecondary}, transparent)`,
+                  borderRadius: '2px',
+                  boxShadow: `0 0 10px ${theme.accentPrimary}40`,
+                }} />
+              </span>
               <span style={{ 
                 display: 'block',
                 color: theme.textSecondary,
                 fontWeight: '500',
                 fontSize: '0.65em',
-                marginTop: '4px',
+                marginTop: getResponsiveValue('12px', '10px', '8px'),
+                fontFamily: 'monospace',
+                letterSpacing: '0.1em',
               }}>
-                DIGITAL POETRY
+                {'<'} DIGITAL WORLD {' />'}
               </span>
             </h1>
-          </div>
 
-          {/* Rotating Expertise - Clean display */}
-          <div className="scale-in" style={{
-            maxWidth: '600px',
-            textAlign: 'center',
-            opacity: isVisible ? 1 : 0,
-          }}>
+            {/* Enhanced tech subtitle with more technical terms */}
             <div style={{
-              fontSize: isMobile ? '1.2rem' : '1.5rem',
-              fontWeight: '400',
+              marginTop: getResponsiveValue('12px', '10px', '8px'),
+              fontSize: getResponsiveValue('14px', '13px', '11px'),
               color: theme.textMuted,
-              lineHeight: 1.5,
+              fontFamily: 'monospace',
+              letterSpacing: getResponsiveValue('2px', '1.5px', '1px'),
+              opacity: 0.7,
+              wordBreak: 'break-word',
             }}>
-              <span style={{ color: theme.textPrimary }}>I specialize in </span>
-              <span style={{
-                color: theme.accentPrimary,
-                fontWeight: '600',
-                position: 'relative',
-                display: 'inline-block',
-              }}>
-                {expertiseItems[activeIndex].title}
-              </span>
+              // SCALABLE • PERFORMANT • INNOVATIVE
             </div>
+
           </div>
 
-          {/* Expertise Grid - Compact and minimal */}
+          {/* Enhanced technical expertise grid */}
           <div style={{
             display: 'grid',
-            gridTemplateColumns: isMobile ? '1fr 1fr' : 'repeat(4, 1fr)',
-            gap: isMobile ? '12px' : '24px',
+            gridTemplateColumns: getResponsiveValue(
+              'repeat(4, 1fr)', 
+              'repeat(2, 1fr)', 
+              isSmallMobile ? '1fr' : 'repeat(2, 1fr)'
+            ),
+            gap: getResponsiveValue('12px', '10px', '8px'),
             width: '100%',
-            maxWidth: '900px',
-            marginTop: '16px',
+            maxWidth: '700px',
+            marginTop: getResponsiveValue('12px', '10px', '8px'),
+            padding: '0 8px',
           }}>
             {expertiseItems.map((item, index) => (
               <div
                 key={index}
-                className="hover-glow"
+                className="tech-card hover-glow"
                 style={{
-                  padding: isMobile ? '16px 12px' : '20px 16px',
-                  background: index === activeIndex ? `${theme.accentPrimary}08` : 'transparent',
-                  border: `1px solid ${index === activeIndex ? theme.accentPrimary : `${theme.textMuted}20`}`,
-                  borderRadius: '12px',
-                  cursor: 'pointer',
-                  transition: 'all 0.3s ease',
+                  padding: getResponsiveValue('16px 12px', '14px 10px', '12px 8px'),
+                  background: `linear-gradient(135deg, ${theme.accentPrimary}15, ${theme.bgSecondary}90)`,
+                  border: `1px solid ${theme.accentPrimary}`,
+                  borderRadius: getResponsiveValue('14px', '12px', '10px'),
+                  cursor: 'default',
+                  transition: 'all 0.4s ease',
                   textAlign: 'center',
+                  backdropFilter: 'blur(12px)',
+                  boxShadow: `0 6px 25px -6px ${theme.accentPrimary}35, inset 0 1px 0 ${theme.accentPrimary}20`,
+                  minHeight: getResponsiveValue('75px', '65px', '55px'),
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  position: 'relative',
+                  overflow: 'hidden',
                 }}
-                onMouseEnter={() => setActiveIndex(index)}
               >
+                {/* Tech code identifier */}
                 <div style={{
-                  fontSize: '11px',
-                  fontWeight: '600',
-                  color: index === activeIndex ? theme.accentPrimary : theme.textSecondary,
-                  marginBottom: '8px',
-                  letterSpacing: '1px',
-                }}>
-                  {String(index + 1).padStart(2, '0')}
-                </div>
-                <h3 style={{
-                  fontSize: isMobile ? '12px' : '14px',
-                  fontWeight: '600',
-                  color: index === activeIndex ? theme.textPrimary : theme.textSecondary,
-                  marginBottom: '4px',
-                  textTransform: 'uppercase',
+                  position: 'absolute',
+                  top: getResponsiveValue('6px', '5px', '4px'),
+                  right: getResponsiveValue('8px', '6px', '5px'),
+                  fontSize: getResponsiveValue('8px', '7px', '6px'),
+                  fontFamily: 'monospace',
+                  color: theme.accentPrimary,
+                  opacity: 0.6,
                   letterSpacing: '0.5px',
+                  fontWeight: '600',
+                }}>
+                  {item.techCode}
+                </div>
+
+                {/* Enhanced tech symbol with glow effect */}
+                <div style={{
+                  fontSize: getResponsiveValue('24px', '20px', '18px'),
+                  marginBottom: getResponsiveValue('10px', '8px', '6px'),
+                  filter: 'none',
+                  transition: 'all 0.4s ease',
+                  color: theme.accentPrimary,
+                  fontWeight: 'bold',
+                  textShadow: `0 0 15px ${theme.accentPrimary}60`,
+                  transform: 'scale(1.1)',
+                }}>
+                  {item.symbol}
+                </div>
+
+                {/* Enhanced title with better typography */}
+                <h3 style={{
+                  fontSize: getResponsiveValue('11px', '10px', '9px'),
+                  fontWeight: '700',
+                  color: theme.textPrimary,
+                  marginBottom: 0,
+                  textTransform: 'uppercase',
+                  letterSpacing: getResponsiveValue('1px', '0.8px', '0.6px'),
+                  lineHeight: 1.2,
+                  wordBreak: 'break-word',
+                  hyphens: 'auto',
+                  textAlign: 'center',
+                  fontFamily: 'system-ui, -apple-system, sans-serif',
+                  textShadow: `0 1px 2px ${theme.accentPrimary}20`,
                 }}>
                   {item.title}
                 </h3>
-                <p style={{
-                  fontSize: isMobile ? '11px' : '12px',
-                  color: theme.textMuted,
-                  opacity: 0.8,
-                  lineHeight: 1.4,
-                  margin: 0,
-                }}>
-                  {item.description}
-                </p>
+
+                {/* Enhanced hover effect with animated border */}
+                <div style={{
+                  position: 'absolute',
+                  bottom: 0,
+                  left: 0,
+                  width: '100%',
+                  height: getResponsiveValue('3px', '2px', '2px'),
+                  background: `linear-gradient(90deg, ${theme.accentPrimary}, ${theme.textSecondary}, ${theme.accentPrimary})`,
+                  transform: 'scaleX(1)',
+                  transformOrigin: 'center',
+                  transition: 'transform 0.4s ease',
+                  boxShadow: index === activeIndex ? `0 0 8px ${theme.accentPrimary}60` : 'none',
+                }} />
+
+                {/* Subtle tech pattern overlay */}
+                <div style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  background: `
+                    radial-gradient(circle at 20% 20%, ${theme.accentPrimary}05 0%, transparent 50%),
+                    radial-gradient(circle at 80% 80%, ${theme.textSecondary}03 0%, transparent 50%)
+                  `,
+                  opacity: 1,
+                  transition: 'opacity 0.4s ease',
+                  pointerEvents: 'none',
+                }} />
               </div>
             ))}
           </div>
 
-          {/* Call to Action - Simple but effective */}
+          {/* Enhanced technical buttons with terminal styling */}
           <div style={{
             display: 'flex',
-            gap: '20px',
+            flexDirection: getResponsiveValue('row', 'row', isSmallMobile ? 'column' : 'row'),
+            gap: getResponsiveValue('24px', '20px', '16px'),
             alignItems: 'center',
-            marginTop: '16px',
+            justifyContent: 'center',
+            marginTop: getResponsiveValue('16px', '12px', '10px'),
+            width: '100%',
+            maxWidth: '500px',
           }}>
             <button 
               className="hover-lift"
               style={{
-                padding: isMobile ? '12px 32px' : '14px 40px',
-                fontSize: isMobile ? '13px' : '14px',
-                fontWeight: '500',
-                background: theme.textPrimary,
+                padding: getResponsiveValue('16px 44px', '14px 36px', '12px 28px'),
+                fontSize: getResponsiveValue('13px', '12px', '11px'),
+                fontWeight: '600',
+                background: `linear-gradient(135deg, ${theme.textPrimary}, ${theme.accentSecondary})`,
                 color: theme.bgPrimary,
                 border: 'none',
-                borderRadius: '40px',
+                borderRadius: '50px',
                 cursor: 'pointer',
-                transition: 'all 0.3s ease',
+                transition: 'all 0.4s ease',
                 textTransform: 'uppercase',
-                letterSpacing: '2px',
+                letterSpacing: getResponsiveValue('2px', '1.5px', '1px'),
+                position: 'relative',
+                overflow: 'hidden',
+                fontFamily: 'monospace',
+                boxShadow: `0 4px 20px -4px ${theme.textPrimary}40`,
+                minWidth: getResponsiveValue('auto', 'auto', isSmallMobile ? '200px' : 'auto'),
+                width: isSmallMobile ? '100%' : 'auto',
               }}
               onClick={() => scrollToSection('projects')}
             >
-              VIEW WORK
+              <span style={{ position: 'relative', zIndex: 2 }}>
+                $ ./view-projects
+              </span>
             </button>
             
             <button 
               className="hover-lift"
               style={{
-                padding: isMobile ? '12px 32px' : '14px 40px',
-                fontSize: isMobile ? '13px' : '14px',
-                fontWeight: '500',
+                padding: getResponsiveValue('16px 44px', '14px 36px', '12px 28px'),
+                fontSize: getResponsiveValue('13px', '12px', '11px'),
+                fontWeight: '600',
                 background: 'transparent',
                 color: theme.textPrimary,
-                border: `1px solid ${theme.textPrimary}`,
-                borderRadius: '40px',
+                border: `2px solid ${theme.textPrimary}`,
+                borderRadius: '50px',
                 cursor: 'pointer',
-                transition: 'all 0.3s ease',
+                transition: 'all 0.4s ease',
                 textTransform: 'uppercase',
-                letterSpacing: '2px',
+                letterSpacing: getResponsiveValue('2px', '1.5px', '1px'),
+                position: 'relative',
+                overflow: 'hidden',
+                fontFamily: 'monospace',
+                backdropFilter: 'blur(10px)',
+                minWidth: getResponsiveValue('auto', 'auto', isSmallMobile ? '200px' : 'auto'),
+                width: isSmallMobile ? '100%' : 'auto',
               }}
               onClick={() => scrollToSection('contact')}
             >
-              LET'S TALK
+              <span style={{ position: 'relative', zIndex: 2 }}>
+                $ ./connect
+              </span>
             </button>
+          </div>
+
+          {/* Technical status bar */}
+          <div style={{
+            marginTop: getResponsiveValue('16px', '12px', '10px'),
+            fontSize: getResponsiveValue('10px', '9px', '8px'),
+            fontFamily: 'monospace',
+            color: theme.textMuted,
+            opacity: 0.5,
+            letterSpacing: '1px',
+            textAlign: 'center',
+            padding: getResponsiveValue('8px 16px', '6px 12px', '4px 8px'),
+            background: `linear-gradient(135deg, ${theme.bgSecondary}40, transparent)`,
+            borderRadius: '20px',
+            border: `1px solid ${theme.textMuted}15`,
+            backdropFilter: 'blur(8px)',
+          }}>
+            STATUS: ONLINE • UPTIME: 99.9% • LAST_DEPLOY: {new Date().toISOString().split('T')[0]}
           </div>
         </div>
       </div>

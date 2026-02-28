@@ -43,21 +43,35 @@ export default function Work() {
   const experiences = [
     {
       id: 1,
+      organization: "Creciendo Philippines",
+      location: "Quezon City, Philippines",
+      role: "Web Developer Intern | Backend Developer",
+      duration: "Nov 2025 – Feb 2026 | 400 hours",
+      type: "INTERNSHIP",
+      responsibilities: [
+        "Developed and maintained backend systems with Express.js and MongoDB, improving application efficiency",
+        "Built and optimized APIs to support seamless web application functionality, enhancing system performance"
+      ]
+    },
+    {
+      id: 2,
       organization: "Executive Secretary's Office",
       location: "National University - Baliwag, Bulacan",
       role: "Core Member",
       duration: "2023-2024",
+      type: "ORGANIZATION",
       responsibilities: [
         "Participated in organizing university-level Quiz Bee competitions",
         "Coordinated academic communications and event logistics"
       ]
     },
     {
-      id: 2,
+      id: 3,
       organization: "AWS Cloud Clubs",
       location: "National University - Baliwag, Bulacan",
       role: "Committee Member – Chief Skill Development Office",
       duration: "2025-Present",
+      type: "ORGANIZATION",
       responsibilities: [
         "Organized cloud learning sessions for IT students",
         "Supported cloud workshops and technical training programs"
@@ -152,8 +166,8 @@ export default function Work() {
           maxWidth: getResponsiveValue('1200px', '800px', '100%'),
           margin: '0 auto',
           display: 'grid',
-          gridTemplateColumns: isMobile ? '1fr' : isTablet ? '1fr' : 'repeat(auto-fit, minmax(400px, 1fr))',
-          gap: getResponsiveValue('40px', '30px', '25px'),
+          gridTemplateColumns: isMobile ? '1fr' : isTablet ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)',
+          gap: getResponsiveValue('15px', '12px', '10px'),
           padding: getResponsiveValue('0 20px', '0 15px', '0 10px'),
         }}
       >
@@ -164,8 +178,8 @@ export default function Work() {
             onMouseLeave={() => setHoveredIndex(null)}
             style={{
               background: 'linear-gradient(135deg, #fff 0%, #f8f9fa 100%)',
-              borderRadius: getResponsiveValue('24px', '20px', '16px'),
-              padding: getResponsiveValue('40px', '30px', '20px'),
+              borderRadius: getResponsiveValue('12px', '10px', '8px'),
+              padding: getResponsiveValue('18px', '15px', '12px'),
               border: `2px solid ${theme.border}`,
               boxShadow: hoveredIndex === index
                 ? '0 30px 60px rgba(0,0,0,0.15)'
@@ -184,10 +198,10 @@ export default function Work() {
                 position: 'absolute',
                 top: 0,
                 right: 0,
-                width: getResponsiveValue('120px', '100px', '80px'),
-                height: getResponsiveValue('120px', '100px', '80px'),
+                width: getResponsiveValue('60px', '50px', '40px'),
+                height: getResponsiveValue('60px', '50px', '40px'),
                 background: `linear-gradient(135deg, ${theme.primary}08, transparent)`,
-                borderBottomLeftRadius: getResponsiveValue('60px', '50px', '40px'),
+                borderBottomLeftRadius: getResponsiveValue('30px', '25px', '20px'),
               }}
             ></div>
 
@@ -195,17 +209,17 @@ export default function Work() {
             <div 
               style={{
                 position: 'absolute',
-                top: getResponsiveValue('20px', '15px', '12px'),
-                right: getResponsiveValue('20px', '15px', '12px'),
-                width: getResponsiveValue('50px', '45px', '35px'),
-                height: getResponsiveValue('50px', '45px', '35px'),
+                top: getResponsiveValue('10px', '8px', '6px'),
+                right: getResponsiveValue('10px', '8px', '6px'),
+                width: getResponsiveValue('28px', '24px', '20px'),
+                height: getResponsiveValue('28px', '24px', '20px'),
                 background: `linear-gradient(135deg, ${theme.primary} 0%, #333333 100%)`,
                 borderRadius: '50%',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 color: '#ffffff',
-                fontSize: getResponsiveValue('1.2rem', '1.1rem', '0.9rem'),
+                fontSize: getResponsiveValue('0.7rem', '0.65rem', '0.6rem'),
                 fontWeight: '800',
                 boxShadow: '0 8px 20px rgba(0,0,0,0.15)',
               }}
@@ -217,24 +231,35 @@ export default function Work() {
             <div 
               style={{
                 display: 'inline-block',
-                background: `${theme.primary}15`,
+                background: exp.type === 'INTERNSHIP' ? `${theme.primary}20` : `${theme.primary}15`,
                 color: theme.primary,
-                padding: getResponsiveValue('8px 16px', '6px 12px', '5px 10px'),
-                borderRadius: '20px',
-                fontSize: getResponsiveValue('0.8rem', '0.75rem', '0.7rem'),
+                padding: getResponsiveValue('4px 8px', '3px 6px', '2px 4px'),
+                borderRadius: '12px',
+                fontSize: getResponsiveValue('0.6rem', '0.55rem', '0.5rem'),
                 fontWeight: '700',
                 textTransform: 'uppercase',
                 letterSpacing: '0.5px',
-                marginBottom: '20px',
+                marginBottom: '6px',
+                border: exp.type === 'INTERNSHIP' ? `2px solid ${theme.primary}30` : 'none',
               }}
             >
+              {exp.type}
+            </div>
+
+            {/* Duration Info */}
+            <div style={{
+              fontSize: getResponsiveValue('0.65rem', '0.6rem', '0.55rem'),
+              color: theme.secondary,
+              marginBottom: '8px',
+              fontWeight: '600',
+            }}>
               {exp.duration}
             </div>
 
             <h3 style={{
-              fontSize: getResponsiveValue('1.6rem', '1.4rem', '1.2rem'),
+              fontSize: getResponsiveValue('1.1rem', '1rem', '0.9rem'),
               fontWeight: '900',
-              marginBottom: getResponsiveValue('8px', '6px', '5px'),
+              marginBottom: getResponsiveValue('4px', '3px', '2px'),
               background: `${theme.primary}`,
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
@@ -246,10 +271,10 @@ export default function Work() {
 
             <div 
               style={{
-                fontSize: getResponsiveValue('1.1rem', '1.05rem', '1rem'),
+                fontSize: getResponsiveValue('0.85rem', '0.8rem', '0.75rem'),
                 fontWeight: '700',
                 color: theme.primary,
-                marginBottom: '8px',
+                marginBottom: '4px',
               }}
             >
               {exp.role}
@@ -257,9 +282,9 @@ export default function Work() {
 
             <p 
               style={{
-                fontSize: getResponsiveValue('0.95rem', '0.9rem', '0.85rem'),
+                fontSize: getResponsiveValue('0.75rem', '0.7rem', '0.65rem'),
                 color: theme.secondary,
-                marginBottom: '25px',
+                marginBottom: '12px',
                 opacity: 0.8,
               }}
             >
@@ -269,14 +294,14 @@ export default function Work() {
             {/* Responsibilities */}
             <div 
               style={{
-                marginTop: getResponsiveValue('25px', '20px', '15px'),
+                marginTop: getResponsiveValue('12px', '10px', '8px'),
               }}
             >
               <h4 style={{
-                fontSize: getResponsiveValue('1rem', '0.95rem', '0.9rem'),
+                fontSize: getResponsiveValue('0.75rem', '0.7rem', '0.65rem'),
                 fontWeight: '700',
                 color: theme.primary,
-                marginBottom: '15px',
+                marginBottom: '8px',
                 textTransform: 'uppercase',
                 letterSpacing: '0.5px',
               }}>
@@ -285,7 +310,7 @@ export default function Work() {
               <div style={{
                 display: 'flex',
                 flexDirection: 'column',
-                gap: getResponsiveValue('12px', '10px', '8px'),
+                gap: getResponsiveValue('6px', '5px', '4px'),
               }}>
                 {exp.responsibilities.map((item, i) => (
                   <div 
@@ -294,22 +319,22 @@ export default function Work() {
                       display: 'flex',
                       alignItems: 'flex-start',
                       gap: '12px',
-                      padding: getResponsiveValue('12px 0', '10px 0', '8px 0'),
+                      padding: getResponsiveValue('6px 0', '5px 0', '4px 0'),
                       borderBottom: i < exp.responsibilities.length - 1 ? `1px solid ${theme.border}` : 'none',
                     }}
                   >
                     <div style={{
-                      width: '6px',
-                      height: '6px',
+                      width: '4px',
+                      height: '4px',
                       background: `linear-gradient(135deg, ${theme.primary} 0%, #333333 100%)`,
                       borderRadius: '50%',
-                      marginTop: '8px',
+                      marginTop: '5px',
                       flexShrink: 0,
                     }}></div>
                     <span 
                       style={{
-                        fontSize: getResponsiveValue('0.95rem', '0.9rem', '0.85rem'),
-                        lineHeight: 1.6,
+                        fontSize: getResponsiveValue('0.75rem', '0.7rem', '0.65rem'),
+                        lineHeight: 1.4,
                         color: theme.primary,
                       }}
                     >

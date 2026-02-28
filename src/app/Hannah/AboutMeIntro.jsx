@@ -8,6 +8,7 @@ export default function AboutMeIntro() {
   const [elementVisible, setElementVisible] = useState(false)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [isImageHovered, setIsImageHovered] = useState(false)
+  const [activeCardIndex, setActiveCardIndex] = useState(2) // Start with middle card active
   const { windowSize, getResponsiveValue } = useResponsive()
 
   const theme = {
@@ -259,7 +260,7 @@ export default function AboutMeIntro() {
                     overflow: 'hidden',
                     background: `linear-gradient(145deg, ${theme.bgSecondary}, ${theme.accentTertiary}50)`,
                     padding: '12px',
-                    transform: isImageHovered ? 'scale(1.05)' : 'scale(1)',
+                    transform: isImageHovered ? 'scale(1.05) rotate(-2deg)' : 'scale(1) rotate(-2deg)', // Added slight rotation
                     transition: 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
                   }}
                   onMouseEnter={() => setIsImageHovered(true)}
@@ -313,45 +314,116 @@ export default function AboutMeIntro() {
               transform: elementVisible ? 'translateY(0)' : 'translateY(30px)',
               transition: 'all 1s ease 0.6s',
             }}>
-              {/* About Card */}
+              {/* Enhanced About Card */}
               <div style={{
-                background: '#ffffff',
-                borderRadius: '25px',
-                padding: isMobile ? '30px' : '35px',
-                border: `3px solid ${theme.accentPrimary}30`,
+                background: 'linear-gradient(135deg, #ffffff 0%, #fefefe 50%, #f9f9f9 100%)',
+                borderRadius: '28px', // More rounded
+                padding: isMobile ? '35px' : '40px', // Increased padding
+                border: `3px solid ${theme.accentPrimary}40`,
                 textAlign: 'center',
                 position: 'relative',
                 overflow: 'hidden',
-                boxShadow: '0 10px 30px rgba(0,0,0,0.1)',
+                boxShadow: '0 15px 40px rgba(0,0,0,0.12), 0 5px 15px rgba(108, 19, 31, 0.1)',
+                transform: 'rotate(-1deg)', // Slight rotation for uniqueness
               }}>
+                {/* Enhanced Background Pattern */}
                 <div style={{
                   position: 'absolute',
-                  top: '-50%',
-                  left: '-50%',
-                  width: '200%',
-                  height: '200%',
-                  background: `conic-gradient(from 0deg, transparent, ${theme.accentPrimary}05, transparent, ${theme.textSecondary}05)`,
-                  animation: 'rotateFloat 20s linear infinite',
+                  top: '-30%',
+                  left: '-30%',
+                  width: '160%',
+                  height: '160%',
+                  background: `conic-gradient(from 45deg, transparent, ${theme.accentPrimary}03, transparent, ${theme.textSecondary}03, transparent)`,
+                  animation: 'rotateFloat 25s linear infinite',
+                }}></div>
+
+                {/* Decorative Corner Elements */}
+                <div style={{
+                  position: 'absolute',
+                  top: '15px',
+                  right: '15px',
+                  width: '40px',
+                  height: '40px',
+                  background: `linear-gradient(135deg, ${theme.accentPrimary}15, ${theme.textSecondary}10)`,
+                  borderRadius: '12px',
+                  transform: 'rotate(15deg)',
+                }}></div>
+
+                <div style={{
+                  position: 'absolute',
+                  bottom: '15px',
+                  left: '15px',
+                  width: '25px',
+                  height: '25px',
+                  background: `${theme.accentSecondary}20`,
+                  borderRadius: '50%',
+                  animation: 'floatPulse 4s ease-in-out infinite',
+                }}></div>
+
+                {/* Accent Line */}
+                <div style={{
+                  position: 'absolute',
+                  top: '0',
+                  left: '20%',
+                  right: '20%',
+                  height: '4px',
+                  background: `linear-gradient(90deg, transparent, ${theme.accentPrimary}, transparent)`,
+                  borderRadius: '0 0 2px 2px',
                 }}></div>
                 
                 <div style={{ position: 'relative', zIndex: 2 }}>
                   <h3 style={{
-                    fontSize: isMobile ? '1.4rem' : '1.6rem',
-                    fontWeight: '700',
-                    color: theme.accentPrimary,
-                    marginBottom: '15px',
+                    fontSize: isMobile ? '1.5rem' : '1.7rem',
+                    fontWeight: '800',
+                    background: `linear-gradient(135deg, ${theme.accentPrimary}, ${theme.textSecondary})`,
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                    marginBottom: '18px',
+                    letterSpacing: '-0.02em',
                   }}>
                     Goal-Oriented Developer
                   </h3>
+
+                  {/* Enhanced Divider */}
+                  <div style={{
+                    width: '80px',
+                    height: '3px',
+                    background: `linear-gradient(90deg, ${theme.accentPrimary}, ${theme.textSecondary})`,
+                    borderRadius: '2px',
+                    margin: '0 auto 20px',
+                    animation: 'expandContract 3s ease-in-out infinite',
+                  }}></div>
                   
                   <div style={{
-                    fontSize: isMobile ? '1rem' : '1.1rem',
+                    fontSize: isMobile ? '1.05rem' : '1.15rem',
                     color: theme.textMuted,
-                    lineHeight: 1.6,
-                    fontWeight: '400',
+                    lineHeight: 1.7,
+                    fontWeight: '500',
+                    textAlign: 'left', // Changed to left align for better readability
                   }}>
-                    IT graduate focused on mobile and web development. 
-                    I turn ideas into functional digital solutions and enjoy creating applications that are useful and meaningful for users.
+                    <span style={{ 
+                      color: theme.textPrimary, 
+                      fontWeight: '700',
+                      fontSize: '1.1em',
+                    }}>
+                      IT graduate
+                    </span> focused on mobile and web development. 
+                    I turn ideas into <span style={{ 
+                      color: theme.accentPrimary, 
+                      fontWeight: '600' 
+                    }}>functional digital solutions</span> and enjoy creating applications that are 
+                    <span style={{ 
+                      color: theme.textSecondary, 
+                      fontWeight: '600' 
+                    }}>useful and meaningful</span> for users. 
+                    <br /><br />
+                    <span style={{ 
+                      fontStyle: 'italic',
+                      color: theme.textSecondary,
+                    }}>
+                      Continuously learning and improving my skills.
+                    </span>
                   </div>
                 </div>
               </div>
@@ -398,7 +470,7 @@ export default function AboutMeIntro() {
               </div>
             </div>
           )}
-          {/* Mobile/Tablet: Horizontal Stats Bar */}
+          {/* Mobile/Tablet: Horizontal Carousel Stats */}
           {(isMobile || (isTablet && !isTabletLandscape)) && (
             <div style={{
               background: '#ffffff',
@@ -420,68 +492,143 @@ export default function AboutMeIntro() {
                 Professional Journey
               </h3>
               
+              {/* Horizontal Scroll Container */}
               <div style={{
-                display: 'grid',
-                gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)',
-                gap: isMobile ? '20px' : '25px',
+                overflowX: 'auto',
+                overflowY: 'hidden',
+                scrollBehavior: 'smooth',
+                scrollbarWidth: 'none',
+                msOverflowStyle: 'none',
+                WebkitScrollbar: { display: 'none' },
+                paddingBottom: '10px',
               }}>
-                {[
-                  { number: '03', label: 'Years Experience', color: theme.accentPrimary, percentage: '85%' },
-                  { number: '05', label: 'Projects Experience', color: theme.textSecondary, percentage: '92%' },
-                  { number: '∞', label: 'Learning Experience', color: theme.accentSecondary, percentage: '100%' }
-                ].map((stat, index) => (
-                  <div key={index} style={{
-                    textAlign: 'center',
-                    padding: isMobile ? '20px' : '25px',
-                    background: `${stat.color}08`,
-                    borderRadius: '20px',
-                    border: `2px solid ${stat.color}30`,
-                    transition: 'all 0.3s ease',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.target.style.transform = 'translateY(-5px)'
-                    e.target.style.boxShadow = `0 10px 25px ${stat.color}30`
-                  }}
-                  onMouseLeave={(e) => {
-                    e.target.style.transform = 'translateY(0)'
-                    e.target.style.boxShadow = 'none'
-                  }}
-                  >
-                    <div style={{
-                      fontSize: isMobile ? '2rem' : '2.5rem',
-                      fontWeight: '900',
-                      color: stat.color,
-                      marginBottom: '10px',
-                      fontFamily: "'Space Grotesk', monospace",
-                    }}>
-                      {stat.number}
-                    </div>
-                    
-                    <div style={{
-                      fontSize: isMobile ? '0.9rem' : '1rem',
-                      fontWeight: '600',
-                      color: theme.textPrimary,
-                      marginBottom: '15px',
-                    }}>
-                      {stat.label}
-                    </div>
-                    
-                    <div style={{
-                      width: '100%',
-                      height: '8px',
-                      background: '#e0e0e0',
-                      borderRadius: '4px',
-                      overflow: 'hidden',
-                    }}>
+                <div style={{
+                  display: 'flex',
+                  gap: isMobile ? '15px' : '20px',
+                  paddingRight: '20px',
+                  minWidth: 'max-content',
+                }}>
+                  {[
+                    { 
+                      number: '03', 
+                      label: 'Years Experience',
+                      color: theme.accentPrimary,
+                      description: 'Building web applications',
+                      details: 'HTML/CSS to React & Node.js'
+                    },
+                    { 
+                      number: '05', 
+                      label: 'Projects Completed',
+                      color: theme.accentPrimary,
+                      description: 'From concept to deployment',
+                      details: 'E-commerce & management systems'
+                    },
+                    { 
+                      number: '∞', 
+                      label: 'Learning Journey',
+                      color: theme.accentPrimary,
+                      description: 'Exploring new technologies',
+                      details: 'Always curious about trends'
+                    },
+                    { 
+                      number: '24/7', 
+                      label: 'Problem Solving',
+                      color: theme.accentPrimary,
+                      description: 'Creative solutions',
+                      details: 'Debugging & optimization'
+                    },
+                    { 
+                      number: '100%', 
+                      label: 'Commitment',
+                      color: theme.accentPrimary,
+                      description: 'Quality code delivery',
+                      details: 'Attention to detail'
+                    }
+                  ].map((stat, index) => (
+                    <div key={index} style={{
+                      minWidth: isMobile ? '250px' : '280px',
+                      textAlign: 'center',
+                      padding: isMobile ? '20px' : '25px',
+                      background: `${stat.color}08`,
+                      borderRadius: '20px',
+                      border: `2px solid ${stat.color}30`,
+                      transition: 'all 0.3s ease',
+                      flexShrink: 0,
+                    }}
+                    onMouseEnter={(e) => {
+                      e.target.style.transform = 'translateY(-5px)'
+                      e.target.style.boxShadow = `0 10px 25px ${stat.color}30`
+                    }}
+                    onMouseLeave={(e) => {
+                      e.target.style.transform = 'translateY(0)'
+                      e.target.style.boxShadow = 'none'
+                    }}
+                    >
+                      {/* Header */}
                       <div style={{
-                        width: stat.percentage,
-                        height: '100%',
-                        background: stat.color,
-                        borderRadius: '4px',
-                        transition: 'width 1.5s ease-in-out',
-                      }}></div>
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: '10px',
+                        marginBottom: '15px',
+                      }}>
+                        <div style={{
+                          fontSize: isMobile ? '1.8rem' : '2rem',
+                          fontWeight: '900',
+                          color: stat.color,
+                          fontFamily: "'Space Grotesk', monospace",
+                        }}>
+                          {stat.number}
+                        </div>
+                      </div>
+                      
+                      <div style={{
+                        fontSize: isMobile ? '0.95rem' : '1rem',
+                        fontWeight: '700',
+                        color: theme.textPrimary,
+                        marginBottom: '10px',
+                      }}>
+                        {stat.label}
+                      </div>
+
+                      <div style={{
+                        fontSize: isMobile ? '0.85rem' : '0.9rem',
+                        fontWeight: '600',
+                        color: theme.textSecondary,
+                        marginBottom: '8px',
+                        lineHeight: 1.3,
+                      }}>
+                        {stat.description}
+                      </div>
+
+                      <div style={{
+                        fontSize: isMobile ? '0.75rem' : '0.8rem',
+                        color: theme.textMuted,
+                        lineHeight: 1.4,
+                        fontStyle: 'italic',
+                      }}>
+                        {stat.details}
+                      </div>
                     </div>
-                  </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Scroll Indicator Dots */}
+              <div style={{
+                display: 'flex',
+                justifyContent: 'center',
+                gap: '8px',
+                marginTop: '20px',
+              }}>
+                {[0,1,2,3,4].map((dot, index) => (
+                  <div key={index} style={{
+                    width: '8px',
+                    height: '8px',
+                    borderRadius: '50%',
+                    background: index < 3 ? theme.accentPrimary : `${theme.accentPrimary}30`,
+                    transition: 'all 0.3s ease',
+                  }}></div>
                 ))}
               </div>
             </div>
@@ -582,7 +729,7 @@ export default function AboutMeIntro() {
                     overflow: 'hidden',
                     background: `linear-gradient(145deg, ${theme.bgSecondary}, ${theme.accentTertiary}50)`,
                     padding: '12px',
-                    transform: isImageHovered ? 'scale(1.03)' : 'scale(1)',
+                    transform: isImageHovered ? 'scale(1.03) rotate(-2deg)' : 'scale(1) rotate(-2deg)', // Added slight rotation
                     transition: 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
                   }}
                   onMouseEnter={() => setIsImageHovered(true)}
@@ -706,68 +853,106 @@ export default function AboutMeIntro() {
                   </h3>
                   
                   <div style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(3, 1fr)',
-                    gap: '15px',
+                    overflowX: 'auto',
+                    overflowY: 'hidden',
+                    scrollBehavior: 'smooth',
+                    scrollbarWidth: 'none',
+                    msOverflowStyle: 'none',
+                    WebkitScrollbar: { display: 'none' },
                   }}>
-                    {[
-                      { number: '03', label: 'Years Experience', color: theme.accentPrimary, percentage: '85%' },
-                      { number: '05', label: 'Projects Experience', color: theme.textSecondary, percentage: '92%' },
-                      { number: '∞', label: 'Learning Experience', color: theme.accentSecondary, percentage: '100%' }
-                    ].map((stat, index) => (
-                      <div key={index} style={{
-                        textAlign: 'center',
-                        padding: '15px',
-                        background: `${stat.color}05`,
-                        borderRadius: '15px',
-                        border: `1px solid ${stat.color}20`,
-                        transition: 'all 0.3s ease',
-                      }}
-                      onMouseEnter={(e) => {
-                        e.target.style.transform = 'translateY(-3px)'
-                        e.target.style.boxShadow = `0 8px 20px ${stat.color}25`
-                      }}
-                      onMouseLeave={(e) => {
-                        e.target.style.transform = 'translateY(0)'
-                        e.target.style.boxShadow = 'none'
-                      }}
-                      >
-                        <div style={{
-                          fontSize: '1.8rem',
-                          fontWeight: '900',
-                          color: stat.color,
-                          marginBottom: '8px',
-                          fontFamily: "'Space Grotesk', monospace",
-                        }}>
-                          {stat.number}
-                        </div>
-                        
-                        <div style={{
-                          fontSize: '0.8rem',
-                          fontWeight: '600',
-                          color: theme.textPrimary,
-                          marginBottom: '10px',
-                        }}>
-                          {stat.label}
-                        </div>
-                        
-                        <div style={{
-                          width: '100%',
-                          height: '6px',
-                          background: '#e0e0e0',
-                          borderRadius: '3px',
-                          overflow: 'hidden',
-                        }}>
+                    <div style={{
+                      display: 'flex',
+                      gap: '12px',
+                      paddingBottom: '5px',
+                      minWidth: 'max-content',
+                    }}>
+                      {[
+                        { 
+                          number: '03', 
+                          label: 'Years Experience',
+                          color: theme.accentPrimary,
+                          description: 'Building web apps'
+                        },
+                        { 
+                          number: '05', 
+                          label: 'Projects Completed',
+                          color: theme.accentPrimary,
+                          description: 'Concept to deployment'
+                        },
+                        { 
+                          number: '∞', 
+                          label: 'Learning Journey',
+                          color: theme.accentPrimary,
+                          description: 'Always exploring'
+                        },
+                        { 
+                          number: '24/7', 
+                          label: 'Problem Solving',
+                          color: theme.accentPrimary,
+                          description: 'Creative solutions'
+                        },
+                        { 
+                          number: '100%', 
+                          label: 'Commitment',
+                          color: theme.accentPrimary,
+                          description: 'Quality delivery'
+                        }
+                      ].map((stat, index) => (
+                        <div key={index} style={{
+                          minWidth: '160px',
+                          textAlign: 'center',
+                          padding: '15px',
+                          background: `${stat.color}08`,
+                          borderRadius: '15px',
+                          border: `1px solid ${stat.color}20`,
+                          transition: 'all 0.3s ease',
+                          flexShrink: 0,
+                        }}
+                        onMouseEnter={(e) => {
+                          e.target.style.transform = 'translateY(-3px)'
+                          e.target.style.boxShadow = `0 8px 20px ${stat.color}25`
+                        }}
+                        onMouseLeave={(e) => {
+                          e.target.style.transform = 'translateY(0)'
+                          e.target.style.boxShadow = 'none'
+                        }}
+                        >
                           <div style={{
-                            width: stat.percentage,
-                            height: '100%',
-                            background: stat.color,
-                            borderRadius: '3px',
-                            transition: 'width 1.5s ease-in-out',
-                          }}></div>
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            gap: '6px',
+                            marginBottom: '8px',
+                          }}>
+                            <div style={{
+                              fontSize: '1.4rem',
+                              fontWeight: '900',
+                              color: stat.color,
+                              fontFamily: "'Space Grotesk', monospace",
+                            }}>
+                              {stat.number}
+                            </div>
+                          </div>
+                          
+                          <div style={{
+                            fontSize: '0.75rem',
+                            fontWeight: '600',
+                            color: theme.textPrimary,
+                            marginBottom: '6px',
+                          }}>
+                            {stat.label}
+                          </div>
+
+                          <div style={{
+                            fontSize: '0.7rem',
+                            color: theme.textSecondary,
+                            lineHeight: 1.3,
+                          }}>
+                            {stat.description}
+                          </div>
                         </div>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -821,7 +1006,7 @@ export default function AboutMeIntro() {
                     overflow: 'hidden',
                     background: `linear-gradient(145deg, ${theme.bgSecondary}, ${theme.accentTertiary}50)`,
                     padding: '15px',
-                    transform: isImageHovered ? 'scale(1.02) rotate(1deg)' : 'scale(1)',
+                    transform: isImageHovered ? 'scale(1.02) rotate(-2deg)' : 'scale(1) rotate(-2deg)', // Added slight rotation
                     transition: 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
                   }}
                   onMouseEnter={() => setIsImageHovered(true)}
@@ -981,196 +1166,328 @@ export default function AboutMeIntro() {
                   </div>
                 </div>
               </div>
-              {/* Stats Section */}
+              {/* Stats Section - Vertical Cards Carousel */}
               <div style={{
                 position: 'relative',
                 opacity: elementVisible ? 1 : 0,
                 transform: elementVisible ? 'translateX(0)' : 'translateX(50px)',
                 transition: 'all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s',
+                height: '400px',
+                width: '320px', // Increased to accommodate larger cards
               }}>
-                {/* Stats Layout */}
-                <div style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '12px',
-                  width: '100%',
-                }}>
-                  {[
-                    { 
-                      number: '03', 
-                      label: 'Years Experience',
-                      color: theme.accentPrimary,
-                      percentage: '85%'
-                    },
-                    { 
-                      number: '05', 
-                      label: 'Projects Experience',
-                      color: theme.textSecondary,
-                      percentage: '92%'
-                    },
-                    { 
-                      number: '∞', 
-                      label: 'Learning Experience',
-                      color: theme.accentSecondary,
-                      percentage: '100%'
-                    }
-                  ].map((stat, index) => (
-                    <div key={index} style={{
-                      position: 'relative',
-                      background: '#ffffff',
-                      borderRadius: '15px',
-                      padding: '16px',
-                      border: `2px solid ${stat.color}`,
-                      minWidth: '220px',
-                      transition: 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-                      cursor: 'pointer',
-                      overflow: 'hidden',
-                      opacity: 1,
-                    }}
-                    onMouseEnter={(e) => {
-                      e.target.style.transform = 'translateX(8px) scale(1.02)'
-                      e.target.style.boxShadow = `0 15px 35px ${stat.color}40`
-                      e.target.style.borderColor = stat.color
-                    }}
-                    onMouseLeave={(e) => {
-                      e.target.style.transform = 'scale(1)'
-                      e.target.style.boxShadow = 'none'
-                      e.target.style.borderColor = stat.color
-                    }}
-                    >
-                      {/* Content Layout */}
-                      <div style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'space-between',
-                        marginBottom: '10px',
-                      }}>
-                        <div style={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: '12px',
-                        }}>
-                          {/* Number Circle */}
-                          <div style={{
-                            width: '45px',
-                            height: '45px',
-                            borderRadius: '50%',
-                            background: stat.color,
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            boxShadow: `0 6px 15px ${stat.color}40`,
-                          }}>
-                            <span style={{
-                              fontSize: '1.2rem',
-                              fontWeight: '900',
-                              color: 'white',
-                              fontFamily: "'Space Grotesk', monospace",
-                            }}>
-                              {stat.number}
-                            </span>
-                          </div>
-                          {/* Label */}
-                          <div>
-                            <div style={{
-                              fontSize: '1rem',
-                              fontWeight: '700',
-                              color: theme.textPrimary,
-                              marginBottom: '2px',
-                            }}>
-                              {stat.label}
-                            </div>
-                            <div style={{
-                              fontSize: '0.75rem',
-                              color: theme.textSecondary,
-                              fontWeight: '500',
-                            }}>
-                              Professional Growth
-                            </div>
-                          </div>
-                        </div>
+                {/* Carousel Container */}
+                <div 
+                  data-carousel-container
+                  style={{
+                    position: 'relative',
+                    height: '100%',
+                    width: '100%',
+                    overflowY: 'auto',
+                    overflowX: 'hidden',
+                    scrollBehavior: 'smooth',
+                    scrollbarWidth: 'none', // Firefox
+                    msOverflowStyle: 'none', // IE and Edge
+                  }}
+                  className="hide-scrollbar"
+                  onScroll={(e) => {
+                    const scrollTop = e.target.scrollTop;
+                    const cardHeight = 100; // Reduced spacing
+                    const newActiveIndex = Math.round(scrollTop / cardHeight);
+                    const clampedIndex = Math.max(0, Math.min(4, newActiveIndex));
+                    setActiveCardIndex(clampedIndex);
+                  }}
+                >
+                  {/* Cards Container - Enhanced Layout */}
+                  <div style={{
+                    position: 'relative',
+                    height: 'calc(100% + 500px)', // Reduced scrollable area
+                    paddingTop: '120px', // Reduced padding
+                    paddingBottom: '120px', // Reduced padding
+                  }}>
+                    {[
+                      { 
+                        number: '03', 
+                        label: 'Years Experience',
+                        color: theme.accentPrimary,
+                        description: 'Building modern web applications'
+                      },
+                      { 
+                        number: '05', 
+                        label: 'Projects Completed',
+                        color: theme.accentPrimary,
+                        description: 'From concept to deployment'
+                      },
+                      { 
+                        number: '∞', 
+                        label: 'Learning Journey',
+                        color: theme.accentPrimary,
+                        description: 'Exploring new technologies'
+                      },
+                      { 
+                        number: '24/7', 
+                        label: 'Problem Solving',
+                        color: theme.accentPrimary,
+                        description: 'Creative solutions daily'
+                      },
+                      { 
+                        number: '100%', 
+                        label: 'Commitment',
+                        color: theme.accentPrimary,
+                        description: 'Quality code delivery'
+                      }
+                    ].map((stat, index) => {
+                      // Calculate positions for enhanced stacked effect
+                      const baseY = 120 + (index * 100); // Reduced spacing
+                      
+                      // Calculate visual positioning relative to active card
+                      const relativePosition = index - activeCardIndex;
+                      
+                      let scale = 1;
+                      let opacity = 1;
+                      let zIndex = 5;
+                      let translateY = 0;
+                      let background = '#ffffff';
+                      let borderOpacity = '1';
+                      
+                      if (relativePosition === 0) {
+                        // Center/Active card - fully visible
+                        scale = 1;
+                        opacity = 1;
+                        zIndex = 5;
+                        translateY = 0;
+                        background = '#7e3f49ff'; // Accent color background
+                        borderOpacity = '1';
+                      } else if (relativePosition === -1) {
+                        // Card above center
+                        scale = 0.88;
+                        opacity = 0.7;
+                        zIndex = 4;
+                        translateY = -25;
+                        background = '#f8f9fa';
+                        borderOpacity = '0.7';
+                      } else if (relativePosition === 1) {
+                        // Card below center
+                        scale = 0.88;
+                        opacity = 0.7;
+                        zIndex = 4;
+                        translateY = 25;
+                        background = '#f8f9fa';
+                        borderOpacity = '0.7';
+                      } else if (relativePosition < -1) {
+                        // Cards far above
+                        scale = 0.75;
+                        opacity = 0.4;
+                        zIndex = 3;
+                        translateY = -50;
+                        background = '#f0f0f0';
+                        borderOpacity = '0.5';
+                      } else {
+                        // Cards far below
+                        scale = 0.75;
+                        opacity = 0.4;
+                        zIndex = 3;
+                        translateY = 50;
+                        background = '#f0f0f0';
+                        borderOpacity = '0.5';
+                      }
 
-                        {/* Right Icon */}
-                        <div style={{
-                          width: '28px',
-                          height: '28px',
-                          borderRadius: '8px',
-                          background: '#f0f0f0',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                        }}>
+                      return (
+                        <div key={index} style={{
+                          position: 'absolute',
+                          top: `${baseY}px`,
+                          left: '50%',
+                          width: '270px', // Increased from 250px
+                          height: '140px', // Increased from 120px
+                          background: background,
+                          borderRadius: '18px', // Slightly larger radius
+                          padding: '18px', // Increased padding
+                          border: `2px solid ${stat.color}${Math.round(parseFloat(borderOpacity) * 255).toString(16).padStart(2, '0')}`,
+                          boxShadow: relativePosition === 0 
+                            ? `0 20px 40px ${stat.color}30` 
+                            : `0 8px 20px rgba(0,0,0,0.1)`,
+                          transform: `translateX(-50%) translateY(${translateY}px) scale(${scale})`,
+                          opacity: opacity,
+                          zIndex: zIndex,
+                          transition: 'all 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                          cursor: 'pointer',
+                          overflow: 'hidden', // Changed back to hidden for clean look
+                        }}
+                        onClick={() => {
+                          setActiveCardIndex(index);
+                          const container = document.querySelector('[data-carousel-container]');
+                          if (container) {
+                            container.scrollTo({
+                              top: index * 100,
+                              behavior: 'smooth'
+                            });
+                          }
+                        }}
+                        >
+                          {/* Enhanced Card Content */}
                           <div style={{
-                            width: '10px',
-                            height: '10px',
+                            display: 'flex',
+                            alignItems: 'center', // Changed to center for compact layout
+                            gap: '12px',
+                            height: '100%',
+                          }}>
+                            {/* Left: Bigger Number Circle with Different Shape */}
+                            <div style={{
+                              width: '60px', // Increased from 45px
+                              height: '60px', // Increased from 45px
+                              borderRadius: '20px', // Changed from 50% (circle) to rounded square
+                              background: `linear-gradient(135deg, ${stat.color}, ${stat.color}dd)`, // Enhanced gradient
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              boxShadow: `0 8px 20px ${stat.color}40`, // Enhanced shadow
+                              flexShrink: 0,
+                              transform: 'rotate(-5deg)', // Slight rotation for dynamic look
+                            }}>
+                              <span style={{
+                                fontSize: '1.3rem', // Increased font size
+                                fontWeight: '900',
+                                color: 'white',
+                                fontFamily: "'Space Grotesk', monospace",
+                                transform: 'rotate(5deg)', // Counter-rotate text to keep it straight
+                              }}>
+                                {stat.number}
+                              </span>
+                            </div>
+
+                            {/* Right: Compact Content */}
+                            <div style={{
+                              flex: 1,
+                              display: 'flex',
+                              flexDirection: 'column',
+                              justifyContent: 'center',
+                              gap: '4px', // Minimal gap
+                            }}>
+                              {/* Title */}
+                              <div style={{
+                                fontSize: '1rem', // Smaller title
+                                fontWeight: '700',
+                                color: relativePosition === 0 ? '#ffffff' : theme.textPrimary, // White text for active card
+                                lineHeight: 1.1,
+                              }}>
+                                {stat.label}
+                              </div>
+
+                              {/* Compact Description */}
+                              <div style={{
+                                fontSize: '0.8rem', // Smaller description
+                                color: relativePosition === 0 ? '#FFECEA' : theme.textSecondary, // Light text for active card
+                                fontWeight: '500',
+                                lineHeight: 1.2,
+                              }}>
+                                {stat.description}
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Enhanced Decorative Elements */}
+                          <div style={{
+                            position: 'absolute',
+                            top: '8px',
+                            right: '8px',
+                            width: '20px',
+                            height: '20px',
+                            background: `${stat.color}20`,
                             borderRadius: '50%',
-                            background: stat.color,
+                          }}></div>
+
+                          {/* Subtle Pattern Overlay */}
+                          <div style={{
+                            position: 'absolute',
+                            top: 0,
+                            right: 0,
+                            width: '60px',
+                            height: '60px',
+                            background: `linear-gradient(135deg, transparent 40%, ${stat.color}08 100%)`,
+                            borderTopRightRadius: '16px',
                           }}></div>
                         </div>
-                      </div>
+                      );
+                    })}
+                  </div>
+                </div>
 
-                      {/* Progress Bar */}
-                      <div style={{
-                        width: '100%',
-                        height: '6px',
-                        background: '#e0e0e0',
-                        borderRadius: '3px',
-                        overflow: 'hidden',
-                        position: 'relative',
-                      }}>
-                        <div style={{
-                          width: stat.percentage,
-                          height: '100%',
-                          background: stat.color,
-                          borderRadius: '3px',
-                          transition: 'width 1s ease-in-out',
-                        }}></div>
-                      </div>
-                    </div>
+                {/* Enhanced Navigation Indicators */}
+                <div style={{
+                  position: 'absolute',
+                  right: '-12px',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '6px',
+                  alignItems: 'center',
+                }}>
+                  {[0,1,2,3,4].map((dot, index) => (
+                    <div key={index} style={{
+                      width: index === activeCardIndex ? '8px' : '5px',
+                      height: index === activeCardIndex ? '8px' : '5px',
+                      borderRadius: '50%',
+                      background: index === activeCardIndex ? theme.accentPrimary : `${theme.accentPrimary}50`,
+                      transition: 'all 0.3s ease',
+                      cursor: 'pointer',
+                      boxShadow: index === activeCardIndex ? `0 2px 8px ${theme.accentPrimary}40` : 'none',
+                    }}
+                    onClick={() => {
+                      setActiveCardIndex(index);
+                      const container = document.querySelector('[data-carousel-container]');
+                      if (container) {
+                        container.scrollTo({
+                          top: index * 100,
+                          behavior: 'smooth'
+                        });
+                      }
+                    }}
+                    ></div>
                   ))}
                 </div>
-                {/* Decorative Elements */}
+
+                {/* Enhanced Decorative Elements */}
                 <div style={{
                   position: 'absolute',
-                  right: '-25px',
-                  top: '20%',
-                  bottom: '20%',
-                  width: '8px',
-                  background: theme.accentPrimary,
-                  borderRadius: '4px',
+                  right: '-20px',
+                  top: '25%',
+                  bottom: '25%',
+                  width: '4px',
+                  background: `linear-gradient(to bottom, transparent, ${theme.accentPrimary}60, transparent)`,
+                  borderRadius: '2px',
                 }}></div>
 
                 <div style={{
                   position: 'absolute',
-                  top: '-10px',
-                  left: '-15px',
-                  width: '25px',
-                  height: '25px',
-                  background: theme.accentPrimary,
-                  borderRadius: '6px',
-                  animation: 'floatPulse 5s ease-in-out infinite',
+                  top: '-8px',
+                  left: '-12px',
+                  width: '16px',
+                  height: '16px',
+                  background: `linear-gradient(135deg, ${theme.accentPrimary}, ${theme.accentPrimary}cc)`,
+                  borderRadius: '3px',
+                  animation: 'floatPulse 4s ease-in-out infinite',
                 }}></div>
 
                 <div style={{
                   position: 'absolute',
-                  bottom: '-8px',
-                  right: '-12px',
-                  width: '18px',
-                  height: '18px',
-                  border: `3px solid ${theme.textSecondary}`,
-                  borderRadius: '50%',
-                  animation: 'rotateFloat 10s linear infinite',
-                }}></div>
-
-                <div style={{
-                  position: 'absolute',
-                  top: '45%',
-                  left: '-20px',
+                  bottom: '-6px',
+                  right: '-10px',
                   width: '12px',
                   height: '12px',
-                  background: theme.accentSecondary,
+                  border: `2px solid ${theme.textSecondary}80`,
+                  borderRadius: '50%',
+                  animation: 'rotateFloat 8s linear infinite',
+                }}></div>
+
+                <div style={{
+                  position: 'absolute',
+                  top: '40%',
+                  left: '-16px',
+                  width: '8px',
+                  height: '8px',
+                  background: `${theme.accentSecondary}cc`,
                   clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)',
-                  animation: 'floatPulse 7s ease-in-out infinite reverse',
+                  animation: 'floatPulse 6s ease-in-out infinite reverse',
                 }}></div>
               </div>
             </>
@@ -1213,6 +1530,11 @@ export default function AboutMeIntro() {
         @keyframes expandContract {
           0%, 100% { width: 100px; }
           50% { width: 120px; }
+        }
+
+        /* Hide scrollbar for WebKit browsers */
+        .hide-scrollbar::-webkit-scrollbar {
+          display: none;
         }
       `}</style>
     </div>

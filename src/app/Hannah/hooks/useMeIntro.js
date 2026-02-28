@@ -18,14 +18,26 @@ export const useMeIntro = () => {
     height: typeof window !== 'undefined' ? window.innerHeight : 800
   })
 
-  const greetings = [
-    "Creative Developer & Designer",
-    "Building Digital Experience", 
-    "Innovation Meets Function   ",
-    "Code with Purpose & Intent  ",
-    "Design with Intent & Vision",
-    "Digital Solution Creator    "
-  ]
+const greetings = [
+  "Creating Simple Digital Experiences",
+  "Building Useful Web Projects",
+  "Turning Ideas Into Websites",
+  "Learning and Growing Through Code",
+  "Designing Clean and Simple Interfaces",
+  "Developing Practical Solutions",
+  "Making Ideas Work Online",
+  "Exploring Modern Web Development",
+  "Improving Through Every Project",
+  "Creating Things That Work and Feel Right",
+  "Continuously Learning and Improving",
+  "Always Curious, Always Learning",
+  "Growing Through Every Challenge",
+  "Learning Something New Every Day",
+  "Open to Learning and New Ideas",
+  "Building, Testing, and Learning",
+  "Progress Over Perfection",
+  "Learning as I Create"
+]
 
   const socialLinks = {
     facebook: "https://www.facebook.com/share/15r8QNkywy/",
@@ -55,11 +67,12 @@ export const useMeIntro = () => {
     }
   }, [])
 
-  // Get responsive values
+  // Enhanced responsive values function
   const getResponsiveValue = (desktop, tablet, mobile) => {
-    if (windowSize.width < 768) return mobile
-    if (windowSize.width < 1024) return tablet
-    return desktop
+    if (windowSize.width < 480) return mobile // Small mobile
+    if (windowSize.width < 768) return mobile // Mobile
+    if (windowSize.width < 1024) return tablet // Tablet
+    return desktop // Desktop
   }
 
   useEffect(() => {

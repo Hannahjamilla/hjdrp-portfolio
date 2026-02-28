@@ -355,7 +355,7 @@ export default function Projects({ scrollDirection = 'down' }) {
       <div style={{
         minHeight: '100vh',
         background: theme.bgPrimary,
-        padding: getResponsiveValue('100px 60px', '80px 40px', '60px 25px'),
+        padding: getResponsiveValue('60px 40px', '50px 30px', '40px 20px'),
         fontFamily: "'Inter', 'SF Pro Display', -apple-system, sans-serif",
         opacity: isVisible ? 1 : 0,
         transform: isVisible ? 'translateY(0)' : (scrollDirection === 'down' ? 'translateY(50px)' : 'translateY(-50px)'),
@@ -397,15 +397,15 @@ export default function Projects({ scrollDirection = 'down' }) {
           {/* Enhanced Header */}
           <div style={{
             textAlign: 'center',
-            marginBottom: getResponsiveValue(80, 60, 40),
+            marginBottom: getResponsiveValue(50, 40, 30),
             opacity: isVisible ? 1 : 0,
             transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
             transition: 'all 0.8s ease 0.2s',
           }}>
             <h1 style={{
-              fontSize: getResponsiveValue('5rem', '4rem', '3.2rem'),
+              fontSize: getResponsiveValue('3.5rem', '3rem', '2.5rem'),
               fontWeight: '900',
-              marginBottom: getResponsiveValue(25, 22, 20),
+              marginBottom: getResponsiveValue(15, 12, 10),
               color: theme.textPrimary,
               letterSpacing: '-0.04em',
               textShadow: '0 2px 4px rgba(0,0,0,0.05)',
@@ -446,7 +446,7 @@ export default function Projects({ scrollDirection = 'down' }) {
               </span>
             </h1>
             <p style={{
-              fontSize: getResponsiveValue('1.5rem', '1.3rem', '1.15rem'),
+              fontSize: getResponsiveValue('1.2rem', '1.1rem', '1rem'),
               color: theme.textMuted,
               fontWeight: '400',
               maxWidth: '700px',
@@ -473,8 +473,8 @@ export default function Projects({ scrollDirection = 'down' }) {
           <div style={{
             display: 'grid',
             gridTemplateColumns: getResponsiveValue('repeat(3, 1fr)', 'repeat(2, 1fr)', '1fr'),
-            gap: getResponsiveValue(40, 30, 25),
-            marginBottom: getResponsiveValue(60, 50, 40),
+            gap: getResponsiveValue(25, 20, 15),
+            marginBottom: getResponsiveValue(40, 30, 25),
             alignItems: 'stretch',
           }} className="project-grid">
             {projects.map((project, index) => (
@@ -483,7 +483,7 @@ export default function Projects({ scrollDirection = 'down' }) {
                 style={{
                   background: theme.bgPrimary,
                   border: `2px solid ${theme.borderLight}`,
-                  borderRadius: '24px',
+                  borderRadius: '16px',
                   overflow: 'hidden',
                   position: 'relative',
                   boxShadow: '0 10px 30px -5px rgba(0, 0, 0, 0.1)',
@@ -508,7 +508,7 @@ export default function Projects({ scrollDirection = 'down' }) {
                 {/* Project Image */}
                 <div style={{
                   width: '100%',
-                  height: getResponsiveValue(280, 240, 200),
+                  height: getResponsiveValue(200, 180, 150),
                   overflow: 'hidden',
                   position: 'relative',
                   background: theme.bgSecondary,
@@ -538,11 +538,11 @@ export default function Projects({ scrollDirection = 'down' }) {
                     transition: 'opacity 0.3s ease',
                     display: 'flex',
                     alignItems: 'flex-end',
-                    padding: '20px',
+                    padding: '15px',
                   }}>
                     <div style={{
                       color: '#ffffff',
-                      fontSize: getResponsiveValue('1rem', '0.95rem', '0.9rem'),
+                      fontSize: getResponsiveValue('0.85rem', '0.8rem', '0.75rem'),
                       fontWeight: '600',
                     }}>
                       Click to view details →
@@ -556,9 +556,9 @@ export default function Projects({ scrollDirection = 'down' }) {
                     right: '15px',
                     background: theme.accentColor,
                     color: theme.bgPrimary,
-                    padding: getResponsiveValue('8px 16px', '7px 14px', '6px 12px'),
+                    padding: getResponsiveValue('6px 12px', '5px 10px', '4px 8px'),
                     borderRadius: '20px',
-                    fontSize: getResponsiveValue('0.85rem', '0.8rem', '0.75rem'),
+                    fontSize: getResponsiveValue('0.75rem', '0.7rem', '0.65rem'),
                     fontWeight: '800',
                     letterSpacing: '0.5px',
                     boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
@@ -569,16 +569,16 @@ export default function Projects({ scrollDirection = 'down' }) {
 
                 {/* Project Info */}
                 <div style={{
-                  padding: getResponsiveValue('25px', '22px', '20px'),
+                  padding: getResponsiveValue('18px', '16px', '14px'),
                   display: 'flex',
                   flexDirection: 'column',
                   flex: 1,
                 }} className="card-content">
                   <h3 style={{
-                    fontSize: getResponsiveValue('1.5rem', '1.3rem', '1.2rem'),
+                    fontSize: getResponsiveValue('1.2rem', '1.1rem', '1rem'),
                     fontWeight: '800',
                     color: theme.textPrimary,
-                    marginBottom: '10px',
+                    marginBottom: '8px',
                     lineHeight: 1.2,
                   }} className="force-light-text">
                     {project.title}
@@ -586,9 +586,9 @@ export default function Projects({ scrollDirection = 'down' }) {
                   
                   {project.subtitle && (
                     <p style={{
-                      fontSize: getResponsiveValue('1rem', '0.95rem', '0.9rem'),
+                      fontSize: getResponsiveValue('0.85rem', '0.8rem', '0.75rem'),
                       color: theme.textMuted,
-                      marginBottom: '12px',
+                      marginBottom: '10px',
                       fontWeight: '500',
                     }} className="force-light-text">
                       {project.subtitle}
@@ -596,10 +596,10 @@ export default function Projects({ scrollDirection = 'down' }) {
                   )}
 
                   <p style={{
-                    fontSize: getResponsiveValue('0.95rem', '0.9rem', '0.85rem'),
+                    fontSize: getResponsiveValue('0.8rem', '0.75rem', '0.7rem'),
                     color: theme.textSecondary,
-                    lineHeight: 1.6,
-                    marginBottom: '15px',
+                    lineHeight: 1.5,
+                    marginBottom: '12px',
                     display: '-webkit-box',
                     WebkitLineClamp: 3,
                     WebkitBoxOrient: 'vertical',
@@ -613,18 +613,18 @@ export default function Projects({ scrollDirection = 'down' }) {
                   <div style={{
                     display: 'flex',
                     flexWrap: 'wrap',
-                    gap: '8px',
-                    marginBottom: '15px',
+                    gap: '6px',
+                    marginBottom: '12px',
                   }}>
                     {project.tech.slice(0, 3).map((tech, idx) => (
                       <div
                         key={idx}
                         style={{
-                          padding: '6px 12px',
+                          padding: '5px 10px',
                           background: theme.bgSecondary,
                           border: `1px solid ${theme.borderLight}`,
-                          borderRadius: '12px',
-                          fontSize: getResponsiveValue('0.8rem', '0.75rem', '0.7rem'),
+                          borderRadius: '10px',
+                          fontSize: getResponsiveValue('0.7rem', '0.65rem', '0.6rem'),
                           fontWeight: '600',
                           color: theme.textPrimary,
                         }}
@@ -635,11 +635,11 @@ export default function Projects({ scrollDirection = 'down' }) {
                     ))}
                     {project.tech.length > 3 && (
                       <div style={{
-                        padding: '6px 12px',
+                        padding: '5px 10px',
                         background: `${theme.accentColor}10`,
                         border: `1px solid ${theme.accentColor}30`,
-                        borderRadius: '12px',
-                        fontSize: getResponsiveValue('0.8rem', '0.75rem', '0.7rem'),
+                        borderRadius: '10px',
+                        fontSize: getResponsiveValue('0.7rem', '0.65rem', '0.6rem'),
                         fontWeight: '700',
                         color: theme.accentColor,
                       }}>
@@ -653,18 +653,18 @@ export default function Projects({ scrollDirection = 'down' }) {
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center',
-                    paddingTop: '15px',
+                    paddingTop: '12px',
                     borderTop: `1px solid ${theme.borderLight}`,
                   }} className="force-light-border">
                     <div style={{
-                      fontSize: getResponsiveValue('0.85rem', '0.8rem', '0.75rem'),
+                      fontSize: getResponsiveValue('0.75rem', '0.7rem', '0.65rem'),
                       color: theme.textMuted,
                       fontWeight: '600',
                     }} className="force-light-text">
                       {project.year}
                     </div>
                     <div style={{
-                      fontSize: getResponsiveValue('0.85rem', '0.8rem', '0.75rem'),
+                      fontSize: getResponsiveValue('0.75rem', '0.7rem', '0.65rem'),
                       color: theme.accentColor,
                       fontWeight: '700',
                     }}>
