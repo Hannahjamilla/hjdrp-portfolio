@@ -68,7 +68,11 @@ export default function Introduction() {
     if (mounted) {
       const style = document.createElement('style')
       style.textContent = createMeIntroStyles() + `
-        @keyframes softFloat {
+        @keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+@keyframes softFloat {
           0%, 100% { transform: translateY(0); }
           50% { transform: translateY(-10px); }
         }
@@ -431,6 +435,8 @@ export default function Introduction() {
               padding: '6px 16px',
               border: `1px solid ${theme.textSecondary}30`,
               borderRadius: '30px',
+              minWidth: '320px',
+              textAlign: 'center',
             }}>
               {displayText}
               <span style={{

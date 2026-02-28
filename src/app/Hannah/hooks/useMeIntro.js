@@ -20,11 +20,11 @@ export const useMeIntro = () => {
 
   const greetings = [
     "Creative Developer & Designer",
-    "Building Digital Experiences", 
-    "Innovation Meets Functionality",
-    "Code with Purpose",
-    "Design with Intent",
-    "Digital Solution Creator"
+    "Building Digital Experience", 
+    "Innovation Meets Function   ",
+    "Code with Purpose & Intent  ",
+    "Design with Intent & Vision",
+    "Digital Solution Creator    "
   ]
 
   const socialLinks = {
@@ -112,9 +112,9 @@ export const useMeIntro = () => {
         
         setTimeout(() => {
           setCurrentGreeting((prev) => (prev + 1) % greetings.length)
-        }, 3000)
+        }, 2500)
       }
-    }, 40)
+    }, 60)
 
     return () => clearInterval(typingInterval)
   }, [currentGreeting])
