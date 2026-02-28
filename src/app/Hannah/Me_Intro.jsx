@@ -763,9 +763,9 @@ export default function Introduction() {
             gridTemplateColumns: getResponsiveValue(
               'repeat(4, 1fr)', 
               'repeat(2, 1fr)', 
-              isSmallMobile ? '1fr' : 'repeat(2, 1fr)'
+              'repeat(2, 1fr)'
             ),
-            gap: getResponsiveValue('12px', '10px', '8px'),
+            gap: getResponsiveValue('12px', '10px', '6px'),
             width: '100%',
             maxWidth: '700px',
             marginTop: getResponsiveValue('12px', '10px', '8px'),
@@ -776,16 +776,17 @@ export default function Introduction() {
                 key={index}
                 className="tech-card hover-glow"
                 style={{
-                  padding: getResponsiveValue('16px 12px', '14px 10px', '12px 8px'),
+                  padding: getResponsiveValue('16px 12px', '14px 10px', '4px 3px'),
                   background: `linear-gradient(135deg, ${theme.accentPrimary}15, ${theme.bgSecondary}90)`,
                   border: `1px solid ${theme.accentPrimary}`,
-                  borderRadius: getResponsiveValue('14px', '12px', '10px'),
+                  borderRadius: getResponsiveValue('20px', '16px', '12px'),
                   cursor: 'default',
                   transition: 'all 0.4s ease',
                   textAlign: 'center',
                   backdropFilter: 'blur(12px)',
                   boxShadow: `0 6px 25px -6px ${theme.accentPrimary}35, inset 0 1px 0 ${theme.accentPrimary}20`,
-                  minHeight: getResponsiveValue('75px', '65px', '55px'),
+                  minHeight: getResponsiveValue('75px', '65px', '35px'),
+                  aspectRatio: getResponsiveValue('1.4', '1.3', '1.5'),
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'center',
@@ -797,8 +798,8 @@ export default function Introduction() {
                 {/* Tech code identifier */}
                 <div style={{
                   position: 'absolute',
-                  top: getResponsiveValue('6px', '5px', '4px'),
-                  right: getResponsiveValue('8px', '6px', '5px'),
+                  top: getResponsiveValue('6px', '5px', '1px'),
+                  right: getResponsiveValue('8px', '6px', '2px'),
                   fontSize: getResponsiveValue('8px', '7px', '6px'),
                   fontFamily: 'monospace',
                   color: theme.accentPrimary,
@@ -812,7 +813,7 @@ export default function Introduction() {
                 {/* Enhanced tech symbol with glow effect */}
                 <div style={{
                   fontSize: getResponsiveValue('24px', '20px', '18px'),
-                  marginBottom: getResponsiveValue('10px', '8px', '6px'),
+                  marginBottom: getResponsiveValue('10px', '8px', '2px'),
                   filter: 'none',
                   transition: 'all 0.4s ease',
                   color: theme.accentPrimary,

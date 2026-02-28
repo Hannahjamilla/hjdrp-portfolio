@@ -28,7 +28,7 @@ const greetings = [
   "Making Ideas Work Online",
   "Exploring Modern Web Development",
   "Improving Through Every Project",
-  "Creating Things That Work and Feel Right",
+  "Built with Purpose",
   "Continuously Learning and Improving",
   "Always Curious, Always Learning",
   "Growing Through Every Challenge",
