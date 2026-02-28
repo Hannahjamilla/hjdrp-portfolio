@@ -335,22 +335,6 @@ export default function AboutMeIntro() {
                 }}></div>
                 
                 <div style={{ position: 'relative', zIndex: 2 }}>
-                  <div style={{
-                    width: '60px',
-                    height: '60px',
-                    background: theme.accentPrimary,
-                    borderRadius: '50%',
-                    margin: '0 auto 20px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontSize: '1.5rem',
-                    color: 'white',
-                    fontWeight: '900',
-                  }}>
-                    
-                  </div>
-                  
                   <h3 style={{
                     fontSize: isMobile ? '1.4rem' : '1.6rem',
                     fontWeight: '700',
@@ -393,22 +377,6 @@ export default function AboutMeIntro() {
                 }}></div>
                 
                 <div style={{ position: 'relative', zIndex: 2 }}>
-                  <div style={{
-                    width: '60px',
-                    height: '60px',
-                    background: theme.textSecondary,
-                    borderRadius: '50%',
-                    margin: '0 auto 20px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontSize: '1.5rem',
-                    color: 'white',
-                    fontWeight: '900',
-                  }}>
-                    🚀
-                  </div>
-                  
                   <h3 style={{
                     fontSize: isMobile ? '1.4rem' : '1.6rem',
                     fontWeight: '700',
