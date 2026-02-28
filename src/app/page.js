@@ -2,7 +2,9 @@
 
 import { useState, useEffect, useRef } from 'react'
 import Loading from './components/Loading'
+import GlobalNavigation from './components/GlobalNavigation'
 import AboutMe from './Hannah/AboutMe'
+import AboutMeIntro from './Hannah/AboutMeIntro'
 import Me_Intro from './Hannah/Me_Intro'
 import Work from './Hannah/work'
 import Projects from './Hannah/projects'
@@ -545,6 +547,9 @@ export default function Home() {
       style={styles.container} 
       className="container-lock bg-pattern"
     >
+      {/* Global Navigation */}
+      <GlobalNavigation />
+
       {/* Floating Background Elements */}
       <div style={styles.floatingElements}>
         <div className="floating-element" style={{...styles.floatingShape, top: '10%', left: '5%'}} />
@@ -562,6 +567,7 @@ export default function Home() {
       />
 
       <Me_Intro scrollDirection={scrollDirection} />
+      <AboutMeIntro scrollDirection={scrollDirection} />
       <AboutMe scrollDirection={scrollDirection} />
       <Work scrollDirection={scrollDirection} />
       <Projects scrollDirection={scrollDirection} />

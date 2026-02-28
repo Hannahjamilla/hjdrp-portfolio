@@ -84,7 +84,7 @@ export default function GlobalNavigation() {
       WebkitBackdropFilter: 'blur(25px)',
       boxShadow: isScrolled ? '0 8px 32px rgba(0, 0, 0, 0.12)' : '0 4px 20px rgba(0, 0, 0, 0.08)',
       transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-      padding: getResponsiveValue('18px 60px', '15px 40px', '15px 20px'),
+      padding: getResponsiveValue('8px 30px', '6px 20px', '6px 12px'),
       borderBottom: `1px solid ${isScrolled ? 'rgba(0, 0, 0, 0.1)' : 'rgba(0, 0, 0, 0.05)'}`,
     }}>
       <div style={{
@@ -117,7 +117,7 @@ export default function GlobalNavigation() {
             src="/images/HanMade.png" 
             alt="HanMade Logo" 
             style={{
-              height: getResponsiveValue(55, 50, 45),
+              height: getResponsiveValue(32, 28, 25),
               width: 'auto',
               objectFit: 'contain',
               transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
@@ -138,10 +138,10 @@ export default function GlobalNavigation() {
         {/* Desktop Navigation */}
         <div style={{
           display: isMobile ? 'none' : 'flex',
-          gap: getResponsiveValue(40, 30, 25),
+          gap: getResponsiveValue(18, 15, 12),
           alignItems: 'center',
           background: 'rgba(0, 0, 0, 0.03)',
-          padding: '12px 24px',
+          padding: '6px 12px',
           borderRadius: '50px',
           border: '1px solid rgba(0, 0, 0, 0.08)',
         }}>
@@ -152,9 +152,9 @@ export default function GlobalNavigation() {
               style={{
                 color: activeSection === section ? theme.textPrimary : theme.textSecondary,
                 textDecoration: 'none',
-                fontSize: getResponsiveValue('0.95rem', '0.9rem', '0.85rem'),
+                fontSize: getResponsiveValue('0.8rem', '0.75rem', '0.7rem'),
                 fontWeight: activeSection === section ? '700' : '600',
-                padding: '10px 16px',
+                padding: '6px 10px',
                 position: 'relative',
                 transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                 whiteSpace: 'nowrap',
@@ -196,7 +196,7 @@ export default function GlobalNavigation() {
             border: '1px solid rgba(0, 0, 0, 0.1)',
             borderRadius: '12px',
             cursor: 'pointer',
-            padding: '12px',
+            padding: '8px',
             transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
           }}
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -211,16 +211,16 @@ export default function GlobalNavigation() {
           }}
         >
           <div style={{
-            width: '28px',
-            height: '3px',
+            width: '24px',
+            height: '2px',
             backgroundColor: theme.textPrimary,
             borderRadius: '2px',
             transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
             transform: isMobileMenuOpen ? 'rotate(45deg) translate(6px, 6px)' : 'none',
           }}></div>
           <div style={{
-            width: '28px',
-            height: '3px',
+            width: '24px',
+            height: '2px',
             backgroundColor: theme.textPrimary,
             borderRadius: '2px',
             transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
@@ -228,12 +228,12 @@ export default function GlobalNavigation() {
             transform: isMobileMenuOpen ? 'scale(0)' : 'scale(1)',
           }}></div>
           <div style={{
-            width: '28px',
-            height: '3px',
+            width: '24px',
+            height: '2px',
             backgroundColor: theme.textPrimary,
             borderRadius: '2px',
             transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-            transform: isMobileMenuOpen ? 'rotate(-45deg) translate(8px, -8px)' : 'none',
+            transform: isMobileMenuOpen ? 'rotate(-45deg) translate(6px, -6px)' : 'none',
           }}></div>
         </button>
       </div>
@@ -249,7 +249,7 @@ export default function GlobalNavigation() {
           backdropFilter: 'blur(25px)',
           WebkitBackdropFilter: 'blur(25px)',
           borderTop: `1px solid ${theme.borderColor}`,
-          padding: '25px 20px',
+          padding: '15px 12px',
           display: 'flex',
           flexDirection: 'column',
           gap: '8px',
@@ -264,9 +264,9 @@ export default function GlobalNavigation() {
               style={{
                 color: activeSection === section ? theme.textPrimary : theme.textSecondary,
                 textDecoration: 'none',
-                fontSize: '1.1rem',
+                fontSize: '0.9rem',
                 fontWeight: activeSection === section ? '700' : '600',
-                padding: '16px 20px',
+                padding: '10px 14px',
                 textAlign: 'center',
                 transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                 borderRadius: '12px',
