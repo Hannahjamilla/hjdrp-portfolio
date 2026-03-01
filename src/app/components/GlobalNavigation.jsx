@@ -75,7 +75,7 @@ export default function GlobalNavigation() {
   return (
     <nav style={{
       position: 'fixed',
-      top: isMobile ? '20px' : 0,
+      top: isMobile ? '15px' : 0,
       left: isMobile ? '50%' : 0,
       right: isMobile ? 'auto' : 0,
       transform: isMobile ? 'translateX(-50%)' : 'none',
@@ -87,10 +87,10 @@ export default function GlobalNavigation() {
       backdropFilter: isMobile ? 'blur(8px)' : 'blur(12px)',
       border: isMobile ? `1px solid ${theme.borderColor}` : 'none',
       borderBottom: isMobile ? `1px solid ${theme.borderColor}` : `1px solid ${theme.borderColor}`,
-      borderRadius: isMobile ? '25px' : '0',
+      borderRadius: isMobile ? '20px' : '0',
       zIndex: 1000,
       transition: 'all 0.3s ease',
-      padding: isMobile ? '8px 12px' : '0 20px',
+      padding: isMobile ? '6px 10px' : '0 20px',
       display: 'flex',
       alignItems: 'center',
       justifyContent: isMobile ? 'center' : 'space-between',
@@ -202,7 +202,7 @@ export default function GlobalNavigation() {
       {isMobile && (
         <div style={{
           display: 'flex',
-          gap: '8px',
+          gap: '6px',
           alignItems: 'center',
           justifyContent: 'center',
         }}>
@@ -213,23 +213,23 @@ export default function GlobalNavigation() {
               style={{
                 color: activeSection === section ? '#FFFFFF' : theme.textSecondary,
                 textDecoration: 'none',
-                fontSize: '0.75rem',
+                fontSize: '0.7rem',
                 fontWeight: activeSection === section ? '700' : '600',
-                padding: '4px 12px',
+                padding: '3px 8px',
                 textAlign: 'center',
                 transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                borderRadius: '15px',
+                borderRadius: '12px',
                 background: activeSection === section ? theme.textPrimary : 'transparent',
                 textTransform: 'uppercase',
-                letterSpacing: '0.3px',
+                letterSpacing: '0.2px',
                 cursor: 'pointer',
-                width: '65px',
-                height: '24px',
+                width: '55px',
+                height: '20px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 whiteSpace: 'nowrap',
-                boxShadow: activeSection === section ? '0 3px 8px rgba(108, 19, 31, 0.25)' : 'none',
+                boxShadow: activeSection === section ? '0 2px 6px rgba(108, 19, 31, 0.25)' : 'none',
               }} 
               onClick={(e) => {
                 e.preventDefault()

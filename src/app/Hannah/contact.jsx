@@ -449,6 +449,7 @@ export default function Contact({ scrollDirection = 'down' }) {
         @media (max-width: 1024px) {
           .contact-container {
             padding: 60px 30px !important;
+            padding-top: 90px !important;
             min-height: auto !important;
           }
           .contact-title {
@@ -465,6 +466,7 @@ export default function Contact({ scrollDirection = 'down' }) {
         @media (max-width: 768px) {
           .contact-container {
             padding: 40px 20px !important;
+            padding-top: 70px !important;
             min-height: auto !important;
             display: block !important;
           }
@@ -495,6 +497,7 @@ export default function Contact({ scrollDirection = 'down' }) {
         @media (max-width: 480px) {
           .contact-container {
             padding: 30px 15px !important;
+            padding-top: 60px !important;
             min-height: auto !important;
             display: block !important;
           }
@@ -539,6 +542,7 @@ export default function Contact({ scrollDirection = 'down' }) {
         @media (max-width: 380px) {
           .contact-container {
             padding: 25px 12px !important;
+            padding-top: 55px !important;
           }
           .contact-title {
             font-size: 1.6rem !important;
@@ -559,6 +563,7 @@ export default function Contact({ scrollDirection = 'down' }) {
         @media (max-height: 600px) and (orientation: landscape) {
           .contact-container {
             padding: 20px 15px !important;
+            padding-top: 50px !important;
             min-height: auto !important;
           }
           .contact-grid {
@@ -602,7 +607,8 @@ export default function Contact({ scrollDirection = 'down' }) {
         id="contact" 
         style={{
           minHeight: isMobile ? 'auto' : '100vh',
-          padding: getResponsiveValue('80px 40px', '40px 20px', '30px 15px'),
+          padding: getResponsiveValue('80px 40px', '40px 20px', '50px 15px'),
+        paddingTop: getResponsiveValue('100px', '80px', '70px'),
           paddingBottom: getResponsiveValue('80px', '60px', '40px'),
           background: `
             radial-gradient(circle at 20% 30%, ${theme.bgPrimary}60 0%, transparent 50%),
@@ -873,7 +879,7 @@ export default function Contact({ scrollDirection = 'down' }) {
           <div style={{
             textAlign: 'center',
             marginBottom: getResponsiveValue(60, 40, 30),
-            paddingTop: getResponsiveValue(0, 20, 30),
+            paddingTop: getResponsiveValue(0, 10, 20),
           }}>
             {/* Terminal-style header */}
             <div style={{
