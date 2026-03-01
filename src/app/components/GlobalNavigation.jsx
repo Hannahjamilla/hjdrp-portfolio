@@ -87,10 +87,10 @@ export default function GlobalNavigation() {
       backdropFilter: isMobile ? 'blur(8px)' : 'blur(12px)',
       border: isMobile ? `1px solid ${theme.borderColor}` : 'none',
       borderBottom: isMobile ? `1px solid ${theme.borderColor}` : `1px solid ${theme.borderColor}`,
-      borderRadius: isMobile ? '20px' : '0',
+      borderRadius: isMobile ? '10px' : '0',
       zIndex: 1000,
       transition: 'all 0.3s ease',
-      padding: isMobile ? '5px 10px' : '0 20px',
+      padding: isMobile ? '2px 6px' : '0 20px',
       display: 'flex',
       alignItems: 'center',
       justifyContent: isMobile ? 'center' : 'space-between',
@@ -202,7 +202,7 @@ export default function GlobalNavigation() {
       {isMobile && (
         <div style={{
           display: 'flex',
-          gap: '5px',
+          gap: '4px',
           alignItems: 'center',
           justifyContent: 'center',
         }}>
@@ -213,23 +213,23 @@ export default function GlobalNavigation() {
               style={{
                 color: activeSection === section ? '#FFFFFF' : theme.textSecondary,
                 textDecoration: 'none',
-                fontSize: '0.72rem',
+                fontSize: '0.68rem',
                 fontWeight: activeSection === section ? '700' : '600',
-                padding: '3px 8px',
+                padding: '0px 8px',
                 textAlign: 'center',
                 transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                borderRadius: '14px',
+                borderRadius: '7px',
                 background: activeSection === section ? theme.textPrimary : 'transparent',
                 textTransform: 'uppercase',
-                letterSpacing: '0.2px',
+                letterSpacing: '0.1px',
                 cursor: 'pointer',
-                width: '56px',
-                height: '22px',
+                width: '60px',
+                height: '12px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 whiteSpace: 'nowrap',
-                boxShadow: activeSection === section ? '0 2px 6px rgba(108, 19, 31, 0.22)' : 'none',
+                boxShadow: activeSection === section ? '0 1px 2px rgba(108, 19, 31, 0.2)' : 'none',
               }} 
               onClick={(e) => {
                 e.preventDefault()
