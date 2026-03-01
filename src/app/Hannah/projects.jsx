@@ -508,7 +508,7 @@ export default function Projects({ scrollDirection = 'down' }) {
                 {/* Project Image */}
                 <div style={{
                   width: '100%',
-                  height: getResponsiveValue(200, 180, 150),
+                  height: getResponsiveValue(220, 200, 180),
                   overflow: 'hidden',
                   position: 'relative',
                   background: theme.bgSecondary,
@@ -569,7 +569,7 @@ export default function Projects({ scrollDirection = 'down' }) {
 
                 {/* Project Info */}
                 <div style={{
-                  padding: getResponsiveValue('18px', '16px', '14px'),
+                  padding: getResponsiveValue('20px', '18px', '16px'),
                   display: 'flex',
                   flexDirection: 'column',
                   flex: 1,

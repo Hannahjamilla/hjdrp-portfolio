@@ -495,8 +495,8 @@ export default function AboutMe({ scrollDirection = 'down' }) {
                 borderRadius: '20px',
                 padding: getResponsiveValue('45px 35px', '40px 30px', '35px 25px'),
                 position: 'relative',
-                boxShadow: '25px 25px 0px 0px rgba(0,0,0,1)',
-                transform: 'rotate(-2deg)',
+                boxShadow: isMobile ? '15px 15px 0px 0px rgba(0,0,0,1)' : '25px 25px 0px 0px rgba(0,0,0,1)',
+                transform: isMobile ? 'rotate(0deg)' : 'rotate(-2deg)',
                 overflow: 'hidden',
               }} className="profile-card">
 
@@ -598,8 +598,8 @@ export default function AboutMe({ scrollDirection = 'down' }) {
               {/* Fixed Hexagon Grid */}
               <div style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(4, 1fr)',
-                gap: getResponsiveValue(12, 10, 8),
+                gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)',
+                gap: getResponsiveValue(16, 12, 10),
                 marginTop: getResponsiveValue('80px', '70px', '60px'),
                 justifyItems: 'center',
               }} className="hexagon-grid">

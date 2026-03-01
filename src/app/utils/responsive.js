@@ -38,3 +38,10 @@ export const fontSize = {
   '3xl': (isMobile) => isMobile ? '2rem' : '2.5rem',
   '4xl': (isMobile) => isMobile ? '2.5rem' : '3.5rem',
 }
+
+// Touch-friendly sizing
+export const touchTargets = {
+  minimum: 44, // iOS minimum
+  recommended: 48, // Android minimum
+  comfortable: 52, // Comfortable for most users
+}

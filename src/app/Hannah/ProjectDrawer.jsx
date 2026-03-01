@@ -251,8 +251,8 @@ export default function ProjectDrawer({
           top: 0,
           right: 0,
           bottom: 0,
-          width: isMobile ? '100%' : isTablet ? '85%' : '900px',
-          maxWidth: isMobile ? '100%' : '900px',
+          width: isMobile ? '100vw' : isTablet ? '85vw' : '900px',
+          maxWidth: isMobile ? '100vw' : '900px',
           height: '100vh',
           background: `linear-gradient(135deg, ${theme.bgPrimary} 0%, ${theme.bgSecondary} 100%)`,
           boxShadow: isMobile 
@@ -272,15 +272,15 @@ export default function ProjectDrawer({
           onClick={onClose}
           style={{
             position: 'absolute',
-            top: isMobile ? '15px' : '25px',
-            right: isMobile ? '15px' : '25px',
-            width: isMobile ? '45px' : '50px',
-            height: isMobile ? '45px' : '50px',
+            top: isMobile ? '20px' : '25px',
+            right: isMobile ? '20px' : '25px',
+            width: isMobile ? '48px' : '50px',
+            height: isMobile ? '48px' : '50px',
             borderRadius: '50%',
             background: theme.accentColor,
             color: theme.bgPrimary,
             border: 'none',
-            fontSize: isMobile ? '1.5rem' : '1.8rem',
+            fontSize: isMobile ? '1.8rem' : '1.8rem',
             cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
@@ -288,6 +288,7 @@ export default function ProjectDrawer({
             zIndex: 10,
             transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
             boxShadow: '0 8px 20px rgba(108, 19, 31, 0.3)',
+            touchAction: 'manipulation',
           }}
           onMouseEnter={(e) => {
             e.target.style.transform = 'scale(1.1) rotate(90deg)'

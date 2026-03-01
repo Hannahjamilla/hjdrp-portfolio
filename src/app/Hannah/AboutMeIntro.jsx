@@ -510,39 +510,74 @@ export default function AboutMeIntro() {
                 }}>
                   {[
                     { 
-                      number: '03', 
-                      label: 'Years Experience',
+                      number: '3+', 
+                      label: 'Years Learning',
                       color: theme.accentPrimary,
-                      description: 'Building web applications',
-                      details: 'HTML/CSS to React & Node.js'
+                      description: 'Continuous development',
+                      details: 'From basics to advanced concepts'
                     },
                     { 
-                      number: '05', 
-                      label: 'Projects Completed',
+                      number: '10+', 
+                      label: 'Projects Built',
                       color: theme.accentPrimary,
-                      description: 'From concept to deployment',
-                      details: 'E-commerce & management systems'
+                      description: 'Ideas brought to life',
+                      details: 'Web apps & mobile solutions'
                     },
                     { 
                       number: '∞', 
-                      label: 'Learning Journey',
+                      label: 'Growth Mindset',
                       color: theme.accentPrimary,
-                      description: 'Exploring new technologies',
-                      details: 'Always curious about trends'
+                      description: 'Always exploring',
+                      details: 'New frameworks & technologies'
                     },
                     { 
                       number: '24/7', 
-                      label: 'Problem Solving',
+                      label: 'Problem Solver',
                       color: theme.accentPrimary,
-                      description: 'Creative solutions',
+                      description: 'Creative thinking',
                       details: 'Debugging & optimization'
                     },
                     { 
                       number: '100%', 
-                      label: 'Commitment',
+                      label: 'Dedication',
                       color: theme.accentPrimary,
-                      description: 'Quality code delivery',
-                      details: 'Attention to detail'
+                      description: 'Quality focused',
+                      details: 'Attention to every detail'
+                    },
+                    { 
+                      number: '5+', 
+                      label: 'Tech Stacks',
+                      color: theme.accentPrimary,
+                      description: 'Full-stack skills',
+                      details: 'Frontend to backend mastery'
+                    },
+                    { 
+                      number: '50+', 
+                      label: 'Skills Acquired',
+                      color: theme.accentPrimary,
+                      description: 'Diverse toolkit',
+                      details: 'Languages, frameworks & tools'
+                    },
+                    { 
+                      number: '3', 
+                      label: 'Certifications',
+                      color: theme.accentPrimary,
+                      description: 'Professional credentials',
+                      details: 'Industry recognized achievements'
+                    },
+                    { 
+                      number: '∞', 
+                      label: 'Curiosity Level',
+                      color: theme.accentPrimary,
+                      description: 'Never stop learning',
+                      details: 'Always asking "how" & "why"'
+                    },
+                    { 
+                      number: '1st', 
+                      label: 'User Priority',
+                      color: theme.accentPrimary,
+                      description: 'User-centered design',
+                      details: 'Building for real people'
                     }
                   ].map((stat, index) => (
                     <div key={index} style={{
@@ -621,12 +656,12 @@ export default function AboutMeIntro() {
                 gap: '8px',
                 marginTop: '20px',
               }}>
-                {[0,1,2,3,4].map((dot, index) => (
+                {[0,1,2,3,4,5,6,7,8,9].map((dot, index) => (
                   <div key={index} style={{
                     width: '8px',
                     height: '8px',
                     borderRadius: '50%',
-                    background: index < 3 ? theme.accentPrimary : `${theme.accentPrimary}30`,
+                    background: index < 5 ? theme.accentPrimary : `${theme.accentPrimary}30`,
                     transition: 'all 0.3s ease',
                   }}></div>
                 ))}
@@ -868,34 +903,64 @@ export default function AboutMeIntro() {
                     }}>
                       {[
                         { 
-                          number: '03', 
-                          label: 'Years Experience',
+                          number: '3+', 
+                          label: 'Years Learning',
                           color: theme.accentPrimary,
-                          description: 'Building web apps'
+                          description: 'Continuous development'
                         },
                         { 
-                          number: '05', 
-                          label: 'Projects Completed',
+                          number: '10+', 
+                          label: 'Projects Built',
                           color: theme.accentPrimary,
-                          description: 'Concept to deployment'
+                          description: 'Ideas to reality'
                         },
                         { 
                           number: '∞', 
-                          label: 'Learning Journey',
+                          label: 'Growth Mindset',
                           color: theme.accentPrimary,
                           description: 'Always exploring'
                         },
                         { 
                           number: '24/7', 
-                          label: 'Problem Solving',
+                          label: 'Problem Solver',
                           color: theme.accentPrimary,
-                          description: 'Creative solutions'
+                          description: 'Creative thinking'
                         },
                         { 
                           number: '100%', 
-                          label: 'Commitment',
+                          label: 'Dedication',
                           color: theme.accentPrimary,
-                          description: 'Quality delivery'
+                          description: 'Quality focused'
+                        },
+                        { 
+                          number: '5+', 
+                          label: 'Tech Stacks',
+                          color: theme.accentPrimary,
+                          description: 'Full-stack skills'
+                        },
+                        { 
+                          number: '50+', 
+                          label: 'Skills Acquired',
+                          color: theme.accentPrimary,
+                          description: 'Diverse toolkit'
+                        },
+                        { 
+                          number: '3', 
+                          label: 'Certifications',
+                          color: theme.accentPrimary,
+                          description: 'Professional credentials'
+                        },
+                        { 
+                          number: '∞', 
+                          label: 'Curiosity Level',
+                          color: theme.accentPrimary,
+                          description: 'Never stop learning'
+                        },
+                        { 
+                          number: '1st', 
+                          label: 'User Priority',
+                          color: theme.accentPrimary,
+                          description: 'User-centered design'
                         }
                       ].map((stat, index) => (
                         <div key={index} style={{
@@ -1193,47 +1258,77 @@ export default function AboutMeIntro() {
                     const scrollTop = e.target.scrollTop;
                     const cardHeight = 100; // Reduced spacing
                     const newActiveIndex = Math.round(scrollTop / cardHeight);
-                    const clampedIndex = Math.max(0, Math.min(4, newActiveIndex));
+                    const clampedIndex = Math.max(0, Math.min(9, newActiveIndex));
                     setActiveCardIndex(clampedIndex);
                   }}
                 >
                   {/* Cards Container - Enhanced Layout */}
                   <div style={{
                     position: 'relative',
-                    height: 'calc(100% + 500px)', // Reduced scrollable area
+                    height: 'calc(100% + 900px)', // Increased for more cards
                     paddingTop: '120px', // Reduced padding
                     paddingBottom: '120px', // Reduced padding
                   }}>
                     {[
                       { 
-                        number: '03', 
-                        label: 'Years Experience',
+                        number: '3+', 
+                        label: 'Years Learning',
                         color: theme.accentPrimary,
-                        description: 'Building modern web applications'
+                        description: 'Continuous skill development'
                       },
                       { 
-                        number: '05', 
-                        label: 'Projects Completed',
+                        number: '10+', 
+                        label: 'Projects Built',
                         color: theme.accentPrimary,
-                        description: 'From concept to deployment'
+                        description: 'From ideas to reality'
                       },
                       { 
                         number: '∞', 
-                        label: 'Learning Journey',
+                        label: 'Growth Mindset',
                         color: theme.accentPrimary,
-                        description: 'Exploring new technologies'
+                        description: 'Always exploring & learning'
                       },
                       { 
                         number: '24/7', 
-                        label: 'Problem Solving',
+                        label: 'Problem Solver',
                         color: theme.accentPrimary,
-                        description: 'Creative solutions daily'
+                        description: 'Creative thinking daily'
                       },
                       { 
                         number: '100%', 
-                        label: 'Commitment',
+                        label: 'Dedication',
                         color: theme.accentPrimary,
-                        description: 'Quality code delivery'
+                        description: 'Quality in every detail'
+                      },
+                      { 
+                        number: '5+', 
+                        label: 'Tech Stacks',
+                        color: theme.textSecondary,
+                        description: 'Full-stack capabilities'
+                      },
+                      { 
+                        number: '50+', 
+                        label: 'Skills Acquired',
+                        color: theme.textSecondary,
+                        description: 'Frontend to backend'
+                      },
+                      { 
+                        number: '3', 
+                        label: 'Certifications',
+                        color: theme.textSecondary,
+                        description: 'Professional credentials'
+                      },
+                      { 
+                        number: '∞', 
+                        label: 'Curiosity Level',
+                        color: theme.textSecondary,
+                        description: 'Never stop questioning'
+                      },
+                      { 
+                        number: '1st', 
+                        label: 'User Priority',
+                        color: theme.textSecondary,
+                        description: 'User-centered approach'
                       }
                     ].map((stat, index) => {
                       // Calculate positions for enhanced stacked effect
@@ -1422,7 +1517,7 @@ export default function AboutMeIntro() {
                   gap: '6px',
                   alignItems: 'center',
                 }}>
-                  {[0,1,2,3,4].map((dot, index) => (
+                  {[0,1,2,3,4,5,6,7,8,9].map((dot, index) => (
                     <div key={index} style={{
                       width: index === activeCardIndex ? '8px' : '5px',
                       height: index === activeCardIndex ? '8px' : '5px',

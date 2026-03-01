@@ -376,8 +376,8 @@ export default function Introduction() {
           conic-gradient(from 45deg at 60% 20%, ${theme.accentPrimary}10, transparent, ${theme.textSecondary}08),
           linear-gradient(135deg, ${theme.bgPrimary} 0%, ${theme.bgSecondary} 50%, ${theme.bgPrimary} 100%)
         `,
-        padding: getResponsiveValue('20px 120px', '16px 60px', '12px 24px'),
-        paddingTop: getResponsiveValue('120px', '100px', '90px'), // Increased top padding for navigation
+        padding: getResponsiveValue('20px 40px', '16px 30px', '12px 16px'),
+        paddingTop: getResponsiveValue('120px', '100px', '80px'), // Increased top padding for navigation
         paddingBottom: getResponsiveValue('60px', '50px', '40px'), // Increased bottom padding
         width: '100%',
         overflow: 'visible',

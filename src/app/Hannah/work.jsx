@@ -167,7 +167,7 @@ export default function Work() {
           margin: '0 auto',
           display: 'grid',
           gridTemplateColumns: isMobile ? '1fr' : isTablet ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)',
-          gap: getResponsiveValue('15px', '12px', '10px'),
+          gap: getResponsiveValue('20px', '16px', '12px'),
           padding: getResponsiveValue('0 20px', '0 15px', '0 10px'),
         }}
       >
@@ -178,8 +178,8 @@ export default function Work() {
             onMouseLeave={() => setHoveredIndex(null)}
             style={{
               background: 'linear-gradient(135deg, #fff 0%, #f8f9fa 100%)',
-              borderRadius: getResponsiveValue('12px', '10px', '8px'),
-              padding: getResponsiveValue('18px', '15px', '12px'),
+              borderRadius: getResponsiveValue('16px', '12px', '10px'),
+              padding: getResponsiveValue('24px', '20px', '16px'),
               border: `2px solid ${theme.border}`,
               boxShadow: hoveredIndex === index
                 ? '0 30px 60px rgba(0,0,0,0.15)'
