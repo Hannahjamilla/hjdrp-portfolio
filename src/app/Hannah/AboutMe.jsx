@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useState, useRef } from 'react'
-import GlobalNavigation from '../components/GlobalNavigation'
 
 export default function AboutMe({ scrollDirection = 'down' }) {
   const [mounted, setMounted] = useState(false)
@@ -343,7 +342,6 @@ export default function AboutMe({ scrollDirection = 'down' }) {
 
   return (
     <div>
-      <GlobalNavigation />
       <div style={{
         minHeight: '100vh',
         background: theme.bgPrimary,

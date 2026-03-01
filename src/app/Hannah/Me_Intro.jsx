@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { useMeIntro } from './hooks/useMeIntro'
 import { createMeIntroStyles } from './styles/MeIntroStyles'
-import GlobalNavigation from '../components/GlobalNavigation'
 import ScrollToTop from './components/ScrollToTop'
 
 export default function Introduction() {
@@ -358,7 +357,6 @@ export default function Introduction() {
 
   return (
     <div ref={containerRef} style={{ position: 'relative', width: '100%', overflow: 'visible' }}>
-      <GlobalNavigation />
 
       {/* Main Container - Adjusted for navigation visibility */}
       <div className="content-container" style={{

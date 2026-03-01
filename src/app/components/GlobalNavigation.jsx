@@ -75,26 +75,23 @@ export default function GlobalNavigation() {
   return (
     <nav style={{
       position: 'fixed',
-      top: isMobile ? '18px' : 0,
-      left: isMobile ? '50%' : 0,
-      right: isMobile ? 'auto' : 0,
-      transform: isMobile ? 'translateX(-50%)' : 'none',
-      height: isMobile ? 'auto' : '70px',
-      width: isMobile ? 'auto' : '100%',
+      top: 0,
+      left: 0,
+      right: 0,
+      height: isMobile ? '60px' : '70px',
+      width: '100%',
       background: isMobile 
-        ? 'rgba(255, 236, 234, 0.9)' 
+        ? 'rgba(255, 236, 234, 0.95)' 
         : isScrolled ? 'rgba(255, 236, 234, 0.95)' : 'rgba(255, 236, 234, 0.8)',
-      backdropFilter: isMobile ? 'blur(8px)' : 'blur(12px)',
-      border: isMobile ? `1px solid ${theme.borderColor}` : 'none',
-      borderBottom: isMobile ? `1px solid ${theme.borderColor}` : `1px solid ${theme.borderColor}`,
-      borderRadius: isMobile ? '10px' : '0',
+      backdropFilter: 'blur(12px)',
+      borderBottom: `1px solid ${theme.borderColor}`,
       zIndex: 1000,
       transition: 'all 0.3s ease',
-      padding: isMobile ? '2px 6px' : '0 20px',
+      padding: isMobile ? '0 16px' : '0 20px',
       display: 'flex',
       alignItems: 'center',
-      justifyContent: isMobile ? 'center' : 'space-between',
-      boxShadow: isMobile ? '0 4px 20px rgba(0, 0, 0, 0.1)' : 'none',
+      justifyContent: 'space-between',
+      boxShadow: isMobile || isScrolled ? '0 2px 8px rgba(0, 0, 0, 0.08)' : 'none',
     }}>
       {!isMobile && (
         <div style={{
@@ -198,13 +195,84 @@ export default function GlobalNavigation() {
         </div>
       )}
 
-      {/* Mobile Floating Navigation */}
+      {/* Mobile Navigation - Full Width Layout */}
       {isMobile && (
+        <>
+          {/* Mobile Logo */}
+          <div style={{ 
+            display: 'flex', 
+            alignItems: 'center',
+          }}>
+            <img 
+              src="/images/HanMade.png" 
+              alt="HanMade Logo" 
+              style={{
+                height: 28,
+                width: 'auto',
+                objectFit: 'contain',
+                cursor: 'pointer',
+              }}
+              onClick={() => scrollToSection('home')}
+            />
+          </div>
+
+          {/* Mobile Menu Toggle */}
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            style={{
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              padding: '8px',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '3px',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <div style={{
+              width: '20px',
+              height: '2px',
+              background: theme.textPrimary,
+              transition: 'all 0.3s ease',
+              transform: isMobileMenuOpen ? 'rotate(45deg) translateY(5px)' : 'none',
+            }}></div>
+            <div style={{
+              width: '20px',
+              height: '2px',
+              background: theme.textPrimary,
+              transition: 'all 0.3s ease',
+              opacity: isMobileMenuOpen ? 0 : 1,
+            }}></div>
+            <div style={{
+              width: '20px',
+              height: '2px',
+              background: theme.textPrimary,
+              transition: 'all 0.3s ease',
+              transform: isMobileMenuOpen ? 'rotate(-45deg) translateY(-5px)' : 'none',
+            }}></div>
+          </button>
+        </>
+      )}
+
+      {/* Mobile Menu Dropdown */}
+      {isMobile && isMobileMenuOpen && (
         <div style={{
+          position: 'absolute',
+          top: '100%',
+          right: '16px',
+          width: '200px',
+          background: 'rgba(255, 236, 234, 0.98)',
+          backdropFilter: 'blur(12px)',
+          border: `1px solid ${theme.borderColor}`,
+          borderRadius: '12px',
+          padding: '12px',
           display: 'flex',
-          gap: '4px',
-          alignItems: 'center',
-          justifyContent: 'center',
+          flexDirection: 'column',
+          gap: '8px',
+          boxShadow: '0 8px 24px rgba(0, 0, 0, 0.15)',
+          zIndex: 1001,
         }}>
           {sections.map((section) => (
             <a 
@@ -213,27 +281,33 @@ export default function GlobalNavigation() {
               style={{
                 color: activeSection === section ? '#FFFFFF' : theme.textSecondary,
                 textDecoration: 'none',
-                fontSize: '0.68rem',
+                fontSize: '0.85rem',
                 fontWeight: activeSection === section ? '700' : '600',
-                padding: '0px 8px',
-                textAlign: 'center',
+                padding: '10px 14px',
+                textAlign: 'left',
                 transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                borderRadius: '7px',
+                borderRadius: '8px',
                 background: activeSection === section ? theme.textPrimary : 'transparent',
                 textTransform: 'uppercase',
-                letterSpacing: '0.1px',
+                letterSpacing: '0.5px',
                 cursor: 'pointer',
-                width: '60px',
-                height: '12px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                whiteSpace: 'nowrap',
-                boxShadow: activeSection === section ? '0 1px 2px rgba(108, 19, 31, 0.2)' : 'none',
+                border: activeSection === section ? 'none' : `1px solid transparent`,
               }} 
               onClick={(e) => {
                 e.preventDefault()
                 scrollToSection(section)
+              }}
+              onMouseEnter={(e) => {
+                if (activeSection !== section) {
+                  e.target.style.background = 'rgba(108, 19, 31, 0.1)'
+                  e.target.style.borderColor = theme.borderColor
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (activeSection !== section) {
+                  e.target.style.background = 'transparent'
+                  e.target.style.borderColor = 'transparent'
+                }
               }}
             >
               {section.charAt(0).toUpperCase() + section.slice(1)}

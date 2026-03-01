@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import GlobalNavigation from '../components/GlobalNavigation'
 import ProjectDrawer from './ProjectDrawer'
 
 export default function Projects({ scrollDirection = 'down' }) {
@@ -351,7 +350,6 @@ export default function Projects({ scrollDirection = 'down' }) {
 
   return (
     <div>
-      <GlobalNavigation />
       <div style={{
         minHeight: '100vh',
         background: theme.bgPrimary,

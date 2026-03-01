@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import GlobalNavigation from '../components/GlobalNavigation'
 
 export default function Contact({ scrollDirection = 'down' }) {
   const [mounted, setMounted] = useState(false)
@@ -602,7 +601,6 @@ export default function Contact({ scrollDirection = 'down' }) {
 
   return (
     <div>
-      <GlobalNavigation />
       <section 
         id="contact" 
         style={{
