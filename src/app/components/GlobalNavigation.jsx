@@ -75,7 +75,7 @@ export default function GlobalNavigation() {
   return (
     <nav style={{
       position: 'fixed',
-      top: isMobile ? '15px' : 0,
+      top: isMobile ? '18px' : 0,
       left: isMobile ? '50%' : 0,
       right: isMobile ? 'auto' : 0,
       transform: isMobile ? 'translateX(-50%)' : 'none',
@@ -90,7 +90,7 @@ export default function GlobalNavigation() {
       borderRadius: isMobile ? '20px' : '0',
       zIndex: 1000,
       transition: 'all 0.3s ease',
-      padding: isMobile ? '6px 10px' : '0 20px',
+      padding: isMobile ? '5px 10px' : '0 20px',
       display: 'flex',
       alignItems: 'center',
       justifyContent: isMobile ? 'center' : 'space-between',
@@ -202,7 +202,7 @@ export default function GlobalNavigation() {
       {isMobile && (
         <div style={{
           display: 'flex',
-          gap: '6px',
+          gap: '5px',
           alignItems: 'center',
           justifyContent: 'center',
         }}>
@@ -213,23 +213,23 @@ export default function GlobalNavigation() {
               style={{
                 color: activeSection === section ? '#FFFFFF' : theme.textSecondary,
                 textDecoration: 'none',
-                fontSize: '0.7rem',
+                fontSize: '0.72rem',
                 fontWeight: activeSection === section ? '700' : '600',
                 padding: '3px 8px',
                 textAlign: 'center',
                 transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                borderRadius: '12px',
+                borderRadius: '14px',
                 background: activeSection === section ? theme.textPrimary : 'transparent',
                 textTransform: 'uppercase',
                 letterSpacing: '0.2px',
                 cursor: 'pointer',
-                width: '55px',
-                height: '20px',
+                width: '56px',
+                height: '22px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 whiteSpace: 'nowrap',
-                boxShadow: activeSection === section ? '0 2px 6px rgba(108, 19, 31, 0.25)' : 'none',
+                boxShadow: activeSection === section ? '0 2px 6px rgba(108, 19, 31, 0.22)' : 'none',
               }} 
               onClick={(e) => {
                 e.preventDefault()
