@@ -439,6 +439,24 @@ export const createMeIntroStyles = () => `
       height: 40px;
       font-size: 1rem;
     }
+    
+    /* Disable heavy animations on mobile */
+    .floating-shape,
+    .particle,
+    * {
+      animation: none !important;
+      transform: none !important;
+      filter: none !important;
+    }
+    
+    /* Simplify hover effects */
+    .avatar-container:hover,
+    .social-link:hover,
+    .primary-btn:hover,
+    .secondary-btn:hover {
+      transform: none !important;
+      box-shadow: none !important;
+    }
   }
   
   @media (max-width: 480px) {

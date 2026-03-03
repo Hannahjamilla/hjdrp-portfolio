@@ -63,11 +63,14 @@ const greetings = [
     }
 
     const handleMouseMove = (e) => {
+      // Throttle mouse movement on mobile for better performance
+      if (window.innerWidth < 768) return
       setMousePosition({ x: e.clientX, y: e.clientY })
     }
 
-    window.addEventListener('resize', handleResize)
-    window.addEventListener('mousemove', handleMouseMove)
+    // Use passive listeners for better performance
+    window.addEventListener('resize', handleResize, { passive: true })
+    window.addEventListener('mousemove', handleMouseMove, { passive: true })
     return () => {
       window.removeEventListener('resize', handleResize)
       window.removeEventListener('mousemove', handleMouseMove)
@@ -94,6 +97,12 @@ const greetings = [
       setIsScrolled(scrollTop > 50)
       setShowScrollTop(scrollTop > 300)
 
+      // Throttle section detection on mobile
+      if (window.innerWidth < 768) {
+        // Less frequent updates on mobile
+        if (scrollTop % 10 !== 0) return
+      }
+
       const sections = ['home', 'about', 'work', 'projects', 'contact']
       const current = sections.find(section => {
         const element = document.getElementById(section)
@@ -108,7 +117,7 @@ const greetings = [
       }
     }
 
-    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', handleScroll, { passive: true })
     return () => {
       clearTimeout(timer)
       window.removeEventListener('scroll', handleScroll)

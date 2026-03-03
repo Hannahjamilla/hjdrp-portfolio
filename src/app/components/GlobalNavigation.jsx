@@ -19,24 +19,35 @@ export default function GlobalNavigation() {
 
   const sections = ['home', 'about', 'work', 'projects', 'contact']
 
-  // Handle window resize
+  // Handle window resize with throttling
   useEffect(() => {
+    let timeoutId = null
+    
     const handleResize = () => {
-      setWindowSize({
-        width: window.innerWidth,
-        height: window.innerHeight
-      })
+      clearTimeout(timeoutId)
+      timeoutId = setTimeout(() => {
+        setWindowSize({
+          width: window.innerWidth,
+          height: window.innerHeight
+        })
+      }, window.innerWidth < 768 ? 300 : 150) // Longer delay on mobile
     }
 
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
+    window.addEventListener('resize', handleResize, { passive: true })
+    return () => {
+      clearTimeout(timeoutId)
+      window.removeEventListener('resize', handleResize)
+    }
   }, [])
 
-  // Handle scroll
+  // Handle scroll with throttling
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY
       setIsScrolled(scrollTop > 50)
+
+      // Throttle section detection on mobile
+      if (window.innerWidth < 768 && scrollTop % 10 !== 0) return
 
       const current = sections.find(section => {
         const element = document.getElementById(section)
@@ -51,7 +62,7 @@ export default function GlobalNavigation() {
       }
     }
 
-    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 

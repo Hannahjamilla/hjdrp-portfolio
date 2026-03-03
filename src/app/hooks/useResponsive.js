@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 
 export const useResponsive = () => {
   const [windowSize, setWindowSize] = useState({
@@ -12,17 +12,17 @@ export const useResponsive = () => {
     let timeoutId = null
     
     const handleResize = () => {
-      // Debounce resize events for better performance
+      // Debounce resize events for better performance - increased delay for mobile
       clearTimeout(timeoutId)
       timeoutId = setTimeout(() => {
         setWindowSize({
           width: window.innerWidth,
           height: window.innerHeight
         })
-      }, 150)
+      }, window.innerWidth < 768 ? 300 : 150) // Longer delay on mobile
     }
 
-    window.addEventListener('resize', handleResize)
+    window.addEventListener('resize', handleResize, { passive: true })
     
     return () => {
       clearTimeout(timeoutId)
@@ -30,16 +30,17 @@ export const useResponsive = () => {
     }
   }, [])
 
+  // Memoize responsive values to prevent unnecessary recalculations
   const isMobile = windowSize.width < 768
   const isTablet = windowSize.width >= 768 && windowSize.width < 1024
   const isDesktop = windowSize.width >= 1024
   const isLandscape = windowSize.width > windowSize.height
 
-  const getResponsiveValue = (desktop, tablet, mobile) => {
+  const getResponsiveValue = useCallback((desktop, tablet, mobile) => {
     if (isMobile) return mobile
     if (isTablet) return tablet
     return desktop
-  }
+  }, [isMobile, isTablet])
 
   return {
     windowSize,

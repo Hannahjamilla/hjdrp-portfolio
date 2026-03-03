@@ -219,8 +219,9 @@ export default function AboutMe({ scrollDirection = 'down' }) {
           }
           
           .profile-card {
-            padding: 25px 18px !important;
+            padding: 20px 15px !important;
             transform: rotate(0deg) !important;
+            box-shadow: 8px 8px 0px 0px rgba(0,0,0,1) !important;
           }
           
           .profile-card:hover {
@@ -491,9 +492,9 @@ export default function AboutMe({ scrollDirection = 'down' }) {
                 background: `linear-gradient(135deg, ${theme.bgPrimary} 0%, ${theme.bgSecondary} 100%)`,
                 border: `3px solid ${theme.accent}`,
                 borderRadius: '20px',
-                padding: getResponsiveValue('45px 35px', '40px 30px', '35px 25px'),
+                padding: getResponsiveValue('45px 35px', '40px 30px', '25px 20px'),
                 position: 'relative',
-                boxShadow: isMobile ? '15px 15px 0px 0px rgba(0,0,0,1)' : '25px 25px 0px 0px rgba(0,0,0,1)',
+                boxShadow: isMobile ? '10px 10px 0px 0px rgba(0,0,0,1)' : '25px 25px 0px 0px rgba(0,0,0,1)',
                 transform: isMobile ? 'rotate(0deg)' : 'rotate(-2deg)',
                 overflow: 'hidden',
               }} className="profile-card">
@@ -522,7 +523,7 @@ export default function AboutMe({ scrollDirection = 'down' }) {
                 }}></div>
 
                 <h3 style={{
-                  fontSize: getResponsiveValue('2rem', '1.8rem', '1.6rem'),
+                  fontSize: getResponsiveValue('2rem', '1.8rem', '1.4rem'),
                   fontWeight: '900',
                   color: theme.textPrimary,
                   marginBottom: '20px',
@@ -538,7 +539,7 @@ export default function AboutMe({ scrollDirection = 'down' }) {
                   </span>
                 </h3>
                 <p style={{
-                  fontSize: getResponsiveValue('1.1rem', '1rem', '0.95rem'),
+                  fontSize: getResponsiveValue('1.1rem', '1rem', '0.85rem'),
                   lineHeight: '1.8',
                   color: theme.textSecondary,
                   marginBottom: '30px',
@@ -562,7 +563,7 @@ export default function AboutMe({ scrollDirection = 'down' }) {
                   display: 'flex',
                   flexDirection: 'column',
                   gap: '15px',
-                  marginTop: getResponsiveValue('40px', '35px', '30px'),
+                  marginTop: getResponsiveValue('40px', '35px', '20px'),
                 }}>
                   {[
                     { label: 'Experience', value: '3+ Years' },
@@ -573,18 +574,18 @@ export default function AboutMe({ scrollDirection = 'down' }) {
                       display: 'flex',
                       justifyContent: 'space-between',
                       alignItems: 'center',
-                      padding: '15px 0',
+                      padding: getResponsiveValue('15px 0', '12px 0', '10px 0'),
                       borderBottom: `1px solid ${theme.borderColor}`,
                     }}>
                       <span style={{
-                        fontSize: getResponsiveValue('0.9rem', '0.85rem', '0.8rem'),
+                        fontSize: getResponsiveValue('0.9rem', '0.85rem', '0.75rem'),
                         fontWeight: '600',
                         color: theme.textMuted,
                         textTransform: 'uppercase',
                         letterSpacing: '0.05em',
                       }}>{stat.label}</span>
                       <span style={{
-                        fontSize: getResponsiveValue('1.4rem', '1.3rem', '1.2rem'),
+                        fontSize: getResponsiveValue('1.4rem', '1.3rem', '1.1rem'),
                         fontWeight: '800',
                         color: theme.accent,
                       }}>{stat.value}</span>

@@ -104,18 +104,7 @@ export default function Home() {
         background: var(--text-secondary);
       }
 
-      /* Scroll Progress Bar */
-      .scroll-progress {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 0%;
-        height: 3px;
-        background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
-        z-index: 9999;
-        transition: width 0.1s ease;
-        box-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
-      }
+
 
       /* Modern Animations */
       @keyframes fadeInUp {
@@ -452,20 +441,14 @@ export default function Home() {
     const animatedElements = document.querySelectorAll('.fade-in-up, .fade-in-left, .fade-in-right, .scale-in')
     animatedElements.forEach(el => observer.observe(el))
 
-    // Enhanced scroll handling
+    // Enhanced scroll handling with throttling
     const handleScroll = () => {
       if (typeof window === 'undefined') return
       
       const scrollTop = window.scrollY
-      const scrollProgress = document.querySelector('.scroll-progress')
       
-      // Calculate scroll progress
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight
-      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0
-      
-      if (scrollProgress) {
-        scrollProgress.style.width = `${progress}%`
-      }
+      // Throttle scroll updates on mobile
+      if (window.innerWidth < 768 && scrollTop % 5 !== 0) return
       
       // Determine scroll direction
       if (scrollTop > lastScrollY && scrollTop > 100) {
@@ -489,21 +472,18 @@ export default function Home() {
         setCurrentSection(current)
       }
 
-      // Parallax effect for background elements
-      const parallaxElements = document.querySelectorAll('.parallax')
-      parallaxElements.forEach(el => {
-        const speed = el.dataset.speed || 0.5
-        const yPos = -(scrollTop * speed)
-        el.style.transform = `translateY(${yPos}px)`
-      })
+      // Disable parallax on mobile for performance
+      if (window.innerWidth >= 768) {
+        const parallaxElements = document.querySelectorAll('.parallax')
+        parallaxElements.forEach(el => {
+          const speed = el.dataset.speed || 0.5
+          const yPos = -(scrollTop * speed)
+          el.style.transform = `translateY(${yPos}px)`
+        })
+      }
     }
 
-    // Add scroll progress bar
-    if (!document.querySelector('.scroll-progress')) {
-      const scrollProgressBar = document.createElement('div')
-      scrollProgressBar.className = 'scroll-progress'
-      document.body.appendChild(scrollProgressBar)
-    }
+
 
     // Add custom cursor - DISABLED
     // const addCustomCursor = () => {
@@ -550,21 +530,25 @@ export default function Home() {
       {/* Global Navigation */}
       <GlobalNavigation />
 
-      {/* Floating Background Elements */}
+      {/* Floating Background Elements - Disabled on mobile */}
+      {typeof window !== 'undefined' && window.innerWidth >= 768 && (
       <div style={styles.floatingElements}>
         <div className="floating-element" style={{...styles.floatingShape, top: '10%', left: '5%'}} />
         <div className="floating-element" style={{...styles.floatingShape, top: '20%', right: '10%', animationDelay: '-2s'}} />
         <div className="floating-element" style={{...styles.floatingShape, bottom: '30%', left: '8%', animationDelay: '-4s'}} />
         <div className="floating-element" style={{...styles.floatingShape, bottom: '10%', right: '5%', animationDelay: '-1s'}} />
       </div>
+      )}
 
-      {/* Interactive Background Gradient */}
+      {/* Interactive Background Gradient - Simplified on mobile */}
+      {typeof window !== 'undefined' && window.innerWidth >= 768 && (
       <div 
         style={{
           ...styles.interactiveBackground,
           background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(102, 126, 234, 0.05), transparent 40%)`
         }}
       />
+      )}
 
       <Me_Intro scrollDirection={scrollDirection} />
       <AboutMeIntro scrollDirection={scrollDirection} />

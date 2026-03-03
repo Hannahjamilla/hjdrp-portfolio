@@ -412,7 +412,7 @@ export default function AboutMeIntro() {
                     I turn ideas into <span style={{ 
                       color: theme.accentPrimary, 
                       fontWeight: '600' 
-                    }}>functional digital solutions</span> and enjoy creating applications that are 
+                    }}>functional digital solutions</span> and enjoy creating applications that are{' '}
                     <span style={{ 
                       color: theme.textSecondary, 
                       fontWeight: '600' 

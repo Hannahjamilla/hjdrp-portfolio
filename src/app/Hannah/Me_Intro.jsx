@@ -60,6 +60,9 @@ export default function Introduction() {
   const isTablet = windowSize.width < 1024
   const isSmallMobile = windowSize.width < 480
 
+  // Disable heavy animations on mobile for better performance
+  const shouldReduceAnimations = isMobile || window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
   // Remove auto-rotation - let user control interaction
   // useEffect(() => {
   //   const interval = setInterval(() => {
@@ -268,15 +271,15 @@ export default function Introduction() {
         `).join('')}
 
         .tech-glow {
-          animation: techGlow 2s ease-in-out infinite;
+          animation: ${shouldReduceAnimations ? 'none' : 'techGlow 2s ease-in-out infinite'};
         }
 
         .circuit-pulse {
-          animation: circuitPulse 2s ease-in-out infinite;
+          animation: ${shouldReduceAnimations ? 'none' : 'circuitPulse 2s ease-in-out infinite'};
         }
 
         .hologram-flicker {
-          animation: hologramFlicker 1.5s ease-in-out infinite;
+          animation: ${shouldReduceAnimations ? 'none' : 'hologramFlicker 1.5s ease-in-out infinite'};
         }
 
         .tech-card {
@@ -300,11 +303,11 @@ export default function Introduction() {
         }
 
         .soft-float {
-          animation: softFloat 6s ease-in-out infinite;
+          animation: ${shouldReduceAnimations ? 'none' : 'softFloat 6s ease-in-out infinite'};
         }
 
         .subtle-pulse {
-          animation: subtlePulse 3s ease-in-out infinite;
+          animation: ${shouldReduceAnimations ? 'none' : 'subtlePulse 3s ease-in-out infinite'};
         }
 
         .slide-up-fade {
@@ -338,8 +341,36 @@ export default function Introduction() {
         @media (prefers-reduced-motion: reduce) {
           .soft-float,
           .subtle-pulse,
+          .tech-glow,
+          .circuit-pulse,
+          .hologram-flicker,
           * {
             animation: none !important;
+          }
+        }
+
+        /* Mobile performance optimizations */
+        @media (max-width: 768px) {
+          .soft-float,
+          .subtle-pulse,
+          .tech-glow,
+          .circuit-pulse,
+          .hologram-flicker,
+          .matrix-rain {
+            animation: none !important;
+          }
+          
+          /* Disable heavy filters and transforms on mobile */
+          .hologram-flicker,
+          .tech-glow {
+            filter: none !important;
+            transform: none !important;
+            box-shadow: none !important;
+          }
+          
+          /* Simplify gradients on mobile */
+          .content-container {
+            background: ${theme.bgPrimary} !important;
           }
         }
       `
@@ -381,12 +412,13 @@ export default function Introduction() {
         overflow: 'visible',
       }} id="home">
 
-        {/* Responsive decorative elements */}
+        {/* Responsive decorative elements - Reduced on mobile */}
         <div style={{
           position: 'absolute',
           inset: 0,
           overflow: 'hidden',
           pointerEvents: 'none',
+          display: shouldReduceAnimations ? 'none' : 'block',
         }}>
           {/* Enhanced technical circuit lines */}
           <svg
@@ -436,8 +468,8 @@ export default function Introduction() {
             <polygon points={getResponsiveValue("160,40 170,50 160,60 150,50", "120,30 127,37 120,45 112,37", "80,20 85,25 80,30 75,25")} fill={theme.accentPrimary} opacity="0.4" />
           </svg>
 
-          {/* Code-like floating elements */}
-          {[...Array(getResponsiveValue(6, 4, 3))].map((_, i) => (
+          {/* Code-like floating elements - Reduced on mobile */}
+          {!shouldReduceAnimations && [...Array(getResponsiveValue(6, 4, 2))].map((_, i) => (
             <div
               key={`code-${i}`}
               style={{
@@ -458,8 +490,8 @@ export default function Introduction() {
             </div>
           ))}
 
-          {/* Matrix Rain Effect - Responsive */}
-          {[...Array(getResponsiveValue(8, 6, 4))].map((_, i) => (
+          {/* Matrix Rain Effect - Disabled on mobile */}
+          {!shouldReduceAnimations && [...Array(getResponsiveValue(8, 6, 0))].map((_, i) => (
             <div
               key={`matrix-${i}`}
               className="matrix-rain"
@@ -476,7 +508,8 @@ export default function Introduction() {
             />
           ))}
 
-          {/* Holographic Grid - Responsive */}
+          {/* Holographic Grid - Simplified on mobile */}
+          {!shouldReduceAnimations && (
           <div
             className="hologram-flicker"
             style={{
@@ -494,9 +527,11 @@ export default function Introduction() {
               clipPath: 'polygon(0 0, 100% 20%, 80% 100%, 0% 80%)',
             }}
           />
+          )}
 
-          {/* Animated Geometric Shapes - Responsive */}
+          {/* Animated Geometric Shapes - Simplified on mobile */}
           {/* Responsive animated geometric shapes */}
+          {!shouldReduceAnimations && (
           <div className="soft-float" style={{
             position: 'absolute',
             top: getResponsiveValue('10%', '8%', '5%'),
@@ -505,10 +540,12 @@ export default function Introduction() {
             height: getResponsiveValue('300px', '200px', '150px'),
             background: `conic-gradient(from 45deg, ${theme.accentPrimary}15, transparent, ${theme.textSecondary}10, transparent)`,
             borderRadius: '50%',
-            animation: 'rotateShape 20s linear infinite',
+            animation: shouldReduceAnimations ? 'none' : 'rotateShape 20s linear infinite',
             filter: getResponsiveValue('blur(40px)', 'blur(30px)', 'blur(20px)'),
           }} />
+          )}
 
+          {!shouldReduceAnimations && (
           <div style={{
             position: 'absolute',
             top: getResponsiveValue('60%', '65%', '70%'),
@@ -517,11 +554,13 @@ export default function Introduction() {
             height: getResponsiveValue('250px', '180px', '120px'),
             background: `linear-gradient(135deg, ${theme.bgPrimary}40, ${theme.accentSecondary}20)`,
             clipPath: 'polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%)',
-            animation: 'floatRotate 15s ease-in-out infinite',
+            animation: shouldReduceAnimations ? 'none' : 'floatRotate 15s ease-in-out infinite',
             filter: getResponsiveValue('blur(20px)', 'blur(15px)', 'blur(10px)'),
           }} />
+          )}
 
-          {/* Morphing Blob - Responsive */}
+          {/* Morphing Blob - Simplified on mobile */}
+          {!shouldReduceAnimations && (
           <div style={{
             position: 'absolute',
             top: getResponsiveValue('20%', '18%', '15%'),
@@ -530,12 +569,13 @@ export default function Introduction() {
             height: getResponsiveValue('200px', '150px', '100px'),
             background: `radial-gradient(circle, ${theme.accentPrimary}12, transparent 70%)`,
             borderRadius: '63% 37% 54% 46% / 55% 48% 52% 45%',
-            animation: 'morphBlob 8s ease-in-out infinite',
+            animation: shouldReduceAnimations ? 'none' : 'morphBlob 8s ease-in-out infinite',
             filter: getResponsiveValue('blur(30px)', 'blur(20px)', 'blur(15px)'),
           }} />
+          )}
 
-          {/* Responsive floating particles */}
-          {[...Array(getResponsiveValue(6, 4, 3))].map((_, i) => (
+          {/* Responsive floating particles - Reduced on mobile */}
+          {!shouldReduceAnimations && [...Array(getResponsiveValue(6, 4, 2))].map((_, i) => (
             <div key={i} style={{
               position: 'absolute',
               top: `${20 + i * 15}%`,
@@ -589,7 +629,8 @@ export default function Introduction() {
           {/* Responsive animated lines - removed moving lines */}
           {/* Static decorative lines instead of animated ones */}
 
-          {/* Responsive glowing orbs */}
+          {/* Responsive glowing orbs - Simplified on mobile */}
+          {!shouldReduceAnimations && (
           <div style={{
             position: 'absolute',
             top: getResponsiveValue('15%', '12%', '8%'),
@@ -598,10 +639,12 @@ export default function Introduction() {
             height: getResponsiveValue('80px', '60px', '40px'),
             background: `radial-gradient(circle, ${theme.accentPrimary}20, transparent 70%)`,
             borderRadius: '50%',
-            animation: 'pulseGlow 3s ease-in-out infinite',
+            animation: shouldReduceAnimations ? 'none' : 'pulseGlow 3s ease-in-out infinite',
             filter: getResponsiveValue('blur(15px)', 'blur(12px)', 'blur(8px)'),
           }} />
+          )}
 
+          {!shouldReduceAnimations && (
           <div style={{
             position: 'absolute',
             bottom: getResponsiveValue('20%', '18%', '15%'),
@@ -610,11 +653,13 @@ export default function Introduction() {
             height: getResponsiveValue('60px', '45px', '30px'),
             background: `radial-gradient(circle, ${theme.textSecondary}25, transparent 70%)`,
             borderRadius: '50%',
-            animation: 'pulseGlow 4s ease-in-out infinite reverse',
+            animation: shouldReduceAnimations ? 'none' : 'pulseGlow 4s ease-in-out infinite reverse',
             filter: getResponsiveValue('blur(20px)', 'blur(15px)', 'blur(10px)'),
           }} />
+          )}
 
-          {/* Responsive interactive cursor trail */}
+          {/* Responsive interactive cursor trail - Disabled on mobile */}
+          {!shouldReduceAnimations && (
           <div style={{
             position: 'absolute',
             top: mousePosition.y - getResponsiveValue(100, 75, 50),
@@ -627,6 +672,7 @@ export default function Introduction() {
             filter: getResponsiveValue('blur(40px)', 'blur(30px)', 'blur(20px)'),
             pointerEvents: 'none',
           }} />
+          )}
         </div>
 
         {/* Content - Optimized spacing for visibility */}

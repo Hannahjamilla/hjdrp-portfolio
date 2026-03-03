@@ -481,18 +481,7 @@ html {
   border-radius: var(--border-radius-sm);
 }
 
-/* Scroll Progress Bar */
-.scroll-progress {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 0%;
-  height: 3px;
-  background: var(--gradient-primary);
-  z-index: var(--z-toast);
-  transition: width 0.1s ease;
-  box-shadow: 0 0 10px rgba(99, 102, 241, 0.5);
-}
+
 
 /* Custom Cursor */
 .cursor-dot {
@@ -584,6 +573,31 @@ html {
   .tech-card, .card {
     min-height: 80px;
     padding: 16px 12px;
+  }
+  
+  /* Disable heavy animations on mobile */
+  * {
+    animation-duration: 0.3s !important;
+    transition-duration: 0.3s !important;
+  }
+  
+  /* Disable complex transforms and filters */
+  .floating-shape,
+  .particle,
+  .matrix-rain,
+  .hologram-flicker {
+    display: none !important;
+  }
+  
+  /* Simplify backgrounds */
+  .bg-pattern::before {
+    display: none !important;
+  }
+  
+  /* Reduce blur effects */
+  .glass {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
   }
 }
 
@@ -701,7 +715,6 @@ img {
     text-shadow: none !important;
   }
   
-  .scroll-progress,
   .cursor-dot,
   .cursor-outline {
     display: none !important;
