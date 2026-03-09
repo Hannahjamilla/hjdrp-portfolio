@@ -16,7 +16,6 @@ const getTimeBasedGreeting = () => {
     return 'Hello There'
   }
 }
-
 export const useMeIntro = () => {
   const [mounted, setMounted] = useState(false)
   const [currentGreeting, setCurrentGreeting] = useState(0)
@@ -105,7 +104,7 @@ const greetings = [
     setMounted(true)
     // Set initial time-based greeting
     setTimeGreeting(getTimeBasedGreeting())
-    
+
     const timer = setTimeout(() => {
       setIsVisible(true)
       setElementVisible(true)

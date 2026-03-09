@@ -9,7 +9,6 @@ export default function Introduction() {
   const {
     mounted,
     displayText,
-    timeGreeting,
     isTyping,
     activeSection,
     isVisible,
@@ -800,7 +799,7 @@ export default function Introduction() {
               opacity: 0.7,
               wordBreak: 'break-word',
             }}>
-              // SCALABLE • PERFORMANT • INNOVATIVE 
+              // SCALABLE • PERFORMANT • INNOVATIVE
             </div>
 
           </div>

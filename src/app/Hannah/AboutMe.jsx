@@ -24,7 +24,6 @@ export default function AboutMe({ scrollDirection = 'down' }) {
   useEffect(() => {
     setGreeting(getTimeBasedGreeting())
   }, [])
-
   useEffect(() => {
     setMounted(true)
     const timer = setTimeout(() => setIsVisible(true), 300)
