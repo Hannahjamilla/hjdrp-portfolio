@@ -23,13 +23,13 @@ export default function Introduction() {
   const containerRef = useRef(null)
 
   const theme = {
-    bgPrimary: '#FFECEA',
-    bgSecondary: '#ffffff',
-    textPrimary: '#6C131F',
-    textSecondary: '#A14B58',
-    textMuted: '#A14B58',
-    accentPrimary: '#6C131F',
-    accentSecondary: '#A14B58',
+    bgPrimary: '#d8e2dc',
+    bgSecondary: '#f5f1ed',
+    textPrimary: '#2D5A4F',
+    textSecondary: '#6B5B52',
+    textMuted: '#8B7355',
+    accentPrimary: '#2D5A4F',
+    accentSecondary: '#ffe5d9',
   }
 
   // Learning-focused expertise areas
@@ -941,7 +941,7 @@ export default function Introduction() {
                 padding: getResponsiveValue('16px 44px', '14px 36px', '12px 28px'),
                 fontSize: getResponsiveValue('13px', '12px', '11px'),
                 fontWeight: '600',
-                background: `linear-gradient(135deg, ${theme.textPrimary}, ${theme.accentSecondary})`,
+                background: `${theme.textPrimary}`,
                 color: theme.bgPrimary,
                 border: 'none',
                 borderRadius: '50px',

@@ -49,15 +49,15 @@ export default function Contact({ scrollDirection = 'down' }) {
   }
 
   const theme = {
-    bgPrimary: '#FFECEA',
-    bgSecondary: '#ffffff',
-    bgTertiary: '#f8f4f3',
-    textPrimary: '#6C131F',
-    textSecondary: '#A14B58',
-    textMuted: '#A14B58',
-    borderColor: 'rgba(108, 19, 31, 0.15)',
-    accent: '#6C131F',
-    accentSecondary: '#A14B58',
+    bgPrimary: '#d8e2dc',
+    bgSecondary: '#f5f1ed',
+    bgTertiary: '#e8ebe8',
+    textPrimary: '#2D5A4F',
+    textSecondary: '#6B5B52',
+    textMuted: '#8B7355',
+    borderColor: 'rgba(45, 90, 79, 0.15)',
+    accent: '#2D5A4F',
+    accentSecondary: '#ffe5d9',
   }
   const contactMethods = [
     {

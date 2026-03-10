@@ -12,9 +12,11 @@ export default function GlobalNavigation() {
   })
 
   const theme = {
-    textPrimary: '#6C131F',
-    textSecondary: '#A14B58',
-    borderColor: 'rgba(108, 19, 31, 0.15)',
+    textPrimary: '#2D5A4F',
+    textSecondary: '#2D5A4F',
+    bgSecondary: '#f5f1ed',
+    bgTertiary: '#e8ebe8',
+    borderColor: 'rgba(45, 90, 79, 0.15)',
   }
 
   const sections = ['home', 'about', 'work', 'projects', 'contact']
@@ -92,8 +94,8 @@ export default function GlobalNavigation() {
       height: isMobile ? '60px' : '70px',
       width: '100%',
       background: isMobile 
-        ? 'rgba(255, 236, 234, 0.95)' 
-        : isScrolled ? 'rgba(255, 236, 234, 0.95)' : 'rgba(255, 236, 234, 0.8)',
+        ? 'rgba(245, 241, 237, 0.95)' 
+        : isScrolled ? 'rgba(245, 241, 237, 0.95)' : 'rgba(245, 241, 237, 0.8)',
       backdropFilter: 'blur(12px)',
       borderBottom: `1px solid ${theme.borderColor}`,
       zIndex: 1000,
@@ -159,9 +161,10 @@ export default function GlobalNavigation() {
             gap: getResponsiveValue(18, 15, 12),
             alignItems: 'center',
             background: 'rgba(0, 0, 0, 0.03)',
-            padding: '6px 12px',
+            padding: '8px 12px',
             borderRadius: '50px',
             border: '1px solid rgba(0, 0, 0, 0.08)',
+            marginTop: '8px',
           }}>
             {sections.map((section) => (
               <a 
@@ -274,7 +277,7 @@ export default function GlobalNavigation() {
           top: '100%',
           right: '16px',
           width: '200px',
-          background: 'rgba(255, 236, 234, 0.98)',
+          background: 'rgba(245, 241, 237, 0.98)',
           backdropFilter: 'blur(12px)',
           border: `1px solid ${theme.borderColor}`,
           borderRadius: '12px',

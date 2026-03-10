@@ -53,15 +53,15 @@ export default function Projects({ scrollDirection = 'down' }) {
   }
 
   const theme = {
-    bgPrimary: '#FFECEA',
-    bgSecondary: '#ffffff',
-    bgTertiary: '#f8f4f3',
-    textPrimary: '#6C131F',
-    textSecondary: '#A14B58',
-    textMuted: '#A14B58',
-    accentColor: '#6C131F',
-    borderLight: 'rgba(108, 19, 31, 0.15)',
-    borderMedium: 'rgba(108, 19, 31, 0.25)',
+    bgPrimary: '#d8e2dc',
+    bgSecondary: '#f5f1ed',
+    bgTertiary: '#e8ebe8',
+    textPrimary: '#2D5A4F',
+    textSecondary: '#6B5B52',
+    textMuted: '#8B7355',
+    accentColor: '#2D5A4F',
+    borderLight: 'rgba(45, 90, 79, 0.15)',
+    borderMedium: 'rgba(45, 90, 79, 0.25)',
     success: '#10b981',
     warning: '#f59e0b',
     info: '#3b82f6'
@@ -173,7 +173,7 @@ export default function Projects({ scrollDirection = 'down' }) {
           left: 0;
           right: 0;
           bottom: 0;
-          background: linear-gradient(135deg, rgba(0,0,0,0.02) 0%, transparent 50%, rgba(0,0,0,0.02) 100%);
+          background: rgba(0,0,0,0.05);
           opacity: 0;
           transition: opacity 0.3s ease;
           border-radius: 24px;
@@ -531,7 +531,7 @@ export default function Projects({ scrollDirection = 'down' }) {
                     left: 0,
                     right: 0,
                     bottom: 0,
-                    background: 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%)',
+                    background: 'rgba(0,0,0,0.5)',
                     opacity: hoveredCard === index ? 1 : 0,
                     transition: 'opacity 0.3s ease',
                     display: 'flex',

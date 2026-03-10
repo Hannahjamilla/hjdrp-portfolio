@@ -12,14 +12,14 @@ export default function AboutMeIntro() {
   const { windowSize, getResponsiveValue } = useResponsive()
 
   const theme = {
-    bgPrimary: '#FFECEA',
-    bgSecondary: '#ffffff',
-    textPrimary: '#6C131F',
-    textSecondary: '#A14B58',
-    textMuted: '#A14B58',
-    accentPrimary: '#6C131F',
-    accentSecondary: '#E8B4B8',
-    accentTertiary: '#F5D5D7',
+    bgPrimary: '#d8e2dc',
+    bgSecondary: '#f5f1ed',
+    textPrimary: '#2D5A4F',
+    textSecondary: '#6B5B52',
+    textMuted: '#8B7355',
+    accentPrimary: '#2D5A4F',
+    accentSecondary: '#ffe5d9',
+    accentTertiary: '#f5e8e0',
   }
 
   const isMobile = windowSize.width < 768
@@ -316,7 +316,7 @@ export default function AboutMeIntro() {
             }}>
               {/* Enhanced About Card */}
               <div style={{
-                background: 'linear-gradient(135deg, #ffffff 0%, #fefefe 50%, #f9f9f9 100%)',
+                background: '#f5f1ed',
                 borderRadius: '28px', // More rounded
                 padding: isMobile ? '35px' : '40px', // Increased padding
                 border: `3px solid ${theme.accentPrimary}40`,
@@ -429,7 +429,7 @@ export default function AboutMeIntro() {
               </div>
               {/* Skills Card */}
               <div style={{
-                background: '#ffffff',
+                background: '#eee2df',
                 borderRadius: '25px',
                 padding: isMobile ? '30px' : '35px',
                 border: `3px solid ${theme.textSecondary}30`,
@@ -473,7 +473,7 @@ export default function AboutMeIntro() {
           {/* Mobile/Tablet: Horizontal Carousel Stats */}
           {(isMobile || (isTablet && !isTabletLandscape)) && (
             <div style={{
-              background: '#ffffff',
+              background: '#f5f1ed',
               borderRadius: '30px',
               padding: isMobile ? '25px' : '35px',
               border: `3px solid ${theme.accentPrimary}20`,
@@ -517,7 +517,7 @@ export default function AboutMeIntro() {
                       details: 'From basics to advanced concepts'
                     },
                     { 
-                      number: '10+', 
+                      number: '5', 
                       label: 'Projects Built',
                       color: theme.accentPrimary,
                       description: 'Ideas brought to life',
@@ -552,7 +552,7 @@ export default function AboutMeIntro() {
                       details: 'Frontend to backend mastery'
                     },
                     { 
-                      number: '50+', 
+                      number: '10+', 
                       label: 'Skills Acquired',
                       color: theme.accentPrimary,
                       description: 'Diverse toolkit',
@@ -816,7 +816,7 @@ export default function AboutMeIntro() {
               }}>
                 {/* Single Content Card */}
                 <div style={{
-                  background: '#ffffff',
+                  background: '#f5f1ed',
                   borderRadius: '25px',
                   padding: '35px',
                   border: `3px solid ${theme.accentPrimary}30`,
@@ -871,7 +871,7 @@ export default function AboutMeIntro() {
                 transition: 'all 1s ease 0.6s',
               }}>
                 <div style={{
-                  background: '#ffffff',
+                  background: '#f5f1ed',
                   borderRadius: '20px',
                   padding: '20px',
                   border: `2px solid ${theme.accentPrimary}15`,
@@ -909,7 +909,7 @@ export default function AboutMeIntro() {
                           description: 'Continuous development'
                         },
                         { 
-                          number: '10+', 
+                          number: '5', 
                           label: 'Projects Built',
                           color: theme.accentPrimary,
                           description: 'Ideas to reality'
@@ -939,7 +939,7 @@ export default function AboutMeIntro() {
                           description: 'Full-stack skills'
                         },
                         { 
-                          number: '50+', 
+                          number: '10+', 
                           label: 'Skills Acquired',
                           color: theme.accentPrimary,
                           description: 'Diverse toolkit'
@@ -1204,7 +1204,7 @@ export default function AboutMeIntro() {
                 }}>
                   <div style={{
                     padding: '25px',
-                    background: '#ffffff',
+                    background: '#f5f1ed',
                     borderRadius: '20px',
                     border: `2px solid ${theme.accentPrimary}30`,
                     textAlign: 'left',
@@ -1277,7 +1277,7 @@ export default function AboutMeIntro() {
                         description: 'Continuous skill development'
                       },
                       { 
-                        number: '10+', 
+                        number: '5', 
                         label: 'Projects Built',
                         color: theme.accentPrimary,
                         description: 'From ideas to reality'
@@ -1307,7 +1307,7 @@ export default function AboutMeIntro() {
                         description: 'Full-stack capabilities'
                       },
                       { 
-                        number: '50+', 
+                        number: '10+', 
                         label: 'Skills Acquired',
                         color: theme.textSecondary,
                         description: 'Frontend to backend'
@@ -1341,7 +1341,7 @@ export default function AboutMeIntro() {
                       let opacity = 1;
                       let zIndex = 5;
                       let translateY = 0;
-                      let background = '#ffffff';
+                      let background = '#f5f1ed';
                       let borderOpacity = '1';
                       
                       if (relativePosition === 0) {
@@ -1350,7 +1350,7 @@ export default function AboutMeIntro() {
                         opacity = 1;
                         zIndex = 5;
                         translateY = 0;
-                        background = '#7e3f49ff'; // Accent color background
+                        background = '#3d7a6dff'; // Darker teal for active card
                         borderOpacity = '1';
                       } else if (relativePosition === -1) {
                         // Card above center
@@ -1461,7 +1461,7 @@ export default function AboutMeIntro() {
                               <div style={{
                                 fontSize: '1rem', // Smaller title
                                 fontWeight: '700',
-                                color: relativePosition === 0 ? '#ffffff' : theme.textPrimary, // White text for active card
+                                color: relativePosition === 0 ? '#f5f1ed' : theme.textPrimary, // Light text for active card
                                 lineHeight: 1.1,
                               }}>
                                 {stat.label}
@@ -1470,7 +1470,7 @@ export default function AboutMeIntro() {
                               {/* Compact Description */}
                               <div style={{
                                 fontSize: '0.8rem', // Smaller description
-                                color: relativePosition === 0 ? '#FFECEA' : theme.textSecondary, // Light text for active card
+                                color: relativePosition === 0 ? '#d8e2dc' : theme.textSecondary, // Light text for active card
                                 fontWeight: '500',
                                 lineHeight: 1.2,
                               }}>

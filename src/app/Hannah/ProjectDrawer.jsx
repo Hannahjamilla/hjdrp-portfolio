@@ -24,7 +24,6 @@ export default function ProjectDrawer({
     setMounted(true)
   }, [])
 
-  // Window resize handler
   useEffect(() => {
     const handleResize = () => {
       setWindowSize({
@@ -40,7 +39,6 @@ export default function ProjectDrawer({
   const isMobile = windowSize.width < 768
   const isTablet = windowSize.width < 1024
 
-  // Auto image slider
   useEffect(() => {
     if (!selectedProject || selectedProject.images.length <= 1) return
 
@@ -51,18 +49,16 @@ export default function ProjectDrawer({
           prev === selectedProject.images.length - 1 ? 0 : prev + 1
         )
         setIsTransitioning(false)
-      }, 150) // Half of transition duration
+      }, 150)
     }, 5000)
 
     return () => clearInterval(interval)
   }, [selectedProject])
 
-  // Reset image index when project changes
   useEffect(() => {
     setCurrentImageIndex(selectedImageIndex || 0)
   }, [selectedProject, selectedImageIndex])
 
-  // Handle manual image selection
   const handleImageSelect = (index) => {
     setIsTransitioning(true)
     setTimeout(() => {
@@ -74,12 +70,10 @@ export default function ProjectDrawer({
 
   useEffect(() => {
     if (selectedProject) {
-      // Prevent body scroll WITHOUT moving the page
       document.documentElement.style.overflow = 'hidden'
       document.body.style.overflow = 'hidden'
       
       return () => {
-        // Restore body scroll
         document.documentElement.style.overflow = ''
         document.body.style.overflow = ''
       }
@@ -93,7 +87,7 @@ export default function ProjectDrawer({
     ? academicProjects.find(proj => proj.images.includes(selectedProject.images[currentImageIndex])) || academicProjects[0]
     : null
 
-  const drawerContent = (
+  return (
     <>
       <style jsx>{`
         @keyframes slideInRight {
@@ -160,19 +154,6 @@ export default function ProjectDrawer({
           border-radius: 4px;
         }
 
-        .drawer-content::-webkit-scrollbar {
-          width: 8px;
-        }
-
-        .drawer-content::-webkit-scrollbar-track {
-          background: transparent;
-        }
-
-        .drawer-content::-webkit-scrollbar-thumb {
-          background: rgba(0,0,0,0.2);
-          border-radius: 4px;
-        }
-
         .drawer-content::-webkit-scrollbar-thumb:hover {
           background: rgba(0,0,0,0.3);
         }
@@ -195,17 +176,6 @@ export default function ProjectDrawer({
           background: rgba(0,0,0,0.3);
         }
 
-        @keyframes pulse {
-          0%, 100% { opacity: 0.7; }
-          50% { opacity: 1; }
-        }
-
-        @keyframes shimmer {
-          0% { left: -100%; }
-          100% { left: 100%; }
-        }
-
-        /* Enhanced mobile styles */
         @media (max-width: 768px) {
           .drawer-content {
             border-radius: 20px 20px 0 0 !important;
@@ -216,13 +186,11 @@ export default function ProjectDrawer({
           }
         }
 
-        /* Smooth transitions for all interactive elements */
         .tech-pill, .thumbnail-image, .nav-arrow {
           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
         }
       `}</style>
       
-      {/* Enhanced Overlay */}
       <div 
         style={{
           position: 'fixed',
@@ -244,7 +212,6 @@ export default function ProjectDrawer({
         onClick={onClose}
       />
       
-      {/* Enhanced Drawer */}
       <div 
         style={{
           position: 'fixed',
@@ -254,7 +221,7 @@ export default function ProjectDrawer({
           width: isMobile ? '100vw' : isTablet ? '85vw' : '900px',
           maxWidth: isMobile ? '100vw' : '900px',
           height: '100vh',
-          background: `linear-gradient(135deg, ${theme.bgPrimary} 0%, ${theme.bgSecondary} 100%)`,
+          background: `${theme.bgPrimary}`,
           boxShadow: isMobile 
             ? 'none' 
             : '-15px 0 40px rgba(0, 0, 0, 0.3)',
@@ -267,7 +234,6 @@ export default function ProjectDrawer({
         className="drawer-content force-light"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Enhanced Close Button */}
         <button
           onClick={onClose}
           style={{
@@ -287,24 +253,23 @@ export default function ProjectDrawer({
             justifyContent: 'center',
             zIndex: 10,
             transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-            boxShadow: '0 8px 20px rgba(108, 19, 31, 0.3)',
+            boxShadow: '0 8px 20px rgba(45, 90, 79, 0.3)',
             touchAction: 'manipulation',
           }}
           onMouseEnter={(e) => {
             e.target.style.transform = 'scale(1.1) rotate(90deg)'
             e.target.style.background = theme.textSecondary
-            e.target.style.boxShadow = '0 12px 30px rgba(108, 19, 31, 0.4)'
+            e.target.style.boxShadow = '0 12px 30px rgba(45, 90, 79, 0.4)'
           }}
           onMouseLeave={(e) => {
             e.target.style.transform = 'scale(1) rotate(0deg)'
             e.target.style.background = theme.accentColor
-            e.target.style.boxShadow = '0 8px 20px rgba(108, 19, 31, 0.3)'
+            e.target.style.boxShadow = '0 8px 20px rgba(45, 90, 79, 0.3)'
           }}
         >
           ×
         </button>
 
-        {/* Enhanced Content Container */}
         <div style={{
           padding: isMobile 
             ? '70px 20px 30px' 
@@ -314,198 +279,80 @@ export default function ProjectDrawer({
           maxWidth: isMobile ? '100%' : '100%',
           margin: '0 auto',
         }}>
-          {/* Enhanced Header Section */}
-          <div style={{
-            marginBottom: isMobile ? '30px' : '40px',
-            textAlign: isMobile ? 'left' : 'center',
-            position: 'relative',
+          <h2 style={{
+            fontSize: isMobile ? '2rem' : isTablet ? '2.5rem' : '3rem',
+            fontWeight: '900',
+            color: theme.textPrimary,
+            marginBottom: isMobile ? '12px' : '20px',
+            lineHeight: 1.1,
           }}>
-            {/* Decorative header background */}
-            <div style={{
-              position: 'absolute',
-              top: '-20px',
-              left: '50%',
-              transform: 'translateX(-50%)',
-              width: isMobile ? '200px' : '300px',
-              height: '100px',
-              background: `linear-gradient(135deg, ${theme.accentColor}05, transparent)`,
-              borderRadius: '50px',
-              zIndex: -1,
-            }}></div>
-
-            {/* Project Badges */}
-            <div style={{
-              display: 'flex',
-              gap: isMobile ? '10px' : '15px',
-              marginBottom: isMobile ? '20px' : '30px',
-              flexWrap: 'wrap',
-              justifyContent: isMobile ? 'flex-start' : 'center',
+            {selectedProject.title}
+          </h2>
+          
+          {selectedProject.subtitle && (
+            <p style={{
+              fontSize: isMobile ? '1.1rem' : isTablet ? '1.2rem' : '1.3rem',
+              color: theme.textMuted,
+              marginBottom: isMobile ? '15px' : '25px',
+              fontWeight: '500',
+              lineHeight: 1.4,
+              fontStyle: 'italic',
             }}>
-              <div style={{
-                padding: isMobile ? '10px 18px' : '14px 28px',
-                background: theme.accentColor,
-                color: theme.bgPrimary,
-                borderRadius: isMobile ? '15px' : '20px',
-                fontSize: isMobile ? '0.8rem' : '0.9rem',
-                fontWeight: '800',
-                textTransform: 'uppercase',
-                letterSpacing: '0.8px',
-                boxShadow: '0 6px 20px rgba(108, 19, 31, 0.25)',
-                position: 'relative',
-                overflow: 'hidden',
-              }}>
-                <div style={{
-                  position: 'absolute',
-                  top: 0,
-                  left: '-100%',
-                  width: '100%',
-                  height: '100%',
-                  background: 'linear-gradient(90deg, transparent, rgba(255,236,234,0.2), transparent)',
-                  animation: 'shimmer 2s infinite',
-                }}></div>
-                {selectedProject.badge}
-              </div>
-              <div style={{
-                padding: isMobile ? '10px 18px' : '14px 28px',
-                background: `linear-gradient(135deg, ${theme.bgSecondary} 0%, ${theme.bgTertiary || theme.bgSecondary} 100%)`,
-                color: theme.textPrimary,
-                borderRadius: isMobile ? '15px' : '20px',
-                fontSize: isMobile ? '0.8rem' : '0.9rem',
-                fontWeight: '700',
-                border: `2px solid ${theme.borderLight}`,
-                boxShadow: '0 4px 15px rgba(0, 0, 0, 0.1)',
-              }} className="force-light-bg-secondary force-light-text force-light-border">
-                {selectedProject.year}
-              </div>
-              <div style={{
-                padding: isMobile ? '10px 18px' : '14px 28px',
-                background: `${theme.accentColor}20`,
-                color: theme.accentColor,
-                borderRadius: isMobile ? '15px' : '20px',
-                fontSize: isMobile ? '0.8rem' : '0.9rem',
-                fontWeight: '700',
-                border: `2px solid ${theme.accentColor}40`,
-                boxShadow: '0 4px 15px rgba(0, 0, 0, 0.1)',
-              }}>
-                {selectedProject.role}
-              </div>
-            </div>
+              {selectedProject.subtitle}
+            </p>
+          )}
 
-            {/* Project Title with enhanced styling */}
-            <h2 style={{
-              fontSize: isMobile ? '2rem' : isTablet ? '2.5rem' : '3rem',
-              fontWeight: '900',
+          <div style={{
+            background: `${theme.bgSecondary}`,
+            padding: isMobile ? '20px' : '25px',
+            borderRadius: isMobile ? '15px' : '20px',
+            border: `1px solid ${theme.borderLight}`,
+            position: 'relative',
+            marginBottom: isMobile ? '25px' : '35px',
+          }}>
+            <p style={{
+              fontSize: isMobile ? '0.95rem' : isTablet ? '1rem' : '1.1rem',
               color: theme.textPrimary,
-              marginBottom: isMobile ? '12px' : '20px',
-              lineHeight: 1.1,
-              background: isMobile 
-                ? 'none' 
-                : '#6C131F',
-              WebkitBackgroundClip: isMobile ? 'unset' : 'text',
-              WebkitTextFillColor: isMobile ? theme.textPrimary : 'transparent',
-              backgroundClip: isMobile ? 'unset' : 'text',
-              textShadow: isMobile ? 'none' : '0 2px 4px rgba(0,0,0,0.1)',
+              lineHeight: 1.8,
+              textAlign: 'left',
+              margin: 0,
               position: 'relative',
-            }} className="force-light-text">
-              {selectedProject.title}
-              {/* Underline decoration */}
-              <div style={{
-                position: 'absolute',
-                bottom: '-8px',
-                left: '50%',
-                transform: 'translateX(-50%)',
-                width: isMobile ? '60px' : '80px',
-                height: '4px',
-                background: `linear-gradient(90deg, transparent, ${theme.accentColor}, transparent)`,
-                borderRadius: '2px',
-              }}></div>
-            </h2>
-            
-            {/* Project Subtitle */}
-            {selectedProject.subtitle && (
-              <p style={{
-                fontSize: isMobile ? '1.1rem' : isTablet ? '1.2rem' : '1.3rem',
-                color: theme.textMuted,
-                marginBottom: isMobile ? '15px' : '25px',
-                fontWeight: '500',
-                lineHeight: 1.4,
-                fontStyle: 'italic',
-              }} className="force-light-text">{selectedProject.subtitle}</p>
-            )}
-
-            {/* Project Description with better formatting */}
-            <div style={{
-              background: `linear-gradient(135deg, ${theme.bgSecondary}50 0%, transparent 100%)`,
-              padding: isMobile ? '20px' : '25px',
-              borderRadius: isMobile ? '15px' : '20px',
-              border: `1px solid ${theme.borderLight}`,
-              position: 'relative',
-            }} className="force-light-border">
-              <p style={{
-                fontSize: isMobile ? '0.95rem' : isTablet ? '1rem' : '1.1rem',
-                color: theme.textPrimary,
-                lineHeight: 1.8,
-                textAlign: 'left',
-                margin: 0,
-                position: 'relative',
-                zIndex: 1,
-              }} className="force-light-text">
-                {selectedProject.fullDescription}
-              </p>
-              {/* Quote mark decoration */}
-              <div style={{
-                position: 'absolute',
-                top: '10px',
-                left: '15px',
-                fontSize: '3rem',
-                color: `${theme.accentColor}30`,
-                fontFamily: 'serif',
-                lineHeight: 1,
-                zIndex: 0,
-              }}>"</div>
-            </div>
+              zIndex: 1,
+            }}>
+              {selectedProject.fullDescription}
+            </p>
           </div>
 
-          {/* Enhanced Image Section with Auto Slider */}
           <div style={{
             width: '100%',
             marginBottom: isMobile ? '25px' : '35px',
             position: 'relative',
           }}>
-            {/* Section Header */}
-            <div style={{
+            <h3 style={{
+              fontSize: isMobile ? '1.1rem' : '1.3rem',
+              fontWeight: '800',
+              color: theme.textPrimary,
+              margin: 0,
+              marginBottom: isMobile ? '15px' : '20px',
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'space-between',
-              marginBottom: isMobile ? '15px' : '20px',
+              gap: '10px',
             }}>
-              <h3 style={{
-                fontSize: isMobile ? '1.1rem' : '1.3rem',
-                fontWeight: '800',
-                color: theme.textPrimary,
-                margin: 0,
-                display: 'flex',
-                alignItems: 'center',
-                gap: '10px',
-              }} className="force-light-text">
-                <span style={{
-                  width: '6px',
-                  height: '20px',
-                  background: theme.accentColor,
-                  borderRadius: '3px',
-                }}></span>
-                Project Gallery
-              </h3>
-              
-            </div>
+              <span style={{
+                width: '6px',
+                height: '20px',
+                background: theme.accentColor,
+                borderRadius: '3px',
+              }}></span>
+              Project Gallery
+            </h3>
 
-            {/* Main Image Container */}
             <div style={{
               width: '100%',
               height: isMobile ? '280px' : isTablet ? '380px' : '450px',
               borderRadius: isMobile ? '15px' : '25px',
               overflow: 'hidden',
-              background: `linear-gradient(135deg, ${theme.bgSecondary} 0%, ${theme.bgTertiary || theme.bgSecondary} 100%)`,
+              background: `${theme.bgSecondary}`,
               border: `3px solid ${theme.borderLight}`,
               position: 'relative',
               display: 'flex',
@@ -514,9 +361,8 @@ export default function ProjectDrawer({
               boxShadow: isMobile 
                 ? '0 10px 30px rgba(0, 0, 0, 0.15)' 
                 : '0 20px 50px rgba(0, 0, 0, 0.2)',
-            }} className="force-light-bg-secondary force-light-border">
+            }}>
               
-              {/* Auto-sliding Image */}
               <img 
                 src={selectedProject.images[currentImageIndex]} 
                 alt={`${selectedProject.title} ${currentImageIndex + 1}`}
@@ -535,7 +381,6 @@ export default function ProjectDrawer({
                 className="image-transition"
               />
               
-              {/* Enhanced Image Counter & Controls */}
               <div style={{
                 position: 'absolute',
                 bottom: isMobile ? '15px' : '20px',
@@ -544,25 +389,6 @@ export default function ProjectDrawer({
                 alignItems: 'center',
                 gap: '12px',
               }}>
-                {/* Progress bar */}
-                <div style={{
-                  width: isMobile ? '60px' : '80px',
-                  height: '4px',
-                  background: 'rgba(255, 255, 255, 0.3)',
-                  borderRadius: '2px',
-                  overflow: 'hidden',
-                  position: 'relative',
-                }}>
-                  <div style={{
-                    width: `${((currentImageIndex + 1) / selectedProject.images.length) * 100}%`,
-                    height: '100%',
-                    background: 'linear-gradient(90deg, #00ff00, #00cc00)',
-                    borderRadius: '2px',
-                    transition: 'width 0.3s ease',
-                  }}></div>
-                </div>
-                
-                {/* Image counter */}
                 <div style={{
                   background: 'rgba(0, 0, 0, 0.9)',
                   color: '#ffffff',
@@ -577,91 +403,9 @@ export default function ProjectDrawer({
                   {currentImageIndex + 1} / {selectedProject.images.length}
                 </div>
               </div>
-
-              {/* Enhanced Navigation Arrows (Desktop only) */}
-              {!isMobile && selectedProject.images.length > 1 && (
-                <>
-                  <button
-                    onClick={() => handleImageSelect(
-                      currentImageIndex === 0 ? selectedProject.images.length - 1 : currentImageIndex - 1
-                    )}
-                    style={{
-                      position: 'absolute',
-                      left: '20px',
-                      top: '50%',
-                      transform: 'translateY(-50%)',
-                      width: '50px',
-                      height: '50px',
-                      borderRadius: '50%',
-                      background: 'rgba(0, 0, 0, 0.8)',
-                      color: '#ffffff',
-                      border: '2px solid rgba(255, 255, 255, 0.2)',
-                      cursor: 'pointer',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      fontSize: '1.5rem',
-                      fontWeight: 'bold',
-                      transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                      backdropFilter: 'blur(15px)',
-                    }}
-                    onMouseEnter={(e) => {
-                      e.target.style.background = 'rgba(0, 0, 0, 0.95)'
-                      e.target.style.transform = 'translateY(-50%) scale(1.1)'
-                      e.target.style.borderColor = 'rgba(255, 255, 255, 0.4)'
-                    }}
-                    onMouseLeave={(e) => {
-                      e.target.style.background = 'rgba(0, 0, 0, 0.8)'
-                      e.target.style.transform = 'translateY(-50%) scale(1)'
-                      e.target.style.borderColor = 'rgba(255, 255, 255, 0.2)'
-                    }}
-                  >
-                    ‹
-                  </button>
-                  
-                  <button
-                    onClick={() => handleImageSelect(
-                      currentImageIndex === selectedProject.images.length - 1 ? 0 : currentImageIndex + 1
-                    )}
-                    style={{
-                      position: 'absolute',
-                      right: '20px',
-                      top: '50%',
-                      transform: 'translateY(-50%)',
-                      width: '50px',
-                      height: '50px',
-                      borderRadius: '50%',
-                      background: 'rgba(0, 0, 0, 0.8)',
-                      color: '#ffffff',
-                      border: '2px solid rgba(255, 255, 255, 0.2)',
-                      cursor: 'pointer',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      fontSize: '1.5rem',
-                      fontWeight: 'bold',
-                      transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                      backdropFilter: 'blur(15px)',
-                    }}
-                    onMouseEnter={(e) => {
-                      e.target.style.background = 'rgba(0, 0, 0, 0.95)'
-                      e.target.style.transform = 'translateY(-50%) scale(1.1)'
-                      e.target.style.borderColor = 'rgba(255, 255, 255, 0.4)'
-                    }}
-                    onMouseLeave={(e) => {
-                      e.target.style.background = 'rgba(0, 0, 0, 0.8)'
-                      e.target.style.transform = 'translateY(-50%) scale(1)'
-                      e.target.style.borderColor = 'rgba(255, 255, 255, 0.2)'
-                    }}
-                  >
-                    ›
-                  </button>
-                </>
-              )}
             </div>
           </div>
 
-          {/* Enhanced Thumbnail Gallery */}
           <div 
             style={{
               display: 'flex',
@@ -671,15 +415,8 @@ export default function ProjectDrawer({
               overflowY: 'hidden',
               padding: isMobile ? '8px 0' : '12px 0',
               scrollBehavior: 'smooth',
-              scrollbarWidth: 'thin',
-              scrollbarColor: 'rgba(0,0,0,0.2) transparent',
             }} 
             className="thumbnail-gallery-scroll"
-            onWheel={(e) => {
-              e.preventDefault()
-              const container = e.currentTarget
-              container.scrollLeft += e.deltaY > 0 ? 100 : -100
-            }}
           >
             {selectedProject.images.map((image, idx) => (
               <div
@@ -694,7 +431,7 @@ export default function ProjectDrawer({
                   cursor: 'pointer',
                   flexShrink: 0,
                   transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                  background: `linear-gradient(135deg, ${theme.bgSecondary} 0%, ${theme.bgTertiary || theme.bgSecondary} 100%)`,
+                  background: `${theme.bgSecondary}`,
                   boxShadow: idx === currentImageIndex 
                     ? '0 8px 20px rgba(0, 0, 0, 0.2)' 
                     : '0 4px 12px rgba(0, 0, 0, 0.1)',
@@ -728,7 +465,6 @@ export default function ProjectDrawer({
                   }}
                 />
                 
-                {/* Active indicator */}
                 {idx === currentImageIndex && (
                   <div style={{
                     position: 'absolute',
@@ -753,30 +489,22 @@ export default function ProjectDrawer({
             ))}
           </div>
 
-          {/* Enhanced Technologies Section */}
           <div style={{
             marginBottom: isMobile ? '30px' : '40px',
             position: 'relative',
           }}>
-            {/* Section Header */}
-            <div style={{
-              display: 'flex',
-              alignItems: 'center',
+            <h4 style={{
+              fontSize: isMobile ? '1.2rem' : '1.4rem',
+              fontWeight: '800',
+              color: theme.textPrimary,
+              margin: 0,
+              textTransform: 'uppercase',
+              letterSpacing: '0.05em',
               marginBottom: isMobile ? '20px' : '25px',
             }}>
-              <h4 style={{
-                fontSize: isMobile ? '1.2rem' : '1.4rem',
-                fontWeight: '800',
-                color: theme.textPrimary,
-                margin: 0,
-                textTransform: 'uppercase',
-                letterSpacing: '0.05em',
-              }} className="force-light-text">
-                Technologies Used
-              </h4>
-            </div>
+              Technologies Used
+            </h4>
             
-            {/* Technologies Grid */}
             <div style={{
               display: 'grid',
               gridTemplateColumns: isMobile 
@@ -790,7 +518,7 @@ export default function ProjectDrawer({
                   key={idx}
                   style={{
                     padding: isMobile ? '14px 18px' : '16px 22px',
-                    background: `linear-gradient(135deg, ${theme.bgSecondary} 0%, ${theme.bgTertiary || theme.bgSecondary} 100%)`,
+                    background: `${theme.bgSecondary}`,
                     border: `2px solid ${theme.borderLight}`,
                     borderRadius: isMobile ? '12px' : '16px',
                     fontSize: isMobile ? '0.85rem' : '0.9rem',
@@ -801,109 +529,16 @@ export default function ProjectDrawer({
                     position: 'relative',
                     overflow: 'hidden',
                     cursor: 'default',
-                    boxShadow: '0 4px 15px rgba(0, 0, 0, 0.08)',
-                  }}
-                  className="tech-pill force-light-bg-secondary force-light-border force-light-text"
-                  onMouseEnter={(e) => {
-                    e.target.style.background = theme.accentColor
-                    e.target.style.color = '#FFECEA'
-                    e.target.style.transform = 'translateY(-4px) scale(1.03)'
-                    e.target.style.boxShadow = '0 12px 30px rgba(108, 19, 31, 0.2)'
-                    e.target.style.borderColor = theme.accentColor
-                  }}
-                  onMouseLeave={(e) => {
-                    e.target.style.background = `${theme.bgSecondary}`
-                    e.target.style.color = theme.textPrimary
-                    e.target.style.transform = 'translateY(0) scale(1)'
-                    e.target.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.08)'
-                    e.target.style.borderColor = theme.borderLight
+                    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.08)',
                   }}
                 >
-                  {/* Tech icon placeholder */}
-                  <div style={{
-                    position: 'absolute',
-                    top: '8px',
-                    right: '8px',
-                    width: '6px',
-                    height: '6px',
-                    borderRadius: '50%',
-                    background: `${theme.accentColor}60`,
-                    transition: 'all 0.3s ease',
-                  }}></div>
                   {tech}
                 </div>
               ))}
             </div>
-            
-            {/* Decorative background */}
-            <div style={{
-              position: 'absolute',
-              top: '50%',
-              right: '-20px',
-              width: '100px',
-              height: '100px',
-              background: `radial-gradient(circle, ${theme.accentColor}08, transparent)`,
-              borderRadius: '50%',
-              zIndex: -1,
-            }}></div>
           </div>
-
-          {/* Enhanced Academic Project Details */}
-          {isAcademicProject && currentAcademicProject && (
-            <div style={{
-              padding: isMobile ? '20px' : '30px',
-              background: `linear-gradient(135deg, ${theme.bgSecondary} 0%, ${theme.bgTertiary || theme.bgSecondary} 100%)`,
-              borderRadius: isMobile ? '12px' : '20px',
-              border: `2px solid ${theme.borderLight}`,
-              position: 'relative',
-              overflow: 'hidden',
-            }} className="force-light-bg-secondary force-light-border">
-              {/* Decorative corner */}
-              <div style={{
-                position: 'absolute',
-                top: 0,
-                right: 0,
-                width: '60px',
-                height: '60px',
-                background: `linear-gradient(135deg, ${theme.accentColor}20, transparent)`,
-                borderBottomLeftRadius: '20px',
-              }}></div>
-              
-              <h4 style={{
-                fontSize: isMobile ? '1.1rem' : '1.3rem',
-                fontWeight: '800',
-                color: theme.textPrimary,
-                marginBottom: isMobile ? '8px' : '12px',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '10px',
-              }} className="force-light-text">
-                {currentAcademicProject.title}
-              </h4>
-              <div style={{
-                fontSize: isMobile ? '0.85rem' : '0.9rem',
-                fontWeight: '700',
-                color: theme.textMuted,
-                marginBottom: isMobile ? '8px' : '12px',
-                textTransform: 'uppercase',
-                letterSpacing: '0.5px',
-              }} className="force-light-text">
-                Role: {currentAcademicProject.role}
-              </div>
-              <p style={{
-                fontSize: isMobile ? '0.85rem' : '0.9rem',
-                color: theme.textPrimary,
-                lineHeight: 1.7,
-                margin: 0,
-              }} className="force-light-text">
-                {currentAcademicProject.description}
-              </p>
-            </div>
-          )}
         </div>
       </div>
     </>
   )
-
-  return createPortal(drawerContent, document.body)
 }

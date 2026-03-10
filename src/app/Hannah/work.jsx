@@ -79,11 +79,11 @@ export default function Work() {
   ]
 
   const theme = {
-    primary: '#6C131F',
-    secondary: '#A14B58',
-    light: '#FFECEA',
-    border: 'rgba(108, 19, 31, 0.15)',
-    accent: '#A14B58'
+    primary: '#2D5A4F',
+    secondary: '#6B5B52',
+    light: '#d8e2dc',
+    border: 'rgba(45, 90, 79, 0.15)',
+    accent: '#ffe5d9'
   }
 
   return (
@@ -143,7 +143,7 @@ export default function Work() {
               left: '0',
               width: '100%',
               height: getResponsiveValue('6px', '4px', '3px'),
-              background: `linear-gradient(90deg, transparent, ${theme.primary}, transparent)`,
+              background: `${theme.primary}`,
               borderRadius: '3px',
             }}></span>
           </span>
@@ -152,7 +152,7 @@ export default function Work() {
         <div style={{
           width: getResponsiveValue('120px', '100px', '80px'),
           height: getResponsiveValue('6px', '4px', '3px'),
-          background: `linear-gradient(90deg, transparent, ${theme.primary}, transparent)`,
+          background: `${theme.primary}`,
           margin: '0 auto',
           borderRadius: '3px'
         }} />
@@ -175,7 +175,7 @@ export default function Work() {
             onMouseEnter={() => setHoveredIndex(index)}
             onMouseLeave={() => setHoveredIndex(null)}
             style={{
-              background: 'linear-gradient(135deg, #fff 0%, #f8f9fa 100%)',
+              background: '#f5f1ed',
               borderRadius: getResponsiveValue('16px', '12px', '10px'),
               padding: getResponsiveValue('24px', '20px', '16px'),
               border: `2px solid ${theme.border}`,
@@ -198,7 +198,7 @@ export default function Work() {
                 right: 0,
                 width: getResponsiveValue('60px', '50px', '40px'),
                 height: getResponsiveValue('60px', '50px', '40px'),
-                background: `linear-gradient(135deg, ${theme.primary}08, transparent)`,
+                background: `${theme.primary}08`,
                 borderBottomLeftRadius: getResponsiveValue('30px', '25px', '20px'),
               }}
             ></div>
@@ -211,7 +211,7 @@ export default function Work() {
                 right: getResponsiveValue('10px', '8px', '6px'),
                 width: getResponsiveValue('28px', '24px', '20px'),
                 height: getResponsiveValue('28px', '24px', '20px'),
-                background: `linear-gradient(135deg, ${theme.primary} 0%, #333333 100%)`,
+                background: `${theme.primary}`,
                 borderRadius: '50%',
                 display: 'flex',
                 alignItems: 'center',
@@ -324,7 +324,7 @@ export default function Work() {
                     <div style={{
                       width: '4px',
                       height: '4px',
-                      background: `linear-gradient(135deg, ${theme.primary} 0%, #333333 100%)`,
+                      background: `${theme.primary}`,
                       borderRadius: '50%',
                       marginTop: '5px',
                       flexShrink: 0,

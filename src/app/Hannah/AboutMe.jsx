@@ -31,14 +31,14 @@ export default function AboutMe({ scrollDirection = 'down' }) {
   }, [])
 
   const theme = {
-    bgPrimary: '#FFECEA',
-    bgSecondary: '#ffffff',
-    bgTertiary: '#f8f4f3',
-    textPrimary: '#6C131F',
-    textSecondary: '#A14B58',
-    textMuted: '#A14B58',
-    borderColor: 'rgba(108, 19, 31, 0.15)',
-    accent: '#6C131F',
+    bgPrimary: '#d8e2dc',
+    bgSecondary: '#f5f1ed',
+    bgTertiary: '#e8ebe8',
+    textPrimary: '#2D5A4F',
+    textSecondary: '#6B5B52',
+    textMuted: '#8B7355',
+    borderColor: 'rgba(45, 90, 79, 0.15)',
+    accent: '#2D5A4F',
   }
 
   const [windowSize, setWindowSize] = useState({
@@ -104,14 +104,14 @@ export default function AboutMe({ scrollDirection = 'down' }) {
         }
         
         .skill-tag:hover {
-          background: #6C131F;
-          color: #FFECEA;
+          background: #2D5A4F;
+          color: #f5f1ed;
           transform: translateY(-2px);
         }
         
         .hexagon:hover .hexagon-number,
         .hexagon:hover .hexagon-label {
-          color: #FFECEA;
+          color: #f5f1ed;
         }
         
         .profile-card {
@@ -120,23 +120,23 @@ export default function AboutMe({ scrollDirection = 'down' }) {
         
         .profile-card:hover {
           transform: rotate(-2deg) translateY(-5px);
-          box-shadow: 25px 25px 0px 0px rgba(108,19,31,1);
+          box-shadow: 25px 25px 0px 0px rgba(45,90,79,1);
         }
         
         @media (prefers-color-scheme: dark) {
           .profile-card:hover {
-            box-shadow: 25px 25px 0px 0px rgba(255,236,234,1);
+            box-shadow: 25px 25px 0px 0px rgba(245,241,237,1);
           }
         }
 
         .philosophy-item:hover {
-          background: #6C131F;
-          color: #FFECEA;
+          background: #2D5A4F;
+          color: #f5f1ed;
           transform: translateY(-2px);
         }
 
         .philosophy-item:hover .philosophy-title {
-          color: #FFECEA;
+          color: #f5f1ed;
         }
 
         .philosophy-item:hover .philosophy-description {
@@ -446,7 +446,7 @@ export default function AboutMe({ scrollDirection = 'down' }) {
                 textTransform: 'uppercase',
               }} className="title">
                 <span style={{
-                  color: '#6C131F',
+                  color: '#2D5A4F',
                   position: 'relative',
                 }}>
                   ABOUT
@@ -480,7 +480,7 @@ export default function AboutMe({ scrollDirection = 'down' }) {
               position: 'relative',
             }} className="subtitle">
               <span style={{
-                color: '#A14B58',
+                color: '#2D5A4F',
               }}>
                 Creating digital solutions with
               </span>{' '}
@@ -505,7 +505,7 @@ export default function AboutMe({ scrollDirection = 'down' }) {
               position: 'relative',
             }} className="profile-section">
               <div style={{
-                background: `linear-gradient(135deg, ${theme.bgPrimary} 0%, ${theme.bgSecondary} 100%)`,
+                background: `${theme.bgSecondary}`,
                 border: `3px solid ${theme.accent}`,
                 borderRadius: '20px',
                 padding: getResponsiveValue('45px 35px', '40px 30px', '25px 20px'),
@@ -549,7 +549,7 @@ export default function AboutMe({ scrollDirection = 'down' }) {
                   position: 'relative',
                 }}>
                   <span style={{
-                    color: '#6C131F',
+                    color: '#2D5A4F',
                   }}>
                     Web Developer
                   </span>
@@ -563,7 +563,7 @@ export default function AboutMe({ scrollDirection = 'down' }) {
                   position: 'relative',
                 }}>
                   <span style={{
-                    color: '#A14B58',
+                    color: '#2D5A4F',
                   }}>
                     Building web applications that look great and
                   </span>{' '}
