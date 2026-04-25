@@ -491,53 +491,6 @@ export default function RoadScene({ onProgressUpdate, activeStop, scrollProgress
     addHouse(roadPoints[0].clone(), 1) // Start House on Right
     addHouse(roadPoints[roadPoints.length - 1].clone(), -1, true) // End House on Left
 
-    /* ─── PRE-GENERATE BILLBOARD TEXTURES ─── */
-    const billboardWords = ["HANNAH JAMILLA", "KEEP DRIVING", "CODE & DESIGN", "HIRE ME", "PORTFOLIO V2", "SIDE VENTURES", "STAY CURIOUS", "OPEN FOR HIRE"]
-    const billboardTextures = billboardWords.map((word, i) => {
-      const canvas = document.createElement('canvas')
-      canvas.width = 512; canvas.height = 256
-      const ctx = canvas.getContext('2d')
-      const color = i % 3 === 0 ? '#00F5FF' : (i % 3 === 1 ? '#FF0055' : '#FFD700')
-      ctx.fillStyle = '#000'
-      ctx.fillRect(0, 0, canvas.width, canvas.height)
-      ctx.strokeStyle = color
-      ctx.lineWidth = 15
-      ctx.strokeRect(0, 0, canvas.width, canvas.height)
-      ctx.fillStyle = color
-      ctx.font = 'bold 60px Inter, sans-serif'
-      ctx.textAlign = 'center'; ctx.textBaseline = 'middle'
-      ctx.fillText(word, 256, 128)
-      const tex = new THREE.CanvasTexture(canvas)
-      tex.flipY = false // Prevent WebGL warnings
-      return { tex, color }
-    })
-
-    /* ─── ADD BILLBOARD ─── */
-    let billboardIdx = 0
-    function addBillboard(t, side) {
-      const p = ROAD_CURVE.getPointAt(t)
-      const tangent = ROAD_CURVE.getTangentAt(t)
-      const normal = new THREE.Vector3(-tangent.z, 0, tangent.x).normalize()
-      const pos = p.clone().add(normal.multiplyScalar(side * 25))
-      
-      const bg = new THREE.Group()
-      const frame = new THREE.Mesh(new THREE.BoxGeometry(12, 7, 0.6), new THREE.MeshLambertMaterial({ color: 0x1a1a1a }))
-      frame.position.y = 10; bg.add(frame)
-      const pole = new THREE.Mesh(new THREE.CylinderGeometry(0.4, 0.5, 10), new THREE.MeshLambertMaterial({ color: 0x333333 }))
-      pole.position.y = 5; bg.add(pole)
-
-      const { tex, color } = billboardTextures[billboardIdx % billboardTextures.length]
-      billboardIdx++
-      
-      const bMat = new THREE.MeshStandardMaterial({ 
-        map: tex, emissive: color, emissiveIntensity: 2, emissiveMap: tex, transparent: true, opacity: 0.9
-      })
-
-      const screen = new THREE.Mesh(new THREE.PlaneGeometry(11.2, 6.2), bMat)
-      screen.position.set(0, 10, 0.31); bg.add(screen)
-      bg.position.copy(pos); bg.lookAt(p.x, 10, p.z); scene.add(bg)
-    }
-
     // Instanced Trees
     const treeTrunkGeo = new THREE.CylinderGeometry(0.15, 0.25, 1.5)
     const treeFoliageGeo = new THREE.ConeGeometry(1.2, 3.5, 6)
@@ -675,41 +628,6 @@ export default function RoadScene({ onProgressUpdate, activeStop, scrollProgress
       if (i > 0 && i < STOPS.length - 1) addTollGate(stop.t, i)
     })
 
-    // Add signs at stops
-    STOPS.forEach((stop, i) => {
-      const t = stop.t
-      const p = ROAD_CURVE.getPointAt(t)
-      const tangent = ROAD_CURVE.getTangentAt(t)
-      const normal = new THREE.Vector3(-tangent.z, 0, tangent.x).normalize()
-      const signPos = p.clone().add(normal.multiplyScalar(-10))
-
-      const signGroup = new THREE.Group()
-      // Post
-      const post = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.12, 5, 8), new THREE.MeshLambertMaterial({ color: 0x8B6914 }))
-      post.position.y = 2.5; post.castShadow = true; signGroup.add(post)
-
-      // Canvas for Sign Text
-      const canvas = document.createElement('canvas')
-      canvas.width = 256; canvas.height = 128
-      const ctx = canvas.getContext('2d')
-      ctx.fillStyle = stop.color
-      ctx.fillRect(0, 0, canvas.width, canvas.height)
-      ctx.fillStyle = '#fff'
-      ctx.font = 'bold 40px Inter, sans-serif'
-      ctx.textAlign = 'center'
-      ctx.textBaseline = 'middle'
-      ctx.fillText(stop.label, 128, 64)
-      
-      const signTex = new THREE.CanvasTexture(canvas)
-      signTex.flipY = false // Prevent WebGL warnings
-      const boardMat = new THREE.MeshStandardMaterial({ map: signTex, metalness: 0.1, roughness: 0.8 })
-      const board = new THREE.Mesh(new THREE.BoxGeometry(5, 2.5, 0.2), boardMat)
-      board.position.y = 5.5; board.castShadow = true; signGroup.add(board)
-
-      signGroup.position.copy(signPos)
-      signGroup.quaternion.setFromUnitVectors(new THREE.Vector3(0, 0, 1), normal)
-      scene.add(signGroup)
-    })
 
     /* ─── LAMP POSTS ─── */
     const numLamps = 50
@@ -819,11 +737,6 @@ export default function RoadScene({ onProgressUpdate, activeStop, scrollProgress
       cross.position.y = 11; poleGroup.add(cross)
       poleGroup.position.copy(pos); poleGroup.lookAt(p.x, 6, p.z); scene.add(poleGroup)
     }
-
-    /* ─── ADD BILLBOARDS & CHARACTERS ─── */
-    addBillboard(0.1, 1, 0xFF0055) // Pink neon
-    addBillboard(0.45, -1, 0x00F5FF) // Cyan neon
-    addBillboard(0.8, 1, 0xFFD700) // Gold neon
 
     /* ─── CLOUDS: Panoramic ─── */
     const clouds = []
