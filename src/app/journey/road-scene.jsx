@@ -46,7 +46,7 @@ export default function RoadScene({ onProgressUpdate, activeStop, scrollProgress
   const rafRef = useRef(null)
   const progressRef = useRef(0)
   const [cameraMode, setCameraMode] = useState('orbit')
-  const [autoOrbit, setAutoOrbit] = useState(true)
+  const [autoOrbit, setAutoOrbit] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
 
   // Orbit state refs (not useState to avoid re-renders every frame)
@@ -68,11 +68,7 @@ export default function RoadScene({ onProgressUpdate, activeStop, scrollProgress
     const view = VIEWS[mode]
     if (!view) return
     setCameraMode(mode)
-    if (mode === 'orbit') {
-      setAutoOrbit(true)
-    } else {
-      setAutoOrbit(false)
-    }
+    setAutoOrbit(false) // Never auto-orbit
     gsap.to(orbitRef.current, {
       theta: view.theta,
       phi: view.phi,
@@ -813,6 +809,7 @@ export default function RoadScene({ onProgressUpdate, activeStop, scrollProgress
       lastMouse.current = { x: e.clientX, y: e.clientY }
       canvas.style.cursor = 'grabbing'
       if (autoOrbitRef.current) setAutoOrbit(false)
+      gsap.killTweensOf(orbitRef.current) // Stop any automated transitions immediately
     }
     const onPointerMove = (e) => {
       if (!isDragging.current) return
@@ -822,8 +819,8 @@ export default function RoadScene({ onProgressUpdate, activeStop, scrollProgress
 
       // Full 360° Horizontal Orbit
       orbitRef.current.theta += dx * 0.008
-      // Wider Vertical Range (almost full sphere look)
-      orbitRef.current.phi = Math.max(0.01, Math.min(Math.PI * 0.49, orbitRef.current.phi - dy * 0.008))
+      // Wider Vertical Range (almost full sphere look, but avoiding gimbal lock)
+      orbitRef.current.phi = Math.max(0.01, Math.min(Math.PI * 0.7, orbitRef.current.phi - dy * 0.008))
     }
     const onPointerUp = () => {
       isDragging.current = false
@@ -955,10 +952,27 @@ export default function RoadScene({ onProgressUpdate, activeStop, scrollProgress
       }
     }
 
+    const onDriveCar = (e) => {
+      hasInteracted.current = true
+      const step = e.detail.step
+      if (step !== 0) {
+        let newProgress = progressRef.current + step
+        gates.forEach(gate => {
+          if (!gate.opened && step > 0 && progressRef.current < gate.t && newProgress >= gate.t - 0.01) {
+            newProgress = gate.t - 0.01
+          }
+        })
+        progressRef.current = Math.max(0, Math.min(1, newProgress))
+        onProgressUpdate(progressRef.current)
+        updateWorld(progressRef.current)
+      }
+    }
+
     window.addEventListener('wheel', onWheel, { passive: false })
     window.addEventListener('keydown', onKeyDown)
     window.addEventListener('touchstart', onTouchStart, { passive: true })
     window.addEventListener('touchmove', onTouchMove, { passive: false })
+    window.addEventListener('driveCar', onDriveCar)
     updateWorld(0)
 
     /* ─── ANIMATION LOOP ─── */
@@ -966,12 +980,9 @@ export default function RoadScene({ onProgressUpdate, activeStop, scrollProgress
       rafRef.current = requestAnimationFrame(animate)
       const t = getElapsedTime()
 
-      // Auto-orbit logic
+      // Auto-orbit logic disabled based on user request
       if (autoOrbitRef.current) {
         orbitRef.current.theta += 0.005
-      } else if (!hasInteracted.current && progressRef.current < 0.01) {
-        // Initial gentle rotation if no interaction yet
-        orbitRef.current.theta += 0.002
       }
 
       // Update camera orbit every frame
@@ -1055,6 +1066,7 @@ export default function RoadScene({ onProgressUpdate, activeStop, scrollProgress
       window.removeEventListener('keydown', onKeyDown)
       window.removeEventListener('touchstart', onTouchStart)
       window.removeEventListener('touchmove', onTouchMove)
+      window.removeEventListener('driveCar', onDriveCar)
       window.removeEventListener('resize', onResize)
       document.documentElement.style.overflow = ''; document.body.style.overflow = ''
       document.documentElement.style.height = ''; document.body.style.height = ''

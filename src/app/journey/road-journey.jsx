@@ -45,7 +45,7 @@ export default function RoadJourney() {
   if (!mounted) return null
 
   return (
-    <>
+    <div style={{ position: 'fixed', inset: 0, background: '#87CEEB', width: '100vw', height: '100vh' }}>
       {/* Three.js scene fills the entire viewport — no vertical scroll */}
       <RoadScene
         onProgressUpdate={handleProgressUpdate}
@@ -58,25 +58,7 @@ export default function RoadJourney() {
       {/* HUD: Navigation dots removed for a cleaner look */}
 
       {/* HUD: Mile marker */}
-      <div style={{
-        position: 'fixed',
-        bottom: '24px',
-        left: '50%',
-        transform: 'translateX(-50%)',
-        zIndex: 200,
-        background: 'rgba(0,0,0,0.7)',
-        backdropFilter: 'blur(12px)',
-        borderRadius: '12px',
-        padding: '10px 24px',
-        color: '#fff',
-        fontSize: '0.75rem',
-        fontFamily: "'Inter', sans-serif",
-        fontWeight: '700',
-        display: 'flex',
-        alignItems: 'center',
-        gap: '16px',
-        border: '1px solid rgba(255,255,255,0.1)',
-      }}>
+      <div className="hud-mile-marker">
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           <span style={{ fontSize: '0.55rem', opacity: 0.6, letterSpacing: '1.5px' }}>CURRENT LOCATION</span>
           <span>{STOPS[activeStop]?.mile} — {STOPS[activeStop]?.label}</span>
@@ -87,7 +69,42 @@ export default function RoadJourney() {
           <span>{Math.round(scrollProgress * 100)}%</span>
         </div>
       </div>
-    </>
+      <style>{`
+        .hud-mile-marker {
+          position: fixed;
+          bottom: 24px;
+          left: 50%;
+          transform: translateX(-50%);
+          z-index: 200;
+          background: rgba(0,0,0,0.7);
+          backdrop-filter: blur(12px);
+          border-radius: 12px;
+          padding: 10px 24px;
+          color: #fff;
+          font-size: 0.75rem;
+          font-family: 'Inter', sans-serif;
+          font-weight: 700;
+          display: flex;
+          align-items: center;
+          gap: 16px;
+          border: 1px solid rgba(255,255,255,0.1);
+          white-space: nowrap;
+        }
+
+        @media (max-width: 768px) {
+          .hud-mile-marker {
+            bottom: 16px;
+            padding: 8px 16px;
+            font-size: 0.65rem;
+            gap: 12px;
+          }
+          .hud-mile-marker > div:nth-child(1) span:first-child,
+          .hud-mile-marker > div:nth-child(3) span:first-child {
+            font-size: 0.45rem !important;
+          }
+        }
+      `}</style>
+    </div>
   )
 }
 

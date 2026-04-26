@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { STOPS } from './road-journey'
 
 // ─── DATA ───
@@ -86,14 +86,12 @@ function HeroStop({ visible, scrollProgress }) {
     const translateY = -exitFactor * 100;
 
     return (
-        <div style={{
-            position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center',
+        <div className={`stop-panel hero-panel ${visible ? 'is-visible' : ''}`} style={{
             opacity: opacity,
             transform: `translateY(${translateY}px)`,
-            transition: 'opacity 0.8s ease, transform 0.8s ease',
-            pointerEvents: 'none',
-            fontFamily: "'Inter', sans-serif", overflow: 'hidden',
-            zIndex: 1000
+            zIndex: 1000,
+            pointerEvents: visible && !timedOut ? 'auto' : 'none',
+            visibility: visible && !timedOut ? 'visible' : 'hidden'
         }}>
             {/* Top Status Bar */}
             <div style={{
@@ -178,13 +176,8 @@ function HeroStop({ visible, scrollProgress }) {
 
 function AboutStop({ visible, onImageClick }) {
     return (
-        <div style={{
-            position: 'absolute', top: '10%', left: '3%',
-            transform: `${visible ? 'translateX(0) rotate(-1deg)' : 'translateX(-100px) rotate(-5deg)'}`,
-            opacity: visible ? 1 : 0, transition: 'all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)', pointerEvents: visible ? 'auto' : 'none',
-            maxWidth: 550, width: '90%'
-        }}>
-            <div style={{
+        <div className={`stop-panel about-panel ${visible ? 'is-visible' : ''}`}>
+            <div className="panel-box" style={{
                 background: 'linear-gradient(135deg, #f8f9fa, #e9ecef)', color: '#333', borderRadius: 12, padding: '32px',
                 border: '4px solid #fff', boxShadow: '0 30px 60px rgba(0,0,0,0.4), inset 0 0 20px rgba(0,0,0,0.05)',
                 fontFamily: "'Inter', sans-serif", position: 'relative', overflow: 'hidden'
@@ -223,7 +216,7 @@ function AboutStop({ visible, onImageClick }) {
                         <div style={{ marginBottom: 12 }}>
                             <div style={{ fontSize: '0.55rem', color: '#666', textTransform: 'uppercase', letterSpacing: 1.5, fontWeight: 800 }}>Education & Honors</div>
                             <div style={{ fontSize: '1rem', fontWeight: 900, color: '#000' }}>National University - Bulacan </div>
-                            <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#E63946', display: 'flex', gap: 8, marginTop: 2, flexWrap: 'wrap' }}>
+                            <div className="badges-row" style={{ fontSize: '0.8rem', fontWeight: 700, color: '#E63946', display: 'flex', gap: 8, marginTop: 2, flexWrap: 'wrap' }}>
                                 <span>BSIT</span>
                                 <span style={{ opacity: 0.3 }}>|</span>
                                 <span>Dean's List Awardee</span>
@@ -245,7 +238,7 @@ function AboutStop({ visible, onImageClick }) {
                 </div>
 
                 {/* Holographic Seal */}
-                <div style={{
+                <div className="holo-seal" style={{
                     position: 'absolute', bottom: 70, right: 30, width: 70, height: 70,
                     borderRadius: '50%', border: '1px solid rgba(0,0,0,0.1)',
                     background: 'linear-gradient(45deg, #FFD700, #FFF, #FFD700, #FFF)',
@@ -253,12 +246,12 @@ function AboutStop({ visible, onImageClick }) {
                     opacity: 0.4, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.65rem', fontWeight: 900, color: '#000', mixBlendMode: 'overlay', textAlign: 'center', padding: 5
                 }}>NU SEAL OF EXCELLENCE</div>
 
-                <div style={{ marginTop: 25, borderTop: '2px solid rgba(0,0,0,0.15)', paddingTop: 15, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+                <div className="footer-row" style={{ marginTop: 25, borderTop: '2px solid rgba(0,0,0,0.15)', paddingTop: 15, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
                     <div>
                         <div style={{ fontSize: '0.5rem', color: '#666', textTransform: 'uppercase', letterSpacing: 1 }}>Issued / Expiry Date</div>
                         <div style={{ fontSize: '0.85rem', fontWeight: 900 }}>APR 25, 2026 / PERMANENT RESIDENCY</div>
                     </div>
-                    <div style={{ textAlign: 'right' }}>
+                    <div className="signature-box" style={{ textAlign: 'right' }}>
                         <div style={{ fontSize: '1.1rem', fontFamily: "'Courier New', monospace", fontWeight: 900, opacity: 0.85, fontStyle: 'italic', marginBottom: -5 }}>Hannah Jamilla Peralta</div>
                         <div style={{ fontSize: '0.5rem', color: '#666', textTransform: 'uppercase', letterSpacing: 1 }}>VERIFIED DIGITAL SIGNATURE</div>
                     </div>
@@ -270,13 +263,8 @@ function AboutStop({ visible, onImageClick }) {
 
 function SkillsStop({ visible }) {
     return (
-        <div style={{
-            position: 'absolute', top: '50%', right: '5%',
-            transform: `translateY(-50%) ${visible ? 'translateX(0) rotate(1deg)' : 'translateX(100px) rotate(5deg)'}`,
-            opacity: visible ? 1 : 0, transition: 'all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275)', pointerEvents: 'none',
-            width: 'min(90vw, 550px)',
-        }}>
-            <div style={{
+        <div className={`stop-panel skills-panel ${visible ? 'is-visible' : ''}`}>
+            <div className="panel-box" style={{
                 background: '#006847', border: '6px solid #fff', borderRadius: 8, padding: '30px',
                 color: '#fff', fontFamily: "'Inter', sans-serif", boxShadow: '0 20px 50px rgba(0,0,0,0.5)',
                 position: 'relative'
@@ -325,13 +313,8 @@ function SkillsStop({ visible }) {
 
 function WorkStop({ visible }) {
     return (
-        <div style={{
-            position: 'absolute', top: '15%', left: '3%',
-            transform: `rotate(${visible ? '-3deg' : '-10deg'}) scale(${visible ? 1 : 0.8})`,
-            opacity: visible ? 1 : 0, transition: 'all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)', pointerEvents: 'none',
-            width: 'min(90vw, 450px)', zIndex: 100,
-        }}>
-            <div style={{
+        <div className={`stop-panel work-panel ${visible ? 'is-visible' : ''}`}>
+            <div className="panel-box" style={{
                 background: '#FF8C00', padding: '30px', borderRadius: '4px', color: '#000',
                 boxShadow: '10px 10px 0 rgba(0,0,0,0.2)', position: 'relative', textAlign: 'left',
                 border: '8px solid #000', borderStyle: 'double'
@@ -360,13 +343,8 @@ function WorkStop({ visible }) {
 
 function ProjectsStop({ visible, onImageClick }) {
     return (
-        <div style={{
-            position: 'absolute', top: '5%', right: '3%',
-            transform: `${visible ? 'translateY(0)' : 'translateY(-50px)'}`,
-            opacity: visible ? 1 : 0, transition: 'all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275)', pointerEvents: visible ? 'auto' : 'none',
-            maxWidth: 700, display: 'flex', flexDirection: 'column'
-        }}>
-            <div style={{
+        <div className={`stop-panel projects-panel ${visible ? 'is-visible' : ''}`}>
+            <div className="panel-box" style={{
                 background: 'rgba(15, 15, 15, 0.95)', border: '2px solid #FFD700', borderRadius: 16, padding: '25px',
                 boxShadow: '0 0 50px rgba(255,215,0,0.2)', position: 'relative', backdropFilter: 'blur(15px)'
             }}>
@@ -400,11 +378,11 @@ function ProjectsStop({ visible, onImageClick }) {
                                 {/* Scanning Bar */}
                                 <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 2, background: '#FFD700', boxShadow: '0 0 10px #FFD700', opacity: 0.5, animation: 'scan 3s infinite linear' }} />
                             </div>
-                            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', minWidth: 0 }}>
+                            <div className="project-content" style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', minWidth: 0 }}>
                                 <div style={{ fontSize: '0.5rem', fontWeight: 900, color: '#FFD700', marginBottom: 2, textTransform: 'uppercase', letterSpacing: 1.5 }}>{p.badge}</div>
                                 <div style={{ fontWeight: 900, fontSize: '0.95rem', marginBottom: 4, color: '#fff', lineHeight: 1.1, textShadow: '0 0 10px rgba(255,215,0,0.2)' }}>{p.title}</div>
                                 <p style={{ fontSize: '0.62rem', opacity: 0.8, lineHeight: 1.3, margin: 0, fontWeight: 500 }}>{p.desc}</p>
-                                <div style={{ marginTop: 8, display: 'flex', gap: 4, flexWrap: 'wrap' }}>
+                                <div className="tech-tags-row" style={{ marginTop: 8, display: 'flex', gap: 4, flexWrap: 'wrap', justifyContent: 'center' }}>
                                     {p.tech.map(t => (
                                         <span key={t} style={{ fontSize: '0.45rem', color: '#FFD700', background: 'rgba(255,215,0,0.08)', padding: '2px 6px', borderRadius: 2, border: '1px solid rgba(255,215,0,0.2)', fontWeight: 800 }}>{t}</span>
                                     ))}
@@ -420,14 +398,8 @@ function ProjectsStop({ visible, onImageClick }) {
 
 function HobbiesStop({ visible, onImageClick }) {
     return (
-        <div style={{
-            position: 'absolute', top: '50%', left: '3%',
-            transform: `translateY(-50%) ${visible ? 'translateX(0)' : 'translateX(-50px)'}`,
-            opacity: visible ? 1 : 0, transition: 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1)', 
-            pointerEvents: visible ? 'auto' : 'none',
-            zIndex: 300, width: 'min(90vw, 400px)'
-        }}>
-            <div style={{
+        <div className={`stop-panel hobbies-panel ${visible ? 'is-visible' : ''}`}>
+            <div className="panel-box" style={{
                 background: 'rgba(5, 10, 15, 0.95)', border: '1px solid rgba(0, 245, 255, 0.3)',
                 borderRadius: 16, padding: '30px', color: '#fff', backdropFilter: 'blur(30px)',
                 boxShadow: '0 0 50px rgba(0, 245, 255, 0.1)', position: 'relative'
@@ -439,7 +411,7 @@ function HobbiesStop({ visible, onImageClick }) {
                     <p style={{ color: '#00F5FF', fontSize: '0.7rem', fontWeight: 700, margin: '2px 0 0 0', opacity: 0.8 }}>Digital Sketches // After-Hours Experiments</p>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 12 }}>
+                <div className="hobbies-grid" style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 12 }}>
                     {HOBBIES.map((p, i) => (
                         <div key={i} style={{
                             background: 'rgba(255,255,255,0.03)', borderRadius: 10, padding: '12px', color: '#fff',
@@ -457,10 +429,10 @@ function HobbiesStop({ visible, onImageClick }) {
                                  <img src={p.img} style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.7 }} alt={p.title} />
                                  <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.5), transparent)' }} />
                             </div>
-                            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                            <div className="hobby-content" style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                                 <div style={{ fontWeight: 900, fontSize: '0.9rem', marginBottom: 2 }}>{p.title}</div>
                                 <p style={{ fontSize: '0.6rem', opacity: 0.6, margin: 0, lineHeight: 1.3, height: 32, overflow: 'hidden' }}>{p.desc}</p>
-                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 8 }}>
+                                <div className="hobby-footer" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 8 }}>
                                     <div style={{ display: 'flex', gap: 4 }}>
                                         {p.tech.slice(0, 2).map(t => (
                                             <span key={t} style={{ fontSize: '0.45rem', background: 'rgba(0, 245, 255, 0.1)', color: '#00F5FF', padding: '1px 5px', borderRadius: 2, fontWeight: 700 }}>{t}</span>
@@ -495,11 +467,7 @@ function HobbiesStop({ visible, onImageClick }) {
 
 function ContactStop({ visible, onRestart }) {
     return (
-        <div style={{
-            position: 'absolute', bottom: '15%', right: '3%',
-            opacity: visible ? 1 : 0, transform: `translateX(${visible ? '0' : '50px'}) rotate(-2deg)`, transition: 'all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)',
-            pointerEvents: visible ? 'auto' : 'none', zIndex: 2000
-        }}>
+        <div className={`stop-panel contact-panel ${visible ? 'is-visible' : ''}`}>
             {/* Mission Data Floating Above */}
             <div style={{ position: 'absolute', top: -40, left: 20, color: 'rgba(230, 57, 70, 0.6)', fontSize: '0.6rem', fontWeight: 900, letterSpacing: 3, whiteSpace: 'nowrap' }}>
                 MISSION_DURATION: 00:04:21 // FUEL: 12%
@@ -508,7 +476,7 @@ function ContactStop({ visible, onRestart }) {
                 LOC: 14.8511° N, 120.8161° E
             </div>
 
-            <div style={{
+            <div className="panel-box" style={{
                 background: 'rgba(10, 10, 10, 0.95)', backdropFilter: 'blur(30px)', borderRadius: 24, padding: '40px',
                 color: '#fff', textAlign: 'left', maxWidth: 420, border: '1px solid rgba(230, 57, 70, 0.4)',
                 boxShadow: '0 30px 60px rgba(0,0,0,0.7), 0 0 30px rgba(230, 57, 70, 0.15)',
@@ -528,10 +496,10 @@ function ContactStop({ visible, onRestart }) {
                     </div>
                 </div>
 
-                <h2 style={{ fontSize: '2.4rem', fontWeight: 950, marginBottom: 8, letterSpacing: -1.5, lineHeight: 1 }}>Let's <span style={{ color: '#E63946' }}>Connect!</span></h2>
+                <h2 className="contact-title" style={{ fontSize: '2.4rem', fontWeight: 950, marginBottom: 8, letterSpacing: -1.5, lineHeight: 1 }}>Let's <span style={{ color: '#E63946' }}>Connect!</span></h2>
                 <p style={{ opacity: 0.5, fontSize: '0.9rem', marginBottom: 30, fontWeight: 500, lineHeight: 1.6 }}>The road ends here, but our collaboration doesn't have to. Reach out via any of the channels below.</p>
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 15 }}>
+                <div className="socials-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 15 }}>
                     {SOCIALS.map(s => (
                         <a key={s.label} href={s.url} target="_blank" rel="noopener noreferrer" style={{
                             color: '#fff', textDecoration: 'none', fontWeight: 800, fontSize: '0.8rem',
@@ -586,10 +554,64 @@ function ContactStop({ visible, onRestart }) {
     )
 }
 
+function MobileControls() {
+    const driveInterval = useRef(null)
+
+    const startDriving = (dir) => {
+        if (driveInterval.current) clearInterval(driveInterval.current)
+        driveInterval.current = setInterval(() => {
+            window.dispatchEvent(new CustomEvent('driveCar', { detail: { step: dir * 0.003 } }))
+        }, 16)
+    }
+
+    const stopDriving = () => {
+        if (driveInterval.current) clearInterval(driveInterval.current)
+    }
+
+    return (
+        <div className="mobile-controls">
+            <button 
+                onPointerDown={(e) => { e.preventDefault(); startDriving(1) }} 
+                onPointerUp={(e) => { e.preventDefault(); stopDriving() }}
+                onPointerLeave={stopDriving}
+                className="drive-btn"
+            >
+                ⯅ <span style={{fontSize: '0.5rem', display: 'block'}}>DRIVE</span>
+            </button>
+            <button 
+                onPointerDown={(e) => { e.preventDefault(); startDriving(-1) }} 
+                onPointerUp={(e) => { e.preventDefault(); stopDriving() }}
+                onPointerLeave={stopDriving}
+                className="drive-btn"
+            >
+                ⯆ <span style={{fontSize: '0.5rem', display: 'block'}}>REVERSE</span>
+            </button>
+        </div>
+    )
+}
+
 export default function JourneyOverlay({ scrollProgress }) {
     const [unlocked, setUnlocked] = useState([0, 6]) // Hero and Contact unlocked by default
     const [enlargedImg, setEnlargedImg] = useState(null)
     const currentStop = RANGES.findIndex(r => scrollProgress >= r[0] && scrollProgress <= r[1])
+
+    const [isMobile, setIsMobile] = useState(false)
+    const [timeAtStop, setTimeAtStop] = useState(0)
+
+    useEffect(() => {
+        setIsMobile(window.innerWidth <= 768)
+        const handleResize = () => setIsMobile(window.innerWidth <= 768)
+        window.addEventListener('resize', handleResize)
+        return () => window.removeEventListener('resize', handleResize)
+    }, [])
+
+    useEffect(() => {
+        setTimeAtStop(0)
+        const timer = setInterval(() => {
+            setTimeAtStop(prev => prev + 100)
+        }, 100)
+        return () => clearInterval(timer)
+    }, [currentStop])
 
     const unlock = (idx) => {
         if (!unlocked.includes(idx)) {
@@ -598,7 +620,12 @@ export default function JourneyOverlay({ scrollProgress }) {
         }
     }
 
-    const isVisible = (idx) => currentStop === idx && unlocked.includes(idx)
+    const isVisible = (idx) => {
+        if (currentStop !== idx || !unlocked.includes(idx)) return false
+        // Hide after 3 seconds on mobile
+        if (isMobile && timeAtStop > 3000) return false
+        return true
+    }
     const needsToll = (idx) => {
         if (unlocked.includes(idx)) return false
         const stop = STOPS[idx]
@@ -634,27 +661,248 @@ export default function JourneyOverlay({ scrollProgress }) {
                     50%{background-position:100% 50%; opacity:0.5} 
                 }
 
+                .stop-panel {
+                    position: absolute;
+                    pointer-events: none;
+                    transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+                    opacity: 0;
+                    visibility: hidden; /* Hide from mouse and screen readers when inactive */
+                    width: 90%;
+                    z-index: 100;
+                }
+                .stop-panel.is-visible {
+                    opacity: 1;
+                    visibility: visible;
+                    pointer-events: none; /* Allow clicking through empty parts of the panel */
+                }
+                .panel-box {
+                    max-height: 85vh;
+                    overflow-y: auto;
+                    pointer-events: auto; /* Only capture events on the actual UI content */
+                }
+                .panel-box::-webkit-scrollbar {
+                    width: 4px;
+                }
+                .panel-box::-webkit-scrollbar-thumb {
+                    background: rgba(255,255,255,0.2);
+                    border-radius: 4px;
+                }
+                
+                /* HERO */
+                .hero-panel {
+                    inset: 0;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-family: 'Inter', sans-serif;
+                    overflow: hidden;
+                    width: 100%;
+                }
+
+                /* ABOUT */
+                .about-panel {
+                    top: 10%;
+                    left: 3%;
+                    max-width: 550px;
+                    transform: translateX(-100px) rotate(-5deg);
+                }
+                .about-panel.is-visible { transform: translateX(0) rotate(-1deg); }
+
+                /* SKILLS */
+                .skills-panel {
+                    top: 50%;
+                    right: 5%;
+                    max-width: 550px;
+                    transform: translateY(-50%) translateX(100px) rotate(5deg);
+                }
+                .skills-panel.is-visible { transform: translateY(-50%) translateX(0) rotate(1deg); }
+
+                /* WORK */
+                .work-panel {
+                    top: 15%;
+                    left: 3%;
+                    max-width: 450px;
+                    transform: rotate(-10deg) scale(0.8);
+                }
+                .work-panel.is-visible { transform: rotate(-3deg) scale(1); pointer-events: none; }
+                .work-panel .panel-box { pointer-events: auto; }
+
+                /* PROJECTS */
+                .projects-panel {
+                    top: 5%;
+                    right: 3%;
+                    max-width: 700px;
+                    transform: translateY(-50px);
+                }
+                .projects-panel.is-visible { transform: translateY(0); }
+
+                /* HOBBIES */
+                .hobbies-panel {
+                    top: 50%;
+                    left: 3%;
+                    max-width: 400px;
+                    transform: translateY(-50%) translateX(-50px);
+                }
+                .hobbies-panel.is-visible { transform: translateY(-50%) translateX(0); }
+
+                /* CONTACT */
+                .contact-panel {
+                    bottom: 15%;
+                    right: 3%;
+                    max-width: 420px;
+                    transform: translateX(50px) rotate(-2deg);
+                    z-index: 2000;
+                }
+                .contact-panel.is-visible { transform: translateX(0) rotate(-2deg); }
+
+                /* TOLL GATE */
+                .toll-ui {
+                    position: absolute;
+                    bottom: 15%;
+                    left: 50%;
+                    transform: translateX(-50%) translateY(50px) scale(0.8);
+                    opacity: 0;
+                    pointer-events: none;
+                    transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+                    z-index: 1000;
+                    text-align: center;
+                }
+                .toll-ui.is-visible {
+                    opacity: 1;
+                    pointer-events: auto;
+                    transform: translateX(-50%) translateY(0) scale(1);
+                }
+
                 /* Mobile Responsiveness */
                 @media (max-width: 768px) {
-                    .hero-title { font-size: clamp(2rem, 15vw, 4rem) !important; }
-                    .id-card-content { flex-direction: column !important; gap: 20px !important; }
-                    .id-photo { width: 100% !important; height: 180px !important; }
-                    .skills-grid { grid-template-columns: 1fr !important; }
-                    .projects-grid { grid-template-columns: 1fr !important; }
-                    .project-card { flex-direction: column !important; min-height: auto !important; }
-                    .project-thumb { width: 100% !important; height: 140px !important; }
-                    
-                    /* Adjust stop positions for mobile */
-                    div[style*="top: 10%"], div[style*="top: 5%"], div[style*="top: 15%"] {
+                    .stop-panel {
+                        width: 100%;
+                        max-width: 400px;
+                        left: 50% !important;
+                        right: auto !important;
+                        transform-origin: top center;
+                    }
+                    .about-panel {
+                        top: 5%;
+                        transform: translateX(-50%) translateY(-30px) scale(0.65);
+                    }
+                    .about-panel.is-visible { transform: translateX(-50%) translateY(0) scale(0.65); }
+
+                    .skills-panel {
+                        top: 5%;
+                        transform: translateX(-50%) translateY(-30px) scale(0.65);
+                    }
+                    .skills-panel.is-visible { transform: translateX(-50%) translateY(0) scale(0.65); }
+
+                    .work-panel {
+                        top: 5%;
+                        transform: translateX(-50%) translateY(-30px) scale(0.65);
+                    }
+                    .work-panel.is-visible { transform: translateX(-50%) translateY(0) scale(0.65); }
+
+                    .projects-panel {
+                        top: 5%;
+                        transform: translateX(-50%) translateY(-30px) scale(0.65);
+                    }
+                    .projects-panel.is-visible { transform: translateX(-50%) translateY(0) scale(0.65); }
+
+                    .hobbies-panel {
+                        top: 5%;
+                        transform: translateX(-50%) translateY(-30px) scale(0.65);
+                    }
+                    .hobbies-panel.is-visible { transform: translateX(-50%) translateY(0) scale(0.65); }
+
+                    .contact-panel {
+                        bottom: auto;
                         top: 5% !important;
-                        left: 5% !important;
-                        right: 5% !important;
+                        transform: translateX(-50%) translateY(-30px) scale(0.65);
                     }
-                    div[style*="top: 50%"] {
-                        top: 45% !important;
-                        left: 5% !important;
-                        right: 5% !important;
+                    .contact-panel.is-visible { transform: translateX(-50%) translateY(0) scale(0.65); }
+
+                    .toll-ui {
+                        bottom: 5%;
+                        transform: translateX(-50%) translateY(50px) scale(0.8);
                     }
+                    .toll-ui.is-visible {
+                        transform: translateX(-50%) translateY(0) scale(0.9);
+                    }
+
+                    .hero-panel {
+                        padding: 10px;
+                        box-sizing: border-box;
+                        left: 0 !important;
+                        width: 100% !important;
+                    }
+                    .hero-panel > div:last-child {
+                        padding: 20px !important;
+                        width: 100%;
+                    }
+                    .hero-title { font-size: clamp(2rem, 15vw, 3.5rem) !important; }
+                    .id-card-content { flex-direction: column !important; gap: 20px !important; text-align: center; }
+                    .id-photo { width: 140px !important; height: 180px !important; margin: 0 auto; }
+                    .badges-row { justify-content: center !important; }
+                    .holo-seal { display: none !important; }
+                    .footer-row { flex-direction: column !important; align-items: center !important; gap: 15px !important; text-align: center !important; }
+                    .signature-box { text-align: center !important; }
+                    .skills-grid { grid-template-columns: 1fr !important; gap: 10px !important; }
+                    .projects-grid { grid-template-columns: 1fr 1fr !important; gap: 8px !important; }
+                    .hobbies-grid { grid-template-columns: 1fr 1fr !important; gap: 8px !important; }
+                    .project-card { flex-direction: column !important; padding: 10px !important; text-align: center; align-items: center; min-height: 180px !important; }
+                    .project-card .title { font-size: 0.75rem !important; }
+                    .project-thumb { width: 100% !important; height: 60px !important; margin-bottom: 5px; }
+                    .project-content { align-items: center !important; width: 100%; }
+                    .tech-tags-row { justify-content: center !important; }
+                    .hobby-card-mini { flex-direction: column !important; gap: 6px !important; text-align: center; align-items: center; min-height: 180px !important; padding: 10px !important; }
+                    .hobby-card-mini > div:first-child { width: 100% !important; height: 60px !important; }
+                    .hobby-content { align-items: center !important; width: 100%; }
+                    .hobby-footer { flex-direction: column !important; gap: 8px !important; align-items: center !important; }
+                    .contact-title { font-size: 1.8rem !important; }
+                    .socials-grid { grid-template-columns: 1fr !important; gap: 10px !important; }
+                    .panel-box {
+                        max-height: none !important;
+                        padding: 15px !important;
+                        overflow-y: visible !important;
+                    }
+
+                    .mobile-controls {
+                        display: flex;
+                    }
+                }
+
+                .mobile-controls {
+                    display: none;
+                    position: fixed;
+                    right: 20px;
+                    bottom: 80px;
+                    flex-direction: column;
+                    gap: 10px;
+                    z-index: 5000;
+                    pointer-events: auto;
+                }
+
+                .drive-btn {
+                    width: 60px;
+                    height: 60px;
+                    border-radius: 50%;
+                    background: rgba(0,0,0,0.7);
+                    backdrop-filter: blur(5px);
+                    border: 2px solid rgba(255,255,255,0.2);
+                    color: white;
+                    font-size: 1.5rem;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    line-height: 1;
+                    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+                    cursor: pointer;
+                    user-select: none;
+                    -webkit-user-select: none;
+                }
+                .drive-btn:active {
+                    background: rgba(230, 57, 70, 0.8);
+                    border-color: #E63946;
+                    transform: scale(0.95);
                 }
             `}</style>
 
@@ -682,6 +930,8 @@ export default function JourneyOverlay({ scrollProgress }) {
                 <div style={{ height: '100%', width: `${scrollProgress * 100}%`, background: '#E63946', transition: 'width 0.1s linear' }} />
             </div>
 
+            <MobileControls />
+
             {/* Image Modal */}
             {enlargedImg && (
                 <div
@@ -705,11 +955,7 @@ export default function JourneyOverlay({ scrollProgress }) {
 }
 function TollGateUI({ visible, onPay, label }) {
     return (
-        <div style={{
-            position: 'absolute', bottom: '15%', left: '50%', transform: `translateX(-50%) ${visible ? 'translateY(0) scale(1)' : 'translateY(50px) scale(0.8)'}`,
-            opacity: visible ? 1 : 0, pointerEvents: visible ? 'auto' : 'none',
-            transition: 'all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)', textAlign: 'center', zIndex: 1000
-        }}>
+        <div className={`toll-ui ${visible ? 'is-visible' : ''}`}>
             <div style={{
                 background: 'rgba(0,0,0,0.8)', color: '#FFD700', padding: '12px 32px', borderRadius: '100px',
                 border: '4px solid #FFD700', boxShadow: '0 20px 50px rgba(0,0,0,0.5)',
