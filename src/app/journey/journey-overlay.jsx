@@ -75,7 +75,7 @@ function HeroStop({ visible, scrollProgress }) {
     const [timedOut, setTimedOut] = useState(false)
 
     useEffect(() => {
-        const timer = setTimeout(() => setTimedOut(true), 3500)
+        const timer = setTimeout(() => setTimedOut(true), 4500)
         return () => clearTimeout(timer)
     }, [])
 
@@ -554,7 +554,7 @@ function ContactStop({ visible, onRestart }) {
     )
 }
 
-function MobileControls() {
+function MobileControls({ scrollProgress }) {
     const driveInterval = useRef(null)
 
     const startDriving = (dir) => {
@@ -574,9 +574,13 @@ function MobileControls() {
                 onPointerDown={(e) => { e.preventDefault(); startDriving(1) }} 
                 onPointerUp={(e) => { e.preventDefault(); stopDriving() }}
                 onPointerLeave={stopDriving}
-                className="drive-btn"
+                className="drive-btn drive-up"
+                style={{
+                    animation: scrollProgress < 0.05 ? 'pulse-drive 1.5s infinite' : 'none'
+                }}
             >
-                ⯅ <span style={{fontSize: '0.5rem', display: 'block'}}>DRIVE</span>
+                <div style={{ fontSize: '1.8rem', lineHeight: 1 }}>▲</div>
+                <div style={{ fontSize: '0.5rem', fontWeight: 900 }}>DRIVE</div>
             </button>
             <button 
                 onPointerDown={(e) => { e.preventDefault(); startDriving(-1) }} 
@@ -584,7 +588,8 @@ function MobileControls() {
                 onPointerLeave={stopDriving}
                 className="drive-btn"
             >
-                ⯆ <span style={{fontSize: '0.5rem', display: 'block'}}>REVERSE</span>
+                <div style={{ fontSize: '1.8rem', lineHeight: 1 }}>▼</div>
+                <div style={{ fontSize: '0.5rem', fontWeight: 900 }}>REVERSE</div>
             </button>
         </div>
     )
@@ -622,8 +627,8 @@ export default function JourneyOverlay({ scrollProgress }) {
 
     const isVisible = (idx) => {
         if (currentStop !== idx || !unlocked.includes(idx)) return false
-        // Hide after 3 seconds on mobile
-        if (isMobile && timeAtStop > 3000) return false
+        // Hide after 4 seconds on mobile
+        if (isMobile && timeAtStop > 4000) return false
         return true
     }
     const needsToll = (idx) => {
@@ -649,6 +654,11 @@ export default function JourneyOverlay({ scrollProgress }) {
                 @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-20px)} }
                 @keyframes beam { 0%{top:20%; opacity:0} 50%{opacity:1} 100%{top:80%; opacity:0} }
                 @keyframes rotate { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+                @keyframes pulse-drive { 
+                    0% { box-shadow: 0 0 0 0 rgba(230, 57, 70, 0.7); transform: scale(1); }
+                    70% { box-shadow: 0 0 0 15px rgba(230, 57, 70, 0); transform: scale(1.1); }
+                    100% { box-shadow: 0 0 0 0 rgba(230, 57, 70, 0); transform: scale(1); }
+                }
                 @keyframes scrollDown { 0%{height:0;opacity:0;transform:translateY(0)} 50%{height:60px;opacity:1} 100%{height:0;opacity:0;transform:translateY(60px)} }
                 @keyframes glitch {
                     0%, 100% { transform: translate(0); }
@@ -881,28 +891,32 @@ export default function JourneyOverlay({ scrollProgress }) {
                 }
 
                 .drive-btn {
-                    width: 60px;
-                    height: 60px;
-                    border-radius: 50%;
-                    background: rgba(0,0,0,0.7);
-                    backdrop-filter: blur(5px);
-                    border: 2px solid rgba(255,255,255,0.2);
+                    width: 70px;
+                    height: 70px;
+                    border-radius: 12px;
+                    background: rgba(20, 20, 20, 0.9);
+                    backdrop-filter: blur(10px);
+                    border: 2px solid #E63946;
                     color: white;
-                    font-size: 1.5rem;
                     display: flex;
                     flex-direction: column;
                     align-items: center;
                     justify-content: center;
-                    line-height: 1;
-                    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+                    gap: 2px;
+                    box-shadow: 0 10px 25px rgba(0,0,0,0.5), inset 0 0 10px rgba(230, 57, 70, 0.2);
                     cursor: pointer;
                     user-select: none;
                     -webkit-user-select: none;
+                    transition: all 0.2s ease;
                 }
                 .drive-btn:active {
-                    background: rgba(230, 57, 70, 0.8);
+                    background: #E63946;
+                    transform: scale(0.9) translateY(2px);
+                    box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+                }
+                .drive-up {
+                    border-width: 3px;
                     border-color: #E63946;
-                    transform: scale(0.95);
                 }
             `}</style>
 
@@ -930,7 +944,7 @@ export default function JourneyOverlay({ scrollProgress }) {
                 <div style={{ height: '100%', width: `${scrollProgress * 100}%`, background: '#E63946', transition: 'width 0.1s linear' }} />
             </div>
 
-            <MobileControls />
+            <MobileControls scrollProgress={scrollProgress} />
 
             {/* Image Modal */}
             {enlargedImg && (
