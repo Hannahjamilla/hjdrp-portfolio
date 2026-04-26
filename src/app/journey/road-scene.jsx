@@ -907,8 +907,8 @@ export default function RoadScene({ onProgressUpdate, activeStop, scrollProgress
     const onKeyDown = (e) => {
       hasInteracted.current = true
       let step = 0
-      if (['ArrowRight', 'ArrowDown'].includes(e.key)) step = 0.002
-      if (['ArrowLeft', 'ArrowUp'].includes(e.key)) step = -0.002
+      if (['ArrowRight', 'ArrowUp'].includes(e.key)) step = 0.002
+      if (['ArrowLeft', 'ArrowDown'].includes(e.key)) step = -0.002
 
       if (step !== 0) {
         let newProgress = progressRef.current + step
@@ -922,33 +922,37 @@ export default function RoadScene({ onProgressUpdate, activeStop, scrollProgress
         updateWorld(progressRef.current)
       }
     }
-    let touchX = 0
+    let touchDriveInterval = null
     const onTouchStart = (e) => {
       hasInteracted.current = true
-      touchX = e.touches[0].clientX
+      
+      // Start driving after a short hold (200ms)
+      if (touchDriveInterval) clearInterval(touchDriveInterval)
+      touchDriveInterval = setTimeout(() => {
+        touchDriveInterval = setInterval(() => {
+          let newProgress = progressRef.current + 0.0015
+          gates.forEach(gate => {
+            if (!gate.opened && progressRef.current < gate.t && newProgress >= gate.t - 0.01) {
+              newProgress = gate.t - 0.01
+            }
+          })
+          progressRef.current = Math.max(0, Math.min(1, newProgress))
+          onProgressUpdate(progressRef.current); updateWorld(progressRef.current)
+        }, 16)
+      }, 250)
+    }
+    const onTouchEnd = () => {
+      if (touchDriveInterval) {
+        clearTimeout(touchDriveInterval)
+        clearInterval(touchDriveInterval)
+        touchDriveInterval = null
+      }
     }
     const onTouchMove = (e) => {
-      // If two fingers, handle orbit (or just let pointer events do it)
-      if (e.touches.length > 1) return
-
-      // If dragging on the bottom third of the screen, we drive the car
-      // Otherwise, we allow the pointermove (orbit) to take precedence or do both
-      const touchY = e.touches[0].clientY
-      if (touchY > window.innerHeight * 0.7) {
-        e.preventDefault()
-        const dx = touchX - e.touches[0].clientX; touchX = e.touches[0].clientX
-        let newProgress = progressRef.current + dx * 0.0002
-
-        gates.forEach(gate => {
-          if (!gate.opened && dx > 0 && progressRef.current < gate.t && newProgress >= gate.t - 0.01) {
-            newProgress = gate.t - 0.01
-          }
-        })
-        progressRef.current = Math.max(0, Math.min(1, newProgress))
-        onProgressUpdate(progressRef.current); updateWorld(progressRef.current)
-      } else {
-        // Orbiting is handled by onPointerMove generally, but we can ensure it here
-        // if pointer events aren't firing well.
+      // If they are moving their finger, they are likely trying to orbit.
+      // We can cancel the auto-drive if the movement is significant.
+      if (touchDriveInterval && e.touches.length === 1) {
+          // Keep driving if they stay relatively still, or cancel if they swipe fast
       }
     }
 
@@ -970,8 +974,10 @@ export default function RoadScene({ onProgressUpdate, activeStop, scrollProgress
 
     window.addEventListener('wheel', onWheel, { passive: false })
     window.addEventListener('keydown', onKeyDown)
-    window.addEventListener('touchstart', onTouchStart, { passive: true })
-    window.addEventListener('touchmove', onTouchMove, { passive: false })
+    canvas.addEventListener('touchstart', onTouchStart, { passive: true })
+    canvas.addEventListener('touchend', onTouchEnd)
+    canvas.addEventListener('touchcancel', onTouchEnd)
+    window.addEventListener('touchmove', onTouchMove)
     window.addEventListener('driveCar', onDriveCar)
     updateWorld(0)
 

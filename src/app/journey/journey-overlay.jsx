@@ -874,49 +874,22 @@ export default function JourneyOverlay({ scrollProgress }) {
                         overflow-y: visible !important;
                     }
 
-                    .mobile-controls {
-                        display: flex;
-                    }
+                /* TOLL GATE */
+                .toll-ui {
+                    position: absolute;
+                    bottom: 15%;
+                    left: 50%;
+                    transform: translateX(-50%) translateY(50px) scale(0.8);
+                    opacity: 0;
+                    pointer-events: none;
+                    transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+                    z-index: 1000;
+                    text-align: center;
                 }
-
-                .mobile-controls {
-                    display: none;
-                    position: fixed;
-                    right: 20px;
-                    bottom: 80px;
-                    flex-direction: column;
-                    gap: 10px;
-                    z-index: 5000;
+                .toll-ui.is-visible {
+                    opacity: 1;
                     pointer-events: auto;
-                }
-
-                .drive-btn {
-                    width: 70px;
-                    height: 70px;
-                    border-radius: 12px;
-                    background: rgba(20, 20, 20, 0.9);
-                    backdrop-filter: blur(10px);
-                    border: 2px solid #E63946;
-                    color: white;
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    justify-content: center;
-                    gap: 2px;
-                    box-shadow: 0 10px 25px rgba(0,0,0,0.5), inset 0 0 10px rgba(230, 57, 70, 0.2);
-                    cursor: pointer;
-                    user-select: none;
-                    -webkit-user-select: none;
-                    transition: all 0.2s ease;
-                }
-                .drive-btn:active {
-                    background: #E63946;
-                    transform: scale(0.9) translateY(2px);
-                    box-shadow: 0 2px 5px rgba(0,0,0,0.5);
-                }
-                .drive-up {
-                    border-width: 3px;
-                    border-color: #E63946;
+                    transform: translateX(-50%) translateY(0) scale(1);
                 }
             `}</style>
 
@@ -943,8 +916,6 @@ export default function JourneyOverlay({ scrollProgress }) {
             <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 4, background: 'rgba(255,255,255,0.1)', zIndex: 100 }}>
                 <div style={{ height: '100%', width: `${scrollProgress * 100}%`, background: '#E63946', transition: 'width 0.1s linear' }} />
             </div>
-
-            <MobileControls scrollProgress={scrollProgress} />
 
             {/* Image Modal */}
             {enlargedImg && (
