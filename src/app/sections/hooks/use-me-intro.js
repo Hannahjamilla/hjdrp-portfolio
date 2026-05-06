@@ -62,6 +62,7 @@ const greetings = [
 ]
 
   const socialLinks = {
+    portfolio: "https://hannahperalta.vercel.app/",
     facebook: "https://www.facebook.com/share/15r8QNkywy/",
     instagram: "https://www.instagram.com/hjdrp_?igsh=MTNxOGV6aWxjYzd2Zw==",
     linkedin: "https://www.linkedin.com/in/hannah-jamilla-9277a5337",

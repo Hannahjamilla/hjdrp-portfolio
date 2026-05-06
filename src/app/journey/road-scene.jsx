@@ -123,7 +123,7 @@ export default function RoadScene({ onProgressUpdate, activeStop, scrollProgress
     sun.castShadow = true
     sun.shadow.mapSize.set(2048, 2048)
     sun.shadow.bias = -0.001
-    sun.shadow.normalBias = 0.05 // Prevents acne on large planes
+    sun.shadow.normalBias = 0.05
     sun.shadow.camera.left = -150
     sun.shadow.camera.right = 150
     sun.shadow.camera.top = 150
@@ -265,10 +265,7 @@ export default function RoadScene({ onProgressUpdate, activeStop, scrollProgress
       wheel.rotation.x = Math.PI / 2; wheel.position.set(wx, 0.35, wz); wheel.castShadow = true
 
       const hub = new THREE.Mesh(new THREE.CylinderGeometry(0.15, 0.15, 0.26, 8), new THREE.MeshBasicMaterial({ color: 0x888888 }))
-      // Hub is already in local space of wheel, so we only need to handle the relative rotation
-      // Since wheel is rotated X: PI/2, its local Y is World Z. 
-      // But we want hub to be on the face of the wheel.
-      // If we add hub to wheel, its local (0,0,0) is wheel's center.
+
       wheel.add(hub)
 
       carGroup.add(wheel)
@@ -492,30 +489,30 @@ export default function RoadScene({ onProgressUpdate, activeStop, scrollProgress
     const treeFoliageGeo = new THREE.ConeGeometry(1.2, 3.5, 6)
     const treeTrunkMat = new THREE.MeshLambertMaterial({ color: 0x5D4037 })
     const treeFoliageMat = new THREE.MeshLambertMaterial({ color: 0x2E7D32 })
-    
+
     const treeCount = 400
     const iTrunk = new THREE.InstancedMesh(treeTrunkGeo, treeTrunkMat, treeCount)
     const iFoliage = new THREE.InstancedMesh(treeFoliageGeo, treeFoliageMat, treeCount)
     iFoliage.castShadow = true
-    
+
     const dummy = new THREE.Object3D()
     for (let i = 0; i < treeCount; i++) {
-        const t = Math.random()
-        const p = ROAD_CURVE.getPointAt(t)
-        const tangent = ROAD_CURVE.getTangentAt(t)
-        const normal = new THREE.Vector3(-tangent.z, 0, tangent.x).normalize()
-        const side = Math.random() > 0.5 ? 1 : -1
-        const dist = 14 + Math.random() * 80
-        const treePos = p.clone().add(normal.multiplyScalar(side * dist))
-        const s = 0.8 + Math.random() * 0.7
+      const t = Math.random()
+      const p = ROAD_CURVE.getPointAt(t)
+      const tangent = ROAD_CURVE.getTangentAt(t)
+      const normal = new THREE.Vector3(-tangent.z, 0, tangent.x).normalize()
+      const side = Math.random() > 0.5 ? 1 : -1
+      const dist = 14 + Math.random() * 80
+      const treePos = p.clone().add(normal.multiplyScalar(side * dist))
+      const s = 0.8 + Math.random() * 0.7
 
-        dummy.position.set(treePos.x, 0.75 * s, treePos.z)
-        dummy.scale.setScalar(s); dummy.updateMatrix()
-        iTrunk.setMatrixAt(i, dummy.matrix)
-        
-        dummy.position.set(treePos.x, 3 * s, treePos.z)
-        dummy.updateMatrix()
-        iFoliage.setMatrixAt(i, dummy.matrix)
+      dummy.position.set(treePos.x, 0.75 * s, treePos.z)
+      dummy.scale.setScalar(s); dummy.updateMatrix()
+      iTrunk.setMatrixAt(i, dummy.matrix)
+
+      dummy.position.set(treePos.x, 3 * s, treePos.z)
+      dummy.updateMatrix()
+      iFoliage.setMatrixAt(i, dummy.matrix)
     }
     scene.add(iTrunk); scene.add(iFoliage)
 
@@ -525,25 +522,25 @@ export default function RoadScene({ onProgressUpdate, activeStop, scrollProgress
     const rockMat = new THREE.MeshLambertMaterial({ color: 0x333333 })
     const bushGeo = new THREE.SphereGeometry(1, 6, 6)
     const bushMat = new THREE.MeshLambertMaterial({ color: 0x0E3311 })
-    
+
     const iRock = new THREE.InstancedMesh(rockGeo, rockMat, rockCount)
     const iBush = new THREE.InstancedMesh(bushGeo, bushMat, bushCount)
-    
+
     for (let i = 0; i < rockCount; i++) {
-        const t = Math.random(); const p = ROAD_CURVE.getPointAt(t)
-        const side = Math.random() > 0.5 ? 1 : -1; const dist = 14 + Math.random() * 55
-        const pos = p.clone().add(new THREE.Vector3(-ROAD_CURVE.getTangentAt(t).z, 0, ROAD_CURVE.getTangentAt(t).x).normalize().multiplyScalar(side * dist))
-        const s = 0.5 + Math.random() * 2.0
-        dummy.position.set(pos.x, s * 0.4, pos.z); dummy.rotation.set(Math.random(), Math.random(), Math.random()); dummy.scale.setScalar(s); dummy.updateMatrix()
-        iRock.setMatrixAt(i, dummy.matrix)
+      const t = Math.random(); const p = ROAD_CURVE.getPointAt(t)
+      const side = Math.random() > 0.5 ? 1 : -1; const dist = 14 + Math.random() * 55
+      const pos = p.clone().add(new THREE.Vector3(-ROAD_CURVE.getTangentAt(t).z, 0, ROAD_CURVE.getTangentAt(t).x).normalize().multiplyScalar(side * dist))
+      const s = 0.5 + Math.random() * 2.0
+      dummy.position.set(pos.x, s * 0.4, pos.z); dummy.rotation.set(Math.random(), Math.random(), Math.random()); dummy.scale.setScalar(s); dummy.updateMatrix()
+      iRock.setMatrixAt(i, dummy.matrix)
     }
     for (let i = 0; i < bushCount; i++) {
-        const t = Math.random(); const p = ROAD_CURVE.getPointAt(t)
-        const side = Math.random() > 0.5 ? 1 : -1; const dist = 14 + Math.random() * 55
-        const pos = p.clone().add(new THREE.Vector3(-ROAD_CURVE.getTangentAt(t).z, 0, ROAD_CURVE.getTangentAt(t).x).normalize().multiplyScalar(side * dist))
-        const s = 0.9 + Math.random() * 1.5
-        dummy.position.set(pos.x, s * 0.5, pos.z); dummy.scale.set(s, s * 0.6, s); dummy.updateMatrix()
-        iBush.setMatrixAt(i, dummy.matrix)
+      const t = Math.random(); const p = ROAD_CURVE.getPointAt(t)
+      const side = Math.random() > 0.5 ? 1 : -1; const dist = 14 + Math.random() * 55
+      const pos = p.clone().add(new THREE.Vector3(-ROAD_CURVE.getTangentAt(t).z, 0, ROAD_CURVE.getTangentAt(t).x).normalize().multiplyScalar(side * dist))
+      const s = 0.9 + Math.random() * 1.5
+      dummy.position.set(pos.x, s * 0.5, pos.z); dummy.scale.set(s, s * 0.6, s); dummy.updateMatrix()
+      iBush.setMatrixAt(i, dummy.matrix)
     }
     scene.add(iRock); scene.add(iBush)
 
@@ -925,7 +922,7 @@ export default function RoadScene({ onProgressUpdate, activeStop, scrollProgress
     let touchDriveInterval = null
     const onTouchStart = (e) => {
       hasInteracted.current = true
-      
+
       // Start driving after a short hold (200ms)
       if (touchDriveInterval) clearInterval(touchDriveInterval)
       touchDriveInterval = setTimeout(() => {
@@ -952,7 +949,7 @@ export default function RoadScene({ onProgressUpdate, activeStop, scrollProgress
       // If they are moving their finger, they are likely trying to orbit.
       // We can cancel the auto-drive if the movement is significant.
       if (touchDriveInterval && e.touches.length === 1) {
-          // Keep driving if they stay relatively still, or cancel if they swipe fast
+        // Keep driving if they stay relatively still, or cancel if they swipe fast
       }
     }
 

@@ -68,6 +68,26 @@ export default function RoadJourney() {
           <span style={{ fontSize: '0.55rem', opacity: 0.6, letterSpacing: '1.5px' }}>PROGRESS</span>
           <span>{Math.round(scrollProgress * 100)}%</span>
         </div>
+        <div style={{ width: '1px', height: '20px', background: 'rgba(255,255,255,0.2)' }} />
+        <a 
+          href="https://hannahperalta.vercel.app/" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          style={{ 
+            display: 'flex', 
+            flexDirection: 'column', 
+            alignItems: 'flex-end',
+            textDecoration: 'none',
+            color: '#fff',
+            cursor: 'pointer',
+            transition: 'opacity 0.3s ease',
+          }}
+          onMouseEnter={(e) => e.currentTarget.style.opacity = '0.7'}
+          onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
+        >
+          <span style={{ fontSize: '0.55rem', opacity: 0.6, letterSpacing: '1.5px' }}>MORE ABOUT ME</span>
+          <span style={{ fontSize: '0.75rem' }}>hannahperalta</span>
+        </a>
       </div>
       <style>{`
         .hud-mile-marker {

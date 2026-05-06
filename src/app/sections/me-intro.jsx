@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useMeIntro } from './hooks/use-me-intro'
 import { createMeIntroStyles } from './styles/me-intro-styles'
 import ScrollToTop from './components/scroll-to-top'
+import SocialLinks from './components/social-links'
 
 export default function Introduction() {
   const {
@@ -1009,6 +1010,17 @@ export default function Introduction() {
           }}>
             STATUS: ONLINE • UPTIME: 99.9% • LAST_DEPLOY: July 12, 2003
           </div>
+
+          {/* Social Links */}
+          <SocialLinks 
+            socialLinks={socialLinks}
+            elementVisible={elementVisible}
+            getResponsiveValue={getResponsiveValue}
+            theme={{
+              borderColor: theme.textSecondary,
+              textSecondary: theme.textSecondary
+            }}
+          />
         </div>
       </div>
 
